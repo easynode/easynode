@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>../src/EasyNode.js - EasyNode API参考文档</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="icon" href="../assets/favicon.ico">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+                <h1><img src="../assets/css/logo.png" title="EasyNode API参考文档" width="117" height="52"></h1>
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: EasyNode - 0.1.0</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+                    <h2 class="off-left">APIs</h2>
+                    <div id="api-tabview" class="tabview">
+                        <ul class="tabs">
+                            <li><a href="#api-classes">Classes</a></li>
+                            <li><a href="#api-modules">Modules</a></li>
+                        </ul>
+                
+                        <div id="api-tabview-filter">
+                            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+                        </div>
+                
+                        <div id="api-tabview-panel">
+                            <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/#NAMESPACE#.FileService.html">#NAMESPACE#.FileService</a></li>
+                                <li><a href="../classes/EasyNode.html">EasyNode</a></li>
+                                <li><a href="../classes/easynode.framework.ActionAOP.ActionAOP.html">easynode.framework.ActionAOP.ActionAOP</a></li>
+                                <li><a href="../classes/easynode.framework.aop.AOP.html">easynode.framework.aop.AOP</a></li>
+                                <li><a href="../classes/easynode.framework.BeanFactory.html">easynode.framework.BeanFactory</a></li>
+                                <li><a href="../classes/easynode.framework.cache.CacheStat.html">easynode.framework.cache.CacheStat</a></li>
+                                <li><a href="../classes/easynode.framework.cache.ICache.html">easynode.framework.cache.ICache</a></li>
+                                <li><a href="../classes/easynode.framework.cache.Memcached.html">easynode.framework.cache.Memcached</a></li>
+                                <li><a href="../classes/easynode.framework.cache.Redis.html">easynode.framework.cache.Redis</a></li>
+                                <li><a href="../classes/easynode.framework.db.IConnection.html">easynode.framework.db.IConnection</a></li>
+                                <li><a href="../classes/easynode.framework.db.IDataSource.html">easynode.framework.db.IDataSource</a></li>
+                                <li><a href="../classes/easynode.framework.db.MysqlConnection.html">easynode.framework.db.MysqlConnection</a></li>
+                                <li><a href="../classes/easynode.framework.db.MysqlDataSource.html">easynode.framework.db.MysqlDataSource</a></li>
+                                <li><a href="../classes/easynode.framework.Logger.html">easynode.framework.Logger</a></li>
+                                <li><a href="../classes/easynode.framework.mq.IQueue.html">easynode.framework.mq.IQueue</a></li>
+                                <li><a href="../classes/easynode.framework.mq.RedisListQueue.html">easynode.framework.mq.RedisListQueue</a></li>
+                                <li><a href="../classes/easynode.framework.mq.RedisQueue.html">easynode.framework.mq.RedisQueue</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.Action.html">easynode.framework.mvc.Action</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.ActionArgConverter.html">easynode.framework.mvc.ActionArgConverter</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.ActionContext.html">easynode.framework.mvc.ActionContext</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.ActionExecutor.html">easynode.framework.mvc.ActionExecutor</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.ActionFactory.html">easynode.framework.mvc.ActionFactory</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.ActionFilter.html">easynode.framework.mvc.ActionFilter</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.ActionRequestParameter.html">easynode.framework.mvc.ActionRequestParameter</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.ActionResult.html">easynode.framework.mvc.ActionResult</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.CombinedAction.html">easynode.framework.mvc.CombinedAction</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.EJSTemplateViewRenderer.html">easynode.framework.mvc.EJSTemplateViewRenderer</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.IActionContextListener.html">easynode.framework.mvc.IActionContextListener</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.ITemplateViewRenderer.html">easynode.framework.mvc.ITemplateViewRenderer</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.JadeTemplateViewRenderer.html">easynode.framework.mvc.JadeTemplateViewRenderer</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.JSONView.html">easynode.framework.mvc.JSONView</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.MethodDispatchedAction.html">easynode.framework.mvc.MethodDispatchedAction</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.Model.html">easynode.framework.mvc.Model</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.ModelField.html">easynode.framework.mvc.ModelField</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.ModelProxyActionFactory.html">easynode.framework.mvc.ModelProxyActionFactory</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.MustacheTemplateViewRenderer.html">easynode.framework.mvc.MustacheTemplateViewRenderer</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.spi.MysqlModelGenerator.html">easynode.framework.mvc.spi.MysqlModelGenerator</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.View.html">easynode.framework.mvc.View</a></li>
+                                <li><a href="../classes/easynode.framework.plugin.EasyNodePlugin.html">easynode.framework.plugin.EasyNodePlugin</a></li>
+                                <li><a href="../classes/easynode.framework.plugin.PluginLoadContext.html">easynode.framework.plugin.PluginLoadContext</a></li>
+                                <li><a href="../classes/easynode.framework.queue.MQTTQueue.html">easynode.framework.queue.MQTTQueue</a></li>
+                                <li><a href="../classes/easynode.framework.server.AbstractServer.html">easynode.framework.server.AbstractServer</a></li>
+                                <li><a href="../classes/easynode.framework.server.http.KOAActionContext.html">easynode.framework.server.http.KOAActionContext</a></li>
+                                <li><a href="../classes/easynode.framework.server.http.KOADefaultRoutes.html">easynode.framework.server.http.KOADefaultRoutes</a></li>
+                                <li><a href="../classes/easynode.framework.server.http.KOAHttpRequestParameter.html">easynode.framework.server.http.KOAHttpRequestParameter</a></li>
+                                <li><a href="../classes/easynode.framework.server.http.KOAHttpServer.html">easynode.framework.server.http.KOAHttpServer</a></li>
+                                <li><a href="../classes/easynode.framework.server.http.KOAHttpServer.SessionSupport.html">easynode.framework.server.http.KOAHttpServer.SessionSupport</a></li>
+                                <li><a href="../classes/easynode.framework.server.KOAMemorySessionStorage.html">easynode.framework.server.KOAMemorySessionStorage</a></li>
+                                <li><a href="../classes/easynode.framework.server.ServerStat.html">easynode.framework.server.ServerStat</a></li>
+                                <li><a href="../classes/easynode.framework.server.tcp.Decoder.html">easynode.framework.server.tcp.Decoder</a></li>
+                                <li><a href="../classes/easynode.framework.server.tcp.Encoder.html">easynode.framework.server.tcp.Encoder</a></li>
+                                <li><a href="../classes/easynode.framework.server.tcp.Message.html">easynode.framework.server.tcp.Message</a></li>
+                                <li><a href="../classes/easynode.framework.server.tcp.MessageHandler.html">easynode.framework.server.tcp.MessageHandler</a></li>
+                                <li><a href="../classes/easynode.framework.server.tcp.protocols.JSONDecoder.html">easynode.framework.server.tcp.protocols.JSONDecoder</a></li>
+                                <li><a href="../classes/easynode.framework.server.tcp.protocols.JSONEncoder.html">easynode.framework.server.tcp.protocols.JSONEncoder</a></li>
+                                <li><a href="../classes/easynode.framework.server.tcp.protocols.JSONMessageHandler.html">easynode.framework.server.tcp.protocols.JSONMessageHandler</a></li>
+                                <li><a href="../classes/easynode.framework.server.tcp.StreamDecoderHelper.html">easynode.framework.server.tcp.StreamDecoderHelper</a></li>
+                                <li><a href="../classes/easynode.framework.server.tcp.StreamEncoderHelper.html">easynode.framework.server.tcp.StreamEncoderHelper</a></li>
+                                <li><a href="../classes/easynode.framework.server.tcp.TCPClient.html">easynode.framework.server.tcp.TCPClient</a></li>
+                                <li><a href="../classes/easynode.framework.server.tcp.TCPServer.html">easynode.framework.server.tcp.TCPServer</a></li>
+                                <li><a href="../classes/easynode.framework.test.TestCase.html">easynode.framework.test.TestCase</a></li>
+                                <li><a href="../classes/easynode.framework.test.TestCaseRunner.html">easynode.framework.test.TestCaseRunner</a></li>
+                                <li><a href="../classes/easynode.framework.util.Binary.html">easynode.framework.util.Binary</a></li>
+                                <li><a href="../classes/easynode.framework.util.HTTPUtil.html">easynode.framework.util.HTTPUtil</a></li>
+                                <li><a href="../classes/easynode.framework.util.MustacheHelper.html">easynode.framework.util.MustacheHelper</a></li>
+                                <li><a href="../classes/easynode.framework.util.MyError.html">easynode.framework.util.MyError</a></li>
+                                <li><a href="../classes/easynode.framework.util.ObjectWrapper.html">easynode.framework.util.ObjectWrapper</a></li>
+                                <li><a href="../classes/easynode.framework.util.SqlUtil.html">easynode.framework.util.SqlUtil</a></li>
+                                <li><a href="../classes/easynode.framework.util.StringUtil.html">easynode.framework.util.StringUtil</a></li>
+                                <li><a href="../classes/easynode.framework.util.VersionComparator.html">easynode.framework.util.VersionComparator</a></li>
+                                <li><a href="../classes/easynode.framework.view.TemplateView.html">easynode.framework.view.TemplateView</a></li>
+                                <li><a href="../classes/easynode.GenericObject.html">easynode.GenericObject</a></li>
+                                <li><a href="../classes/全局函数.html">全局函数</a></li>
+                            </ul>
+                
+                            <ul id="api-modules" class="apis modules">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+                    Show:
+                    <label for="api-show-inherited">
+                        <input type="checkbox" id="api-show-inherited" checked>
+                        Inherited
+                    </label>
+            
+                    <label for="api-show-protected">
+                        <input type="checkbox" id="api-show-protected">
+                        Protected
+                    </label>
+            
+                    <label for="api-show-private">
+                        <input type="checkbox" id="api-show-private">
+                        Private
+                    </label>
+                    <label for="api-show-deprecated">
+                        <input type="checkbox" id="api-show-deprecated">
+                        Deprecated
+                    </label>
+            
+                </div>
+            
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+<h1 class="file-heading">File: ../src/EasyNode.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+require(&#x27;date-utils&#x27;);
+var assert = require(&#x27;assert&#x27;);
+var fs = require(&#x27;fs&#x27;);
+var path = require(&#x27;path&#x27;);
+var _ = require(&#x27;underscore&#x27;);
+var S = require(&#x27;string&#x27;);
+var cofs = require(&#x27;co-fs&#x27;);
+var os = require(&#x27;os&#x27;);
+
+/**
+ * 为简化API调用定义必要的全局函数，使用全局函数需要引入EasyNode.js，请在应用程序第一行引入EasyNode.js。&lt;br&gt;
+ *      &lt;h5&gt;示例&lt;/h5&gt;
+ *      //bin/main.js。第一行&lt;br&gt;
+ *      require(&#x27;../src/EasyNode.js&#x27;);&lt;br&gt;
+ *      EasyNode.addSourceDirectory(&#x27;test&#x27;, &#x27;demo&#x27;,&#x27;app&#x27;);&lt;br&gt;
+ *      EasyNode.addConfigFile(&#x27;app.conf&#x27;);&lt;br&gt;
+ *      var Logger = using(&#x27;easynode.framework.Logger&#x27;);&lt;br&gt;
+ *      Logger.getLogger().info(&#x27;Hello, EasyNode&#x27;);&lt;br&gt;
+ *
+ * @class EasyNode
+ * */
+
+var EasyNode = global.EasyNode = {};
+
+/**
+ * 返回指定名称的namespace，使用JSON对象来模拟namespace。
+ *
+ * @method _getNamespace
+ * @since 0.1.0
+ * @author zlbbq
+ * @private
+ * @param {String} name namespace字符串
+ * @return {namespace} JSON模拟的namespace对象
+ * @example
+ *      var ns = _getNamespace(&#x27;easynode.framework.Logger&#x27;);                 //返回对象easynode.framework
+ * @example
+ *      var ns = _getNamespace(&#x27;easynode.framework.*&#x27;);                          //返回对象easynode.framework
+ * */
+function _getNamespace(name) {
+        assert(typeof name == &#x27;string&#x27;, &#x27;Invalid namespace type, need a String&#x27;);
+        var parts = name.split(&#x27;.&#x27;);
+        parts = parts.splice(0, parts.length - 1);
+        var ns = global;
+        parts.forEach(function (v) {
+                ns = ns[v];
+                assert(ns != null, &#x60;Can not find class or namespace [${name}]&#x60;);
+        });
+        return ns;
+}
+
+/**
+ * 初始化命名空间，using时自动调用。
+ *
+ * @method _initNamespaces
+ * @since 0.1.0
+ * @author zlbbq
+ * @private
+ * @example
+ *      require(&#x27;../src/EasyNode.js&#x27;);
+ *      EasyNode.addSourceDirectory(&#x27;test&#x27;, &#x27;demo&#x27;);                 // $EasyNode/test/,  $EasyNode/demo
+ *      EasyNode.using(&#x27;easynode.framework.Logger&#x27;);
+ */
+function _initNamespaces() {
+        if (!EasyNode._ns_resolved) {
+                if (!EasyNode._src_folders) {
+                        EasyNode._src_folders = [&#x27;src&#x27;];
+                }
+
+                var s = &#x27;&#x27;;
+                s += &#x27;//============DO NOT MODIFY THIS FILE, IT IS AUTO-GENERATED FOR CODE NOTIFICATION=============/\n\n&#x27;;
+                var namespaces = [];
+
+                function _gen(root, folder, p) {
+                        var files = fs.readdirSync(folder);
+                        files.forEach(function (f) {
+                                if (fs.statSync(path.join(folder, f)).isDirectory()) {
+                                        var ns = (p.length &gt; 0 ? (p + &#x27;.&#x27;) : &#x27;&#x27;) + f;
+                                        var realNS = ns.slice(7);
+                                        if (!_.contains(namespaces, ns)) {
+                                                namespaces.push(ns);
+                                                s += &#x27;/**\n&#x27; +
+                                                        &#x27;* @namespace &#x27; + realNS + &#x27;\n&#x27; +
+                                                        &#x27;*/\n&#x27;;
+                                                s += ns + &#x27; = &#x27; + &#x27;{};\n\n&#x27;;
+                                        }
+                                        _gen(root, path.join(folder, f), ns);
+                                }
+                        });
+                }
+
+                EasyNode._src_folders.forEach(function (src) {
+                        _gen(src, EasyNode.real(src), &#x27;global&#x27;);
+                });
+
+                fs.writeFileSync(EasyNode.real(&#x27;bin/resolved-namespaces.js&#x27;), s);
+                // Evaluate namespace simulation
+                eval(s);
+                EasyNode._ns_resolved = true;
+        }
+}
+
+/**
+ * 字符串去两端空格。
+ *
+ * @method _trim
+ * @since 0.1.0
+ * @author zlbbq
+ * @private
+ * @example
+ *      console.log(_trim(&#x27;   abc   &#x27;));                        //print : &#x27;abc&#x27;
+ * */
+function _trim(s) {
+        s = s || &#x27;&#x27;;
+        if (typeof s == &#x27;string&#x27;) {
+                return s.replace(/^\s\s*/, &#x27;&#x27;).replace(/\s\s*$/, &#x27;&#x27;);
+        }
+        throw new TypeError(&#x27;Not a string&#x27;);
+}
+
+/**
+ * 获取EasyNode的根目录。默认返回进程当前目录的父目录，因此需要在bin目录下启用nodejs；如果传递了命令行参数easynode-home，则返回该命令
+ * 行参数指定的路径。
+ *
+ * @method home
+ * @since 0.1.0
+ * @author zlbbq
+ * @static
+ * @return {String} EasyNode根目录的绝对路径。
+ * @example
+ *      //在bin目录下启动：babel-node ./main.js
+ *      console.log(EasyNode.home());                                            //print：/home/zlbbq/EasyNode
+ * */
+EasyNode.home = function () {
+        return EasyNode.arg(&#x27;easynode-home&#x27;) || path.join(process.cwd(), &#x27;../&#x27;);
+};
+
+/**
+ * 相对路径转绝对路径。
+ *
+ * @method EasyNode.real
+ * @since 0.1.0
+ * @author zlbbq
+ * @static
+ * @param {String} p 相对路径
+ * @return {String} 绝对路径
+ * @example
+ *      var path = &#x27;src/EasyNode.js&#x27;;
+ *      console.log(EasyNode.real(path));                //print : /home/zlbbq/EasyNode/src/EasyNode.js
+ * */
+EasyNode.real = function (p) {
+        return path.join(EasyNode.home(), p || &#x27;&#x27;);
+};
+
+/**
+ * JSON对象扩展，这个函数是underscore的extend函数的快捷方式，具体使用请参考underscore.extend()函数。
+ *
+ * @method extend
+ * @since 0.1.0
+ * @static
+ * @author zlbbq
+ * @param {...} JSON对象
+ * @example
+ *      var o = { a : &#x27;a&#x27; };
+ *      extend(o, { b : &#x27;b&#x27;});          // o = { a : &#x27;a&#x27;, b : &#x27;b&#x27;}
+ * */
+EasyNode.extend = function () {
+        _.extend.apply(null, arguments);
+};
+
+/**
+ * 获取命令行参数。一个命令行参数需要定义在入口js文件之后，并且格式为--$key=$value。&lt;br&gt;
+ * babel-node main.js --easynode.app.name=MyApp
+ *
+ * @method arg
+ * @since 0.1.0
+ * @static
+ * @author zlbbq
+ * @param {String} name 配置项key。
+ * @return {String} 配置值。
+ * @example
+ *      命令行参数：babel-node main.js --easynode.app.name=YourApp
+ *      console.log(config(&#x27;easynode.app.name&#x27;));                  //print : &#x27;YourApp&#x27;
+ */
+EasyNode.arg = function (name) {
+        if (!EasyNode._parsed_args) {
+                EasyNode._parsed_args = {};
+                var f = false;
+                var argReg = /^\-\-(.*)=(.*)$/;
+                process.argv.forEach(function (val) {
+                        if (!f) {
+                                if (val.match(/^\.\/.*\.js$/) || val.match(/^.*\.js$/)) {
+                                        f = true;
+                                }
+                        }
+                        else {
+                                var p = argReg.exec(val);
+                                if (p) {
+                                        EasyNode._parsed_args[p[1]] = p[2];
+                                }
+                        }
+                });
+        }
+        return EasyNode._parsed_args[name || &#x27;&#x27;];
+};
+
+/**
+ * 向EasyNode添加配置文件。配置文件需要位于$EasyNode/etc/目录，默认的配置文件为：EasyNode.conf。该文件始终在所有的配置文件生效前被加载 。
+ *
+ * @method addConfigFile
+ * @since 0.1.0
+ * @static
+ * @author zlbbq
+ * @param {String} ... 配置文件名，可一次添加多个文件。
+ * @throws {Error} 配置文件不存在。{TypeError} 参数非String类型。
+ * @example
+ *      require(&#x27;../src/EasyNode.js&#x27;);
+ *      EasyNode.addConfigFile(&#x27;app.conf&#x27;, &#x27;app1.conf&#x27;, &#x27;app2.conf&#x27;);            // etc/app.conf, etc/app1.conf, etc/app2.conf
+ *      EasyNode.console.log(config(&#x27;easynode.app.name&#x27;));
+ */
+EasyNode.addConfigFile = function () {
+        //清除配置缓存，如果配置文件发生变化
+        EasyNode._config_cache = null;
+        EasyNode._config_files = EasyNode._config_files || [&#x27;etc/EasyNode.conf&#x27;];
+        var arr = _.toArray(arguments);
+        arr.forEach(function (v) {
+                if (_.isString(v)) {
+                        if(v) {
+                                var f = EasyNode.real(v);
+                                if (!fs.existsSync(f)) {
+                                        throw new Error(&#x60;Config file [${f}] is not found!&#x60;);
+                                }
+                                EasyNode._config_files.push(v);
+                        }
+                }
+                else if (_.isArray(v)) {
+                        addConfig.apply(null, v);
+                }
+                else {
+                        throw new TypeError(&#x27;Invalid config type!&#x27;);
+                }
+        });
+};
+
+/**
+ * 获取配置文件中的配置参数。配置参数默认为etc/EasyNode.conf，可以通过EasyNode.addConfigFile向EasyNode添加配置文件。&lt;br&gt;
+ * 注意：如果命令行参数与配置项具有相同的key，则返回命令行参数值。
+ *
+ * @method config
+ * @since 0.1.0
+ * @static
+ * @author zlbbq
+ * @param {String} name 配置项key。
+ * @return {String} 配置值。如果不传递任何参数，EasyNode则会加载配置文件，但不会返回任何值。
+ * @example
+ *      配置文件：etc/EasyNode.conf  ==&gt; easynode.app.name = MyApp
+ *      console.log(config(&#x27;easynode.app.name&#x27;));                  //print : &#x27;MyApp&#x27;
+ *
+ *      命令行参数：babel-node main.js --easynode.app.name=YourApp
+ *      console.log(EasyNode.config(&#x27;easynode.app.name&#x27;));                  //print : &#x27;YourApp&#x27;
+ */
+EasyNode.config = function (name, defaultVal) {
+        if (!EasyNode._config_cache) {
+                EasyNode._config_cache = {};
+                var cfgDirectory = EasyNode.real(&#x27;&#x27;);
+                EasyNode._config_files = EasyNode._config_files || [&#x27;etc/EasyNode.conf&#x27;];
+                EasyNode._config_files.forEach(function (v) {
+                        var file = path.join(cfgDirectory, v);
+                        var cfg = fs.readFileSync(file);
+                        cfg = cfg.toString().split(&#x27;\n&#x27;);
+                        cfg.forEach(function (c) {
+                                if (c &amp;&amp; c[0] != &#x27;#&#x27;) {          //#is a comment flag
+                                        c = c.split(&#x27;=&#x27;);
+                                        c[0] = c[0] &amp;&amp; _trim(c[0]);
+                                        c[1] = c[1] &amp;&amp; _trim(c[1]);
+                                        for(var i = 2;i&lt;c.length;i++) {
+                                                c[1] += &#x27;=&#x27; + c[i];
+                                        }
+                                        if (c[0]) {
+                                                if (EasyNode._config_cache[c[0]] !== undefined) {
+                                                        console.warn(&#x60;***Warning : Duplicate config item [${c[0]}], value [${c[1]}] at [${file}] overwrote others.&#x60;);
+                                                }
+                                                EasyNode._config_cache[c[0]] = c[1];
+                                        }
+                                }
+                        });
+                });
+        }
+        if (typeof name == &#x27;string&#x27;) {
+                var v = EasyNode._config_cache[name];
+                //command line argument is able to overwrite EasyNode.conf configuration
+                var clv = EasyNode.arg(name);
+                clv = clv ? clv : v;
+                return clv || defaultVal;
+        }
+};
+
+/**
+ * 获取字符串表，国际化支持。配置文件：etc/i18n_$locale.conf，格式与EasyNode.conf相同。
+ *
+ * @method i18n
+ * @since 0.1.0
+ * @static
+ * @author zlbbq
+ * @param {String} name 国际化字符串配置项key。
+ * @param {String} prefix 如果传递此值，请始终传递__filename，__filename会被转成namespace(file) + &#x27;.&#x27; + name;
+ * @return {String} 配置值。如果不传递任何参数，EasyNode则会加载国际化配置文件，但不会返回任何值。
+ */
+EasyNode.i18n = function (name, prefix = &#x27;&#x27;) {
+        if (prefix) {
+                name = EasyNode.namespace(prefix) + &#x27;.&#x27; + name;
+        }
+        if (!EasyNode._i18n_cache) {
+                EasyNode._i18n_cache = {};
+                EasyNode._i18n_folders = EasyNode._i18n_folders || [&#x27;etc/i18n&#x27;];
+                EasyNode._i18n_folders.forEach(v =&gt; {
+                        var cfgDirectory = EasyNode.real(v);
+                        var i18nFile = (EasyNode._locale || &#x27;zh_CN&#x27;) + &#x27;.conf&#x27;;
+                        var file = path.join(cfgDirectory, i18nFile);
+                        var cfg = fs.readFileSync(file);
+                        cfg = cfg.toString().split(&#x27;\n&#x27;);
+                        cfg.forEach(function (c) {
+                                if (c &amp;&amp; c[0] != &#x27;#&#x27;) {          //#is a comment flag
+                                        c = c.split(&#x27;=&#x27;);
+                                        c[0] = c[0] &amp;&amp; _trim(c[0]);
+                                        c[1] = c[1] &amp;&amp; _trim(c[1]);
+                                        if (c[0]) {
+                                                if (EasyNode._i18n_cache[c[0]] !== undefined) {
+                                                        console.warn(&#x60;***Warning : Duplicate config item [${c[0]}], value [${c[1]}] at [${file}] overwrote others.&#x60;);
+                                                }
+                                                EasyNode._i18n_cache[c[0]] = c[1];
+                                        }
+                                }
+                        });
+                });
+        }
+        if (typeof name == &#x27;string&#x27;) {
+                var v = EasyNode._i18n_cache[name];
+                return v || name;
+        }
+};
+
+EasyNode.addi18nDirectory = function () {
+        //清除i18n缓存
+        EasyNode._i18n_cache = null;
+        if (!EasyNode._i18n_folders) {
+                EasyNode._i18n_folders = [&#x27;etc/i18n&#x27;];
+        }
+        var arr = _.toArray(arguments);
+        arr.forEach(function (v) {
+                if (_.isString(v)) {
+                        var folder = EasyNode.real(v);
+                        if (!fs.existsSync(folder)) {
+                                throw new Error(&#x60;Can not found i18n folder [${folder}]&#x60;);
+                        }
+                        EasyNode._i18n_folders.push(v);
+                }
+                else if (_.isArray(v)) {
+                        EasyNode.addi18nDirectory.apply(null, v);
+                }
+                else {
+                        throw new TypeError(&#x27;Invalid arguments!&#x27;);
+                }
+        });
+};
+
+/**
+ * 设置i18n Locale，系统默认&#x27;zh_CN&#x27;，i18n默认读取的配置文件为etc/i18n/$locale.conf，如：etc/i18n/zh_CN.conf。
+ * 在使用i18n函数前调用此函数才能正确设置语言。
+ *
+ * @method setLocale
+ * @since 0.1.0
+ * @static
+ * @author zlbbq
+ * @param {String} locale 地区字符串。
+ */
+EasyNode.setLocale = function (locale = &#x27;zh_CN&#x27;) {
+        EasyNode._locale = locale
+};
+/**
+ * 获取i18n Locale，系统默认&#x27;zh_CN&#x27;，可通过启动参数--locale指定地区字符串
+ * --locale=zh_CN
+ *
+ * @method getLocale
+ * @since 0.1.0
+ * @static
+ * @author zlbbq
+ */
+EasyNode.getLocale = function () {
+        return EasyNode._locale || EasyNode.arg(&#x27;locale&#x27;) || &#x27;zh_CN&#x27;;
+};
+
+/**
+ * 获取文件的命名空间名称或全类名。
+ *
+ * @method namespace
+ * @since 0.1.0
+ * @author zlbbq
+ * @static
+ * @param {String} name 建议在源码文件中使用__filename或__dirname。
+ * @return {String} 命名空间名称或全类名。
+ * @throws {TypeError} 参数name不是一个字符串
+ * @throws {Error} 源码文件不在src目录中。
+ * @example
+ *      //文件：src/easynode.framework.Logger.js
+ *      console.log(EasyNode.namespace(__filename));             //print : easynode.framework.Logger
+ *      console.log(EasyNode.namespace(__dirname));              //print : easynode.framework
+ */
+
+EasyNode.namespace = function (name) {
+        assert(typeof name == &#x27;string&#x27;, &#x27;Invalid name, need a String&#x27;);
+        assert(name.match(/.*\/src\/.*/), &#x27;Source code is not in src folder&#x27;);
+        name = name.replace(/\.js/, &#x27;&#x27;).replace(/^.*\/src\//gm, &#x27;&#x27;);
+        return name.replace(/\//gm, &#x27;.&#x27;);
+};
+
+/**
+ * 引用一个类、模块或者一个命名空间下所有的类或模块，取决于Node.js的导出。
+ *
+ * @method using
+ * @since 0.1.0
+ * @author zlbbq
+ * @static
+ * @param {String} name 全类名或命名空间名。
+ * @param {boolean} throwError 是否在类或命名空间未找到时抛出异常，默认为true，当throwError为false时，如果没有找到相应的类或命名空间则返回null
+ * @return {Object} 类，对象，或命名空间对象。
+ * @example
+ *      //引用一个类
+ *      EasyNode.using(&#x27;easynode.framework.Logger&#x27;);
+ *
+ *      //引用easynode.framework命名空间下所有的类。
+ *      EasyNode.using(&#x27;easynode.framework.*&#x27;);
+ * @example
+ *      var Logger = EasyNode.using(&#x27;easynode.framework.Logger&#x27;);
+ *      Logger.getLogger().info(&#x27;Hello, EasyNode&#x27;);
+ * @example
+ *      EasyNode.using(&#x27;easynode.framework.Logger&#x27;);
+ *      easynode.framework.Logger.getLogger().info(&#x27;Hello, EasyNode&#x27;);
+ * @example
+ *      var ns = using(&#x27;easynode.framework.*&#x27;);
+ *      ns.Logger.getLogger().info(&#x27;Hello, EasyNode&#x27;);
+ */
+EasyNode.using = function (name, throwError = true) {
+        if (!EasyNode._ns_resolved) {
+                _initNamespaces();
+        }
+        if (typeof name == &#x27;string&#x27;) {
+                var oName = name;
+                var ns = _getNamespace(name);
+                if (!EasyNode._using_cache) {
+                        EasyNode._using_cache = {};
+                }
+                if (EasyNode._using_cache[name]) {
+                        return EasyNode._using_cache[name];
+                }
+                name = name.replace(/\./gm, &#x27;/&#x27;);
+                if (name.match(/\/\*$/)) {
+                        name = name.replace(/\/\*$/, &#x27;&#x27;);
+                        var folder;
+                        var found = [];
+                        EasyNode._src_folders.forEach(function (src) {
+                                var file = path.join(EasyNode.real(src), name);
+                                if (fs.existsSync(file)) {
+                                        var fstat = fs.statSync(file);
+                                        if (fstat.isDirectory()) {
+                                                found.push(&#x60;[${oName}] was FOUND : [${file}]&#x60;);
+                                                if (!folder) {
+                                                        folder = file;
+                                                }
+                                        }
+                                }
+                        });
+                        if (found.length &gt; 1) {
+                                found = found.join(&#x27;\n&#x27;);
+                                console.warn(&#x60;***Warning: Ambiguous resource [${oName}] and the FIRST one was returned\n${found}&#x60;);
+                        }
+                        if (folder) {
+                                var files = fs.readdirSync(folder);
+                                var o = {};
+                                files.forEach(function (f) {
+                                        if (f.match(/\.js$/)) {
+                                                f = f.replace(/\.js$/, &#x27;&#x27;);
+                                                var className = f;
+                                                o[f] = require(path.join(folder, f));
+                                                ns[className] = o[f];                                    //inject into namespace
+                                        }
+                                });
+                                EasyNode._using_cache[oName] = o;
+                                return o;
+                        }
+                        else {
+                                if (throwError !== false) {
+                                        throw new Error(&#x60;Resource [${oName}] not found!&#x60;);
+                                }
+                                else {
+                                        return null;
+                                }
+                        }
+                }
+                else {
+                        var o;
+                        var f;
+                        var found = [];
+                        EasyNode._src_folders.forEach(function (src) {
+                                var file = path.join(EasyNode.real(src), name + &#x27;.js&#x27;);
+                                if (fs.existsSync(file)) {
+                                        var fstat = fs.statSync(file);
+                                        if (fstat.isFile()) {
+                                                found.push(&#x60;[${oName}] was FOUND : [${file}]&#x60;);
+                                                if (!o) {
+                                                        o = require(file);
+                                                        f = file;
+                                                }
+                                        }
+                                }
+                        });
+                        if (found.length &gt; 1) {
+                                found = found.join(&#x27;\n&#x27;);
+                                console.warn(&#x60;***Warning: Ambiguous resource [${oName}] and the FIRST one was returned\n${found}&#x60;);
+                        }
+                        if (!o) {
+                                if (throwError !== false) {
+                                        throw new Error(&#x60;Resource [${oName}] not found!&#x60;);
+                                }
+                                else {
+                                        return null;
+                                }
+                        }
+                        var className = oName.split(&#x27;.&#x27;).splice(-1);
+                        ns[className[0]] = o;                                                           //inject into namespace
+                        EasyNode._using_cache[oName] = o;
+                        return o;
+                }
+        }
+};
+
+/**
+ * 获取指定命名空间或全类名的绝对路径。
+ *
+ * @method namespace2Path
+ * @since 0.1.0
+ * @author zlbbq
+ * @async
+ * @static
+ * @param {String} namespace 命名空间或全类名。easynode.GenericObject
+ * @throws {Error} 源码目录不存在。{TypeError} 参数非String类型。
+ */
+EasyNode.namespace2Path = function (namespace) {
+        return function *() {
+                EasyNode._src_pathCache = EasyNode._src_pathCache || {};
+                if (EasyNode._src_pathCache[namespace]) {
+                        return EasyNode._src_pathCache[namespace];
+                }
+                var p = null;
+                var found = [];
+                for (var i = 0; i &lt; EasyNode._src_folders.length; i++) {
+                        var src = EasyNode._src_folders[i];
+                        var path2NS = namespace.replace(/\./gm, &#x27;/&#x27;) + &#x27;.js&#x27;;
+                        var file = path.join(EasyNode.real(src), path2NS);
+                        if (yield cofs.exists(file)) {
+                                var fstat = yield cofs.stat(file);
+                                if (fstat.isFile()) {
+                                        found.push(&#x60;[${namespace}] was FOUND : [${file}]&#x60;);
+                                        if (!p) {
+                                                p = file;
+                                        }
+                                }
+                        }
+                        else {
+                                path2NS = namespace.replace(/\./gm, &#x27;/&#x27;);
+                                file = path.join(EasyNode.real(src), path2NS);
+                                if (yield cofs.exists(file)) {
+                                        var fstat = yield cofs.stat(file);
+                                        if (fstat.isDirectory()) {
+                                                found.push(&#x60;[${namespace}] was FOUND : [${file}]&#x60;);
+                                                if (!p) {
+                                                        p = file;
+                                                }
+                                        }
+                                }
+                        }
+                }
+                if (found.length &gt; 1) {
+                        found = found.join(&#x27;\n&#x27;);
+                        console.warn(&#x60;***Warning: Ambiguous resource [${namespace}] and the FIRST one was returned\n${found}&#x60;);
+                }
+                EasyNode._src_pathCache[namespace] = p;
+                return p;
+        }
+};
+
+/**
+ * 向EasyNode添加一个源码目录，使用using引用一个类、对象或命名空间时，EasyNode在所有的源码目录下查找同
+ * 名的目录或js文件，默认的源码目录为：$EasyNode/src/。
+ * &lt;h5&gt;注意：为了识别不同目录下的命名空间，源码目录必须以&#x27;src&#x27;结尾的目录&lt;/h5&gt;
+ *
+ * @method addSourceDirectory
+ * @since 0.1.0
+ * @author zlbbq
+ * @static
+ * @param {String} ... 源码目录，相对于EasyNode根目录。可一次添加多个源码目录。
+ * @throws {Error} 源码目录不存在。{TypeError} 参数非String类型。
+ * @example
+ *      require(&#x27;../src/EasyNode.js&#x27;);
+ *      EasyNode.addSourceDirectory(&#x27;test&#x27;, &#x27;demo&#x27;);                 // $EasyNode/test/,  $EasyNode/demo
+ */
+EasyNode.addSourceDirectory = function () {
+        if (!EasyNode._src_folders) {
+                EasyNode._src_folders = [&#x27;src&#x27;];
+        }
+        var arr = _.toArray(arguments);
+        EasyNode._ns_resolved = false;                                  //clear easynode namespace cache
+        arr.forEach(function (v) {
+                if (_.isString(v)) {
+                        if(v) {
+                                assert(S(v).endsWith(&#x27;src&#x27;), &#x60;Invalid source folder, a source folder must ends with &#x27;src&#x27;&#x60;);
+                                var folder = EasyNode.real(v);
+                                if (!fs.existsSync(folder)) {
+                                        throw new Error(&#x60;Can not found source folder [${folder}]&#x60;);
+                                }
+                                EasyNode._src_folders.push(v);
+                        }
+                }
+                else if (_.isArray(v)) {
+                        EasyNode.addSourceDirectory.apply(null, v);
+                }
+                else {
+                        throw new TypeError(&#x27;Invalid arguments&#x27;);
+                }
+        });
+};
+
+/**
+ * 创建一个实例，指定的namespace必须是一个全类名。即：Node.js的导出对象是一个类，或者是ES5的函数。
+ * &lt;h5&gt;注意，该类必须能够通过无参构造器实例化。&lt;/h5&gt;
+ *
+ * @method create
+ * @since 0.1.0
+ * @author zlbbq
+ * @static
+ * @param {String} namespace 全类名
+ * @example
+ *      require(&#x27;../src/EasyNode.js&#x27;);
+ *      var plugin = EasyNode.create(&#x27;easynode.framework.plugin.EasyNodePlugin&#x27;);
+ *      console.log(plugin.toJSON());
+ */
+EasyNode.create = function (namespace) {
+        var Clazz = using(namespace);
+        return new Clazz;
+};
+
+/**
+ * 获取本机第一块以ethx命名的网卡的配置的第一个IP地址。
+ *
+ * @method getLocalIP
+ * @return {String} 本地IP地址
+ * @since 0.1.0
+ * @author zlbbq
+ * @static
+ * @example
+ *      require(&#x27;../src/EasyNode.js&#x27;);
+ *      var plugin = EasyNode.create(&#x27;easynode.framework.plugin.EasyNodePlugin&#x27;);
+ *      console.log(plugin.toJSON());
+ */
+EasyNode.getLocalIP = function () {
+        if (EasyNode._localIP) {
+                return EasyNode._localIP;
+        }
+        var ip = EasyNode.config(&#x27;easynode.local.ip&#x27;);
+        if(!ip) {
+                var ifaces = os.networkInterfaces();
+                for (var iface in ifaces) {
+                        if (iface.match(/eth\d+/) &amp;&amp; ifaces[iface].length &gt; 0) {             //标准Linux网卡：eth0, eth1
+                                ip = ifaces[iface][0].address;
+                                if (ip) {
+                                        break;
+                                }
+                        }
+                }
+                ip = ip || &#x27;127.0.0.1&#x27;;
+        }
+        return EasyNode._localIP = ip;
+};
+
+/**
+ * 全局函数
+ * @class 全局函数
+ * */
+
+/**
+ * 引用一个类、对象或者一个命名空间下所有的类或对象。类或对象取决于nodejs的module.exports导出了什么。&lt;br&gt;
+ *         &lt;h3&gt;这是EasyNode.using函数的快捷方式&lt;/h3&gt;
+ *
+ * @method using
+ * @since 0.1.0
+ * @author zlbbq
+ * @param {String} name 全类名或命名空间名。
+ * @return {Object} 类，对象，或命名空间对象。
+ * @example
+ *      //引用一个类
+ *      using(&#x27;easynode.framework.Logger&#x27;);
+ *
+ *      //引用easynode.framework命名空间下所有的类。
+ *      using(&#x27;easynode.framework.*&#x27;);
+ * @example
+ *      var Logger = using(&#x27;easynode.framework.Logger&#x27;);
+ *      Logger.getLogger().info(&#x27;Hello, EasyNode&#x27;);
+ * @example
+ *      using(&#x27;easynode.framework.Logger&#x27;);
+ *      easynode.framework.Logger.getLogger().info(&#x27;Hello, EasyNode&#x27;);
+ * @example
+ *      var ns = using(&#x27;easynode.framework.*&#x27;);
+ *      ns.Logger.getLogger().info(&#x27;Hello, EasyNode&#x27;);
+ */
+global.using = global.EasyNode.using;
+
+EasyNode.DEBUG = true;
+    </pre>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

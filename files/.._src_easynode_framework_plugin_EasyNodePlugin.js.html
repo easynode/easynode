@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>../src/easynode/framework/plugin/EasyNodePlugin.js - EasyNode API参考文档</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="icon" href="../assets/favicon.ico">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+                <h1><img src="../assets/css/logo.png" title="EasyNode API参考文档" width="117" height="52"></h1>
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: EasyNode - 0.1.0</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+                    <h2 class="off-left">APIs</h2>
+                    <div id="api-tabview" class="tabview">
+                        <ul class="tabs">
+                            <li><a href="#api-classes">Classes</a></li>
+                            <li><a href="#api-modules">Modules</a></li>
+                        </ul>
+                
+                        <div id="api-tabview-filter">
+                            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+                        </div>
+                
+                        <div id="api-tabview-panel">
+                            <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/#NAMESPACE#.FileService.html">#NAMESPACE#.FileService</a></li>
+                                <li><a href="../classes/EasyNode.html">EasyNode</a></li>
+                                <li><a href="../classes/easynode.framework.ActionAOP.ActionAOP.html">easynode.framework.ActionAOP.ActionAOP</a></li>
+                                <li><a href="../classes/easynode.framework.aop.AOP.html">easynode.framework.aop.AOP</a></li>
+                                <li><a href="../classes/easynode.framework.BeanFactory.html">easynode.framework.BeanFactory</a></li>
+                                <li><a href="../classes/easynode.framework.cache.CacheStat.html">easynode.framework.cache.CacheStat</a></li>
+                                <li><a href="../classes/easynode.framework.cache.ICache.html">easynode.framework.cache.ICache</a></li>
+                                <li><a href="../classes/easynode.framework.cache.Memcached.html">easynode.framework.cache.Memcached</a></li>
+                                <li><a href="../classes/easynode.framework.cache.Redis.html">easynode.framework.cache.Redis</a></li>
+                                <li><a href="../classes/easynode.framework.db.IConnection.html">easynode.framework.db.IConnection</a></li>
+                                <li><a href="../classes/easynode.framework.db.IDataSource.html">easynode.framework.db.IDataSource</a></li>
+                                <li><a href="../classes/easynode.framework.db.MysqlConnection.html">easynode.framework.db.MysqlConnection</a></li>
+                                <li><a href="../classes/easynode.framework.db.MysqlDataSource.html">easynode.framework.db.MysqlDataSource</a></li>
+                                <li><a href="../classes/easynode.framework.Logger.html">easynode.framework.Logger</a></li>
+                                <li><a href="../classes/easynode.framework.mq.IQueue.html">easynode.framework.mq.IQueue</a></li>
+                                <li><a href="../classes/easynode.framework.mq.RedisListQueue.html">easynode.framework.mq.RedisListQueue</a></li>
+                                <li><a href="../classes/easynode.framework.mq.RedisQueue.html">easynode.framework.mq.RedisQueue</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.Action.html">easynode.framework.mvc.Action</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.ActionArgConverter.html">easynode.framework.mvc.ActionArgConverter</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.ActionContext.html">easynode.framework.mvc.ActionContext</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.ActionExecutor.html">easynode.framework.mvc.ActionExecutor</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.ActionFactory.html">easynode.framework.mvc.ActionFactory</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.ActionFilter.html">easynode.framework.mvc.ActionFilter</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.ActionRequestParameter.html">easynode.framework.mvc.ActionRequestParameter</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.ActionResult.html">easynode.framework.mvc.ActionResult</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.CombinedAction.html">easynode.framework.mvc.CombinedAction</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.EJSTemplateViewRenderer.html">easynode.framework.mvc.EJSTemplateViewRenderer</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.IActionContextListener.html">easynode.framework.mvc.IActionContextListener</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.ITemplateViewRenderer.html">easynode.framework.mvc.ITemplateViewRenderer</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.JadeTemplateViewRenderer.html">easynode.framework.mvc.JadeTemplateViewRenderer</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.JSONView.html">easynode.framework.mvc.JSONView</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.MethodDispatchedAction.html">easynode.framework.mvc.MethodDispatchedAction</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.Model.html">easynode.framework.mvc.Model</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.ModelField.html">easynode.framework.mvc.ModelField</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.ModelProxyActionFactory.html">easynode.framework.mvc.ModelProxyActionFactory</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.MustacheTemplateViewRenderer.html">easynode.framework.mvc.MustacheTemplateViewRenderer</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.spi.MysqlModelGenerator.html">easynode.framework.mvc.spi.MysqlModelGenerator</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.View.html">easynode.framework.mvc.View</a></li>
+                                <li><a href="../classes/easynode.framework.plugin.EasyNodePlugin.html">easynode.framework.plugin.EasyNodePlugin</a></li>
+                                <li><a href="../classes/easynode.framework.plugin.PluginLoadContext.html">easynode.framework.plugin.PluginLoadContext</a></li>
+                                <li><a href="../classes/easynode.framework.queue.MQTTQueue.html">easynode.framework.queue.MQTTQueue</a></li>
+                                <li><a href="../classes/easynode.framework.server.AbstractServer.html">easynode.framework.server.AbstractServer</a></li>
+                                <li><a href="../classes/easynode.framework.server.http.KOAActionContext.html">easynode.framework.server.http.KOAActionContext</a></li>
+                                <li><a href="../classes/easynode.framework.server.http.KOADefaultRoutes.html">easynode.framework.server.http.KOADefaultRoutes</a></li>
+                                <li><a href="../classes/easynode.framework.server.http.KOAHttpRequestParameter.html">easynode.framework.server.http.KOAHttpRequestParameter</a></li>
+                                <li><a href="../classes/easynode.framework.server.http.KOAHttpServer.html">easynode.framework.server.http.KOAHttpServer</a></li>
+                                <li><a href="../classes/easynode.framework.server.http.KOAHttpServer.SessionSupport.html">easynode.framework.server.http.KOAHttpServer.SessionSupport</a></li>
+                                <li><a href="../classes/easynode.framework.server.KOAMemorySessionStorage.html">easynode.framework.server.KOAMemorySessionStorage</a></li>
+                                <li><a href="../classes/easynode.framework.server.ServerStat.html">easynode.framework.server.ServerStat</a></li>
+                                <li><a href="../classes/easynode.framework.server.tcp.Decoder.html">easynode.framework.server.tcp.Decoder</a></li>
+                                <li><a href="../classes/easynode.framework.server.tcp.Encoder.html">easynode.framework.server.tcp.Encoder</a></li>
+                                <li><a href="../classes/easynode.framework.server.tcp.Message.html">easynode.framework.server.tcp.Message</a></li>
+                                <li><a href="../classes/easynode.framework.server.tcp.MessageHandler.html">easynode.framework.server.tcp.MessageHandler</a></li>
+                                <li><a href="../classes/easynode.framework.server.tcp.protocols.JSONDecoder.html">easynode.framework.server.tcp.protocols.JSONDecoder</a></li>
+                                <li><a href="../classes/easynode.framework.server.tcp.protocols.JSONEncoder.html">easynode.framework.server.tcp.protocols.JSONEncoder</a></li>
+                                <li><a href="../classes/easynode.framework.server.tcp.protocols.JSONMessageHandler.html">easynode.framework.server.tcp.protocols.JSONMessageHandler</a></li>
+                                <li><a href="../classes/easynode.framework.server.tcp.StreamDecoderHelper.html">easynode.framework.server.tcp.StreamDecoderHelper</a></li>
+                                <li><a href="../classes/easynode.framework.server.tcp.StreamEncoderHelper.html">easynode.framework.server.tcp.StreamEncoderHelper</a></li>
+                                <li><a href="../classes/easynode.framework.server.tcp.TCPClient.html">easynode.framework.server.tcp.TCPClient</a></li>
+                                <li><a href="../classes/easynode.framework.server.tcp.TCPServer.html">easynode.framework.server.tcp.TCPServer</a></li>
+                                <li><a href="../classes/easynode.framework.test.TestCase.html">easynode.framework.test.TestCase</a></li>
+                                <li><a href="../classes/easynode.framework.test.TestCaseRunner.html">easynode.framework.test.TestCaseRunner</a></li>
+                                <li><a href="../classes/easynode.framework.util.Binary.html">easynode.framework.util.Binary</a></li>
+                                <li><a href="../classes/easynode.framework.util.HTTPUtil.html">easynode.framework.util.HTTPUtil</a></li>
+                                <li><a href="../classes/easynode.framework.util.MustacheHelper.html">easynode.framework.util.MustacheHelper</a></li>
+                                <li><a href="../classes/easynode.framework.util.MyError.html">easynode.framework.util.MyError</a></li>
+                                <li><a href="../classes/easynode.framework.util.ObjectWrapper.html">easynode.framework.util.ObjectWrapper</a></li>
+                                <li><a href="../classes/easynode.framework.util.SqlUtil.html">easynode.framework.util.SqlUtil</a></li>
+                                <li><a href="../classes/easynode.framework.util.StringUtil.html">easynode.framework.util.StringUtil</a></li>
+                                <li><a href="../classes/easynode.framework.util.VersionComparator.html">easynode.framework.util.VersionComparator</a></li>
+                                <li><a href="../classes/easynode.framework.view.TemplateView.html">easynode.framework.view.TemplateView</a></li>
+                                <li><a href="../classes/easynode.GenericObject.html">easynode.GenericObject</a></li>
+                                <li><a href="../classes/全局函数.html">全局函数</a></li>
+                            </ul>
+                
+                            <ul id="api-modules" class="apis modules">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+                    Show:
+                    <label for="api-show-inherited">
+                        <input type="checkbox" id="api-show-inherited" checked>
+                        Inherited
+                    </label>
+            
+                    <label for="api-show-protected">
+                        <input type="checkbox" id="api-show-protected">
+                        Protected
+                    </label>
+            
+                    <label for="api-show-private">
+                        <input type="checkbox" id="api-show-private">
+                        Private
+                    </label>
+                    <label for="api-show-deprecated">
+                        <input type="checkbox" id="api-show-deprecated">
+                        Deprecated
+                    </label>
+            
+                </div>
+            
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+<h1 class="file-heading">File: ../src/easynode/framework/plugin/EasyNodePlugin.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+var assert = require(&#x27;assert&#x27;);
+var logger = using(&#x27;easynode.framework.Logger&#x27;).forFile(__filename);
+var GenericObject = using(&#x27;easynode.GenericObject&#x27;);
+var VersionComparator = using(&#x27;easynode.framework.util.VersionComparator&#x27;);
+var co = require(&#x27;co&#x27;);
+var path = require(&#x27;path&#x27;);
+var S = require(&#x27;string&#x27;);
+var thunkify = require(&#x27;thunkify&#x27;);
+var _ = require(&#x27;underscore&#x27;);
+var fs = require(&#x27;co-fs&#x27;);
+
+(function () {
+        //插件名列表，有序
+        var _pluginList = [];
+
+        //插件实例
+        var _plugins = {};
+
+        /**
+         * Class EasyNodePlugin
+         *
+         * @class easynode.framework.plugin.EasyNodePlugin
+         * @extends easynode.GenericObject
+         * @since 0.1.0
+         * @author zlbbq
+         * */
+        class EasyNodePlugin extends GenericObject {
+                /**
+                 * 构造函数。
+                 *
+                 * @method 构造函数
+                 * @param {String} name 插件名称
+                 * @param {String} version 插件版本，默认&#x27;0.0.1&#x27;
+                 * @since 0.1.0
+                 * @author zlbbq
+                 * */
+                constructor(name, version=&#x27;0.0.1&#x27;) {
+                        super();
+                        //调用super()后再定义子类成员。
+                        assert(!S(name).isEmpty(), &#x27;Plugin must be named&#x27;);
+
+                        /**
+                         * 插件名称
+                         * @property name
+                         * @type String
+                         * */
+                        this.name = name;
+
+                        /**
+                         * 插件版本，格式：major.minor.patch
+                         * @property version
+                         * @type String
+                         * @since 0.1.0
+                         * @author zlbbq
+                         * */
+                        this.version = version;
+
+                        /**
+                         * 插件简述，默认与插件名称一致。
+                         * @property brief
+                         * @type String
+                         * @since 0.1.0
+                         * @author zlbbq
+                         * */
+                        this.brief = this.name;
+
+                        /**
+                         * 插件详细描述
+                         * @property description
+                         * @type String
+                         * @default null
+                         * @since 0.1.0
+                         * @author zlbbq
+                         * */
+                        this.description = null;
+
+
+                        /**
+                         * 插件配置项
+                         * @property configurations
+                         * @type Object
+                         * @default {}
+                         * @since 0.1.0
+                         * @author zlbbq
+                         * */
+                        this.configurations = {};
+
+
+                        /**
+                         * 插件国际化配置项
+                         * @property i18nConfig
+                         * @type Object
+                         * @default {}
+                         * @since 0.1.0
+                         * @author zlbbq
+                         * */
+                        this.i18nConfig = {};
+
+
+                        /**
+                         * 是否已经加载
+                         * @property _load
+                         * @type boolean
+                         * @private
+                         * @default {}
+                         * @since 0.1.0
+                         * @author zlbbq
+                         * */
+                        this._load = false;
+                }
+
+                /**
+                 * 获取插件根目录，插件根目录: $EasyNode/plugins/$plugin。
+                 *
+                 * @method home
+                 * @return {String} 插件home目录。绝对目录。
+                 * @since 0.1.0
+                 * @author zlbbq
+                 * */
+                home () {
+                        return EasyNode.real(&#x60;plugins/${this.name}/&#x60;);
+                }
+
+                /**
+                 * 获取指定插件资源的相对路径（相对于EasyNode Home目录）。plugins/$pluginName/$relative
+                 *
+                 * @method relative
+                 * @param {String} p 插件资源相对路径
+                 * @return {String} 插件资源目录，相对于EasyNode目录。
+                 * @since 0.1.0
+                 * @author zlbbq
+                 * */
+                relative(p) {
+                        return path.join(&#x60;plugins/${this.name}/&#x60;, p);
+                }
+
+                /**
+                 * 获取指定插件资源的绝对路径。
+                 *
+                 * @method real
+                 * @param {String} p 插件资源相对路径
+                 * @return {String} 插件资源的绝对路径
+                 * @since 0.1.0
+                 * @author zlbbq
+                 * */
+                real (p) {
+                        return path.join(this.home(), p);
+                }
+
+                /**
+                 * 插件是否已经加载。
+                 *
+                 * @method isLoad
+                 * @return {boolean} 是否已经加载
+                 * @since 0.1.0
+                 * @author zlbbq
+                 * */
+                isLoad() {
+                        return this._load;
+                }
+
+                /**
+                 * 读取插件描述文件，插件描述文件应该位于插件根目录下，命名为：$plugin.md，$plugin为插件名称。
+                 *
+                 * @method getDescription
+                 * @async
+                 * @since 0.1.0
+                 * @author zlbbq
+                 * */
+
+                 getDescription () {
+                        var me = this;
+                        return function * () {
+                                if(me.description != null) {
+                                        return me.description;
+                                }
+                                var descFile = me.real(&#x60;${this.name}.md&#x60;);
+                                var fnReadFile = thunkify(fs.readFile);
+                                var s = yield fnReadFile(descFile);
+                                s = s.toString();
+                                me.description = s;
+                                return s;
+                        };
+                 }
+
+                /**
+                 * 初始化插件。
+                 *
+                 * @method initialize
+                 * @param {easynode.framework.plugin.PluginLoadContext} loadCtx 插件加载环境
+                 * @async
+                 * @since 0.1.0
+                 * @author zlbbq
+                 * */
+                initialize (loadCtx)  {
+                        return function * () {
+
+                        };
+                }
+
+                /**
+                 * 设置或获取插件配置。
+                 *
+                 * @method config
+                 * @param {Object/String} item 配置项名称，当配置项为object并且只有一个参数时则合并配置项到插件配置
+                 * @param {String} defaultValue 默认值，默认为null
+                 * @since 0.1.0
+                 * @author zlbbq
+                 * */
+                config(item, defaultValue=null) {
+                        if(typeof item == &#x27;string&#x27;) {
+                                return this.configurations[item] || defaultValue;
+                        }
+                        else if(typeof item == &#x27;object&#x27; &amp;&amp; arguments.length == 1) {
+                                _.extend(this.configurations, item);
+                        }
+                }
+
+                /**
+                 * 获取插件Web目录，插件Web目录为：$plugin/www/，要求插件目录下有且仅有一个以插件名命名的目录，否则视为无效Web目录。
+                 *
+                 * @method getWebDir
+                 * @return {String} 插件Web目录，没有www目录时返回null
+                 * @async
+                 * @since 0.1.0
+                 * @author zlbbq
+                 * */
+                getWebDir () {
+                        var webDir = this.real(&#x27;www/&#x27;);
+                        var me = this;
+                        return function * () {
+                                var exists = yield fs.exists(path.join(webDir, me.name));
+                                if(exists) {
+                                        var files = yield fs.readdir(webDir);
+                                        if (files.length == 1) {
+                                                return &#x60;plugins/&#x60; + me.name + &#x27;/www/&#x27;;
+                                        }
+                                        else {
+                                                logger.error(&#x60;Unrecognized web directory of plugin [${me.name}]&#x60;);
+                                        }
+                                }
+                        };
+                }
+
+                /**
+                 * 设置或获取插件国际化配置。
+                 *
+                 * @method i18n
+                 * @param {Object/String} item 配置项名称，当配置项为object并且只有一个参数时则合并配置项到插件国际化配置
+                 * @param {String} prefix 配置项前缀，如果传递此值，请始终传递__filename，__filename会被转成namespace(file) + &#x27;.&#x27; + name;
+                 * @since 0.1.0
+                 * @author zlbbq
+                 * */
+                i18n(item, prefix, ...replaces) {
+                        if(typeof item == &#x27;string&#x27;) {
+                                if(prefix) {
+                                        item = EasyNode.namespace(prefix) + &#x27;.&#x27; + item;
+                                }
+                                return this.i18nConfig[item] || item;
+                        }
+                        else if(typeof item == &#x27;object&#x27; &amp;&amp; arguments.length == 1) {
+                                _.extend(this.i18nConfig, item);
+                        }
+                }
+
+                /**
+                 * 获取插件i18n字符串。消息来自于i18n配置文件，i18n配置项为：plugin.$pluginName[.$subKey].$code
+                 *
+                 * @method formatString
+                 * @param {String} key string标识。
+                 * @param {String} subKey string子项，默认为null
+                 * @return {String} i18n字符串
+                 * @since 0.1.0
+                 * @author zlbbq
+                 * */
+                formatString(key, subKey=null) {
+                        var item = &#x27;plugin.&#x27; + this.name + &#x27;.&#x27; + (subKey ? (subKey + &#x27;.&#x27;) : &#x27;&#x27;) + key;
+                        return this.i18n(item, &#x27;&#x27;);
+                }
+
+                /**
+                 * 获取插件i18n字符串 - 响应ActionResult专用。消息来自于i18n配置文件，i18n配置项为：plugin.$pluginName.results.$code
+                 *
+                 * @method formatResult
+                 * @param {String} key string标识。
+                 * @return {String} ActionResult i18n字符串
+                 * @since 0.1.0
+                 * @author zlbbq
+                 * */
+                formatResult(key) {
+                        return this.formatString(key, &#x27;results&#x27;);
+                }
+
+                /**
+                 * 设置插件依赖。如果没有找到依赖的插件则抛出错误。
+                 *
+                 * @method depends
+                 * @param {...} plugins 插件，多参，每个参数为字符串类型。格式：$pluginName@$version
+                 * @return this 可链式调用
+                 * @since 0.1.0
+                 * @author zlbbq
+                 * */
+                depends(...plugins) {
+                        this.dependencies = this.dependencies || [];
+                        this.dependencies = this.dependencies.concat(plugins);
+                        return this;
+                }
+
+                /**
+                 * 检查插件依赖
+                 *
+                 * @method checkDependency
+                 * @since 0.1.0
+                 * @author zlbbq
+                 * */
+                checkDependency() {
+                        this.dependencies = this.dependencies || [];
+                        this.dependencies.forEach(p =&gt; {
+                                var [name,version] = p.split(&#x27;@&#x27;);
+                                var inst = EasyNodePlugin.getPlugin(name, version);
+                                if(!inst) {
+                                        throw new Error(&#x60;Dependency error, plugin [${this.name}] depends [${name}${version ? &#x27;@&#x27; + version : &#x27;&#x27;}], but depended plugin is not found or version is too low&#x60;);
+                                }
+                        });
+                }
+
+
+                /**
+                 * 覆盖GenericObject.toJSON()函数。
+                 *
+                 * @method toJSON
+                 * @since 0.1.0
+                 * @author zlbbq
+                 * */
+                toJSON () {
+                        var o = {
+                                name : this.name,
+                                version : this.version,
+                                brief : this.brief,
+                                description : this.description,
+                                home : this.home()
+                        };
+                        return JSON.stringify(o);
+                }
+
+
+                /**
+                 * 读取easynode.plugins配置项，按配置项顺序加载EasyNode插件，请注意插件的依赖关系。&lt;br/&gt;
+                 * easynode.plugins配置项示例：plugin1,plugin2,plugin3&lt;br/&gt;
+                 * 所有的EasyNode插件应位于$EasyNode/plugins目录。例：$EasyNode/plugins/plugin1/&lt;br/&gt;
+                 * 在插件目录下增加一个.ignore文件可忽略该插件的加载。&lt;br/&gt;
+                 * 执行流程&lt;br/&gt;
+                 * &lt;pre&gt;
+                 *       插件加载流程如下：
+                 *      1. 将插件目录下的src目录加入到EasyNode源码目录
+                 *      2. 读取插件目录下的etc目录下$plugin.conf文件（注意：不递归加载），视为配置文件并加载到插件配置，conf文件格式同EasyNode.conf
+                 *      3. 读取插件目录下的etc/i18n目录下的与EasyNode Locale设定相同的.conf文件，作为国际化文件加载
+                 *      4. 加载插件目录下的src/$pluginName_PluginEntry.js，要求该文件导出的是一个easynode.framework.plugin.EasyNodePlugin类的子类
+                 *      5. 实例化上一步骤的导出类，创建插件实例，并将读取的配置文件通过config和i18n函数配置
+                 *      6. 注册插件到插件库，等待检查依赖关系后初始化
+                 *      上述步骤完成后，开始插件启动流程，插件启动流程如下：
+                 *      1. 调用插件实例的checkDependency函数
+                 *      2. 调用插件的实例的initialize函数初始化插件，插件需要定义Action、路由、中间件均可以在此函数中实现，这是一个异步函数
+                 *      3. 加载插件www目录到KOAHttpServer的Web目录，如果PluginLoadContext中定义了KOAHttpServer实例。
+                 * &lt;/pre&gt;
+                 *
+                 * @method load
+                 * @param {easynode.framework.plugin.PluginLoadContext} loadCtx 加载上下文环境
+                 * @static
+                 * @async
+                 * @since 0.1.0
+                 * @author zlbbq
+                 * */
+                static load(loadCtx) {
+                        function * readConfig(pluginName, dir, pattern=/^.*\.conf$/) {
+                                var exists = yield fs.exists(dir);
+                                if(!exists) {
+                                        return {};
+                                }
+                                var files = yield fs.readdir(dir);
+                                var ret = {};
+                                for(var i = 0;i&lt;files.length;i++) {
+                                        var f = path.join(dir, files[i]);
+                                        if(f.match(pattern)) {
+                                                var cfg = yield fs.readFile(f);
+                                                cfg = cfg.toString().split(&#x27;\n&#x27;);
+                                                cfg.forEach(function (c) {
+                                                        if (c &amp;&amp; c[0] != &#x27;#&#x27;) {          //#is a comment flag
+                                                                c = c.split(&#x27;=&#x27;);
+                                                                c[0] = c[0] &amp;&amp; S(c[0]).trim().toString();
+                                                                c[1] = c[1] &amp;&amp; S(c[1]).trim().toString();
+                                                                if(ret[c[0]] !== undefined) {
+                                                                        logger.warn(&#x60;Duplicated config item in plugin [${pluginName}]: [${c[0]}]&#x60;);
+                                                                }
+                                                                ret[c[0]] = c[1];
+                                                        }
+                                                });
+                                        }
+                                }
+                                return ret;
+                        }
+
+                        var pluginFolder = EasyNode.real(&#x27;plugins/&#x27;);
+                        var locale = EasyNode.getLocale();
+                        return function * () {
+                                var files = yield fs.readdir(pluginFolder);
+                                for(var i = 0;i&lt;files.length;i++) {
+                                        var pluginFolderName = files[i];
+                                        var f = path.join(pluginFolder, pluginFolderName);
+                                        var stat = yield fs.stat(f);
+                                        if(stat.isDirectory()) {
+                                                try {
+                                                        var isIgnore = yield fs.exists(path.join(f, &#x27;.ignore&#x27;));
+                                                        if(isIgnore) {
+                                                                logger.info(&#x60;ignore plugin [${pluginFolderName}]&#x60;);
+                                                                continue;
+                                                        }
+                                                        EasyNode.DEBUG &amp;&amp; logger.debug(&#x60;found plugin directory [${pluginFolderName}]...&#x60;);
+                                                        EasyNode.addSourceDirectory(&#x27;plugins/&#x27; + pluginFolderName + &#x27;/src&#x27;);
+                                                        EasyNode.addConfigFile(&#x27;plugins/&#x27; + pluginFolderName + &#x27;/etc/&#x27; + pluginFolderName + &#x27;.conf&#x27;);
+                                                        var locale = EasyNode.getLocale();
+                                                        var pluginConf = yield readConfig(pluginFolderName, path.join(f, &#x27;etc/&#x27;), new RegExp(pluginFolderName + &#x27;.conf&#x27;));
+                                                        var i18nConf = yield readConfig(pluginFolderName, path.join(f, &#x27;etc/i18n/&#x27;), new RegExp(locale + &#x27;.conf&#x27;));
+                                                        var PluginEntryClass = require(path.join(f, &#x27;src/&#x27;+pluginFolderName+&#x27;_PluginEntry.js&#x27;));
+                                                        var pluginInstance = new PluginEntryClass();
+                                                        if (!(pluginInstance instanceof EasyNodePlugin)) {
+                                                                throw new Error(&#x60;Invalid plugin entry [${pluginFolderName}]&#x60;);
+                                                        }
+                                                        logger.info(&#x60;loading plugin [${pluginInstance.name}@${pluginInstance.version}]&#x60;);
+                                                        if(pluginInstance.name != pluginFolderName) {
+                                                                throw new Error(&#x60;Unmatched plugin name and folder [${pluginInstance.name}]-&gt;[${pluginFolderName}]&#x60;);
+                                                        }
+                                                        pluginInstance.config(pluginConf);
+                                                        pluginInstance.i18n(i18nConf);
+                                                        _plugins[pluginInstance.name] = pluginInstance;
+                                                        _pluginList.push(pluginInstance.name);
+                                                        EasyNode.DEBUG &amp;&amp; logger.debug(&#x60;plugin [${pluginInstance.name}@${pluginInstance.version}] is load, preparing to initialize...&#x60;);
+                                                }catch(e) {
+                                                        logger.error(&#x60;Bad plugin package [${pluginFolderName}]&#x60;);
+                                                        logger.error(e);
+                                                }
+                                        }
+                                }
+
+                                for(var i = 0;i&lt;_pluginList.length;i++) {
+                                        try {
+                                                var pluginInstance = EasyNodePlugin.getPlugin(_pluginList[i]);
+                                                EasyNode.DEBUG &amp;&amp; logger.debug(&#x60;initializing plugin [${pluginInstance.name}@${pluginInstance.version}]...&#x60;);
+                                                EasyNode.DEBUG &amp;&amp; logger.debug(&#x27;checking dependency...&#x27;);
+                                                pluginInstance.checkDependency();
+                                                yield pluginInstance.initialize(loadCtx);
+                                                var webDir = yield pluginInstance.getWebDir();
+                                                if(loadCtx.koaHttpServer &amp;&amp; webDir) {
+                                                        EasyNode.DEBUG &amp;&amp; logger.debug(&#x60;registering plugin web directory [/${pluginInstance.name}]...&#x60;);
+                                                        loadCtx.koaHttpServer.addWebDirs(webDir);
+                                                }
+                                                pluginInstance._load = true;
+                                                logger.info(&#x60;plugin [${pluginInstance.name}@${pluginInstance.version}] is initialized&#x60;);
+                                        }catch(e) {
+                                                logger.error(&#x60;initialize plugin [${pluginInstance.name}] failed&#x60;);
+                                                logger.error(e.stack);
+                                        }
+                                }
+                        };
+                }
+
+                /**
+                 * 获取插件实例。
+                 *
+                 * @method getPlugin
+                 * @param {String} name 插件名，可按$name@$version格式只传递一个name参数
+                 * @param {String} version 插件最低版本，可不传
+                 * @static
+                 * @since 0.1.0
+                 * @author zlbbq
+                 * */
+                static getPlugin(name, version) {
+                        if(arguments.length == 1) {
+                                [name, version] = name.split(&#x27;@&#x27;);
+                        }
+                        var plugin = _plugins[name];
+                        if(plugin &amp;&amp; version) {
+                                if(VersionComparator.compare(plugin.version, version) &gt;= 0) {
+                                        return plugin;
+                                }
+                                else {
+                                        return null;
+                                }
+                        }
+                        return plugin;
+                }
+
+                /**
+                 * 返回系统插件情况。
+                 *
+                 * @method plugins
+                 * @param {boolean} detail 是否获取详细信息，默认false。false时仅返回插件名列表，true时，返回插件的详细信息
+                 * @static
+                 * @since 0.1.0
+                 * @author zlbbq
+                 * */
+                static plugins(detail=false) {
+                        if(!detail) {
+                                return _.clone(_pluginList);
+                        }
+                        else {
+                                var list = [];
+                                for(var name  in _plugins) {
+                                        var inst = _plugins[name];
+                                        var o = {
+                                                name : name,
+                                                version : inst.version,
+                                                brief : inst.brief,
+                                                description : inst.description,
+                                                load : inst.isLoad()
+                                        };
+                                        list.push(o);
+                                }
+                                return list;
+                        }
+                }
+
+                getClassName() {
+                        return EasyNode.namespace(__filename);
+                }
+        }
+
+        module.exports = EasyNodePlugin;
+})();
+    </pre>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

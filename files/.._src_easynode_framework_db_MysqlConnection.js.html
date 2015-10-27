@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>../src/easynode/framework/db/MysqlConnection.js - EasyNode API参考文档</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="icon" href="../assets/favicon.ico">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+                <h1><img src="../assets/css/logo.png" title="EasyNode API参考文档" width="117" height="52"></h1>
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: EasyNode - 0.1.0</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+                    <h2 class="off-left">APIs</h2>
+                    <div id="api-tabview" class="tabview">
+                        <ul class="tabs">
+                            <li><a href="#api-classes">Classes</a></li>
+                            <li><a href="#api-modules">Modules</a></li>
+                        </ul>
+                
+                        <div id="api-tabview-filter">
+                            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+                        </div>
+                
+                        <div id="api-tabview-panel">
+                            <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/#NAMESPACE#.FileService.html">#NAMESPACE#.FileService</a></li>
+                                <li><a href="../classes/EasyNode.html">EasyNode</a></li>
+                                <li><a href="../classes/easynode.framework.ActionAOP.ActionAOP.html">easynode.framework.ActionAOP.ActionAOP</a></li>
+                                <li><a href="../classes/easynode.framework.aop.AOP.html">easynode.framework.aop.AOP</a></li>
+                                <li><a href="../classes/easynode.framework.BeanFactory.html">easynode.framework.BeanFactory</a></li>
+                                <li><a href="../classes/easynode.framework.cache.CacheStat.html">easynode.framework.cache.CacheStat</a></li>
+                                <li><a href="../classes/easynode.framework.cache.ICache.html">easynode.framework.cache.ICache</a></li>
+                                <li><a href="../classes/easynode.framework.cache.Memcached.html">easynode.framework.cache.Memcached</a></li>
+                                <li><a href="../classes/easynode.framework.cache.Redis.html">easynode.framework.cache.Redis</a></li>
+                                <li><a href="../classes/easynode.framework.db.IConnection.html">easynode.framework.db.IConnection</a></li>
+                                <li><a href="../classes/easynode.framework.db.IDataSource.html">easynode.framework.db.IDataSource</a></li>
+                                <li><a href="../classes/easynode.framework.db.MysqlConnection.html">easynode.framework.db.MysqlConnection</a></li>
+                                <li><a href="../classes/easynode.framework.db.MysqlDataSource.html">easynode.framework.db.MysqlDataSource</a></li>
+                                <li><a href="../classes/easynode.framework.Logger.html">easynode.framework.Logger</a></li>
+                                <li><a href="../classes/easynode.framework.mq.IQueue.html">easynode.framework.mq.IQueue</a></li>
+                                <li><a href="../classes/easynode.framework.mq.RedisListQueue.html">easynode.framework.mq.RedisListQueue</a></li>
+                                <li><a href="../classes/easynode.framework.mq.RedisQueue.html">easynode.framework.mq.RedisQueue</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.Action.html">easynode.framework.mvc.Action</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.ActionArgConverter.html">easynode.framework.mvc.ActionArgConverter</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.ActionContext.html">easynode.framework.mvc.ActionContext</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.ActionExecutor.html">easynode.framework.mvc.ActionExecutor</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.ActionFactory.html">easynode.framework.mvc.ActionFactory</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.ActionFilter.html">easynode.framework.mvc.ActionFilter</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.ActionRequestParameter.html">easynode.framework.mvc.ActionRequestParameter</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.ActionResult.html">easynode.framework.mvc.ActionResult</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.CombinedAction.html">easynode.framework.mvc.CombinedAction</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.EJSTemplateViewRenderer.html">easynode.framework.mvc.EJSTemplateViewRenderer</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.IActionContextListener.html">easynode.framework.mvc.IActionContextListener</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.ITemplateViewRenderer.html">easynode.framework.mvc.ITemplateViewRenderer</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.JadeTemplateViewRenderer.html">easynode.framework.mvc.JadeTemplateViewRenderer</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.JSONView.html">easynode.framework.mvc.JSONView</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.MethodDispatchedAction.html">easynode.framework.mvc.MethodDispatchedAction</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.Model.html">easynode.framework.mvc.Model</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.ModelField.html">easynode.framework.mvc.ModelField</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.ModelProxyActionFactory.html">easynode.framework.mvc.ModelProxyActionFactory</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.MustacheTemplateViewRenderer.html">easynode.framework.mvc.MustacheTemplateViewRenderer</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.spi.MysqlModelGenerator.html">easynode.framework.mvc.spi.MysqlModelGenerator</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.View.html">easynode.framework.mvc.View</a></li>
+                                <li><a href="../classes/easynode.framework.plugin.EasyNodePlugin.html">easynode.framework.plugin.EasyNodePlugin</a></li>
+                                <li><a href="../classes/easynode.framework.plugin.PluginLoadContext.html">easynode.framework.plugin.PluginLoadContext</a></li>
+                                <li><a href="../classes/easynode.framework.queue.MQTTQueue.html">easynode.framework.queue.MQTTQueue</a></li>
+                                <li><a href="../classes/easynode.framework.server.AbstractServer.html">easynode.framework.server.AbstractServer</a></li>
+                                <li><a href="../classes/easynode.framework.server.http.KOAActionContext.html">easynode.framework.server.http.KOAActionContext</a></li>
+                                <li><a href="../classes/easynode.framework.server.http.KOADefaultRoutes.html">easynode.framework.server.http.KOADefaultRoutes</a></li>
+                                <li><a href="../classes/easynode.framework.server.http.KOAHttpRequestParameter.html">easynode.framework.server.http.KOAHttpRequestParameter</a></li>
+                                <li><a href="../classes/easynode.framework.server.http.KOAHttpServer.html">easynode.framework.server.http.KOAHttpServer</a></li>
+                                <li><a href="../classes/easynode.framework.server.http.KOAHttpServer.SessionSupport.html">easynode.framework.server.http.KOAHttpServer.SessionSupport</a></li>
+                                <li><a href="../classes/easynode.framework.server.KOAMemorySessionStorage.html">easynode.framework.server.KOAMemorySessionStorage</a></li>
+                                <li><a href="../classes/easynode.framework.server.ServerStat.html">easynode.framework.server.ServerStat</a></li>
+                                <li><a href="../classes/easynode.framework.server.tcp.Decoder.html">easynode.framework.server.tcp.Decoder</a></li>
+                                <li><a href="../classes/easynode.framework.server.tcp.Encoder.html">easynode.framework.server.tcp.Encoder</a></li>
+                                <li><a href="../classes/easynode.framework.server.tcp.Message.html">easynode.framework.server.tcp.Message</a></li>
+                                <li><a href="../classes/easynode.framework.server.tcp.MessageHandler.html">easynode.framework.server.tcp.MessageHandler</a></li>
+                                <li><a href="../classes/easynode.framework.server.tcp.protocols.JSONDecoder.html">easynode.framework.server.tcp.protocols.JSONDecoder</a></li>
+                                <li><a href="../classes/easynode.framework.server.tcp.protocols.JSONEncoder.html">easynode.framework.server.tcp.protocols.JSONEncoder</a></li>
+                                <li><a href="../classes/easynode.framework.server.tcp.protocols.JSONMessageHandler.html">easynode.framework.server.tcp.protocols.JSONMessageHandler</a></li>
+                                <li><a href="../classes/easynode.framework.server.tcp.StreamDecoderHelper.html">easynode.framework.server.tcp.StreamDecoderHelper</a></li>
+                                <li><a href="../classes/easynode.framework.server.tcp.StreamEncoderHelper.html">easynode.framework.server.tcp.StreamEncoderHelper</a></li>
+                                <li><a href="../classes/easynode.framework.server.tcp.TCPClient.html">easynode.framework.server.tcp.TCPClient</a></li>
+                                <li><a href="../classes/easynode.framework.server.tcp.TCPServer.html">easynode.framework.server.tcp.TCPServer</a></li>
+                                <li><a href="../classes/easynode.framework.test.TestCase.html">easynode.framework.test.TestCase</a></li>
+                                <li><a href="../classes/easynode.framework.test.TestCaseRunner.html">easynode.framework.test.TestCaseRunner</a></li>
+                                <li><a href="../classes/easynode.framework.util.Binary.html">easynode.framework.util.Binary</a></li>
+                                <li><a href="../classes/easynode.framework.util.HTTPUtil.html">easynode.framework.util.HTTPUtil</a></li>
+                                <li><a href="../classes/easynode.framework.util.MustacheHelper.html">easynode.framework.util.MustacheHelper</a></li>
+                                <li><a href="../classes/easynode.framework.util.MyError.html">easynode.framework.util.MyError</a></li>
+                                <li><a href="../classes/easynode.framework.util.ObjectWrapper.html">easynode.framework.util.ObjectWrapper</a></li>
+                                <li><a href="../classes/easynode.framework.util.SqlUtil.html">easynode.framework.util.SqlUtil</a></li>
+                                <li><a href="../classes/easynode.framework.util.StringUtil.html">easynode.framework.util.StringUtil</a></li>
+                                <li><a href="../classes/easynode.framework.util.VersionComparator.html">easynode.framework.util.VersionComparator</a></li>
+                                <li><a href="../classes/easynode.framework.view.TemplateView.html">easynode.framework.view.TemplateView</a></li>
+                                <li><a href="../classes/easynode.GenericObject.html">easynode.GenericObject</a></li>
+                                <li><a href="../classes/全局函数.html">全局函数</a></li>
+                            </ul>
+                
+                            <ul id="api-modules" class="apis modules">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+                    Show:
+                    <label for="api-show-inherited">
+                        <input type="checkbox" id="api-show-inherited" checked>
+                        Inherited
+                    </label>
+            
+                    <label for="api-show-protected">
+                        <input type="checkbox" id="api-show-protected">
+                        Protected
+                    </label>
+            
+                    <label for="api-show-private">
+                        <input type="checkbox" id="api-show-private">
+                        Private
+                    </label>
+                    <label for="api-show-deprecated">
+                        <input type="checkbox" id="api-show-deprecated">
+                        Deprecated
+                    </label>
+            
+                </div>
+            
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+<h1 class="file-heading">File: ../src/easynode/framework/db/MysqlConnection.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+var assert = require(&#x27;assert&#x27;);
+var logger = using(&#x27;easynode.framework.Logger&#x27;).forFile(__filename);
+var IConnection = using(&#x27;easynode.framework.db.IConnection&#x27;);
+var thunkify = require(&#x27;thunkify&#x27;);
+var SqlUtil = using(&#x27;easynode.framework.util.SqlUtil&#x27;);
+var S = require(&#x27;string&#x27;);
+var _ = require(&#x27;underscore&#x27;);
+var mysql = require(&#x27;mysql&#x27;);
+var Model = using(&#x27;easynode.framework.mvc.Model&#x27;);
+var util = require(&#x27;util&#x27;);
+
+(function () {
+        var DEFAULT_RPP = parseInt(EasyNode.config(&#x27;easynode.framework.mvc.model.defaultRPP&#x27;, &#x27;20&#x27;));
+        var LOW_PERFORMANCE_SQL = parseInt(EasyNode.config(&#x27;easynode.framework.db.execSQLWarning&#x27;, &#x27;3000&#x27;));
+
+        /**
+         * Class MysqlConnection
+         *
+         * @class easynode.framework.db.MysqlConnection
+         * @extends easynode.framework.db.IConnection
+         * @since 0.1.0
+         * @author zlbbq
+         * */
+        class MysqlConnection extends IConnection {
+                /**
+                 * 构造函数。
+                 *
+                 * @method 构造函数
+                 * @since 0.1.0
+                 * @author zlbbq
+                 * */
+                constructor(rawConnection) {
+                        super();
+                        //调用super()后再定义子类成员。
+                        this.rawConnection = rawConnection;
+                }
+
+                /**
+                 * 执行查询SQL，返回查询结果数组
+                 *
+                 * @method execQuery
+                 * @param {String} sql 查询SQL模板语句。SELECT A.* FROM TABLE_A WHERE A.FIELD_A = #fieldA# AND A.FIELD_B = $fieldB$
+                 *                      &quot;#&quot;表示转义参数，通常用于字符串、日期等数据类型
+                 *                      &quot;$&quot;表示非转义参数，通常用于数值型或SQL子句，注意SQL注入风险。
+                 * @param {Object/Array} args 模板替换参数，如果是对象，则按同名替换，如果是数组则逐个按顺序替换
+                 * @return {Array} 查询结果，每个元素表示为一个JSON对象，具有与查询结果集列名完全同名的属性。
+                 * @async
+                 * @since 0.1.0
+                 * @author zlbbq
+                 * */
+                execQuery(sql, args = {}) {
+                        var me = this;
+                        return function * () {
+                                var finalSql = SqlUtil.replaceMysqlArgs(sql, args);
+                                EasyNode.DEBUG &amp;&amp; logger.debug(&#x27;original sql : &#x27; + sql);
+                                EasyNode.DEBUG &amp;&amp; logger.debug(&#x27;args :&#x27; + JSON.stringify(args));
+                                EasyNode.DEBUG &amp;&amp; logger.debug(&#x27;executing sql : &#x27; + finalSql);
+                                var d = new Date();
+                                var fnQuery = thunkify(me.rawConnection.query);
+                                var result = yield fnQuery.call(me.rawConnection, finalSql);
+                                var cost = new Date() - d;
+                                EasyNode.DEBUG &amp;&amp; logger.debug(&#x60;execute sql cost [${cost}]ms : ${finalSql}&#x60;);
+                                if (cost &gt;= LOW_PERFORMANCE_SQL) {
+                                        logger.warn(&#x60;***LOW performance SQL(${cost}ms): ${finalSql}&#x60;);
+                                }
+                                var ret = [];
+                                for (var i = 0; i &lt; result[0].length; i++) {
+                                        ret[i] = SqlUtil.mapEntity(result[0][i]);
+                                }
+                                return ret;
+                        };
+                }
+
+                /**
+                 * 执行更新SQL，返回影响行数
+                 *
+                 * @method execUpdate
+                 * @param {String} sql 查询SQL模板语句。SELECT A.* FROM TABLE_A WHERE A.FIELD_A = #fieldA# AND A.FIELD_B = $fieldB$
+                 *                      &quot;#&quot;表示转义参数，通常用于字符串、日期等数据类型
+                 *                      &quot;$&quot;表示非转义参数，通常用于数值型或SQL子句，注意SQL注入风险。
+                 * @param {Object/Array} args 模板替换参数，如果是对象，则按同名替换，如果是数组则逐个按顺序替换
+                 * @return {Object} 返回更新语句影响行数和insertId，insertId表示自增列ID
+                 *                              {
+                 *                                      rowsAffected : 1,                       //更新影响行数
+                 *                                      insertId : 0                                 //自增列ID
+                 *                              }
+                 * @async
+                 * @since 0.1.0
+                 * @author zlbbq
+                 * */
+                execUpdate(sql, args = {}) {
+                        var me = this;
+                        return function * () {
+                                var finalSql = SqlUtil.replaceMysqlArgs(sql, args);
+                                EasyNode.DEBUG &amp;&amp; logger.debug(&#x27;original sql : &#x27; + sql);
+                                EasyNode.DEBUG &amp;&amp; logger.debug(&#x27;args :&#x27; + JSON.stringify(args));
+                                EasyNode.DEBUG &amp;&amp; logger.debug(&#x27;executing sql : &#x27; + finalSql);
+                                var d = new Date();
+                                var fnQuery = thunkify(me.rawConnection.query);
+                                var result = yield fnQuery.call(me.rawConnection, finalSql);
+                                var cost = new Date() - d;
+                                EasyNode.DEBUG &amp;&amp; logger.debug(&#x60;execute sql cost [${cost}]ms : ${finalSql}&#x60;);
+                                if (cost &gt;= LOW_PERFORMANCE_SQL) {
+                                        logger.warn(&#x60;***LOW performance SQL(${cost}ms): ${finalSql}&#x60;);
+                                }
+                                return {
+                                        affectedRows: result[0].affectedRows,
+                                        insertId: result[0].insertId
+                                };
+                        };
+                }
+
+                /**
+                 * 启动事务
+                 *
+                 * @method beginTransaction
+                 * @async
+                 * @since 0.1.0
+                 * @author zlbbq
+                 * */
+                beginTransaction() {
+                        var me = this;
+                        return function * () {
+                                EasyNode.DEBUG &amp;&amp; logger.debug(&#x27;begin mysql transaction...&#x27;);
+                                var fnBeginTransaction = thunkify(me.rawConnection.beginTransaction);
+                                yield fnBeginTransaction.call(me.rawConnection);
+                        };
+                }
+
+                /**
+                 * 提交事务
+                 *
+                 * @method commit
+                 * @async
+                 * @since 0.1.0
+                 * @author zlbbq
+                 * */
+                commit() {
+                        var me = this;
+                        return function * () {
+                                EasyNode.DEBUG &amp;&amp; logger.debug(&#x27;commit mysql transaction&#x27;);
+                                var fnCommit = thunkify(me.rawConnection.commit);
+                                yield fnCommit.call(me.rawConnection);
+                        };
+                }
+
+                /**
+                 * 回滚事务
+                 *
+                 * @method rollback
+                 * @async
+                 * @since 0.1.0
+                 * @author zlbbq
+                 * */
+                rollback() {
+                        var me = this;
+                        return function * () {
+                                EasyNode.DEBUG &amp;&amp; logger.debug(&#x27;rollback mysql transaction&#x27;);
+                                var fnRollback = thunkify(me.rawConnection.rollback);
+                                yield fnRollback.call(me.rawConnection);
+                        };
+                }
+
+                /**
+                 * 创建一个数据库模型。
+                 *
+                 * @method create
+                 * @param {easynode.framework.mvc.Model} model 模型及值定义
+                 * @async
+                 * @since 0.1.0
+                 * @author zlbbq
+                 * */
+                create(model) {
+                        var me = this;
+                        return function * () {
+                                var d = new Date();
+                                var sql = &#x27;INSERT INTO $__table__$ ($__fields__$) VALUES ($__quoteFields__$)&#x27;;
+                                var __table__ = model.getSchema();
+                                var fields = model.getFieldNames(false);
+                                var __fields__ = [];
+                                var __quoteFields__ = [];
+                                fields.forEach(f =&gt; {
+                                        __fields__.push(SqlUtil.aliasReverse(f));
+                                        __quoteFields__.push(&#x60;#${f}#&#x60;);
+                                });
+                                __fields__ = __fields__.join(&#x27; , &#x27;);
+                                __quoteFields__ = __quoteFields__.join(&#x27; , &#x27;);
+                                sql = sql.replace(/\$__table__\$/, __table__)
+                                        .replace(/\$__fields__\$/, __fields__)
+                                        .replace(/\$__quoteFields__\$/, __quoteFields__);
+                                var args = model.getFieldValues();
+                                EasyNode.DEBUG &amp;&amp; console.dir(args);
+                                EasyNode.DEBUG &amp;&amp; logger.debug(&#x60;Prepare create sql cost [${new Date() - d}]ms&#x60;);
+                                return yield me.execUpdate(sql, args);
+                        };
+                }
+
+                /**
+                 * 从数据库读取一个模型。
+                 *
+                 * @method read
+                 * @param {easynode.framework.mvc.Model} model 模型定义
+                 * @since 0.1.0
+                 * @author zlbbq
+                 * */
+                read(model, id) {
+                        assert(typeof id != null, &#x27;Invalid argument&#x27;);
+                        var me = this;
+                        return function * () {
+                                var d = new Date();
+                                var sql = &#x27;SELECT $__fields__$ FROM $__view__$ WHERE $__identityField__$ = #id#&#x27;;
+                                var __view__ = model.getView();
+                                var __fields__ = [];
+                                model.getFieldNames(true).forEach(f =&gt; {
+                                        __fields__.push(SqlUtil.aliasReverse(f));
+                                });
+                                __fields__ = __fields__.join(&#x27;, &#x27;);
+                                if (model.isRawView()) {
+                                        __view__ = &#x60;(${__view__}) AS __TEMP__&#x60;;
+                                }
+                                var __identityField__ = SqlUtil.aliasReverse(model.getIdentifyField());
+                                sql = sql.replace(/\$__fields__\$/, __fields__)
+                                        .replace(/\$__view__\$/, __view__)
+                                        .replace(/\$__identityField__\$/, __identityField__);
+                                EasyNode.DEBUG &amp;&amp; logger.debug(&#x60;Prepare read sql cost [${new Date() - d}]ms&#x60;);
+                                var ret = yield me.execQuery(sql, {id: id});
+                                assert(ret.length &lt;= 1, &#x27;Multi-records matched to the identity field, please set primary key or unique key on the identity field&#x27;);
+                                if (ret.length &gt; 0) {
+                                        return Model.normalizeJSON(model, ret[0]);
+                                }
+                                return null;
+                        };
+                }
+
+                /**
+                 * 更新数据库的一个模型。
+                 *
+                 * @method update
+                 * @param {easynode.framework.mvc.Model} model 模型定义
+                 * @async
+                 * @since 0.1.0
+                 * @author zlbbq
+                 * */
+                update(model) {
+                        var me = this;
+                        return function * () {
+                                var d = new Date();
+                                var sql = &#x27;UPDATE $__table__$ SET $__set__$ WHERE $__identityField__$ = $__identityAlias__$&#x27;;
+                                var __table__ = model.getSchema();
+                                var fields = model.getFieldNames(false);
+                                var __set__ = [];
+                                var __identityAlias__ = model.getIdentifyField();
+                                var __identityField__ = SqlUtil.aliasReverse(__identityAlias__);
+                                fields.forEach(f =&gt; {
+                                        if (f != __identityAlias__ &amp;&amp; model.getFieldValue(f) !== undefined) {
+                                                var colName = SqlUtil.aliasReverse(f);
+                                                __set__.push(&#x60;${colName} = #${f}#&#x60;);
+                                        }
+                                });
+                                __set__ = __set__.join(&#x27;, &#x27;);
+                                sql = sql.replace(/\$__table__\$/, __table__)
+                                        .replace(/\$__set__\$/, __set__)
+                                        .replace(/\$__identityField__\$/, __identityField__)
+                                        .replace(/\$__identityAlias__\$/, &#x60;#${__identityAlias__}#&#x60;);
+                                EasyNode.DEBUG &amp;&amp; logger.debug(&#x60;Prepare update sql cost [${new Date() - d}]ms&#x60;);
+                                return yield me.execUpdate(sql, model.getFieldValues());
+                        };
+                }
+
+                /**
+                 * 从数据库删除一个或一组模型。
+                 *
+                 * @method del
+                 * @param {easynode.framework.mvc.Model} model 模型定义
+                 * @param {Array/int} ids 主键值数组或单个数值。数组时删除多个，单个数值时仅删除一个
+                 * @async
+                 * @since 0.1.0
+                 * @author zlbbq
+                 * */
+                del(model, ids = [0]) {
+                        var me = this;
+                        assert(util.isArray(ids) || typeof ids == &#x27;number&#x27;, &#x27;Invalid argument ids&#x27;);
+                        return function * () {
+                                var d = new Date();
+                                var sql = &#x27;&#x27;;
+                                if (util.isArray(ids)) {
+                                        sql = &#x27;DELETE FROM $__table__$ WHERE $__identityField__$ in ($__ids__$)&#x27;;
+                                        var sIn = [];
+                                        ids.forEach(id =&gt; {
+                                                sIn.push(mysql.escape(id));
+                                        });
+                                        sql = sql.replace(/\$__ids__\$/, sIn.join(&#x27;, &#x27;));
+                                }
+                                else {
+                                        sql = &#x27;DELETE FROM $__table__$ WHERE $__identityField__$ = $__ids__$&#x27;;
+                                        sql = sql.replace(/\$__ids__\$/, mysql.escape(ids));
+                                }
+                                var __table__ = model.getSchema();
+                                var __identityAlias__ = model.getIdentifyField();
+                                var __identityField__ = SqlUtil.aliasReverse(__identityAlias__);
+                                sql = sql.replace(/\$__table__\$/, __table__).replace(/\$__identityField__\$/, __identityField__);
+                                EasyNode.DEBUG &amp;&amp; logger.debug(&#x60;Prepare delete sql cost [${new Date() - d}]ms&#x60;);
+                                return yield me.execUpdate(sql);
+                        };
+                }
+
+                /**
+                 * 从数据库查询模型集合。
+                 *
+                 * @method list
+                 * @param {easynode.framework.mvc.Model} model 模型定义
+                 * @param {Object/String} condition 查询条件，属性名应与查询字段相同，属性值的Notation表示如下：
+                 *                      {
+                 *                              exp : &#x27;=&#x27;,                                                         //查询条件表达式:
+                 *                                                                                                     // =, &lt;&gt;, !=, &gt;, &lt; , &gt;= , &lt;= : value可为任意类型
+                 *                                                                                                     // like, startsWith, endsWith : value需要是字符串类型
+                 *                                                                                                     // in, not-in : value需要为一个数组
+                 *                                                                                                     // between : value需要为一个两个元素的数组\
+                 *                              value : &#x27;any type matched to the field&#x27;
+                 *                      }
+                 *                      当condition为String时，默认为：{condition : &#x27;=&#x27;, value : &#x27;$string value&#x27;}
+                 * @param {Object} pagination 分页参数, Notation : { page : 1, rpp : 20} page: 页号，rpp : 每页行数(rows per page)
+                 * @param {Array} orderBy 排序方式，字符串数组，
+                 *                              格式：[$fieldName ASC/DESC, $fieldName ASC/DESC]，使用空格来分隔排序字段和条件
+                 * @param {String/Function} conditionPattern 查询条件拼装模板, 为空时则默认按所传递条件的AND条件拼装，如果传递此值，
+                 *                              必须以&#x27;AND &#x27;开头，使用&#x27;$&#x27;前后包裹字段名表示条件子句占位符，例：&#x27;AND ($pluginName$ OR $pluginVersion$) AND $jsonTest$&#x27;
+                 *                              实际执行的SQL将替换各占位符为条件子句，如果条件子句没有传递，则条件子句为&quot;1 = 1&quot;，这会显得SQL
+                 *                              比较啰嗦，但是会减少非常大的子符串操作工作量并且具有相当好的容错性，同时这会不给数据库带来
+                 *                              过多的额外开销。
+                 *                              当conditionPattern为function时，使用该函数的返回值作为conditionPattern, 函数原型：function conditionPattern(condition, model){}
+                 * @return {Object} 分页查询结果, Notation : { rows, pages, page, rpp, data : [] } rows : 结果集总行数，pages : 结果集总页数, page, rpp同参数pagination
+                 * @async
+                 * @since 0.1.0
+                 * @author zlbbq
+                 * */
+                list(model, condition = {}, pagination = {
+                        page: 1,
+                        rpp: DEFAULT_RPP
+                }, orderBy = [], conditionPattern = null) {
+                        if(!pagination) {
+                                pagination = {};
+                        }
+                        if(!pagination.page) {
+                                pagination.page = 1;
+                        }
+                        if(!pagination.rpp) {
+                                pagination.rpp = DEFAULT_RPP;
+                        }
+                        if(typeof conditionPattern == &#x27;function&#x27;) {
+                                conditionPattern = conditionPattern(condition, model);
+                        }
+                        orderBy = orderBy || [];
+                        var me = this;
+                        return function * () {
+                                var ret = {
+                                        rows: 0,
+                                        pages: 0,
+                                        page: pagination.page,
+                                        rpp: pagination.rpp,
+                                        data: []
+                                };
+                                var d = new Date();
+                                var sql = &#x27;SELECT $__fields__$ FROM $__view__$ WHERE 1 = 1&#x27;;
+                                var countSql = [];
+                                var conditionSqlParts = {};
+                                var __view__ = model.getView();
+                                var __fields__ = [];
+                                model.getFieldNames(true).forEach(f =&gt; {
+                                        __fields__.push(SqlUtil.aliasReverse(f));
+                                });
+                                __fields__ = __fields__.join(&#x27;, &#x27;);
+                                //var __identityAlias__ = model.getIdentifyField();
+                                //var __identityField__ = SqlUtil.aliasReverse(__identityAlias__);
+                                if (model.isRawView()) {
+                                        __view__ = &#x60;(${__view__}) AS __TEMP__&#x60;;
+                                }
+                                sql = sql.replace(/\$__fields__\$/, __fields__).replace(/\$__view__\$/, __view__);
+                                sql = [sql];
+                                //var tmpCountSql = &#x27;SELECT COUNT($__identityField__$) AS ROW_COUNT FROM $__view__$ WHERE 1 = 1&#x27;;
+                                var tmpCountSql = &#x27;SELECT COUNT(1) AS ROW_COUNT FROM $__view__$ WHERE 1 = 1&#x27;;
+                                countSql.push(tmpCountSql.replace(/\$__view__\$/, __view__));
+                                var conArgs = {};
+                                for (var c in condition) {
+                                        var v = condition[c];
+                                        if (typeof v != &#x27;function&#x27;) {
+                                                if (typeof v == &#x27;string&#x27;) {
+                                                        v = {
+                                                                exp: &#x27;=&#x27;,
+                                                                value: v
+                                                        };
+                                                }
+                                                var exp = v.exp || &#x27;=&#x27;;
+                                                me._makeConditionParts(exp, c, v.value, conditionSqlParts, conArgs);
+                                        }
+                                }
+
+                                //确认查询子句的组合条件
+                                var conditionClause = me._makeConditionClause(conditionSqlParts, conditionPattern);
+                                countSql.push(conditionClause);
+                                sql.push(conditionClause);
+
+                                //查询结果
+                                //排序
+                                if (orderBy.length &gt; 0) {
+                                        sql.push(&#x27;ORDER BY&#x27;);
+                                        var orderClause = [];
+                                        orderBy.forEach(o =&gt; {
+                                                o = o.replace(/\s+/, &#x27; &#x27;);
+                                                var [field, order] = o.split(&#x27; &#x27;);
+                                                order = order || &#x27;ASC&#x27;;
+                                                field = SqlUtil.aliasReverse(field);
+                                                orderClause.push(&#x60;${field} ${order}&#x60;);
+                                        });
+                                        sql.push(orderClause.join(&#x27;, &#x27;));
+                                }
+                                //分页
+                                sql.push(SqlUtil.pagingToLimit(pagination));
+
+                                // 查询行数
+                                countSql = countSql.join(&#x27; &#x27;);
+                                EasyNode.DEBUG &amp;&amp; logger.debug(&#x60;Prepare list sql cost [${new Date() - d}]ms&#x60;);
+                                var r = yield me.execQuery(countSql, conArgs);
+                                ret.rows = r[0].rowCount || 0;
+                                ret.pages = SqlUtil.calculatePages(ret.rows, ret.rpp);
+                                if(ret.rows &gt; 0) {
+                                        sql = sql.join(&#x27; &#x27;);
+                                        var data = yield me.execQuery(sql, conArgs);
+                                        //处理结果
+                                        if (data) {
+                                                var idx = 0;
+                                                data.forEach(row =&gt; {
+                                                        data[idx++] = Model.normalizeJSON(model, row);
+                                                });
+                                                ret.data = data;
+                                        }
+                                }
+                                return ret;
+                        };
+                }
+
+                _makeConditionClause(conditionSqlParts, conditionPattern) {
+                        var conditionFields = [];
+                        if (!conditionPattern) {
+                                conditionPattern = &#x27;&#x27;;
+                                for (var alias in conditionSqlParts) {
+                                        conditionFields.push(alias);
+                                        conditionPattern += &#x60;AND $${alias}$ &#x60;;
+                                }
+                        }
+                        var s = conditionPattern;
+                        var regEx = /\$(\w*)\$/;
+                        while (true) {
+                                var arr = regEx.exec(s);
+                                if (!arr) {
+                                        break;
+                                }
+                                s = s.replace(regEx, conditionSqlParts[arr[1]] || &#x27;1 = 0&#x27;);          // 设置１= 0防止条件为空的情况
+                        }
+                        return s;
+                }
+
+                _makeConditionParts(expression, alias, v, sql, args) {
+                        if (v == null) {
+                                return;
+                        }
+                        var colName = SqlUtil.aliasReverse(alias);
+                        assert(typeof expression == &#x27;string&#x27;, &#x27;Invalid condition, enumeration of condition is [=, &gt;=, &lt;=, &lt;&gt;, !=, like, startsWith(^), endsWith($), in(()), not-in(!()), between(-)]&#x27;);
+                        expression = expression.toUpperCase();
+                        switch (expression) {
+                                case &#x27;=&#x27; :
+                                case &#x27;&lt;&gt;&#x27; :
+                                case &#x27;!=&#x27; :
+                                case &#x27;&gt;=&#x27;:
+                                case &#x27;&lt;=&#x27;:
+                                {
+                                        var temp = &#x60;${colName} ${expression} #${alias}#&#x60;;
+                                        sql[alias] = temp;
+                                        args[alias] = v;
+                                        break;
+                                }
+                                case &#x27;LIKE&#x27; :
+                                {
+                                        var temp = &#x60;${colName} LIKE #${alias}#&#x60;;
+                                        v = &#x27;%&#x27; + v + &#x27;%&#x27;;
+                                        sql[alias] = temp;
+                                        args[alias] = v;
+                                        break;
+                                }
+                                case &#x27;STARTSWITH&#x27; :
+                                case &#x27;^&#x27; :
+                                {
+                                        var temp = &#x60;${colName} LIKE #${alias}#&#x60;;
+                                        v = v + &#x27;%&#x27;;
+                                        sql[alias] = temp;
+                                        args[alias] = v;
+                                        break;
+                                }
+                                case &#x27;ENDSWITH&#x27; :
+                                case &#x27;$&#x27;:
+                                {
+                                        var temp = &#x60;${colName} LIKE #${alias}#&#x60;;
+                                        v = &#x27;%&#x27; + v;
+                                        sql[alias] = temp;
+                                        args[alias] = v;
+                                        break;
+                                }
+                                case &#x27;IN&#x27;:
+                                case &#x27;()&#x27;:
+                                case &#x27;NOT-IN&#x27;:
+                                case &#x27;!()&#x27; :
+                                {
+                                        assert(util.isArray(v) &amp;&amp; v.length &gt; 0, &#x27;Invalid condition &quot;in/not in&quot;, need Array value&#x27;);
+                                        var temp = &#x60;${colName} $__NOT__$ IN (&#x60;;
+                                        var s = [];
+                                        if (expression == &#x27;IN&#x27; || expression == &#x27;()&#x27;) {
+                                                temp = temp.replace(/\$__NOT__\$/, &#x27;&#x27;);
+                                        }
+                                        else {
+                                                temp = temp.replace(/\$__NOT__\$/, &#x27;NOT&#x27;);
+                                        }
+                                        var counter = 0;
+                                        v.forEach(t =&gt; {
+                                                s.push(&#x60;#${alias}_${counter}#&#x60;);
+                                                args[alias + &#x27;_&#x27; + counter] = t;
+                                                counter++;
+                                        });
+                                        temp += s.join(&#x27;,&#x27;) + &#x27;)&#x27;;
+                                        sql[alias] = temp;
+                                        break;
+                                }
+                                case &#x27;BETWEEN&#x27;:
+                                case &#x27;-&#x27;:
+                                {
+                                        //assert(util.isArray(v) &amp;&amp; v.length == 2, &#x27;Invalid condition &quot;between&quot;, need Array with 2 elements, and the first one must be lower than the second one&#x27;);
+                                        if(v.length == 2 &amp;&amp; v[0] !== null &amp;&amp; v[1] !== null) {
+                                                var temp = &#x60;${colName} BETWEEN #${alias}_0# AND #${alias}_1#&#x60;;
+                                                sql[alias] = temp;
+                                                args[alias + &#x27;_0&#x27;] = v[0];
+                                                args[alias + &#x27;_1&#x27;] = v[1];
+                                        }
+                                        else if(v[0] === null) {
+                                                var temp = &#x60;${colName} &lt; #${alias}#&#x60;;
+                                                sql[alias] = temp;
+                                                args[alias] = v[1];
+                                        }
+                                        else if(v.length == 1 || v[1] === null) {
+                                                var temp = &#x60;${colName} &gt;= #${alias}#&#x60;;
+                                                sql[alias] = temp;
+                                                args[alias] = v[0];
+                                        }
+                                        break;
+                                }
+                                default :
+                                {
+                                        throw new Error(&#x60;Unknown condition [${expression}]&#x60;);
+                                }
+                        }
+                }
+
+                getClassName() {
+                        return EasyNode.namespace(__filename);
+                }
+        }
+
+        module.exports = MysqlConnection;
+})();
+    </pre>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

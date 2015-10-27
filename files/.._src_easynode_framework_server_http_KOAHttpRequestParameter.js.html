@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>../src/easynode/framework/server/http/KOAHttpRequestParameter.js - EasyNode API参考文档</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="icon" href="../assets/favicon.ico">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+                <h1><img src="../assets/css/logo.png" title="EasyNode API参考文档" width="117" height="52"></h1>
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: EasyNode - 0.1.0</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+                    <h2 class="off-left">APIs</h2>
+                    <div id="api-tabview" class="tabview">
+                        <ul class="tabs">
+                            <li><a href="#api-classes">Classes</a></li>
+                            <li><a href="#api-modules">Modules</a></li>
+                        </ul>
+                
+                        <div id="api-tabview-filter">
+                            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+                        </div>
+                
+                        <div id="api-tabview-panel">
+                            <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/#NAMESPACE#.FileService.html">#NAMESPACE#.FileService</a></li>
+                                <li><a href="../classes/EasyNode.html">EasyNode</a></li>
+                                <li><a href="../classes/easynode.framework.ActionAOP.ActionAOP.html">easynode.framework.ActionAOP.ActionAOP</a></li>
+                                <li><a href="../classes/easynode.framework.aop.AOP.html">easynode.framework.aop.AOP</a></li>
+                                <li><a href="../classes/easynode.framework.BeanFactory.html">easynode.framework.BeanFactory</a></li>
+                                <li><a href="../classes/easynode.framework.cache.CacheStat.html">easynode.framework.cache.CacheStat</a></li>
+                                <li><a href="../classes/easynode.framework.cache.ICache.html">easynode.framework.cache.ICache</a></li>
+                                <li><a href="../classes/easynode.framework.cache.Memcached.html">easynode.framework.cache.Memcached</a></li>
+                                <li><a href="../classes/easynode.framework.cache.Redis.html">easynode.framework.cache.Redis</a></li>
+                                <li><a href="../classes/easynode.framework.db.IConnection.html">easynode.framework.db.IConnection</a></li>
+                                <li><a href="../classes/easynode.framework.db.IDataSource.html">easynode.framework.db.IDataSource</a></li>
+                                <li><a href="../classes/easynode.framework.db.MysqlConnection.html">easynode.framework.db.MysqlConnection</a></li>
+                                <li><a href="../classes/easynode.framework.db.MysqlDataSource.html">easynode.framework.db.MysqlDataSource</a></li>
+                                <li><a href="../classes/easynode.framework.Logger.html">easynode.framework.Logger</a></li>
+                                <li><a href="../classes/easynode.framework.mq.IQueue.html">easynode.framework.mq.IQueue</a></li>
+                                <li><a href="../classes/easynode.framework.mq.RedisListQueue.html">easynode.framework.mq.RedisListQueue</a></li>
+                                <li><a href="../classes/easynode.framework.mq.RedisQueue.html">easynode.framework.mq.RedisQueue</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.Action.html">easynode.framework.mvc.Action</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.ActionArgConverter.html">easynode.framework.mvc.ActionArgConverter</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.ActionContext.html">easynode.framework.mvc.ActionContext</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.ActionExecutor.html">easynode.framework.mvc.ActionExecutor</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.ActionFactory.html">easynode.framework.mvc.ActionFactory</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.ActionFilter.html">easynode.framework.mvc.ActionFilter</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.ActionRequestParameter.html">easynode.framework.mvc.ActionRequestParameter</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.ActionResult.html">easynode.framework.mvc.ActionResult</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.CombinedAction.html">easynode.framework.mvc.CombinedAction</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.EJSTemplateViewRenderer.html">easynode.framework.mvc.EJSTemplateViewRenderer</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.IActionContextListener.html">easynode.framework.mvc.IActionContextListener</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.ITemplateViewRenderer.html">easynode.framework.mvc.ITemplateViewRenderer</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.JadeTemplateViewRenderer.html">easynode.framework.mvc.JadeTemplateViewRenderer</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.JSONView.html">easynode.framework.mvc.JSONView</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.MethodDispatchedAction.html">easynode.framework.mvc.MethodDispatchedAction</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.Model.html">easynode.framework.mvc.Model</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.ModelField.html">easynode.framework.mvc.ModelField</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.ModelProxyActionFactory.html">easynode.framework.mvc.ModelProxyActionFactory</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.MustacheTemplateViewRenderer.html">easynode.framework.mvc.MustacheTemplateViewRenderer</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.spi.MysqlModelGenerator.html">easynode.framework.mvc.spi.MysqlModelGenerator</a></li>
+                                <li><a href="../classes/easynode.framework.mvc.View.html">easynode.framework.mvc.View</a></li>
+                                <li><a href="../classes/easynode.framework.plugin.EasyNodePlugin.html">easynode.framework.plugin.EasyNodePlugin</a></li>
+                                <li><a href="../classes/easynode.framework.plugin.PluginLoadContext.html">easynode.framework.plugin.PluginLoadContext</a></li>
+                                <li><a href="../classes/easynode.framework.queue.MQTTQueue.html">easynode.framework.queue.MQTTQueue</a></li>
+                                <li><a href="../classes/easynode.framework.server.AbstractServer.html">easynode.framework.server.AbstractServer</a></li>
+                                <li><a href="../classes/easynode.framework.server.http.KOAActionContext.html">easynode.framework.server.http.KOAActionContext</a></li>
+                                <li><a href="../classes/easynode.framework.server.http.KOADefaultRoutes.html">easynode.framework.server.http.KOADefaultRoutes</a></li>
+                                <li><a href="../classes/easynode.framework.server.http.KOAHttpRequestParameter.html">easynode.framework.server.http.KOAHttpRequestParameter</a></li>
+                                <li><a href="../classes/easynode.framework.server.http.KOAHttpServer.html">easynode.framework.server.http.KOAHttpServer</a></li>
+                                <li><a href="../classes/easynode.framework.server.http.KOAHttpServer.SessionSupport.html">easynode.framework.server.http.KOAHttpServer.SessionSupport</a></li>
+                                <li><a href="../classes/easynode.framework.server.KOAMemorySessionStorage.html">easynode.framework.server.KOAMemorySessionStorage</a></li>
+                                <li><a href="../classes/easynode.framework.server.ServerStat.html">easynode.framework.server.ServerStat</a></li>
+                                <li><a href="../classes/easynode.framework.server.tcp.Decoder.html">easynode.framework.server.tcp.Decoder</a></li>
+                                <li><a href="../classes/easynode.framework.server.tcp.Encoder.html">easynode.framework.server.tcp.Encoder</a></li>
+                                <li><a href="../classes/easynode.framework.server.tcp.Message.html">easynode.framework.server.tcp.Message</a></li>
+                                <li><a href="../classes/easynode.framework.server.tcp.MessageHandler.html">easynode.framework.server.tcp.MessageHandler</a></li>
+                                <li><a href="../classes/easynode.framework.server.tcp.protocols.JSONDecoder.html">easynode.framework.server.tcp.protocols.JSONDecoder</a></li>
+                                <li><a href="../classes/easynode.framework.server.tcp.protocols.JSONEncoder.html">easynode.framework.server.tcp.protocols.JSONEncoder</a></li>
+                                <li><a href="../classes/easynode.framework.server.tcp.protocols.JSONMessageHandler.html">easynode.framework.server.tcp.protocols.JSONMessageHandler</a></li>
+                                <li><a href="../classes/easynode.framework.server.tcp.StreamDecoderHelper.html">easynode.framework.server.tcp.StreamDecoderHelper</a></li>
+                                <li><a href="../classes/easynode.framework.server.tcp.StreamEncoderHelper.html">easynode.framework.server.tcp.StreamEncoderHelper</a></li>
+                                <li><a href="../classes/easynode.framework.server.tcp.TCPClient.html">easynode.framework.server.tcp.TCPClient</a></li>
+                                <li><a href="../classes/easynode.framework.server.tcp.TCPServer.html">easynode.framework.server.tcp.TCPServer</a></li>
+                                <li><a href="../classes/easynode.framework.test.TestCase.html">easynode.framework.test.TestCase</a></li>
+                                <li><a href="../classes/easynode.framework.test.TestCaseRunner.html">easynode.framework.test.TestCaseRunner</a></li>
+                                <li><a href="../classes/easynode.framework.util.Binary.html">easynode.framework.util.Binary</a></li>
+                                <li><a href="../classes/easynode.framework.util.HTTPUtil.html">easynode.framework.util.HTTPUtil</a></li>
+                                <li><a href="../classes/easynode.framework.util.MustacheHelper.html">easynode.framework.util.MustacheHelper</a></li>
+                                <li><a href="../classes/easynode.framework.util.MyError.html">easynode.framework.util.MyError</a></li>
+                                <li><a href="../classes/easynode.framework.util.ObjectWrapper.html">easynode.framework.util.ObjectWrapper</a></li>
+                                <li><a href="../classes/easynode.framework.util.SqlUtil.html">easynode.framework.util.SqlUtil</a></li>
+                                <li><a href="../classes/easynode.framework.util.StringUtil.html">easynode.framework.util.StringUtil</a></li>
+                                <li><a href="../classes/easynode.framework.util.VersionComparator.html">easynode.framework.util.VersionComparator</a></li>
+                                <li><a href="../classes/easynode.framework.view.TemplateView.html">easynode.framework.view.TemplateView</a></li>
+                                <li><a href="../classes/easynode.GenericObject.html">easynode.GenericObject</a></li>
+                                <li><a href="../classes/全局函数.html">全局函数</a></li>
+                            </ul>
+                
+                            <ul id="api-modules" class="apis modules">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+                    Show:
+                    <label for="api-show-inherited">
+                        <input type="checkbox" id="api-show-inherited" checked>
+                        Inherited
+                    </label>
+            
+                    <label for="api-show-protected">
+                        <input type="checkbox" id="api-show-protected">
+                        Protected
+                    </label>
+            
+                    <label for="api-show-private">
+                        <input type="checkbox" id="api-show-private">
+                        Private
+                    </label>
+                    <label for="api-show-deprecated">
+                        <input type="checkbox" id="api-show-deprecated">
+                        Deprecated
+                    </label>
+            
+                </div>
+            
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+<h1 class="file-heading">File: ../src/easynode/framework/server/http/KOAHttpRequestParameter.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+var assert = require(&#x27;assert&#x27;);
+var logger = using(&#x27;easynode.framework.Logger&#x27;).forFile(__filename);
+var GenericObject = using(&#x27;easynode.GenericObject&#x27;);
+var ActionRequestParameter = using(&#x27;easynode.framework.mvc.ActionRequestParameter&#x27;);
+var S = require(&#x27;string&#x27;);
+var fs = require(&#x27;fs&#x27;);
+var cofs = require(&#x27;co-fs&#x27;);
+var path = require(&#x27;path&#x27;);
+var UUID = require(&#x27;node-uuid&#x27;);
+
+(function () {
+        /**
+         * KOAHttpRequestParameter提供了标准的获取HTTP参数或上传的文件的函数供下游middleware使用。
+         *
+         * @class easynode.framework.server.http.KOAHttpRequestParameter
+         * @extends easynode.framework.mvc.ActionRequestParameter
+         * @since 0.1.0
+         * @author zlbbq
+         * */
+        class KOAHttpRequestParameter extends ActionRequestParameter {
+                /**
+                 * 构造函数。
+                 *
+                 * @method 构造函数
+                 * @since 0.1.0
+                 * @author zlbbq
+                 * */
+                constructor(query, parts, uploadDir) {
+                        super();
+                        //调用super()后再定义子类成员。
+                        parts.field = parts.field || {};
+                        parts.fields = parts.fields || [];
+                        parts.file = parts.file || {};
+                        parts.files = parts.files || [];
+
+                        this._query = query || {};
+                        this._parts = parts || {};
+                        this._uploadDir = uploadDir;
+
+                        //this._parts.fields.forEach(f =&gt; {
+                        //        EasyNode.DEBUG &amp;&amp; logger.debug(&#x27;----&gt;&#x27; + JSON.stringify(f));
+                        //});
+                        //
+                        //parts.files.forEach(file =&gt; {
+                        //        EasyNode.DEBUG &amp;&amp; logger.debug(&#x27;----&gt;&#x27; + JSON.stringify(file));
+                        //});
+                        //
+                        //for(var key in this._query) {
+                        //        if(this._query[key] != &#x27;function&#x27;) {
+                        //                EasyNode.DEBUG &amp;&amp; logger.debug(key + &#x27;=&#x27; + this._query[key]);
+                        //        }
+                        //}
+                }
+
+                /**
+                 * 获取HTTP请求参数。注意：EasyNode使用&#x27;first&#x27;模式取query string参数，参数名相同时，先出现的值有效。
+                 *
+                 * @method param
+                 * @param {String} name 参数名
+                 * @param {String} where 从哪里取参数，枚举，可以为&quot;query&quot;(query string)，&quot;body“(http body, POST时有效)，
+                 *      &quot;all&quot;(body或query,body优先)，默认”all“
+                 * @return {String} 参数值
+                 * @since 0.1.0
+                 * @author zlbbq
+                 * */
+                param (name, where=&#x27;all&#x27;, canNull=true) {
+                        var queryVal = this._query[name];
+                        var bodyVal = this._parts.field[name];
+
+                        if(canNull != true) {
+                                queryVal = queryVal || &#x27;&#x27;;
+                                bodyVal = bodyVal || &#x27;&#x27;;
+                        }
+
+                        switch(where) {
+                                case &#x27;query&#x27; :
+                                {
+                                        return queryVal;
+                                }
+                                case &#x27;body&#x27; :
+                                {
+                                        return bodyVal;
+                                }
+                                case &#x27;all&#x27; :
+                                {
+                                        return bodyVal ? bodyVal : queryVal;
+                                }
+                        }
+                }
+
+                hasParam(name, where=&#x27;all&#x27;) {
+                        switch(where) {
+                                case &#x27;query&#x27; :
+                                        return this._query.hasOwnProperty(name);
+                                case &#x27;body&#x27; :
+                                        return this._parts.field.hasOwnProperty(name);
+                                case &#x27;all&#x27;:
+                                        return this._query.hasOwnProperty(name) || this._parts.field.hasOwnProperty(name);
+                        }
+                        return false;
+                }
+
+                /**
+                 * 获取此上下文环境中指所有的参数。
+                 *
+                 * @method params
+                 * @return {Object} json对象
+                 * @since 0.1.0
+                 * @author zlbbq
+                 * */
+                params () {
+                        var o = {};
+                        this.paramNames().forEach(name =&gt; {
+                                o[name] = this.param(name);
+                        });
+                        return o;
+                }
+
+                /**
+                 * 获取HTTP请求参数名称。
+                 *
+                 * @method paramNames
+                 * @param {String} where 从哪里取参数名，枚举，可以为&quot;query&quot;(query string)，&quot;body“(http body, POST时有效)，
+                 *      &quot;all&quot;(body或query,body优先)，默认”all“
+                 * @return {Array} 参数名
+                 * @since 0.1.0
+                 * @author zlbbq
+                 * */
+                paramNames (where=&#x27;all&#x27;) {
+                        if(!this._queryKeys) {
+                                this._queryKeys = [];
+                                for (var key in this._query) {
+                                        if (typeof this._query[key] == &#x27;string&#x27;) {
+                                                this._queryKeys.push(key);
+                                        }
+                                }
+                        }
+
+                        if(!this._bodyKeys) {
+                                this._bodyKeys = [];
+                                for (var key in this._parts.field) {
+                                        if (typeof this._query[key] == &#x27;string&#x27;) {
+                                                this._bodyKeys.push(key);
+                                        }
+                                }
+                        }
+
+                        if(!this._allKeys) {
+                                this._allKeys = _.union(this._queryKeys, this._bodyKeys);
+                        }
+
+                        switch(where) {
+                                case &#x27;query&#x27; :
+                                {
+                                        return this._queryKeys;
+                                }
+                                case &#x27;body&#x27; :
+                                {
+                                        return this._bodyKeys;
+                                }
+                                case &#x27;all&#x27; :
+                                {
+                                        return this._allKeys;
+                                }
+                        }
+                }
+
+                /**
+                 * 获取上传的文件描述，POST且enctype=&quot;multipart-form-data&quot;时有效。没有指定参数名的文件时，返回null。
+                 *
+                 * @method file
+                 * @param {String} name 参数名（字段名）
+                 * @return {object} 上传的文件描述。结构如下：
+                 *                              {
+                 *                                      field : &#x27;file1&#x27;,
+                                                         name : &#x27;xx.jpg&#x27;,
+                                                         mime : &#x27;image/jpeg&#x27;,
+                                                         path : &#x27;/tmp/adksl1234j123/xx.jpg&#x27;
+                 *                              }
+                 * @since 0.1.0
+                 * @author zlbbq
+                 * */
+                file (name) {
+                        if(this._parts.file) {
+                                var f = this._parts.file[name];
+                                if(f) {
+                                        var size = 0;
+                                        try{
+                                                size = fs.statSync(f.path).size;
+                                        }catch(e){}
+                                        return {
+                                                field : f.fieldname,
+                                                name : f.filename,
+                                                mime : f.mime || f.mimeType,
+                                                path : f.path,
+                                                size : size
+                                        };
+                                }
+                        }
+                }
+
+                /**
+                 * 保存文件到上传目录。
+                 *
+                 * @method saveFile
+                 * @param {String} name 参数名（字段名）
+                 * @return {object} 上传的文件描述。结构参考：file()函数。
+                 * @async
+                 * @since 0.1.0
+                 * @author zlbbq
+                 * */
+                saveFile (name) {
+                        var me = this;
+                        return function * () {
+                                var f = me.file(name);
+                                if(!f) {
+                                        return null;
+                                }
+                                //在上传目录下创建日期目录
+                                var _date = new Date();
+                                var folder = EasyNode.real(EasyNode.config(&#x27;easynode.servers.koa-HttpServer.uploadDir&#x27;, &#x27;www/uploads&#x27;));
+                                if (!fs.existsSync(folder)) {
+                                        fs.mkdirSync(folder);
+                                }
+                                var datedir = _date.getFullYear();
+                                var mm = _date.getMonth() + 1;
+                                if (mm &lt; 10) {
+                                        datedir += &quot;0&quot; + mm;
+                                } else {
+                                        datedir += mm.toString();
+                                }
+                                var dd = _date.getDate();
+                                if (dd &lt; 10) {
+                                        datedir += &quot;0&quot; + dd;
+                                } else {
+                                        datedir += dd.toString();
+                                }
+                                folder = path.join(folder, datedir);
+                                // 指定文件上传后的目录 - 示例为&quot;images&quot;目录。
+                                if (!fs.existsSync(folder)) {
+                                        fs.mkdirSync(folder);
+                                }
+                                var unifiedDir = UUID.v4().replace(/\-.*$/, &#x27;&#x27;);
+                                folder = path.join(folder, unifiedDir);
+                                if (!fs.existsSync(folder)) {
+                                        fs.mkdirSync(folder);
+                                }
+                                //移动文件
+                                var targetFileRealPath = path.join(folder, f.name);
+                                var targetFileURI = path.join(EasyNode.config(&#x27;easynode.servers.koa-HttpServer.uploadURIPrefix&#x27;, &#x27;/uploads&#x27;), datedir + &#x27;/&#x27; + unifiedDir + &#x27;/&#x27; + f.name);
+                                if(fs.existsSync(targetFileRealPath)) {
+                                        logger.warn(&#x27;upload file exists, trying to save it again&#x27;);
+                                        return yield me.saveFile(name);
+                                }
+                                yield cofs.rename(f.path, targetFileRealPath);
+                                f.path = targetFileURI;
+                                return f;
+                        }
+                }
+
+                /**
+                 * 枚举所有上传的文件参数名（字段名）。
+                 *
+                 * @method fileNames
+                 * @param {String} name 参数名（字段名）
+                 * @return {Array} 上传的所有文件参数名（字段名）
+                 * @since 0.1.0
+                 * @author zlbbq
+                 * */
+                fileNames () {
+                        var arr = [];
+                        for(var key  in this._parts.file) {
+                                if(typeof this._parts.file[key] == &#x27;object&#x27;) {
+                                        arr.push(key);
+                                }
+                        }
+                        return arr;
+                }
+
+                getClassName() {
+                        return EasyNode.namespace(__filename);
+                }
+        }
+
+        module.exports = KOAHttpRequestParameter;
+})();
+    </pre>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>
