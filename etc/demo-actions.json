@@ -1,0 +1,16 @@
+{
+        "m": [
+                {
+                        "action-name": "a",
+                        "action-class": "easynode.tests.Test4Action",
+                        "description" : "description of action",
+                        "enabled" : true
+                },
+                {
+                        "action-bean": "$bean1",
+                        "action-name" : "a",
+                        "description" : "description of action",
+                        "enabled" : false
+                }
+        ]
+}

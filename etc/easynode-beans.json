@@ -1,0 +1,60 @@
+{
+        "datasource" : {
+                "class" : "easynode.framework.db.MysqlDataSource",
+                "scope" : "singleton",
+                "init" : "initialize",
+                "init-args" : [
+                        {
+                                "host" : "$str(app.datasource.host)",
+                                "user" : "$str(app.datasource.user)",
+                                "password" : "$str(app.datasource.password)",
+                                "database" : "$str(app.datasource.database)",
+                                "connectionLimit" : "$int(app.datasource.connectionLimit)",
+                                "queueLimit" : 0,
+                                "waitForConnections" : true,
+                                "acquireTimeout" : 10000
+                        },"mysql-datasource"
+                ],
+                "props" : {
+                }
+        },
+        "cache" : {
+                "class" : "easynode.framework.cache.Redis",
+                "scope" : "singleton",
+                "init" : "initialize",
+                "init-args" : [
+                        "$str(app.cache.host)",
+                        "$int(app.datasource.port)",
+                        {
+                                "password" : ""
+                        }
+                ],
+                "props" : {
+                }
+        },
+        "mq" : {
+                "class" : "easynode.framework.mq.RedisListQueue",
+                "scope" : "singleton",
+                "init" : "initialize",
+                "init-args" : [
+                        "$str(app.mq.host)",
+                        "$int(app.datasource.port)",
+                        {
+                                "password" : ""
+                        }
+                ],
+                "props" : {
+                }
+        },
+        "sessionStorage" : {
+                "class" : "easynode.framework.util.ObjectWrapper",
+                "scope" : "singleton",
+                "props" : {
+                        "type" : "storage-redis",
+                        "opts" : {
+                                "host" : "$str(app.session.storage.host)",
+                                "port" : "$int(app.session.storage.port)"
+                        }
+                }
+        }
+}
