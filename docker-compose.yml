@@ -1,0 +1,15 @@
+app:
+  dockerfile: "Dockerfile${NODE_ENV}"
+  build: .
+  volumes:
+    - .:/usr/src/app/:rw
+  ports:
+    - 3000:3000
+  dns:
+    - 8.8.8.8
+  env_file:
+    - ./common.env
+  environment:
+    - ENV=aa
+  log_driver: "json-file"
+  restart: always

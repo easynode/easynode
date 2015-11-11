@@ -1,0 +1,17 @@
+#FROM registry.hz.netease.com/nce2/debin:7.8
+FROM node:latest.cnpm
+
+
+COPY . /usr/src/app
+
+# run shell script with params
+#RUN /usr/src/app/install.sh
+
+
+
+WORKDIR /usr/src/app
+RUN cnpm install
+
+
+CMD ["node", "app.js"]
+

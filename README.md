@@ -27,14 +27,14 @@ Inversion of Control，
 ### The directories structure to describe
 
 
-/bin            : 框架主程序运行目录
-/datas          : 开发阶段,本地文件存储目录
-/etc            : 框架默认配置目录
-/plugins        : 插件目录,
-/src            : Easynode框架源码
-/test           : 测试目录(TDD的原理是在开发功能代码之前，先在这里编写单元测试用例代码)
-/www            : Easynode内置Web服务目录,当前可以忽略它
-S_FIlE_TEMPLATE.webstorm10  : WebStorm ide中类模板文件
+* /bin            : 框架主程序运行目录
+* /datas          : 开发阶段,本地文件存储目录(此目录不会提交到仓库)
+* /etc            : 框架默认配置目录
+* /plugins        : 插件目录,
+* /src            : Easynode框架源码
+* /test           : 测试目录(TDD的原理是在开发功能代码之前，先在这里编写单元测试用例代码)
+* /www            : Easynode内置Web服务目录,当前可以忽略它
+* S_FIlE_TEMPLATE.webstorm10  : WebStorm ide中类模板文件
 
 
 
@@ -49,8 +49,8 @@ With the following references, you can quickly familiarize yourself with the eas
 
 ## Contributors
 * NetEase, Inc. (@NetEase)
-* hujb2000(@allen.hu)
-* zlbbq(@zlbbq)
+* hujb2000[hujb2000@163.com]
+* zlbbq[zlbbq@qq.com]
 * TJ Holowaychuk [tj@vision-media.ca][4]
 * Jonathan Ong [jonathanrichardong@gmail.com][5]
 * dead\_horse [dead\_horse@qq.com][6]

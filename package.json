@@ -45,13 +45,14 @@
     "mqtt": "~1.2.0",
     "mustache": "~2.0.0",
     "mysql": "~2.8.0",
-    "node-nos": "^0.2.0",
+    "nenos": "~1.0.1",
     "node-uuid": "~1.4.3",
     "openid": "^0.5.13",
     "redis": "~0.12.1",
     "string": "~3.1.1",
     "thunkify": "~2.1.2",
-    "underscore": "~1.8.3"
+    "underscore": "~1.8.3",
+    "watch-xdelta": "^1.8.1"
   },
   "devDependencies": {
     "chai": "^3.2.0",
