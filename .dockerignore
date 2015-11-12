@@ -6,8 +6,7 @@ test/
 README.md
 docker-compose.yml
 docker-compose.override.yml2
-Dockerfile
-Dockerfile_prod
+Dockerfile*
 install.sh
 .gitignore
 .dockerignore
@@ -18,5 +17,5 @@ stop_all_contailer.sh
 
 netease/config/*.bin
 netease/config/*.
-
+JS_FIlE_TEMPLATE.webstorm10
 

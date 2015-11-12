@@ -1,6 +1,6 @@
-#FROM registry.hz.netease.com/nce2/debin:7.8
 FROM node:latest.cnpm
 
+RUN cnpm install babel@5.8.29 -g
 
 COPY . /usr/src/app
 
@@ -10,8 +10,9 @@ COPY . /usr/src/app
 
 
 WORKDIR /usr/src/app
-RUN cnpm install
+RUN npm install
 
+WORKDIR /usr/src/app/netease/bin
 
-CMD ["node", "app.js"]
+CMD ["sh", "start_smartwatch_backend_servers.sh"]
 
