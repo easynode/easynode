@@ -1,15 +1,7 @@
-<!DOCTYPE html>
-<html ng-app="app">
-<head>
-        <meta charset="UTF-8">
-        <title>网易智能手表后台管理系统</title>
-</head>
-<body>
-<center><h1>Backend Manager System of NetEase SmartWatch</h1></center>
 
-<!--
-cnpm   install watch-xdelta --save will upgrade from 1.5.0->1.5.3"
-cnpm update 不会升级
--->
-</body>
-</html>
+# RUN
+MYSQL_CONFIG_URL='http://****/mysql.json' sh start_smartwatch_backend_servers.sh
+
+# LOG
+tail -f logs/SmartwatchBackendService1.log
+

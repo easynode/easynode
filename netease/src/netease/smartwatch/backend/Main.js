@@ -8,20 +8,7 @@ var MySqlDataSource = using('easynode.framework.db.MysqlDataSource');
 var Package = using('netease.smartwatch.backend.models.Package');
 var Program = using('netease.smartwatch.backend.models.Program');
 var PackageUpdate = using('netease.smartwatch.backend.models.PackageUpdate');
-
-var mysqlOptions = {
-    host: '218.205.113.98',
-    port: 3306,
-    user: 'scard_pro',
-    password: 'scard_pro',
-    database: 'scard_pro',
-    acquireTimeout: '10000',
-    waitForConnections : true,
-    connectionLimit :  10,
-    queueLimit : 10000
-};
-
-
+var HTTPUtil =  using('easynode.framework.util.HTTPUtil');
 
 (function () {
     /**
@@ -48,9 +35,14 @@ var mysqlOptions = {
         }
 
         static * main(){
+            //load config
+            var mysqlConfigUrl = process.env.MYSQL_CONFIG_URL;
+            var mysqlConfig = yield HTTPUtil.getJSON(mysqlConfigUrl);
+
+
             //Database source, connection pool
             var ds = new MySqlDataSource();
-            ds.initialize(mysqlOptions);
+            ds.initialize(mysqlConfig);
 
             //数据库查询
             var conn = yield ds.getConnection();
