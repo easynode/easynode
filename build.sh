@@ -1,7 +1,7 @@
 #!/bin/bash
 
-echo 'Current NODE_ENV is: ' $NODE_ENV
-echo 'Project name is:' $PRJ_NAME
+echo 'Current STAGE is: ' $STAGE
+echo 'Project name is:' $PRJ
 
-docker-compose -p ${PRJ_NAME}_${NODE_ENV} build
+docker-compose -p ${PRJ}_${STAGE} build
 

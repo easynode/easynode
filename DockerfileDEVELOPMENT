@@ -1,0 +1,6 @@
+FROM node:5.0.0.babel
+
+
+CMD ["./start_smartwatch_backend_servers.sh"]
+
+
