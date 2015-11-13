@@ -1,8 +1,8 @@
-FROM node:latest.cnpm
+FROM node:latest.babel
 
 
 WORKDIR /usr/src/app/netease/bin
 
-CMD ["sh","start_smartwatch_backend_servers.sh"]
+CMD ["./start_smartwatch_backend_servers.sh"]
 
 

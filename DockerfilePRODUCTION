@@ -1,6 +1,6 @@
-FROM node:latest.cnpm
+FROM node:latest.babel
 
-RUN cnpm install babel@5.8.29 -g
+MAINTAINER hujb
 
 COPY . /usr/src/app
 
@@ -8,11 +8,10 @@ COPY . /usr/src/app
 #RUN /usr/src/app/install.sh
 
 
-
 WORKDIR /usr/src/app
 RUN npm install
 
 WORKDIR /usr/src/app/netease/bin
 
-CMD ["sh", "start_smartwatch_backend_servers.sh"]
+CMD ["./start_smartwatch_backend_servers.sh"]
 

@@ -4,7 +4,7 @@ app:
   volumes:
     - .:/usr/src/app/:rw
   ports:
-    - 3000:3000
+    - 6005:6005
   dns:
     - 8.8.8.8
   env_file:
