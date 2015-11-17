@@ -2,3 +2,4 @@ _site
 Gemfile.lock
 docs/.Ulysses-Group.plist
 docs/imgs/.Ulysses-Group.plist
+.idea
