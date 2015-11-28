@@ -45,3 +45,5 @@ datas
 netease/config/*.bin
 netease/config/*.json
 !netease/config/smartwatch-backend-service-beans.json
+
+issue.sh
