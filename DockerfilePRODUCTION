@@ -15,5 +15,5 @@ RUN npm install
 
 WORKDIR /usr/src/app/netease/bin
 
-ENTRYPOINT ["./start_smartwatch_backend_servers.sh"]
+CMD ["./start_smartwatch_backend_servers.sh"]
 
