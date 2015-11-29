@@ -9,13 +9,16 @@ CVS
 npm-debug.log
 Dockerfile*
 node_modules
-build.sh
-install.sh
+./build.sh
+./install.sh
 JS_FIlE_TEMPLATE.webstorm10
 docker-compose.*
-start.sh
-stop_all_contailer.sh
-issue.sh
-common.env
+./start.sh
+./stop_all_contailer.sh
+./issue.sh
+./common.env
 netease
+./bin/main.backup.js
+./bin/resolved-namespaces.js
+./src.backup
 

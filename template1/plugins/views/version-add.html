@@ -1,0 +1,76 @@
+<% include head.html %>
+
+<!-- Main Content -->
+<section class="content">
+    <div class="box box-success">
+        <div class="box-header">
+            <h3 class="box-title">添加新版本</h3>
+        </div>
+        <div class="box-body">
+            <form role="form" id="firms_form" data-parsley-validate>
+                <div class="box-body">
+                    <div class="form-group">
+                        <label for="">选择版本描述文件:</label>
+                        <input type="file" class="j-package-select-form" placeholder="" name="package.json" accept="application/json" required/>
+                    </div>
+                    <input type="hidden" name="_csrf" value=""/>
+
+                    <div class="">
+                        <label for="">发布版本号:</label><p class="text-red j-version-select">version</p>
+                    </div>
+                    <div class=""">
+                        <label for="">版本描述:</label><p class="text-red j-describe-select">bug fixed</p>
+                    </div>
+                    <div class=""">
+                        <label for="">发布者:</label><p class="text-red j-issuer-select">Sean</p>
+                    </div>
+                    <div class=""">
+                        <label for="">发布者邮箱:</label><p class="text-red j-email-select">sean@corp.netease.com</p>
+                    </div>
+                </div>
+
+                <div class="box-body table-responsive no-padding">
+                    <table class="table table-hove">
+                        <tbody class="j-package-items-select">
+                            <tr>
+                                <th>固件类型</th>
+                                <th>版本号</th>
+                                <th>描述</th>
+                                <th>文件大小</th>
+                                <th>md5</th>
+                                <th>支持差分</th>
+                                <th>差分块大小</th>
+                                <th>联系人邮箱</th>
+                                <th>操作</th>
+                            </tr>
+                         </tbody>
+                    </table>
+                </div>
+                <div class="box-footer">
+                    <button id="submit" class="btn btn-primary">提交&发布</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">提示</h4>
+                </div>
+                <div class="modal-body">
+                    <p>One fine body&hellip;</p>
+                </div>
+                <div class="modal-footer">
+                    <!--<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>-->
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">确认</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+</section>
+
+<% include footer.html %>

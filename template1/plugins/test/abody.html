@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script src="../AdminLte/plugins/jQuery/jquery-2.1.4.min.js"></script>
+    <script>
+        jQuery.fn.extend({
+            href2ajax: function (fn){
+                $(this).click(function(){
+                    console.log("aaa");
+                    $.ajax({
+                        url: this.href,
+                        method: 'post',
+                        error: function(XMLHttpRequest, textStatus, errorThrown){
+                            alert(XMLHttpRequest.responseText);
+                        },
+                        success: function(data){
+                            try{
+                                fn.call(this,data);
+                            }catch(exception){
+                                alert(data);
+                            }
+                        }
+                    });
+                    return false;
+                });
+            }
+        });
+    </script>
+</head>
+<body>
+<a href="http://127.0.0.1:6005/firmware/upload/1">删除</a>
+<script>
+    $('a').href2ajax();
+</script>
+</body>
+</html>

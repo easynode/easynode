@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<div>
+  <!-- include 使用相对路径-->
+  <% include ../static/kl.txt %>
+
+  <!-- link 使用绝对路径 -->
+  <link href="/kl.txt" rel="stylesheet" type="text/css" />
+
+  <!-- EJS模板路径只能是一个 -->
+  _addTemplate(app){
+  //render(app, {
+  //    root: '/Users/hujiabao/workspace_me/stk_appserver/plugins/IDManager/template',
+  //    layout: 'template',
+  //    viewExt: 'html',
+  //    cache: false,
+  //    debug: true,
+  //    filters: filters
+  //});
+  render(app, {
+  root: '/Users/hujiabao/workspace_me/stk_appserver/plugins/IDManager/template2',
+  layout: 'template',
+  viewExt: 'html',
+  cache: false,
+  debug: true,
+  filters: filters
+  });
+  }
+</div>
+<div>
+  <!-- WebRoot要路径
+  1. KOAHttpServe.use(me.getWebRoot
+  2. httpServer.addWebDirs('plugins/IDManager/AdminLTE');如果其下有index.html则起作用
+  3. httpRoute.addRoute('get','/',route.indexGenerator());
+  按以上1->2->3的顺序奏效，如果想要3起作用，
+  禁用1： KOAHttpServer中注释以下语句 //app.use(staticFileServe(me.getWebRoot()));
+  禁用2： 删除index.html文件
+   -->
+
+  <!-- Gen 访问Session
+  this.session.name = name;
+  this.session.version = vernum;
+  -- >
+  <!-- 数组遍历 ，箭头符号如何取下标 -->
+
+  <!-- 数组delete 与splice的区别
+  [1,2,3].splice(0,1) => [2,3]
+  [1,2,3] ,delete arr[0], => [null,2,3]
+  -->
+</div>
+</body>
+</html>

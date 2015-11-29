@@ -1,6 +1,6 @@
 'use strict';
 
-require('../lib/EasyNode.js');
+require('../src/EasyNode.js');
 var util = require('util');
 var co = require('co');
 var fs = require('fs');

@@ -1,0 +1,24 @@
+{
+        "lbsCache" : {
+                "class" : "easynode.framework.cache.Redis",
+                "scope" : "singleton",
+                "init" : "initialize",
+                "init-args" : [
+                        "$str(redis.host)",
+                        "$int(redis.port)",
+                        {
+                                "auth_pass" : "$str(redis.password)"
+                        }
+                ],
+                "props" : {
+                }
+        },
+        "mongodbOpts" : {
+                "class" : "easynode.framework.util.ObjectWrapper",
+                "scope" : "singleton",
+                "props" : {
+                        "opts" : {
+                        }
+                }
+        }
+}

@@ -1,0 +1,23 @@
+{
+        "bean1" : {
+                "class" : "easynode.framework.beans.TestBean1",
+                "scope" : "singleton",
+                "init" : "init",
+                "init-args" : [],
+                "props" : {
+                        "name1" : "$str(config.item.name1)",
+                        "name2" : "$int(config.item.name2)",
+                        "name3" : "$float(config.item.name3)",
+                        "name4" : 4,
+                        "name5" : "hujiabao",
+                        "bean2" : "$bean2"
+                }
+        },
+        "bean2" : {
+                "class" : "easynode.framework.beans.TestBean2",
+                "scope" : "prototype",
+                "props" : {
+                        "prop1" : "prop1"
+                }
+        }
+}
