@@ -1,1 +1,1 @@
-landslide twelve.md -i -o > landslide/twelve.html
+landslide fullstack_share.md -i -o > landslide/fullstack_share.html
