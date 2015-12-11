@@ -22,18 +22,26 @@
 
 * 云计算
 
-	> DevOps
+	1. DevOps
 
 * 微服务(云服务)
 
-	> 云商
-	> 云信
-	> 云讯
-	> 云推
+  1. 云商
+
+  2. 云信
+
+  3. 云讯
+
+  4. 云推
+
+---
 
 ##  全栈开发规范
 
 * [12-Factory App](http://hujb2000.github.io/easynode/docs/landslide/twelve.html#slide1)
+
+
+---
 
 
 ## 全栈开发模式标准
@@ -46,10 +54,15 @@
 
 	能否自愈
 
+---
+
 ## 前端技术规范
 
 
 * [前端技术规范](http://hujb2000.github.io/allen.hu/update/2015/11/26/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF%E4%B8%AD%E5%BF%83-Web%E5%85%A8%E6%A1%9F%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83.html)
 
+---
 
 # THANK YOU!
+
+---
