@@ -1,266 +1,329 @@
+'use strict';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 var assert = require('assert');
 var logger = using('easynode.framework.Logger').forFile(__filename);
 var GenericObject = using('easynode.GenericObject');
 var S = require('string');
 
 (function () {
-        /**
-         * Class ActionContext
-         *
-         * @class easynode.framework.mvc.ActionContext
-         * @extends easynode.GenericObject
-         * @abstract
-         * @since 0.1.0
-         * @author hujiabao
-         * */
-        class ActionContext extends GenericObject {
-                /**
-                 * 构造函数。
-                 *
-                 * @method 构造函数
-                 * @since 0.1.0
-                 * @author hujiabao
-                 * */
-                constructor(m, a) {
-                        super();
-                        //调用super()后再定义子类成员。
-                        /**
-                         * Action实例。通过setAction和getAction存取。
-                         *
-                         * @property action
-                         * @type easynode.framework.mvc.Action 子类实例
-                         * @protected
-                         * @since 0.1.0
-                         * @author hujiabao
-                         * */
-                        this.action = null;
+  /**
+   * Class ActionContext
+   *
+   * @class easynode.framework.mvc.ActionContext
+   * @extends easynode.GenericObject
+   * @abstract
+   * @since 0.1.0
+   * @author hujiabao
+   * */
 
-                        /**
-                         *  easynode.framework.cache.ICache实例。
-                         *
-                         * @property cache
-                         * @type easynode.framework.cache.ICache实例
-                         * @since 0.1.0
-                         * @author hujiabao
-                         * */
-                        this.cache = null;
+  var ActionContext = function (_GenericObject) {
+    _inherits(ActionContext, _GenericObject);
 
-                        /**
-                         *  easynode.framework.db.IConnection实例。
-                         *
-                         * @property connection
-                         * @type easynode.framework.db.IConnection实例
-                         * @since 0.1.0
-                         * @author hujiabao
-                         * */
-                        this.connection = null;
+    /**
+     * 构造函数。
+     *
+     * @method 构造函数
+     * @since 0.1.0
+     * @author hujiabao
+     * */
 
-                        /**
-                         *  easynode.framework.mq.IQueue实例。
-                         *
-                         * @property queue
-                         * @type easynode.framework.mq.IQueue实例
-                         * @since 0.1.0
-                         * @author hujiabao
-                         * */
-                        this.queue = null;
+    function ActionContext(m, a) {
+      _classCallCheck(this, ActionContext);
 
-                        /**
-                         *  远程地址(客户端地址)。
-                         *
-                         * @property remoteAddress
-                         * @type String
-                         * @since 0.1.0
-                         * @author hujiabao
-                         * */
-                        this.remoteAddress = null;
+      //调用super()后再定义子类成员。
+      /**
+       * Action实例。通过setAction和getAction存取。
+       *
+       * @property action
+       * @type easynode.framework.mvc.Action 子类实例
+       * @protected
+       * @since 0.1.0
+       * @author hujiabao
+       * */
 
-                        /**
-                         *  模块名。
-                         *
-                         * @property moduleName
-                         * @type String
-                         * @since 0.1.0
-                         * @author hujiabao
-                         * */
-                        this.moduleName = m;
-                        /**
-                         *  Action名。
-                         *
-                         * @property actionName
-                         * @type String
-                         * @since 0.1.0
-                         * @author hujiabao
-                         * */
-                        this.actionName = a;
-                }
+      var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ActionContext).call(this));
 
-                /**
-                 * set action成员。
-                 *
-                 * @method setAction
-                 * @param {easynode.framework.mvc.Action} action Action实例。
-                 * @since 0.1.0
-                 * @author hujiabao
-                 * */
-                setAction (action) {
-                        this.action = action;
-                }
+      _this.action = null;
 
-                /**
-                 * get action成员。
-                 *
-                 * @method getAction
-                 * @return {easynode.framework.mvc.Action} Action实例。
-                 * @since 0.1.0
-                 * @author hujiabao
-                 * */
-                getAction() {
-                        return this.action;
-                }
+      /**
+       *  easynode.framework.cache.ICache实例。
+       *
+       * @property cache
+       * @type easynode.framework.cache.ICache实例
+       * @since 0.1.0
+       * @author hujiabao
+       * */
+      _this.cache = null;
 
-                /**
-                 * 获取此上下文环境中指定名称的参数值。
-                 *
-                 * @method param
-                 * @param {String} name 参数名
-                 * @param {Object} defaultValue 默认值，默认为null
-                 * @return {any}
-                 * @since 0.1.0
-                 * @author hujiabao
-                 * */
-                param (name, defaultValue=null) {
-                        throw new Error('Abstract Method');
-                }
+      /**
+       *  easynode.framework.db.IConnection实例。
+       *
+       * @property connection
+       * @type easynode.framework.db.IConnection实例
+       * @since 0.1.0
+       * @author hujiabao
+       * */
+      _this.connection = null;
 
-                /**
-                 * 设置参数值。
-                 *
-                 * @method setParam
-                 * @param {String} name 参数名
-                 * @param {String} val 参数值
-                 * @abstract
-                 * @since 0.1.0
-                 * @author hujiabao
-                 * */
-                setParam(name, val) {
-                        throw new Error('Abstract Method');
-                }
+      /**
+       *  easynode.framework.mq.IQueue实例。
+       *
+       * @property queue
+       * @type easynode.framework.mq.IQueue实例
+       * @since 0.1.0
+       * @author hujiabao
+       * */
+      _this.queue = null;
 
-                /**
-                 * 获取此上下文环境中指所有的参数。
-                 *
-                 * @method params
-                 * @return {Object} json对象
-                 * @since 0.1.0
-                 * @author hujiabao
-                 * */
-                params () {
-                        throw new Error('Abstract Method');
-                }
+      /**
+       *  远程地址(客户端地址)。
+       *
+       * @property remoteAddress
+       * @type String
+       * @since 0.1.0
+       * @author hujiabao
+       * */
+      _this.remoteAddress = null;
 
-                /**
-                 * 为ActionContext增加cache支持。
-                 *
-                 * @method setCache
-                 * @param {easynode.framework.cache.ICache} cache cache实例
-                 * @since 0.1.0
-                 * @author hujiabao
-                 * */
-                setCache (cache) {
-                        this.cache = cache;
-                }
+      /**
+       *  模块名。
+       *
+       * @property moduleName
+       * @type String
+       * @since 0.1.0
+       * @author hujiabao
+       * */
+      _this.moduleName = m;
+      /**
+       *  Action名。
+       *
+       * @property actionName
+       * @type String
+       * @since 0.1.0
+       * @author hujiabao
+       * */
+      _this.actionName = a;
+      return _this;
+    }
+
+    /**
+     * set action成员。
+     *
+     * @method setAction
+     * @param {easynode.framework.mvc.Action} action Action实例。
+     * @since 0.1.0
+     * @author hujiabao
+     * */
 
 
-                /**
-                 * 设置远程地址。
-                 *
-                 * @method setRemoteAddress
-                 * @param {String} remoteAddress 远程IP地址
-                 * @since 0.1.0
-                 * @author hujiabao
-                 * */
-                setRemoteAddress (remoteAddress) {
-                        this.remoteAddress = remoteAddress;
-                }
+    _createClass(ActionContext, [{
+      key: 'setAction',
+      value: function setAction(action) {
+        this.action = action;
+      }
 
-                /**
-                 * 获取远程地址。
-                 *
-                 * @method getRemoteAddress
-                 * @return {String} remoteAddress 远程IP地址
-                 * @since 0.1.0
-                 * @author hujiabao
-                 * */
-                getRemoteAddress () {
-                        return this.remoteAddress;
-                }
+      /**
+       * get action成员。
+       *
+       * @method getAction
+       * @return {easynode.framework.mvc.Action} Action实例。
+       * @since 0.1.0
+       * @author hujiabao
+       * */
 
+    }, {
+      key: 'getAction',
+      value: function getAction() {
+        return this.action;
+      }
 
-                /**
-                 * 获取cache实例。
-                 *
-                 * @method getCache
-                 * @return {easynode.framework.cache.ICache} cache实例
-                 * @since 0.1.0
-                 * @author hujiabao
-                 * */
-                getCache() {
-                        return this.cache;
-                }
+      /**
+       * 获取此上下文环境中指定名称的参数值。
+       *
+       * @method param
+       * @param {String} name 参数名
+       * @param {Object} defaultValue 默认值，默认为null
+       * @return {any}
+       * @since 0.1.0
+       * @author hujiabao
+       * */
 
-                /**
-                 * 为ActionContext增加数据库支持。
-                 *
-                 * @method setCache
-                 * @param {easynode.framework.cache.IConnection} connection 数据库连接实例
-                 * @since 0.1.0
-                 * @author hujiabao
-                 * */
-                setConnection (connection) {
-                        this.connection = connection;
-                }
+    }, {
+      key: 'param',
+      value: function param(name) {
+        var defaultValue = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
 
-                /**
-                 * 获取数据库连接实例。
-                 *
-                 * @method getConnection
-                 * @return {easynode.framework.cache.IConnection} 数据库连接实例
-                 * @since 0.1.0
-                 * @author hujiabao
-                 * */
-                getConnection() {
-                        return this.connection;
-                }
+        throw new Error('Abstract Method');
+      }
 
-                /**
-                 * 为ActionContext增加队列支持。
-                 *
-                 * @method setQueue
-                 * @param {easynode.framework.mq.IQueue} queue 队列实例
-                 * @since 0.1.0
-                 * @author hujiabao
-                 * */
-                setQueue (queue) {
-                        this.queue = queue;
-                }
+      /**
+       * 设置参数值。
+       *
+       * @method setParam
+       * @param {String} name 参数名
+       * @param {String} val 参数值
+       * @abstract
+       * @since 0.1.0
+       * @author hujiabao
+       * */
 
-                /**
-                 * 获取队列连接实例。
-                 *
-                 * @method getQueue
-                 * @return {easynode.framework.mq.IQueue} 队列连接实例
-                 * @since 0.1.0
-                 * @author hujiabao
-                 * */
-                getQueue () {
-                        return this.queue;
-                }
+    }, {
+      key: 'setParam',
+      value: function setParam(name, val) {
+        throw new Error('Abstract Method');
+      }
 
-                getClassName() {
-                        return EasyNode.namespace(__filename);
-                }
-        }
+      /**
+       * 获取此上下文环境中指所有的参数。
+       *
+       * @method params
+       * @return {Object} json对象
+       * @since 0.1.0
+       * @author hujiabao
+       * */
 
-        module.exports = ActionContext;
+    }, {
+      key: 'params',
+      value: function params() {
+        throw new Error('Abstract Method');
+      }
+
+      /**
+       * 为ActionContext增加cache支持。
+       *
+       * @method setCache
+       * @param {easynode.framework.cache.ICache} cache cache实例
+       * @since 0.1.0
+       * @author hujiabao
+       * */
+
+    }, {
+      key: 'setCache',
+      value: function setCache(cache) {
+        this.cache = cache;
+      }
+
+      /**
+       * 设置远程地址。
+       *
+       * @method setRemoteAddress
+       * @param {String} remoteAddress 远程IP地址
+       * @since 0.1.0
+       * @author hujiabao
+       * */
+
+    }, {
+      key: 'setRemoteAddress',
+      value: function setRemoteAddress(remoteAddress) {
+        this.remoteAddress = remoteAddress;
+      }
+
+      /**
+       * 获取远程地址。
+       *
+       * @method getRemoteAddress
+       * @return {String} remoteAddress 远程IP地址
+       * @since 0.1.0
+       * @author hujiabao
+       * */
+
+    }, {
+      key: 'getRemoteAddress',
+      value: function getRemoteAddress() {
+        return this.remoteAddress;
+      }
+
+      /**
+       * 获取cache实例。
+       *
+       * @method getCache
+       * @return {easynode.framework.cache.ICache} cache实例
+       * @since 0.1.0
+       * @author hujiabao
+       * */
+
+    }, {
+      key: 'getCache',
+      value: function getCache() {
+        return this.cache;
+      }
+
+      /**
+       * 为ActionContext增加数据库支持。
+       *
+       * @method setCache
+       * @param {easynode.framework.cache.IConnection} connection 数据库连接实例
+       * @since 0.1.0
+       * @author hujiabao
+       * */
+
+    }, {
+      key: 'setConnection',
+      value: function setConnection(connection) {
+        this.connection = connection;
+      }
+
+      /**
+       * 获取数据库连接实例。
+       *
+       * @method getConnection
+       * @return {easynode.framework.cache.IConnection} 数据库连接实例
+       * @since 0.1.0
+       * @author hujiabao
+       * */
+
+    }, {
+      key: 'getConnection',
+      value: function getConnection() {
+        return this.connection;
+      }
+
+      /**
+       * 为ActionContext增加队列支持。
+       *
+       * @method setQueue
+       * @param {easynode.framework.mq.IQueue} queue 队列实例
+       * @since 0.1.0
+       * @author hujiabao
+       * */
+
+    }, {
+      key: 'setQueue',
+      value: function setQueue(queue) {
+        this.queue = queue;
+      }
+
+      /**
+       * 获取队列连接实例。
+       *
+       * @method getQueue
+       * @return {easynode.framework.mq.IQueue} 队列连接实例
+       * @since 0.1.0
+       * @author hujiabao
+       * */
+
+    }, {
+      key: 'getQueue',
+      value: function getQueue() {
+        return this.queue;
+      }
+    }, {
+      key: 'getClassName',
+      value: function getClassName() {
+        return EasyNode.namespace(__filename);
+      }
+    }]);
+
+    return ActionContext;
+  }(GenericObject);
+
+  module.exports = ActionContext;
 })();

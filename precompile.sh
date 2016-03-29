@@ -20,4 +20,6 @@
 
 babel src -d lib
 
-
+############
+## src->srcback, lib->src, It will not work if the EasyNode source code as "lib" instead of "src".
+############

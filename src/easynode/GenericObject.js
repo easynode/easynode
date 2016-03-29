@@ -1,3 +1,7 @@
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
 var util = require('util');
 var events = require("events");
 
@@ -34,7 +38,7 @@ var events = require("events");
          * @since 0.1.0
          * @author hujiabao
          * */
-         function GenericObject () {
+        function GenericObject() {
                 this.setMaxListeners(EasyNode.arg('easynode.events.maxListeners') || 11);
         }
 
@@ -49,7 +53,7 @@ var events = require("events");
          * @since 0.1.0
          * @author hujiabao
          * */
-        GenericObject.prototype.trigger = function() {
+        GenericObject.prototype.trigger = function () {
                 this.emit.apply(this, arguments);
         };
 
@@ -65,7 +69,6 @@ var events = require("events");
         GenericObject.prototype.off = function (event, listener) {
                 this.removeListener(event, listener);
         };
-
 
         /**
          * 获取对象的字符串描述
@@ -111,18 +114,16 @@ var events = require("events");
          * */
         GenericObject.prototype.toJSON = function () {
                 var o = {};
-                for(var attr in this) {
+                for (var attr in this) {
                         var val = this[attr];
-                        if(attr[0] != '_' && typeof val != 'function') {
-                                if(val!==null&&typeof val == 'object') {
-                                        if(typeof val.toJSON == 'function') {
+                        if (attr[0] != '_' && typeof val != 'function') {
+                                if (val !== null && (typeof val === 'undefined' ? 'undefined' : _typeof(val)) == 'object') {
+                                        if (typeof val.toJSON == 'function') {
                                                 o[attr] = val.toJSON();
-                                        }
-                                        else {
+                                        } else {
                                                 o[attr] = val;
                                         }
-                                }
-                                else {
+                                } else {
                                         o[attr] = val;
                                 }
                         }
@@ -158,7 +159,7 @@ var events = require("events");
          * var ExpressServer = using('easynode.framework.server.http.ExpressServer');
          * new ExpressServer(3010).is('easynode.framework.server.http.ExpressServer');  //true
          * */
-        GenericObject.prototype.noop = function() {};
+        GenericObject.prototype.noop = function () {};
 
         module.exports = GenericObject;
 })();

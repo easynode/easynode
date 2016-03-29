@@ -1,6 +1,6 @@
 {
   "name": "easynode",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "private": false,
   "description": "A fullstack javascript framework. Features : Plug-in, MVC, auto-modeling, Http(based on koa), TCP, Websocket, restful-like, SPA, seajs, Bootstrap.",
   "scripts": {
