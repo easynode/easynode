@@ -1,3 +1,6 @@
+/**
+ * Created by hujiabao on 3/29/16.
+ */
 require('date-utils');
 var assert = require('assert');
 var fs = require('fs');
@@ -27,7 +30,7 @@ var EasyNode = global.EasyNode = {};
  *
  * @method _getNamespace
  * @since 0.1.0
- * @author zlbbq
+ * @author hujiabao
  * @private
  * @param {String} name namespace字符串
  * @return {namespace} JSON模拟的namespace对象
@@ -37,15 +40,15 @@ var EasyNode = global.EasyNode = {};
  *      var ns = _getNamespace('easynode.framework.*');                          //返回对象easynode.framework
  * */
 function _getNamespace(name) {
-        assert(typeof name == 'string', 'Invalid namespace type, need a String');
-        var parts = name.split('.');
-        parts = parts.splice(0, parts.length - 1);
-        var ns = global;
-        parts.forEach(function (v) {
-                ns = ns[v];
-                assert(ns != null, `Can not find class or namespace [${name}]`);
-        });
-        return ns;
+    assert(typeof name == 'string', 'Invalid namespace type, need a String');
+    var parts = name.split('.');
+    parts = parts.splice(0, parts.length - 1);
+    var ns = global;
+    parts.forEach(function (v) {
+        ns = ns[v];
+        assert(ns != null, `Can not find class or namespace [${name}]`);
+    });
+    return ns;
 }
 
 /**
@@ -53,7 +56,7 @@ function _getNamespace(name) {
  *
  * @method _initNamespaces
  * @since 0.1.0
- * @author zlbbq
+ * @author hujiabao
  * @private
  * @example
  *      require('../src/EasyNode.js');
@@ -61,42 +64,42 @@ function _getNamespace(name) {
  *      EasyNode.using('easynode.framework.Logger');
  */
 function _initNamespaces() {
-        if (!EasyNode._ns_resolved) {
-                if (!EasyNode._src_folders) {
-                        EasyNode._src_folders = ['src'];
-                }
-
-                var s = '';
-                s += '//============DO NOT MODIFY THIS FILE, IT IS AUTO-GENERATED FOR CODE NOTIFICATION=============/\n\n';
-                var namespaces = [];
-
-                function _gen(root, folder, p) {
-                        var files = fs.readdirSync(folder);
-                        files.forEach(function (f) {
-                                if (fs.statSync(path.join(folder, f)).isDirectory()) {
-                                        var ns = (p.length > 0 ? (p + '.') : '') + f;
-                                        var realNS = ns.slice(7);
-                                        if (!_.contains(namespaces, ns)) {
-                                                namespaces.push(ns);
-                                                s += '/**\n' +
-                                                        '* @namespace ' + realNS + '\n' +
-                                                        '*/\n';
-                                                s += ns + ' = ' + '{};\n\n';
-                                        }
-                                        _gen(root, path.join(folder, f), ns);
-                                }
-                        });
-                }
-
-                EasyNode._src_folders.forEach(function (src) {
-                        _gen(src, EasyNode.real(src), 'global');
-                });
-
-                fs.writeFileSync(EasyNode.real('bin/resolved-namespaces.js'), s);
-                // Evaluate namespace simulation
-                eval(s);
-                EasyNode._ns_resolved = true;
+    if (!EasyNode._ns_resolved) {
+        if (!EasyNode._src_folders) {
+            EasyNode._src_folders = ['src'];
         }
+
+        var s = '';
+        s += '//============DO NOT MODIFY THIS FILE, IT IS AUTO-GENERATED FOR CODE NOTIFICATION=============/\n\n';
+        var namespaces = [];
+
+        function _gen(root, folder, p) {
+            var files = fs.readdirSync(folder);
+            files.forEach(function (f) {
+                if (fs.statSync(path.join(folder, f)).isDirectory()) {
+                    var ns = (p.length > 0 ? (p + '.') : '') + f;
+                    var realNS = ns.slice(7);
+                    if (!_.contains(namespaces, ns)) {
+                        namespaces.push(ns);
+                        s += '/**\n' +
+                            '* @namespace ' + realNS + '\n' +
+                            '*/\n';
+                        s += ns + ' = ' + '{};\n\n';
+                    }
+                    _gen(root, path.join(folder, f), ns);
+                }
+            });
+        }
+
+        EasyNode._src_folders.forEach(function (src) {
+            _gen(src, EasyNode.real(src), 'global');
+        });
+
+        fs.writeFileSync(EasyNode.real('bin/resolved-namespaces.js'), s);
+        // Evaluate namespace simulation
+        eval(s);
+        EasyNode._ns_resolved = true;
+    }
 }
 
 /**
@@ -104,17 +107,17 @@ function _initNamespaces() {
  *
  * @method _trim
  * @since 0.1.0
- * @author zlbbq
+ * @author hujiabao
  * @private
  * @example
  *      console.log(_trim('   abc   '));                        //print : 'abc'
  * */
 function _trim(s) {
-        s = s || '';
-        if (typeof s == 'string') {
-                return s.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
-        }
-        throw new TypeError('Not a string');
+    s = s || '';
+    if (typeof s == 'string') {
+        return s.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
+    }
+    throw new TypeError('Not a string');
 }
 
 /**
@@ -123,15 +126,15 @@ function _trim(s) {
  *
  * @method home
  * @since 0.1.0
- * @author zlbbq
+ * @author hujiabao
  * @static
  * @return {String} EasyNode根目录的绝对路径。
  * @example
  *      //在bin目录下启动：babel-node ./main.js
- *      console.log(EasyNode.home());                                            //print：/home/zlbbq/EasyNode
+ *      console.log(EasyNode.home());                                            //print：/home/hujiabao/EasyNode
  * */
 EasyNode.home = function () {
-        return EasyNode.arg('easynode-home') || path.join(process.cwd(), '../');
+    return EasyNode.arg('easynode-home') || path.join(process.cwd(), '../');
 };
 
 /**
@@ -139,16 +142,16 @@ EasyNode.home = function () {
  *
  * @method EasyNode.real
  * @since 0.1.0
- * @author zlbbq
+ * @author hujiabao
  * @static
  * @param {String} p 相对路径
  * @return {String} 绝对路径
  * @example
  *      var path = 'src/EasyNode.js';
- *      console.log(EasyNode.real(path));                //print : /home/zlbbq/EasyNode/src/EasyNode.js
+ *      console.log(EasyNode.real(path));                //print : /home/hujiabao/EasyNode/src/EasyNode.js
  * */
 EasyNode.real = function (p) {
-        return path.join(EasyNode.home(), p || '');
+    return path.join(EasyNode.home(), p || '');
 };
 
 /**
@@ -157,15 +160,36 @@ EasyNode.real = function (p) {
  * @method extend
  * @since 0.1.0
  * @static
- * @author zlbbq
+ * @author hujiabao
  * @param {...} JSON对象
  * @example
  *      var o = { a : 'a' };
  *      extend(o, { b : 'b'});          // o = { a : 'a', b : 'b'}
  * */
 EasyNode.extend = function () {
-        _.extend.apply(null, arguments);
+    _.extend.apply(null, arguments);
 };
+
+
+/**
+ * 为非babel-node程序人为指定easynode-home路径,如mocha
+ *
+ * @method addArg
+ * @since 0.1.10
+ * @static
+ * @author hujiabao
+ * @param {String} name 配置项key。
+ * @return {String} 配置值。
+ * @example
+ *      EasyNode.addArg('easynode-home',process.cwd());
+ */
+EasyNode.addArg = function (name,value) {
+    if (_.isEmpty(EasyNode._parsed_args)) {
+        EasyNode._parsed_args = {};
+        EasyNode._parsed_args[name] = value;
+    }
+    return EasyNode._parsed_args[name || ''];
+}
 
 /**
  * 获取命令行参数。一个命令行参数需要定义在入口js文件之后，并且格式为--$key=$value。<br>
@@ -174,7 +198,7 @@ EasyNode.extend = function () {
  * @method arg
  * @since 0.1.0
  * @static
- * @author zlbbq
+ * @author hujiabao
  * @param {String} name 配置项key。
  * @return {String} 配置值。
  * @example
@@ -182,25 +206,25 @@ EasyNode.extend = function () {
  *      console.log(config('easynode.app.name'));                  //print : 'YourApp'
  */
 EasyNode.arg = function (name) {
-        if (!EasyNode._parsed_args) {
-                EasyNode._parsed_args = {};
-                var f = false;
-                var argReg = /^\-\-(.*)=(.*)$/;
-                process.argv.forEach(function (val) {
-                        if (!f) {
-                                if (val.match(/^\.\/.*\.js$/) || val.match(/^.*\.js$/)) {
-                                        f = true;
-                                }
-                        }
-                        else {
-                                var p = argReg.exec(val);
-                                if (p) {
-                                        EasyNode._parsed_args[p[1]] = p[2];
-                                }
-                        }
-                });
-        }
-        return EasyNode._parsed_args[name || ''];
+    if (_.isEmpty(EasyNode._parsed_args)) {
+        EasyNode._parsed_args = {};
+        var f = false;
+        var argReg = /^\-\-(.*)=(.*)$/;
+        process.argv.forEach(function (val) {
+            if (!f) {
+                if (val.match(/^\.\/.*\.js$/) || val.match(/^.*\.js$/)) {
+                    f = true;
+                }
+            }
+            else {
+                var p = argReg.exec(val);
+                if (p) {
+                    EasyNode._parsed_args[p[1]] = p[2];
+                }
+            }
+        });
+    }
+    return EasyNode._parsed_args[name || ''];
 };
 
 /**
@@ -209,7 +233,7 @@ EasyNode.arg = function (name) {
  * @method addConfigFile
  * @since 0.1.0
  * @static
- * @author zlbbq
+ * @author hujiabao
  * @param {String} ... 配置文件名，可一次添加多个文件。
  * @throws {Error} 配置文件不存在。{TypeError} 参数非String类型。
  * @example
@@ -218,27 +242,27 @@ EasyNode.arg = function (name) {
  *      EasyNode.console.log(config('easynode.app.name'));
  */
 EasyNode.addConfigFile = function () {
-        //清除配置缓存，如果配置文件发生变化
-        EasyNode._config_cache = null;
-        EasyNode._config_files = EasyNode._config_files || ['etc/EasyNode.conf'];
-        var arr = _.toArray(arguments);
-        arr.forEach(function (v) {
-                if (_.isString(v)) {
-                        if(v) {
-                                var f = EasyNode.real(v);
-                                if (!fs.existsSync(f)) {
-                                        throw new Error(`Config file [${f}] is not found!`);
-                                }
-                                EasyNode._config_files.push(v);
-                        }
+    //清除配置缓存，如果配置文件发生变化
+    EasyNode._config_cache = null;
+    EasyNode._config_files = EasyNode._config_files || ['etc/EasyNode.conf'];
+    var arr = _.toArray(arguments);
+    arr.forEach(function (v) {
+        if (_.isString(v)) {
+            if(v) {
+                var f = EasyNode.real(v);
+                if (!fs.existsSync(f)) {
+                    throw new Error(`Config file [${f}] is not found!`);
                 }
-                else if (_.isArray(v)) {
-                        addConfig.apply(null, v);
-                }
-                else {
-                        throw new TypeError('Invalid config type!');
-                }
-        });
+                EasyNode._config_files.push(v);
+            }
+        }
+        else if (_.isArray(v)) {
+            addConfig.apply(null, v);
+        }
+        else {
+            throw new TypeError('Invalid config type!');
+        }
+    });
 };
 
 /**
@@ -248,7 +272,7 @@ EasyNode.addConfigFile = function () {
  * @method config
  * @since 0.1.0
  * @static
- * @author zlbbq
+ * @author hujiabao
  * @param {String} name 配置项key。
  * @return {String} 配置值。如果不传递任何参数，EasyNode则会加载配置文件，但不会返回任何值。
  * @example
@@ -259,39 +283,39 @@ EasyNode.addConfigFile = function () {
  *      console.log(EasyNode.config('easynode.app.name'));                  //print : 'YourApp'
  */
 EasyNode.config = function (name, defaultVal) {
-        if (!EasyNode._config_cache) {
-                EasyNode._config_cache = {};
-                var cfgDirectory = EasyNode.real('');
-                EasyNode._config_files = EasyNode._config_files || ['etc/EasyNode.conf'];
-                EasyNode._config_files.forEach(function (v) {
-                        var file = path.join(cfgDirectory, v);
-                        var cfg = fs.readFileSync(file);
-                        cfg = cfg.toString().split('\n');
-                        cfg.forEach(function (c) {
-                                if (c && c[0] != '#') {          //#is a comment flag
-                                        c = c.split('=');
-                                        c[0] = c[0] && _trim(c[0]);
-                                        c[1] = c[1] && _trim(c[1]);
-                                        for(var i = 2;i<c.length;i++) {
-                                                c[1] += '=' + c[i];
-                                        }
-                                        if (c[0]) {
-                                                if (EasyNode._config_cache[c[0]] !== undefined) {
-                                                        console.warn(`***Warning : Duplicate config item [${c[0]}], value [${c[1]}] at [${file}] overwrote others.`);
-                                                }
-                                                EasyNode._config_cache[c[0]] = c[1];
-                                        }
-                                }
-                        });
-                });
-        }
-        if (typeof name == 'string') {
-                var v = EasyNode._config_cache[name];
-                //command line argument is able to overwrite EasyNode.conf configuration
-                var clv = EasyNode.arg(name);
-                clv = clv ? clv : v;
-                return clv || defaultVal;
-        }
+    if (!EasyNode._config_cache) {
+        EasyNode._config_cache = {};
+        var cfgDirectory = EasyNode.real('');
+        EasyNode._config_files = EasyNode._config_files || ['etc/EasyNode.conf'];
+        EasyNode._config_files.forEach(function (v) {
+            var file = path.join(cfgDirectory, v);
+            var cfg = fs.readFileSync(file);
+            cfg = cfg.toString().split('\n');
+            cfg.forEach(function (c) {
+                if (c && c[0] != '#') {          //#is a comment flag
+                    c = c.split('=');
+                    c[0] = c[0] && _trim(c[0]);
+                    c[1] = c[1] && _trim(c[1]);
+                    for(var i = 2;i<c.length;i++) {
+                        c[1] += '=' + c[i];
+                    }
+                    if (c[0]) {
+                        if (EasyNode._config_cache[c[0]] !== undefined) {
+                            console.warn(`***Warning : Duplicate config item [${c[0]}], value [${c[1]}] at [${file}] overwrote others.`);
+                        }
+                        EasyNode._config_cache[c[0]] = c[1];
+                    }
+                }
+            });
+        });
+    }
+    if (typeof name == 'string') {
+        var v = EasyNode._config_cache[name];
+        //command line argument is able to overwrite EasyNode.conf configuration
+        var clv = EasyNode.arg(name);
+        clv = clv ? clv : v;
+        return clv || defaultVal;
+    }
 };
 
 /**
@@ -300,67 +324,67 @@ EasyNode.config = function (name, defaultVal) {
  * @method i18n
  * @since 0.1.0
  * @static
- * @author zlbbq
+ * @author hujiabao
  * @param {String} name 国际化字符串配置项key。
  * @param {String} prefix 如果传递此值，请始终传递__filename，__filename会被转成namespace(file) + '.' + name;
  * @return {String} 配置值。如果不传递任何参数，EasyNode则会加载国际化配置文件，但不会返回任何值。
  */
 EasyNode.i18n = function (name, prefix = '') {
-        if (prefix) {
-                name = EasyNode.namespace(prefix) + '.' + name;
-        }
-        if (!EasyNode._i18n_cache) {
-                EasyNode._i18n_cache = {};
-                EasyNode._i18n_folders = EasyNode._i18n_folders || ['etc/i18n'];
-                EasyNode._i18n_folders.forEach(v => {
-                        var cfgDirectory = EasyNode.real(v);
-                        var i18nFile = (EasyNode._locale || 'zh_CN') + '.conf';
-                        var file = path.join(cfgDirectory, i18nFile);
-                        var cfg = fs.readFileSync(file);
-                        cfg = cfg.toString().split('\n');
-                        cfg.forEach(function (c) {
-                                if (c && c[0] != '#') {          //#is a comment flag
-                                        c = c.split('=');
-                                        c[0] = c[0] && _trim(c[0]);
-                                        c[1] = c[1] && _trim(c[1]);
-                                        if (c[0]) {
-                                                if (EasyNode._i18n_cache[c[0]] !== undefined) {
-                                                        console.warn(`***Warning : Duplicate config item [${c[0]}], value [${c[1]}] at [${file}] overwrote others.`);
-                                                }
-                                                EasyNode._i18n_cache[c[0]] = c[1];
-                                        }
-                                }
-                        });
-                });
-        }
-        if (typeof name == 'string') {
-                var v = EasyNode._i18n_cache[name];
-                return v || name;
-        }
+    if (prefix) {
+        name = EasyNode.namespace(prefix) + '.' + name;
+    }
+    if (!EasyNode._i18n_cache) {
+        EasyNode._i18n_cache = {};
+        EasyNode._i18n_folders = EasyNode._i18n_folders || ['etc/i18n'];
+        EasyNode._i18n_folders.forEach(v => {
+            var cfgDirectory = EasyNode.real(v);
+            var i18nFile = (EasyNode._locale || 'zh_CN') + '.conf';
+            var file = path.join(cfgDirectory, i18nFile);
+            var cfg = fs.readFileSync(file);
+            cfg = cfg.toString().split('\n');
+            cfg.forEach(function (c) {
+                if (c && c[0] != '#') {          //#is a comment flag
+                    c = c.split('=');
+                    c[0] = c[0] && _trim(c[0]);
+                    c[1] = c[1] && _trim(c[1]);
+                    if (c[0]) {
+                        if (EasyNode._i18n_cache[c[0]] !== undefined) {
+                            console.warn(`***Warning : Duplicate config item [${c[0]}], value [${c[1]}] at [${file}] overwrote others.`);
+                        }
+                        EasyNode._i18n_cache[c[0]] = c[1];
+                    }
+                }
+            });
+        });
+    }
+    if (typeof name == 'string') {
+        var v = EasyNode._i18n_cache[name];
+        return v || name;
+    }
 };
 
 EasyNode.addi18nDirectory = function () {
-        //清除i18n缓存
-        EasyNode._i18n_cache = null;
-        if (!EasyNode._i18n_folders) {
-                EasyNode._i18n_folders = ['etc/i18n'];
+    //清除i18n缓存
+    EasyNode._i18n_cache = null;
+    if (!EasyNode._i18n_folders) {
+        EasyNode._i18n_folders = ['etc/i18n'];
+    }
+    var arr = _.toArray(arguments);
+    arr.forEach(function (v) {
+        if (_.isString(v)) {
+            var folder = EasyNode.real(v);
+            if (!fs.existsSync(folder)) {
+                throw new Error(`Can not found i18n folder [${folder}]`);
+            }
+            EasyNode._i18n_folders.push(v);
         }
-        var arr = _.toArray(arguments);
-        arr.forEach(function (v) {
-                if (_.isString(v)) {
-                        var folder = EasyNode.real(v);
-                        if (!fs.existsSync(folder)) {
-                                throw new Error(`Can not found i18n folder [${folder}]`);
-                        }
-                        EasyNode._i18n_folders.push(v);
-                }
-                else if (_.isArray(v)) {
-                        EasyNode.addi18nDirectory.apply(null, v);
-                }
-                else {
-                        throw new TypeError('Invalid arguments!');
-                }
-        });
+        else if (_.isArray(v)) {
+            EasyNode.addi18nDirectory.apply(null, v);
+        }
+        else {
+            throw new TypeError('Invalid arguments!');
+        }
+    });
 };
 
 /**
@@ -370,11 +394,11 @@ EasyNode.addi18nDirectory = function () {
  * @method setLocale
  * @since 0.1.0
  * @static
- * @author zlbbq
+ * @author hujiabao
  * @param {String} locale 地区字符串。
  */
 EasyNode.setLocale = function (locale = 'zh_CN') {
-        EasyNode._locale = locale
+    EasyNode._locale = locale
 };
 /**
  * 获取i18n Locale，系统默认'zh_CN'，可通过启动参数--locale指定地区字符串
@@ -383,10 +407,10 @@ EasyNode.setLocale = function (locale = 'zh_CN') {
  * @method getLocale
  * @since 0.1.0
  * @static
- * @author zlbbq
+ * @author hujiabao
  */
 EasyNode.getLocale = function () {
-        return EasyNode._locale || EasyNode.arg('locale') || 'zh_CN';
+    return EasyNode._locale || EasyNode.arg('locale') || 'zh_CN';
 };
 
 /**
@@ -394,7 +418,7 @@ EasyNode.getLocale = function () {
  *
  * @method namespace
  * @since 0.1.0
- * @author zlbbq
+ * @author hujiabao
  * @static
  * @param {String} name 建议在源码文件中使用__filename或__dirname。
  * @return {String} 命名空间名称或全类名。
@@ -407,10 +431,10 @@ EasyNode.getLocale = function () {
  */
 
 EasyNode.namespace = function (name) {
-        assert(typeof name == 'string', 'Invalid name, need a String');
-        assert(name.match(/.*\/src\/.*/), 'Source code is not in src folder');
-        name = name.replace(/\.js/, '').replace(/^.*\/src\//gm, '');
-        return name.replace(/\//gm, '.');
+    assert(typeof name == 'string', 'Invalid name, need a String');
+    assert(name.match(/.*\/src\/.*/), 'Source code is not in src folder');
+    name = name.replace(/\.js/, '').replace(/^.*\/src\//gm, '');
+    return name.replace(/\//gm, '.');
 };
 
 /**
@@ -418,7 +442,7 @@ EasyNode.namespace = function (name) {
  *
  * @method using
  * @since 0.1.0
- * @author zlbbq
+ * @author hujiabao
  * @static
  * @param {String} name 全类名或命名空间名。
  * @param {boolean} throwError 是否在类或命名空间未找到时抛出异常，默认为true，当throwError为false时，如果没有找到相应的类或命名空间则返回null
@@ -440,97 +464,97 @@ EasyNode.namespace = function (name) {
  *      ns.Logger.getLogger().info('Hello, EasyNode');
  */
 EasyNode.using = function (name, throwError = true) {
-        if (!EasyNode._ns_resolved) {
-                _initNamespaces();
+    if (!EasyNode._ns_resolved) {
+        _initNamespaces();
+    }
+    if (typeof name == 'string') {
+        var oName = name;
+        var ns = _getNamespace(name);
+        if (!EasyNode._using_cache) {
+            EasyNode._using_cache = {};
         }
-        if (typeof name == 'string') {
-                var oName = name;
-                var ns = _getNamespace(name);
-                if (!EasyNode._using_cache) {
-                        EasyNode._using_cache = {};
+        if (EasyNode._using_cache[name]) {
+            return EasyNode._using_cache[name];
+        }
+        name = name.replace(/\./gm, '/');
+        if (name.match(/\/\*$/)) {
+            name = name.replace(/\/\*$/, '');
+            var folder;
+            var found = [];
+            EasyNode._src_folders.forEach(function (src) {
+                var file = path.join(EasyNode.real(src), name);
+                if (fs.existsSync(file)) {
+                    var fstat = fs.statSync(file);
+                    if (fstat.isDirectory()) {
+                        found.push(`[${oName}] was FOUND : [${file}]`);
+                        if (!folder) {
+                            folder = file;
+                        }
+                    }
                 }
-                if (EasyNode._using_cache[name]) {
-                        return EasyNode._using_cache[name];
-                }
-                name = name.replace(/\./gm, '/');
-                if (name.match(/\/\*$/)) {
-                        name = name.replace(/\/\*$/, '');
-                        var folder;
-                        var found = [];
-                        EasyNode._src_folders.forEach(function (src) {
-                                var file = path.join(EasyNode.real(src), name);
-                                if (fs.existsSync(file)) {
-                                        var fstat = fs.statSync(file);
-                                        if (fstat.isDirectory()) {
-                                                found.push(`[${oName}] was FOUND : [${file}]`);
-                                                if (!folder) {
-                                                        folder = file;
-                                                }
-                                        }
-                                }
-                        });
-                        if (found.length > 1) {
-                                found = found.join('\n');
-                                console.warn(`***Warning: Ambiguous resource [${oName}] and the FIRST one was returned\n${found}`);
-                        }
-                        if (folder) {
-                                var files = fs.readdirSync(folder);
-                                var o = {};
-                                files.forEach(function (f) {
-                                        if (f.match(/\.js$/)) {
-                                                f = f.replace(/\.js$/, '');
-                                                var className = f;
-                                                o[f] = require(path.join(folder, f));
-                                                ns[className] = o[f];                                    //inject into namespace
-                                        }
-                                });
-                                EasyNode._using_cache[oName] = o;
-                                return o;
-                        }
-                        else {
-                                if (throwError !== false) {
-                                        throw new Error(`Resource [${oName}] not found!`);
-                                }
-                                else {
-                                        return null;
-                                }
-                        }
+            });
+            if (found.length > 1) {
+                found = found.join('\n');
+                console.warn(`***Warning: Ambiguous resource [${oName}] and the FIRST one was returned\n${found}`);
+            }
+            if (folder) {
+                var files = fs.readdirSync(folder);
+                var o = {};
+                files.forEach(function (f) {
+                    if (f.match(/\.js$/)) {
+                        f = f.replace(/\.js$/, '');
+                        var className = f;
+                        o[f] = require(path.join(folder, f));
+                        ns[className] = o[f];                                    //inject into namespace
+                    }
+                });
+                EasyNode._using_cache[oName] = o;
+                return o;
+            }
+            else {
+                if (throwError !== false) {
+                    throw new Error(`Resource [${oName}] not found!`);
                 }
                 else {
-                        var o;
-                        var f;
-                        var found = [];
-                        EasyNode._src_folders.forEach(function (src) {
-                                var file = path.join(EasyNode.real(src), name + '.js');
-                                if (fs.existsSync(file)) {
-                                        var fstat = fs.statSync(file);
-                                        if (fstat.isFile()) {
-                                                found.push(`[${oName}] was FOUND : [${file}]`);
-                                                if (!o) {
-                                                        o = require(file);
-                                                        f = file;
-                                                }
-                                        }
-                                }
-                        });
-                        if (found.length > 1) {
-                                found = found.join('\n');
-                                console.warn(`***Warning: Ambiguous resource [${oName}] and the FIRST one was returned\n${found}`);
-                        }
-                        if (!o) {
-                                if (throwError !== false) {
-                                        throw new Error(`Resource [${oName}] not found!`);
-                                }
-                                else {
-                                        return null;
-                                }
-                        }
-                        var className = oName.split('.').splice(-1);
-                        ns[className[0]] = o;                                                           //inject into namespace
-                        EasyNode._using_cache[oName] = o;
-                        return o;
+                    return null;
                 }
+            }
         }
+        else {
+            var o;
+            var f;
+            var found = [];
+            EasyNode._src_folders.forEach(function (src) {
+                var file = path.join(EasyNode.real(src), name + '.js');
+                if (fs.existsSync(file)) {
+                    var fstat = fs.statSync(file);
+                    if (fstat.isFile()) {
+                        found.push(`[${oName}] was FOUND : [${file}]`);
+                        if (!o) {
+                            o = require(file);
+                            f = file;
+                        }
+                    }
+                }
+            });
+            if (found.length > 1) {
+                found = found.join('\n');
+                console.warn(`***Warning: Ambiguous resource [${oName}] and the FIRST one was returned\n${found}`);
+            }
+            if (!o) {
+                if (throwError !== false) {
+                    throw new Error(`Resource [${oName}] not found!`);
+                }
+                else {
+                    return null;
+                }
+            }
+            var className = oName.split('.').splice(-1);
+            ns[className[0]] = o;                                                           //inject into namespace
+            EasyNode._using_cache[oName] = o;
+            return o;
+        }
+    }
 };
 
 /**
@@ -538,54 +562,54 @@ EasyNode.using = function (name, throwError = true) {
  *
  * @method namespace2Path
  * @since 0.1.0
- * @author zlbbq
+ * @author hujiabao
  * @async
  * @static
  * @param {String} namespace 命名空间或全类名。easynode.GenericObject
  * @throws {Error} 源码目录不存在。{TypeError} 参数非String类型。
  */
 EasyNode.namespace2Path = function (namespace) {
-        return function *() {
-                EasyNode._src_pathCache = EasyNode._src_pathCache || {};
-                if (EasyNode._src_pathCache[namespace]) {
-                        return EasyNode._src_pathCache[namespace];
-                }
-                var p = null;
-                var found = [];
-                for (var i = 0; i < EasyNode._src_folders.length; i++) {
-                        var src = EasyNode._src_folders[i];
-                        var path2NS = namespace.replace(/\./gm, '/') + '.js';
-                        var file = path.join(EasyNode.real(src), path2NS);
-                        if (yield cofs.exists(file)) {
-                                var fstat = yield cofs.stat(file);
-                                if (fstat.isFile()) {
-                                        found.push(`[${namespace}] was FOUND : [${file}]`);
-                                        if (!p) {
-                                                p = file;
-                                        }
-                                }
-                        }
-                        else {
-                                path2NS = namespace.replace(/\./gm, '/');
-                                file = path.join(EasyNode.real(src), path2NS);
-                                if (yield cofs.exists(file)) {
-                                        var fstat = yield cofs.stat(file);
-                                        if (fstat.isDirectory()) {
-                                                found.push(`[${namespace}] was FOUND : [${file}]`);
-                                                if (!p) {
-                                                        p = file;
-                                                }
-                                        }
-                                }
-                        }
-                }
-                if (found.length > 1) {
-                        found = found.join('\n');
-                        console.warn(`***Warning: Ambiguous resource [${namespace}] and the FIRST one was returned\n${found}`);
-                }
-                EasyNode._src_pathCache[namespace] = p;
-                return p;
+    return function *() {
+        EasyNode._src_pathCache = EasyNode._src_pathCache || {};
+        if (EasyNode._src_pathCache[namespace]) {
+            return EasyNode._src_pathCache[namespace];
         }
+        var p = null;
+        var found = [];
+        for (var i = 0; i < EasyNode._src_folders.length; i++) {
+            var src = EasyNode._src_folders[i];
+            var path2NS = namespace.replace(/\./gm, '/') + '.js';
+            var file = path.join(EasyNode.real(src), path2NS);
+            if (yield cofs.exists(file)) {
+                var fstat = yield cofs.stat(file);
+                if (fstat.isFile()) {
+                    found.push(`[${namespace}] was FOUND : [${file}]`);
+                    if (!p) {
+                        p = file;
+                    }
+                }
+            }
+            else {
+                path2NS = namespace.replace(/\./gm, '/');
+                file = path.join(EasyNode.real(src), path2NS);
+                if (yield cofs.exists(file)) {
+                    var fstat = yield cofs.stat(file);
+                    if (fstat.isDirectory()) {
+                        found.push(`[${namespace}] was FOUND : [${file}]`);
+                        if (!p) {
+                            p = file;
+                        }
+                    }
+                }
+            }
+        }
+        if (found.length > 1) {
+            found = found.join('\n');
+            console.warn(`***Warning: Ambiguous resource [${namespace}] and the FIRST one was returned\n${found}`);
+        }
+        EasyNode._src_pathCache[namespace] = p;
+        return p;
+    }
 };
 
 /**
@@ -595,7 +619,7 @@ EasyNode.namespace2Path = function (namespace) {
  *
  * @method addSourceDirectory
  * @since 0.1.0
- * @author zlbbq
+ * @author hujiabao
  * @static
  * @param {String} ... 源码目录，相对于EasyNode根目录。可一次添加多个源码目录。
  * @throws {Error} 源码目录不存在。{TypeError} 参数非String类型。
@@ -604,29 +628,29 @@ EasyNode.namespace2Path = function (namespace) {
  *      EasyNode.addSourceDirectory('test', 'demo');                 // $EasyNode/test/,  $EasyNode/demo
  */
 EasyNode.addSourceDirectory = function () {
-        if (!EasyNode._src_folders) {
-                EasyNode._src_folders = ['src'];
+    if (!EasyNode._src_folders) {
+        EasyNode._src_folders = ['src'];
+    }
+    var arr = _.toArray(arguments);
+    EasyNode._ns_resolved = false;                                  //clear easynode namespace cache
+    arr.forEach(function (v) {
+        if (_.isString(v)) {
+            if(v) {
+                assert(S(v).endsWith('src'), `Invalid source folder, a source folder must ends with 'src'`);
+                var folder = EasyNode.real(v);
+                if (!fs.existsSync(folder)) {
+                    throw new Error(`Can not found source folder [${folder}]`);
+                }
+                EasyNode._src_folders.push(v);
+            }
         }
-        var arr = _.toArray(arguments);
-        EasyNode._ns_resolved = false;                                  //clear easynode namespace cache
-        arr.forEach(function (v) {
-                if (_.isString(v)) {
-                        if(v) {
-                                assert(S(v).endsWith('src'), `Invalid source folder, a source folder must ends with 'src'`);
-                                var folder = EasyNode.real(v);
-                                if (!fs.existsSync(folder)) {
-                                        throw new Error(`Can not found source folder [${folder}]`);
-                                }
-                                EasyNode._src_folders.push(v);
-                        }
-                }
-                else if (_.isArray(v)) {
-                        EasyNode.addSourceDirectory.apply(null, v);
-                }
-                else {
-                        throw new TypeError('Invalid arguments');
-                }
-        });
+        else if (_.isArray(v)) {
+            EasyNode.addSourceDirectory.apply(null, v);
+        }
+        else {
+            throw new TypeError('Invalid arguments');
+        }
+    });
 };
 
 /**
@@ -635,7 +659,7 @@ EasyNode.addSourceDirectory = function () {
  *
  * @method create
  * @since 0.1.0
- * @author zlbbq
+ * @author hujiabao
  * @static
  * @param {String} namespace 全类名
  * @example
@@ -644,8 +668,8 @@ EasyNode.addSourceDirectory = function () {
  *      console.log(plugin.toJSON());
  */
 EasyNode.create = function (namespace) {
-        var Clazz = using(namespace);
-        return new Clazz;
+    var Clazz = using(namespace);
+    return new Clazz;
 };
 
 /**
@@ -654,7 +678,7 @@ EasyNode.create = function (namespace) {
  * @method getLocalIP
  * @return {String} 本地IP地址
  * @since 0.1.0
- * @author zlbbq
+ * @author hujiabao
  * @static
  * @example
  *      require('../src/EasyNode.js');
@@ -662,23 +686,23 @@ EasyNode.create = function (namespace) {
  *      console.log(plugin.toJSON());
  */
 EasyNode.getLocalIP = function () {
-        if (EasyNode._localIP) {
-                return EasyNode._localIP;
-        }
-        var ip = EasyNode.config('easynode.local.ip');
-        if(!ip) {
-                var ifaces = os.networkInterfaces();
-                for (var iface in ifaces) {
-                        if (iface.match(/eth\d+/) && ifaces[iface].length > 0) {             //标准Linux网卡：eth0, eth1
-                                ip = ifaces[iface][0].address;
-                                if (ip) {
-                                        break;
-                                }
-                        }
+    if (EasyNode._localIP) {
+        return EasyNode._localIP;
+    }
+    var ip = EasyNode.config('easynode.local.ip');
+    if(!ip) {
+        var ifaces = os.networkInterfaces();
+        for (var iface in ifaces) {
+            if (iface.match(/eth\d+/) && ifaces[iface].length > 0) {             //标准Linux网卡：eth0, eth1
+                ip = ifaces[iface][0].address;
+                if (ip) {
+                    break;
                 }
-                ip = ip || '127.0.0.1';
+            }
         }
-        return EasyNode._localIP = ip;
+        ip = ip || '127.0.0.1';
+    }
+    return EasyNode._localIP = ip;
 };
 
 /**
@@ -692,7 +716,7 @@ EasyNode.getLocalIP = function () {
  *
  * @method using
  * @since 0.1.0
- * @author zlbbq
+ * @author hujiabao
  * @param {String} name 全类名或命名空间名。
  * @return {Object} 类，对象，或命名空间对象。
  * @example
