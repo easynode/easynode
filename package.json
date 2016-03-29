@@ -63,7 +63,7 @@
     "supertest": "^1.0.1",
     "xlsx": "^0.8.0"
   },
-  "main": "./src/EasyNode.js",
+  "main": "./lib/EasyNode.js",
   "bin": {
     "easynode": "./bin/main.js"
   },
