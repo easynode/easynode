@@ -7,7 +7,7 @@
 
 # first  compiled file or lib  as src
 
-mv src src.backup
+mv src srcbackup
 mv lib src
 
 npm init
@@ -15,7 +15,7 @@ npm init
 npm publish
 
 mv src lib
-mv src.backup src
+mv srcbackup src
 
 
 
