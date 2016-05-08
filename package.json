@@ -1,6 +1,6 @@
 {
   "name": "easynode",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "private": false,
   "description": "A fullstack javascript framework. Features : Plug-in, MVC, auto-modeling, Http(based on koa), TCP, Websocket, restful-like, SPA, seajs, Bootstrap.",
   "scripts": {
@@ -20,7 +20,7 @@
     "date-utils": "~1.2.16",
     "ejs": "~1.0.0",
     "generic-pool": "~2.2.0",
-    "iconv":"2.2.0",
+    "iconv": "2.2.0",
     "iconv-lite": "~0.4.11",
     "jade": "~1.10.0",
     "koa": "~0.20.0",
@@ -38,7 +38,7 @@
     "md5": "~2.0.0",
     "memcached": "~0.2.8",
     "mongodb": "~2.0.33",
-    "mqtt": "~1.2.0",
+    "mqtt": "~1.10.0",
     "mustache": "~2.0.0",
     "mysql": "~2.8.0",
     "nenos": "~1.0.1",
@@ -69,7 +69,7 @@
     "easynode": "./bin/main.js"
   },
   "directories": {
-    "test": "mocha --compilers js:babel-register"
+    "test": "test"
   },
   "repository": {
     "type": "git",
