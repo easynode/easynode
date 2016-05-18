@@ -48,3 +48,5 @@ netease/config/*.json
 
 #precompile.sh
 #publish.sh
+a.sh
+package.json-e
