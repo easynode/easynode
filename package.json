@@ -54,7 +54,6 @@
 
 
     "ByteBuffer": "^0.2.6",
-    "archiver": "^0.15.1",
     "babel-fs": "^1.0.5",
     "babel-runtime": "^5.8.20",
     "babelify": "^7.2.0",
