@@ -33,7 +33,6 @@
     "colors": "^1.1.2",
     "css-loader": "^0.23.1",
     "date-utils": "^1.2.21",
-    "easynode": "^0.1.20",
     "ejs": "^2.4.1",
     "es3ify-loader": "^0.2.0",
     "es5-shim": "^4.5.8",
