@@ -52,8 +52,8 @@
     "underscore": "~1.8.3",
     "watch-xdelta": "^1.8.1",
 
+
     "ByteBuffer": "^0.2.6",
-    "adm-zip": "0.4.7",
     "archiver": "^0.15.1",
     "babel-fs": "^1.0.5",
     "babel-runtime": "^5.8.20",
