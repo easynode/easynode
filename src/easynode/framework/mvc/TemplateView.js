@@ -1,13 +1,3 @@
-'use strict';
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 var assert = require('assert');
 var logger = using('easynode.framework.Logger').forFile(__filename);
 var GenericObject = using('easynode.GenericObject');
@@ -18,6 +8,7 @@ var path = require('path');
 var fs = require('fs');
 var S = require('string');
 var _ = require('underscore');
+
 
 (function () {
         var EASYNODE_VIEW_DIR = EasyNode.config('easynode.framework.mvc.view.dir', 'views/');
@@ -34,10 +25,7 @@ var _ = require('underscore');
          * @since 0.1.0
          * @author hujiabao
          * */
-
-        var TemplateView = function (_View) {
-                _inherits(TemplateView, _View);
-
+        class TemplateView extends View {
                 /**
                  * 构造函数。
                  *
@@ -48,121 +36,99 @@ var _ = require('underscore');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-
-                function TemplateView() {
-                        var tplFile = arguments.length <= 0 || arguments[0] === undefined ? "" : arguments[0];
-                        var engine = arguments.length <= 1 || arguments[1] === undefined ? DEFAULT_ENGINE : arguments[1];
-                        var dir = arguments.length <= 2 || arguments[2] === undefined ? EASYNODE_VIEW_DIR : arguments[2];
-
-                        _classCallCheck(this, TemplateView);
-
+                constructor(tplFile="", engine=DEFAULT_ENGINE, dir=EASYNODE_VIEW_DIR) {
+                        super();
                         //调用super()后再定义子类成员。
-
-                        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(TemplateView).call(this));
-
                         dir = dir || EASYNODE_VIEW_DIR;
-                        _this.tplFile = tplFile;
-                        engine = _this.getEngine(tplFile);
-                        _this.engine = engine;
-                        _this.dir = dir;
-                        return _this;
+                        this.tplFile = tplFile;
+                        engine = this.getEngine(tplFile);
+                        this.engine = engine;
+                        this.dir = dir;
                 }
 
-                _createClass(TemplateView, [{
-                        key: 'getEngine',
-                        value: function getEngine(tplFile) {
-                                var engine = DEFAULT_ENGINE;
-                                if (this.tplFile.match(/\.ejs$/)) {
-                                        engine = TemplateView.ENGINE_EJS;
-                                } else if (this.tplFile.match(/\.mst$/)) {
-                                        engine = TemplateView.ENGINE_MUSTACHE;
-                                } else if (this.tplFile.match(/\.jade$/)) {
-                                        engine = TemplateView.ENGINE_MUSTACHE;
-                                }
-                                return engine;
+                getEngine(tplFile) {
+                        var engine = DEFAULT_ENGINE;
+                        if(this.tplFile.match(/\.ejs$/)) {
+                                engine = TemplateView.ENGINE_EJS;
                         }
-                }, {
-                        key: 'getContentType',
-                        value: function getContentType() {
-                                return 'html';
+                        else if(this.tplFile.match(/\.mst$/)) {
+                                engine = TemplateView.ENGINE_MUSTACHE;
                         }
-                }, {
-                        key: 'render',
-                        value: function render(actionResult) {
-                                var opts = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+                        else if(this.tplFile.match(/\.jade$/)) {
+                                engine = TemplateView.ENGINE_MUSTACHE;
+                        }
+                        return engine;
+                }
 
-                                var tpl = opts.tplFile || this.tplFile;
-                                var engine = opts.engine || this.engine;
-                                var oEngine = engine;
-                                this.engine = engine = this.getEngine(tpl);
-                                assert(tpl && typeof tpl == 'string', 'Invalid template file name');
-                                var tplContent = _cachedTpl[tpl];
-                                if (!tplContent) {
-                                        var realTplFile = tpl;
-                                        if (this.dir) {
-                                                realTplFile = path.join(EasyNode.real(this.dir), tpl);
-                                        }
-                                        if (!fs.existsSync(realTplFile)) {
-                                                throw new Error('Can not find template file [' + realTplFile + ']');
-                                        }
-                                        tplContent = fs.readFileSync(realTplFile).toString();
-                                        if (ENABLE_TEMPLATE_CACHE) {
-                                                _cachedTpl[tpl] = tplContent;
-                                        }
-                                }
-                                switch (engine) {
-                                        case TemplateView.ENGINE_MUSTACHE:
-                                                {
-                                                        return this._renderMustache(actionResult, tplContent);
-                                                }
-                                        case TemplateView.ENGINE_EJS:
-                                                {
-                                                        return this._renderEJS(actionResult, tplContent);
-                                                }
-                                        case TemplateView.ENGINE_JADE:
-                                                {
-                                                        return this._renderJade(actionResult, tplContent);
-                                                }
-                                        default:
-                                                {
-                                                        assert(opt && opt.renderer, 'Engine [' + oEngine + '] is not supported by default, need a renderer to render ActionResult');
-                                                        return this._render(actionResult, tplContent, opt.renderer);
-                                                }
-                                }
-                        }
-                }, {
-                        key: '_renderMustache',
-                        value: function _renderMustache(actionResult, tplContent) {
-                                return new MustacheTemplateViewRenderer().render(actionResult, tplContent);
-                        }
-                }, {
-                        key: '_renderEJS',
-                        value: function _renderEJS(actionResult, tplContent) {
-                                return new EJSTemplateViewRenderer().render(actionResult, tplContent);
-                        }
-                }, {
-                        key: '_renderJade',
-                        value: function _renderJade(actionResult, tplContent) {
-                                return new JadeTemplateViewRenderer().render(actionResult, tplContent);
-                        }
-                }, {
-                        key: '_render',
-                        value: function _render(actionResult, tplContent, renderer) {
-                                if (typeof renderer == 'string') {
-                                        var Renderer = using(renderer);
-                                        renderer = new Renderer();
-                                }
-                                return renderer.render(actionResult, tplContent);
-                        }
-                }, {
-                        key: 'getClassName',
-                        value: function getClassName() {
-                                return EasyNode.namespace(__filename);
-                        }
-                }]);
+                getContentType () {
+                        return 'html';
+                }
 
-                return TemplateView;
-        }(View);
+                render (actionResult, opts={}) {
+                        var tpl = opts.tplFile || this.tplFile;
+                        var engine = opts.engine || this.engine;
+                        var oEngine = engine;
+                        this.engine = engine = this.getEngine(tpl);
+                        assert(tpl && typeof tpl == 'string', 'Invalid template file name');
+                        var tplContent = _cachedTpl[tpl];
+                        if(!tplContent) {
+                                var realTplFile = tpl;
+                                if(this.dir) {
+                                        realTplFile = path.join(EasyNode.real(this.dir), tpl);
+                                }
+                                if(!fs.existsSync(realTplFile)) {
+                                        throw new Error(`Can not find template file [${realTplFile}]`);
+                                }
+                                tplContent = fs.readFileSync(realTplFile).toString();
+                                if(ENABLE_TEMPLATE_CACHE) {
+                                        _cachedTpl[tpl] = tplContent;
+                                }
+                        }
+                        switch(engine) {
+                                case TemplateView.ENGINE_MUSTACHE :
+                                {
+                                        return this._renderMustache(actionResult, tplContent);
+                                }
+                                case TemplateView.ENGINE_EJS:
+                                {
+                                        return this._renderEJS(actionResult, tplContent);
+                                }
+                                case TemplateView.ENGINE_JADE:
+                                {
+                                        return this._renderJade(actionResult, tplContent);
+                                }
+                                default :
+                                {
+                                        assert(opt && opt.renderer, `Engine [${oEngine}] is not supported by default, need a renderer to render ActionResult`);
+                                        return this._render(actionResult, tplContent, opt.renderer);
+                                }
+                        }
+                }
+
+                _renderMustache(actionResult, tplContent) {
+                        return new MustacheTemplateViewRenderer().render(actionResult, tplContent);
+                }
+
+                _renderEJS(actionResult, tplContent) {
+                        return new EJSTemplateViewRenderer().render(actionResult, tplContent);
+                }
+
+                _renderJade(actionResult, tplContent) {
+                        return new JadeTemplateViewRenderer().render(actionResult, tplContent);
+                }
+
+                _render(actionResult, tplContent, renderer) {
+                        if(typeof renderer == 'string') {
+                                var Renderer = using(renderer);
+                                renderer = new Renderer();
+                        }
+                        return renderer.render(actionResult, tplContent);
+                }
+
+                getClassName() {
+                        return EasyNode.namespace(__filename);
+                }
+        }
 
         /**
          *  mustache模板引擎，适配模板文件后缀.mst
@@ -174,8 +140,6 @@ var _ = require('underscore');
          *  @since 0.1.0
          *  @author hujiabao
          * */
-
-
         TemplateView.ENGINE_MUSTACHE = 'mustache';
 
         /**
