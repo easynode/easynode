@@ -1,6 +1,6 @@
 {
   "name": "easynode",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "private": false,
   "description": "A fullstack javascript framework. Features : Plug-in, MVC, auto-modeling, Http(based on koa), TCP, Websocket, restful-like, SPA, seajs, Bootstrap.",
   "scripts": {
@@ -55,7 +55,7 @@
     "koa-generic-session": "^1.10.2",
     "koa-memcached": "^0.1.2",
     "koa-qs": "^2.0.0",
-    "koa-redis": "^2.0.1",
+    "koa-redis": "~2.0.1",
     "koa-route": "^2.4.2",
     "koa-static": "^2.0.0",
     "lodash": "^4.12.0",
