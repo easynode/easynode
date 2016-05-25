@@ -37,7 +37,7 @@
     "ejs": "^2.4.1",
     "es3ify-loader": "^0.2.0",
     "es5-shim": "^4.5.8",
-    "eslint-plugin-react":"^5.1.1",
+    "eslint-plugin-react": "^5.1.1",
     "file-loader": "^0.8.5",
     "fstream": "^1.0.9",
     "generic-pool": "^2.4.2",
@@ -102,9 +102,7 @@
     "xmldom": "^0.1.22",
     "zip": "^1.2.0"
   },
-  "devDependencies": {
-
-  },
+  "devDependencies": {},
   "main": "./src/EasyNode.js",
   "bin": {
     "easynode": "./bin/main.js"
