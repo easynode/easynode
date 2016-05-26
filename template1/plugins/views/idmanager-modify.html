@@ -1,0 +1,38 @@
+<% include head.html %>
+
+<!-- Main Content -->
+<section class="content">
+    <div class="box box-success">
+        <div class="box-header">
+            <a href="/idmanager"><i class="fa fa-fw fa-chevron-left"></i>返回列表</a>
+            <h3 class="box-title">修改交互稿</h3>
+        </div>
+            <form role="form" action="/idmanager/<%= version.name %>/<%= version.version %>" enctype="multipart/form-data" method="post" data-parsley-validate target="z-idmanager-modify-iframe">
+                <div class="box-body">
+                <input type="hidden" name="_csrf" value=""/>
+                <div class="form-group">
+                    <label for="">产品名称:</label>
+                    <input type="text" class="form-control"  name="name" value=<%= version.name %> data-parsley-required="true" data-parsley-trigger="keyup" data-parsley-required-message="产品名称不能为空"/>
+                </div>
+                <div class="form-group">
+                    <label for="">产品版本号:</label>
+                    <input type="text" class="form-control"  name="version" value=<%= version.version %> data-parsley-required="true" data-parsley-trigger="keyup" data-parsley-required-message="产品版本号不能为空"/>
+                </div>
+                <div class="form-group">
+                    <label for="">产品设计人:</label>
+                    <input type="text" class="form-control" name="designer" value=<%= version.designer %> data-parsley-required="true" data-parsley-trigger="keyup" data-parsley-required-message="产品设计人不能为空"/>
+                </div>
+                <div class="form-group">
+                    <label for="">选择交互稿文件:</label>
+                    <input type="file" placeholder="" name="idpath" accept="application/zip" required/>
+                </div>
+            </div>
+            <div class="box-footer">
+                <button type="submit" class="btn btn-primary">提交</button>
+            </div>
+        </form>
+        <iframe id="z-idmanager-modify-direct" name="z-idmanager-modify-iframe" style="display:none;"></iframe>
+    </div>
+</section>
+
+<% include footer.html %>

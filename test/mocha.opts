@@ -1,0 +1,7 @@
+--reporter spec
+--recursive
+--growl
+--compilers js:babel/register
+--require co-mocha
+-t 30000
+

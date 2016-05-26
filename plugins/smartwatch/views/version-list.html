@@ -1,0 +1,47 @@
+<% include head.html %>
+
+<!-- Main Content -->
+<section class="content">
+    <div class="box box-success">
+        <div class="box-header">
+            <h3 class="box-title">升级包列表</h3>
+        </div>
+        <!-- .box-header -->
+        <div class="box-body table-responsive no-padding">
+            <table class="table table-hove">
+                <tbod>
+                    <tr>
+                        <th>原始版本</th>
+                        <th>目标版本</th>
+                        <th>程序包大小</th>
+                        <th>程序包MD5</th>
+                        <th>程序包URL</th>
+                    </tr>
+                    <% if( listRet && listRet.data.length ) { %>
+                    <% listRet.data.forEach(function(package,index){ %>
+                    <tr>
+                        <td><%= package.srcpkgid %></td>
+                        <td><%= package.topkgid %></td>
+                        <td><%= package.size %></td>
+                        <td><%= package.md5 %></td>
+                        <td><%= package.url %></td>
+                    </tr>
+                    <% }) %>
+                    <%  } %>
+                </tbod>
+            </table>
+        </div>
+        <div class="box-footer clearfix">
+            <ul class="pagination pagination-sm no-margin pull-right">
+                <li><a href="<% if(listRet && listRet.page == 1){ %>javascript:void(0) <% } else { %>/version/<%= listRet.page-1 %><% } %>">《</a></li>
+                <% for(var j=1; j <= listRet.pages; j++ ){ %>
+                <li><a href="<% if(listRet && listRet.page == j ){ %>javascript:void(0) <% } else { %>/version/<%= j %><% } %>"><%= j %></a></li>
+                <% } %>
+                <li><a href="<% if(listRet && listRet.pages == listRet.page) { %>javascript:void(0) <% } else {%>/version/<%= (parseInt(listRet.page)+1)%><% } %>">》</a></li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- rows, pages, page, rpp, data -->
+<% include footer.html %>

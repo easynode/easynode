@@ -1,0 +1,34 @@
+server {
+listen       80;
+server_name  localhost;
+
+ssi on;
+#ssi_silent_errors on;
+#ssi_types text/shtml;
+
+location / {
+root   {{{rootDir}}};
+index  index.html index.htm;
+}
+
+{{{virtualPath}}}
+
+location /json {
+proxy_pass   http://{{{serviceIP}}}:{{{servicePort}}}/json;
+proxy_set_header X-Real-IP $remote_addr;
+}
+
+location /action/ {
+proxy_pass   http://{{{serviceIP}}}:{{{servicePort}}}/action/;
+proxy_set_header X-Real-IP $remote_addr;
+}
+
+location /upload {
+proxy_pass   http://{{{serviceIP}}}:{{{servicePort}}}/upload;
+proxy_set_header X-Real-IP $remote_addr;
+client_max_body_size    10M;
+}
+
+error_page  404                       /404.html;
+error_page  500 502 503 504  /50x.html;
+}

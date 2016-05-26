@@ -1,0 +1,40 @@
+{
+  "version":"0.0.3",
+  "issuer":"Sean",
+  "email":"sean@corp.netease.com",
+  "programs":[
+    {
+      "type":1,
+      "describe": "BLE App,fix bug, or new feature list",
+      "size":10240,
+      "md5":"1234567890098765412345678900987654",
+      "version":"0.1",
+      "disablediff":0,
+      "blocksize":10240,
+      "order":1,
+      "email":"sea@corp.netease.com"
+    },
+    {
+      "type":1,
+      "describe": "BLE SW,fix bug, or new feature list",
+      "size":10240,
+      "md5":"1234567890098765412345678900987654",
+      "version":"0.1",
+      "disablediff":0,
+      "blocksize":10240,
+      "order":2,
+      "email":"sea@corp.netease.com"
+    },
+    {
+      "type":3,
+      "describe": "MCU APP,fix bug, or new feature list",
+      "size":10240,
+      "md5":"1234567890098765412345678900987654",
+      "version":"0.1",
+      "disablediff":0,
+      "blocksize":10240,
+      "order":3,
+      "email":"sea@corp.netease.com"
+    }
+  ]
+}

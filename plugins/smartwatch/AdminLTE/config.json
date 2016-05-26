@@ -1,0 +1,11 @@
+{
+  "host": "218.205.113.98",
+  "port": 3306,
+  "user": "scard_pro",
+  "password": "scard_pro",
+  "database": "scard_pro",
+  "acquireTimeout": "10000",
+  "waitForConnections" : true,
+  "connectionLimit" :  10,
+  "queueLimit" : 10000
+}
