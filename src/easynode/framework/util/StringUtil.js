@@ -4,6 +4,7 @@ var GenericObject = using('easynode.GenericObject');
 var mustache = require('mustache');
 var _ = require('underscore');
 var Iconv = require('iconv').Iconv;
+const crypto = require('crypto');
 
 (function () {
         /**
@@ -128,6 +129,54 @@ var Iconv = require('iconv').Iconv;
                         }
                         return i;
                 }
+
+                /*
+                 * 加密数据
+                 *
+                 * @method encryptAdv
+                 * @param {Buffer|String['binary','hex','utf8','ascii']} 原始数据
+                 * @return {Buffer} 加密数据
+                 * @since 0.1.0
+                 * @author hujiabao
+                 * */
+                static encryptAdv(data) {
+                        var key = 'ABCDE';
+                        var iv = 'ABCDE' ;
+                        var clearEncoding = 'utf8';
+                        var cipherEncoding = 'base64';
+                        var cipherChunks = [];
+                        var cipher = crypto.createCipherivAdv('aes-128-cbc', key, iv);
+                        cipher.setAutoPadding(true);
+
+                        var enc = cipher.update(data, clearEncoding, cipherEncoding);
+                        enc += cipher.final(cipherEncoding);
+
+                        return enc;
+                }
+
+                /*
+                 * 解密数据
+                 *
+                 * @method decryptAdv
+                 * @param {Buffer|String['binary','hex','utf8','ascii']} 加密数据
+                 * @return {Buffer} 原始数据
+                 * @since 0.1.0
+                 * @author hujiabao
+                * */
+                static decryptAdv(data) {
+                        var key = 'ABCDE';
+                        var iv = 'ABCDE' ;
+                        var clearEncoding = 'binary';
+                        var cipherEncoding = 'base64';
+                        var decipher = crypto.createDecipherivAdv('aes-128-cbc', key, iv);
+                        decipher.setAutoPadding(true);
+
+                        var enc = decipher.update(data, cipherEncoding, clearEncoding);
+                        enc += decipher.final(clearEncoding);
+
+                        return enc;
+                }
+
 
                 /**
                  * 返回开关状态
