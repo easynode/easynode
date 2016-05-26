@@ -140,8 +140,8 @@ const crypto = require('crypto');
                  * @author hujiabao
                  * */
                 static encryptAdv(data) {
-                        var key = 'ABCDE';
-                        var iv = '0123456789ABCDEF' ;
+                        var key = 'XRDRUE7FFCRE1T7I';
+                        var iv = '7VU2H0LLBG8373LK' ;
                         var clearEncoding = 'utf8';
                         var cipherEncoding = 'base64';
                         var cipherChunks = [];
@@ -164,8 +164,8 @@ const crypto = require('crypto');
                  * @author hujiabao
                 * */
                 static decryptAdv(data) {
-                        var key = 'ABCDE';
-                        var iv = '0123456789ABCDEF' ;
+                        var key = 'XRDRUE7FFCRE1T7I';
+                        var iv = '7VU2H0LLBG8373LK' ;
                         var clearEncoding = 'binary';
                         var cipherEncoding = 'base64';
                         var decipher = crypto.createDecipherivAdv('aes-128-cbc', key, iv);
