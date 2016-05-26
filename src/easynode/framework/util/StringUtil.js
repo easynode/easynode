@@ -141,7 +141,7 @@ const crypto = require('crypto');
                  * */
                 static encryptAdv(data) {
                         var key = 'ABCDE';
-                        var iv = 'ABCDE' ;
+                        var iv = '0123456789ABCDEF' ;
                         var clearEncoding = 'utf8';
                         var cipherEncoding = 'base64';
                         var cipherChunks = [];
@@ -165,7 +165,7 @@ const crypto = require('crypto');
                 * */
                 static decryptAdv(data) {
                         var key = 'ABCDE';
-                        var iv = 'ABCDE' ;
+                        var iv = '0123456789ABCDEF' ;
                         var clearEncoding = 'binary';
                         var cipherEncoding = 'base64';
                         var decipher = crypto.createDecipherivAdv('aes-128-cbc', key, iv);
