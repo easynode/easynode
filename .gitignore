@@ -50,3 +50,5 @@ netease/config/*.json
 #publish.sh
 a.sh
 package.json-e
+plugins/version.txt
+property.txt
