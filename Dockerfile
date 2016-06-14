@@ -25,7 +25,7 @@ RUN source $HOME/.bashrc && \
         npm install -g easynode-watch && \
     	npm install -g node-gyp && \
     	npm install -g babel-cli && \
-    	npm install apidoc -g && \
+    	npm install -g apidoc && \
     	npm install -g webpack &&\
     	npm install -g eslint && \
         npm install -g eslint-plugin-react && \

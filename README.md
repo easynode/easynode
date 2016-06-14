@@ -237,3 +237,29 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 [80]:	mailto:where@jed.is
 [81]:	mailto:foxandxss@gmail.com
 [82]:	mailto:liujingwei@gmail.com
+
+
+
+## Community
+
+* If you find bugs or have suggestions, please feel free to open [an issue](https://github.com/regularjs/regular/issues)
+
+* Ask any questions on [Stack Overflow](http://stackoverflow.com/questions/tagged/regularjs) with tag `regularjs`.
+
+* Social
+  1. twitter: follow the [@regularjs](https://twitter.com/regularjs).
+  1. gitter: talk on [![Gitter chat](https://badges.gitter.im/regularjs/regular.png)](https://gitter.im/regularjs/regular)
+  1. weibo: [@拴萝卜的棍子](http://weibo.com/luobolee)
+
+## Contribute
+
+__regularjs is still in heavily development__, and please help us with feedback. Contributing to this project is also recommended.
+
+* Please [open an issue](https://github.com/regularjs/regular/issues) before sending pull request,
+* if needed, add your testcase at `test/specs` folder. always make sure the `gulp test` is passed, and the `test/runner/index.html` is passed in every target browser (if a certain browser is not installed, list that in [gulpfile's karmaConfig](https://github.com/regularjs/regular/blob/master/gulpfile.js#L30))
+
+
+
+## LICENSE
+
+[MIT](https://github.com/regularjs/regular/blob/master/LICENSE).
