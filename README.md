@@ -17,7 +17,7 @@ Our general purpose is to code with a synchronized way but run in an asynchronou
 
 ### Class is the First-Citizen
 
-EasyNode follows the object oriented programming method. The first citizen is the class not the funciton.  all classes extend GenericObject.
+EasyNode follows the object oriented programming method. The first citizen is the class not the funciton.  all classes extend GenericObject. Below is the class template.
 
 ```
 var assert = require('assert');
@@ -57,22 +57,19 @@ var GenericObject = using('easynode.GenericObject');
 
 ## Namespace
 
-The src/netease/startwatch/backend directory, The organization structure of this directory is as similar as to organize in the Java programming language that the directory path as the namespace of the class. You can declare a class and create a object like below:
+The organization structure of this directory is as similar as to organize in the Java programming language that the directory path as the namespace of the class. You can declare a class and create a object like below:
 
 ```
 var Package = using('netease.smartwatch.backend.models.Package');
 var model = new Package();
 ```
-
 <br>
-<br>
-<img src="https://raw.githubusercontent.com/nhipster/nhipster.github.io/master/images/directory_structure.png" width="800"/>
-<br>
+<img src="https://raw.githubusercontent.com/nhipster/nhipster.github.io/master/images/namespace_example.png" width="800"/>
 <br>
 
 ## How can you develop with easynode?
 
-With the following references. you will're familiarize with the development process in easynode quickly. The details can been seen in the [EasyNode Home](https://easeynode.github.io)
+With the following references. you will're familiarize with the development process in easynode quickly. The details can been seen in the [EasyNode Home](https://easynode.github.io)
 
 ## Contributors
 
