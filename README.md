@@ -1,8 +1,8 @@
 # Introduction
 
-A framework for microservice written with es6 and integrated a light web service based on koa and a light tcp servic based on native socket. You can utilize all feature characters of ES6 in the framework.
+Easynode is a framework for microservice written with es6 and integrated a light web service based on koa and a light tcp servic based on native socket. You can utilize all feature characters of ES6 in the framework.
 
-# General Purpose
+## General Purpose
 
 Our general purpose is to code with a synchronized way but run in an asynchronous way  for the web project written Node.JS.
 
@@ -13,16 +13,66 @@ Our general purpose is to code with a synchronized way but run in an asynchronou
 <br>
 
 
-# code fragement
+## Code Fragement
 
+### Class is the First-Citizen
 
+EasyNode follows the object oriented programming method. The first citizen is the class not the funciton.  all classes extend GenericObject.
 
-## How can I develop with easynode?
-With the following references, you can quickly familiarize yourself with the easynode development process:
-* [Easynode documents][3]
+```
+var assert = require('assert');
+var logger = using('easynode.framework.Logger').forFile(__filename);
+var GenericObject = using('easynode.GenericObject');
 
-### Examples
+(function () {
+        /**
+         * Class ${NAME}
+         *
+         * @class #NAMESPACE#.${NAME}
+         * @extends easynode.GenericObject
+         * @since 0.1.0
+         * @author ${AUTHOR}
+         * */
+        class ${NAME} extends GenericObject {
+                /**
+                 * 构造函数。
+                 *
+                 * @method 构造函数
+                 * @since 0.1.0
+                 * @author ${AUTHOR}
+                 * */
+                constructor () {
+                        super();
+                        //调用super()后再定义子类成员。
+                }
 
+                getClassName () {
+                        return EasyNode.namespace(__filename);
+                }
+        }
+
+        module.exports = ${NAME};
+})();
+```
+
+## Namespace
+
+The src/netease/startwatch/backend directory, The organization structure of this directory is as similar as to organize in the Java programming language that the directory path as the namespace of the class. You can declare a class and create a object like below:
+
+```
+var Package = using('netease.smartwatch.backend.models.Package');
+var model = new Package();
+```
+
+<br>
+<br>
+<img src="https://raw.githubusercontent.com/nhipster/nhipster.github.io/master/images/directory_structure.png" width="800"/>
+<br>
+<br>
+
+## How can you develop with easynode?
+
+With the following references. you will're familiarize with the development process in easynode quickly. The details can been seen in the [EasyNode Home](https://easeynode.github.io)
 
 ## Contributors
 

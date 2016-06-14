@@ -9,7 +9,7 @@ var GenericObject = using('easynode.GenericObject');
          * @class #NAMESPACE#.${NAME}
          * @extends easynode.GenericObject
          * @since 0.1.0
-         * @author hujiabao
+         * @author ${AUTHOR}
          * */
         class ${NAME} extends GenericObject {
                 /**
@@ -17,7 +17,7 @@ var GenericObject = using('easynode.GenericObject');
                  *
                  * @method 构造函数
                  * @since 0.1.0
-                 * @author hujiabao
+                 * @author ${AUTHOR}
                  * */
                 constructor () {
                         super();
