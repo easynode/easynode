@@ -64,7 +64,7 @@ var Package = using('netease.smartwatch.backend.models.Package');
 var model = new Package();
 ```
 <br>
-<img src="https://raw.githubusercontent.com/nhipster/nhipster.github.io/master/images/namespace_example.png" width="800"/>
+<img src="https://raw.githubusercontent.com/nhipster/nhipster.github.io/master/images/directory_structure.png" width="800"/>
 <br>
 
 ## How can you develop with easynode?
