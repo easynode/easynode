@@ -1,12 +1,17 @@
 {
   "name": "easynode",
-  "version": "0.1.32",
+  "version": "0.1.33",
   "private": false,
-  "description": "A fullstack javascript framework. Features : Plug-in, MVC, auto-modeling, Http(based on koa), TCP, Websocket, restful-like, SPA, seajs, Bootstrap.",
+  "description": "Easynode is a framework for microservice written with es6 and integrated a light web service based on koa and a light tcp servic based on native socket. You can utilize all feature characters of ES6 in the framework.",
   "scripts": {
     "test": "mocha --compilers js:babel-register"
   },
-  "author": "hujiabao <hujb2000@163.com> (http://hujb2000.github.com)",
+  "author": ["hujiabao <hujb2000@163.com> (http://hujb2000.github.com)",
+  "contributors":[
+    "NetEase, Inc. (@NetEase)",
+    "hujb2000[hujb2000@163.com]",
+    "zlbbq[zlbbq@qq.com]"
+    ],
   "dependencies": {
     "ByteBuffer": "^0.2.6",
     "adm-zip": "^0.4.7",
@@ -112,7 +117,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hujb2000/easynode.git"
+    "url": "git+https://github.com/easynode/easynode.git"
   },
   "keywords": [
     "koa",
@@ -122,7 +127,7 @@
   ],
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/hujb2000/easynode/issues"
+    "url": "https://github.com/easynode/easynode/issues"
   },
-  "homepage": "https://github.com/hujb2000/easynode"
+  "homepage": "https://github.com/easynode/easynode"
 }

@@ -69,7 +69,7 @@ var model = new Package();
 
 ## How can you develop with easynode?
 
-With the following references. you will're familiarize with the development process in easynode quickly. The details can been seen in the [EasyNode Home](https://easynode.github.io)
+With the following references. you will're familiarize with the development process in easynode quickly. The details can been seen in the [EasyNode Home](https://easynode.github.io) and [All Examples](https://github.com/easynode/easynode-template/tree/master)
 
 ## Contributors
 
