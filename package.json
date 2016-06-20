@@ -6,7 +6,10 @@
   "scripts": {
     "test": "mocha --compilers js:babel-register"
   },
-  "author": ["hujiabao <hujb2000@163.com> (http://hujb2000.github.com)",
+  "author": [
+    "hujiabao <hujb2000@163.com> (http://hujb2000.github.com)",
+    "zlbbq[zlbbq@qq.com]"
+  ],
   "contributors":[
     "NetEase, Inc. (@NetEase)",
     "hujb2000[hujb2000@163.com]",
