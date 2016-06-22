@@ -43,7 +43,7 @@ var GenericObject = using('easynode.GenericObject');
                 constructor() {
                         super();
                         //调用super()后再定义子类成员。
-                        assert(_instance == null, 'easynode.Mixin is a singleton class,  use class static function Mixin.mix instead of instantiation');
+                        assert(_instance == null, 'easynode.Mixin is a singleton class, please use class static function Mixin.mix instead of instantiation');
                 }
 
                 getClassName () {
