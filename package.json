@@ -10,11 +10,11 @@
     "hujiabao <hujb2000@163.com> (http://hujb2000.github.com)",
     "zlbbq[zlbbq@qq.com]"
   ],
-  "contributors":[
+  "contributors": [
     "NetEase, Inc. (@NetEase)",
     "hujb2000[hujb2000@163.com]",
     "zlbbq[zlbbq@qq.com]"
-    ],
+  ],
   "dependencies": {
     "ByteBuffer": "^0.2.6",
     "adm-zip": "^0.4.7",
@@ -65,6 +65,7 @@
     "koa-generic-session": "^1.10.2",
     "koa-memcached": "^0.1.2",
     "koa-qs": "^2.0.0",
+    "koa-ratelimit": "^2.3.0",
     "koa-redis": "~2.0.1",
     "koa-route": "^2.4.2",
     "koa-static": "^2.0.0",

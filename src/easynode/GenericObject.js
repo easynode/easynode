@@ -34,131 +34,133 @@ var events = require("events");
          * @since 0.1.0
          * @author hujiabao
          * */
-         function GenericObject () {
-                this.setMaxListeners(EasyNode.arg('easynode.events.maxListeners') || 11);
+        class GenericObject extends events.EventEmitter {
+                constructor(){
+                        super();
+                        this.setMaxListeners(EasyNode.arg('easynode.events.maxListeners') || 11);
+                }
+
+                /**
+                 * emit函数的别名。参考：Node.js events.EventEmitter.emit()函数。
+                 *
+                 * @method trigger
+                 * @param {String} event 事件名称
+                 * @param {...} args 事件参数
+                 * @since 0.1.0
+                 * @author hujiabao
+                 * */
+                static trigger() {
+                        this.emit.apply(this, arguments);
+                }
+
+                /**
+                 * removeListener函数的别名。参考：Node.js events.EventEmitter.removeListener()函数。
+                 *
+                 * @method off
+                 * @param {String} event 事件名称
+                 * @param {Function} listener 事件监听器
+                 * @since 0.1.0
+                 * @author hujiabao
+                 * */
+                static off(event, listener) {
+                    this.removeListener(event, listener);
+                }
+
+
+                /**
+                 * 获取对象的字符串描述
+                 *
+                 * @method toString
+                 * @return {String} 对象的字符串描述
+                 * @since 0.1.0
+                 * @author hujiabao
+                 * */
+                static toString () {
+                    return '[object ' + this.getClassName() + ']';
+                }
+
+                /**
+                 * 获取对象的全类名
+                 * @method getClassName
+                 * @return {String} 对象的字符串描述
+                 * @since 0.1.0
+                 * @author hujiabao
+                 * */
+                static getClassName() {
+                    return EasyNode.namespace(__filename);
+                }
+
+                /**
+                 * 返回对象的JSON String表达式
+                 * @method toJSONString
+                 * @return {String} 对象的JSON字符串描述
+                 * @since 0.1.0
+                 * @author hujiabao
+                 * */
+                static toJSONString() {
+                    //return util.inspect(this, {depth: EasyNode.config('easynode.inspect.depth')});
+                    return JSON.stringify(this.toJSON());
+                }
+
+                /**
+                 * 返回对象的JSON对象，即：Notation
+                 * @method toJSON
+                 * @return {Object} 对象的Notation
+                 * @since 0.1.0
+                 * @author hujiabao
+                 * */
+                static toJSON() {
+                    var o = {};
+                    for(var attr in this) {
+                            var val = this[attr];
+                            if(attr[0] != '_' && typeof val != 'function') {
+                                    if(val!==null&&typeof val == 'object') {
+                                            if(typeof val.toJSON == 'function') {
+                                                    o[attr] = val.toJSON();
+                                            }
+                                            else {
+                                                    o[attr] = val;
+                                            }
+                                    }
+                                    else {
+                                            o[attr] = val;
+                                    }
+                            }
+                    }
+                    return o;
+                 }
+
+                /**
+                 * 判定对象是否属于某个类型
+                 * @method is
+                 * @param {String} namespace 全类名
+                 * @return {boolean} 对象是否为某个类的实例
+                 * @since 0.1.0
+                 * @author hujiabao
+                 * @example
+                 *
+                 * var ExpressServer = using('easynode.framework.server.http.ExpressServer');
+                 * new ExpressServer(3010).is('easynode.framework.server.http.ExpressServer');  //true
+                 * */
+                static is(namespace) {
+                    return this.getClassName() == namespace;
+                }
+
+                /**
+                 * 无操作函数。可链式调用。
+                 *
+                 * @method noop
+                 * @return this
+                 * @since 0.1.0
+                 * @author hujiabao
+                 * @example
+                 *
+                 * var ExpressServer = using('easynode.framework.server.http.ExpressServer');
+                 * new ExpressServer(3010).is('easynode.framework.server.http.ExpressServer');  //true
+                 * */
+                static noop() {}
         }
 
-        util.inherits(GenericObject, events.EventEmitter);
-
-        /**
-         * emit函数的别名。参考：Node.js events.EventEmitter.emit()函数。
-         *
-         * @method trigger
-         * @param {String} event 事件名称
-         * @param {...} args 事件参数
-         * @since 0.1.0
-         * @author hujiabao
-         * */
-        GenericObject.prototype.trigger = function() {
-                this.emit.apply(this, arguments);
-        };
-
-        /**
-         * removeListener函数的别名。参考：Node.js events.EventEmitter.removeListener()函数。
-         *
-         * @method off
-         * @param {String} event 事件名称
-         * @param {Function} listener 事件监听器
-         * @since 0.1.0
-         * @author hujiabao
-         * */
-        GenericObject.prototype.off = function (event, listener) {
-                this.removeListener(event, listener);
-        };
-
-
-        /**
-         * 获取对象的字符串描述
-         *
-         * @method toString
-         * @return {String} 对象的字符串描述
-         * @since 0.1.0
-         * @author hujiabao
-         * */
-        GenericObject.prototype.toString = function () {
-                return '[object ' + this.getClassName() + ']';
-        };
-
-        /**
-         * 获取对象的全类名
-         * @method getClassName
-         * @return {String} 对象的字符串描述
-         * @since 0.1.0
-         * @author hujiabao
-         * */
-        GenericObject.prototype.getClassName = function () {
-                return EasyNode.namespace(__filename);
-        };
-
-        /**
-         * 返回对象的JSON String表达式
-         * @method toJSONString
-         * @return {String} 对象的JSON字符串描述
-         * @since 0.1.0
-         * @author hujiabao
-         * */
-        GenericObject.prototype.toJSONString = function () {
-                //return util.inspect(this, {depth: EasyNode.config('easynode.inspect.depth')});
-                return JSON.stringify(this.toJSON());
-        };
-
-        /**
-         * 返回对象的JSON对象，即：Notation
-         * @method toJSON
-         * @return {Object} 对象的Notation
-         * @since 0.1.0
-         * @author hujiabao
-         * */
-        GenericObject.prototype.toJSON = function () {
-                var o = {};
-                for(var attr in this) {
-                        var val = this[attr];
-                        if(attr[0] != '_' && typeof val != 'function') {
-                                if(val!==null&&typeof val == 'object') {
-                                        if(typeof val.toJSON == 'function') {
-                                                o[attr] = val.toJSON();
-                                        }
-                                        else {
-                                                o[attr] = val;
-                                        }
-                                }
-                                else {
-                                        o[attr] = val;
-                                }
-                        }
-                }
-                return o;
-        };
-
-        /**
-         * 判定对象是否属于某个类型
-         * @method is
-         * @param {String} namespace 全类名
-         * @return {boolean} 对象是否为某个类的实例
-         * @since 0.1.0
-         * @author hujiabao
-         * @example
-         *
-         * var ExpressServer = using('easynode.framework.server.http.ExpressServer');
-         * new ExpressServer(3010).is('easynode.framework.server.http.ExpressServer');  //true
-         * */
-        GenericObject.prototype.is = function (namespace) {
-                return this.getClassName() == namespace;
-        };
-
-        /**
-         * 无操作函数。可链式调用。
-         *
-         * @method noop
-         * @return this
-         * @since 0.1.0
-         * @author hujiabao
-         * @example
-         *
-         * var ExpressServer = using('easynode.framework.server.http.ExpressServer');
-         * new ExpressServer(3010).is('easynode.framework.server.http.ExpressServer');  //true
-         * */
-        GenericObject.prototype.noop = function() {};
 
         module.exports = GenericObject;
 })();

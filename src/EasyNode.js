@@ -55,7 +55,7 @@ function _getNamespace(name) {
 }
 
 /**
- * 初始化命名空间，using时自动调用。
+ * 初始化命名空间，using时自动调用。addSourceDirectory添加的目录下的类转化成命名空间
  *
  * @method _initNamespaces
  * @since 0.1.0
@@ -89,7 +89,6 @@ function _initNamespaces() {
             };
 
             if (!EasyNode._src_folders) {
-                console.log(EasyNode.src);
                 EasyNode._src_folders = [EasyNode.src];
             }
 
@@ -131,7 +130,7 @@ function _trim(s) {
 
 /**
  * 获取EasyNode的根目录。默认返回进程当前目录的父目录，因此需要在bin目录下启用nodejs；如果传递了命令行参数easynode-home，则返回该命令
- * 行参数指定的路径。
+ * 行参数指定的路径,对于非babel-node程序,如mocha可以在之此之前先调用EasyNode.addArg('easynode-home',process.pwd)指定当前HOME路径;
  *
  * @method home
  * @since 0.1.0
@@ -180,13 +179,15 @@ EasyNode.extend = function () {
 };
 
 /**
- * 为非babel-node程序人为指定easynode-home路径,如mocha
+ * 为非babel-node程序人为指定easynode-home路径,如mocha,
  *
  * @method addArg
  * @since 0.1.10
  * @static
  * @author hujiabao
- * @param {String} name 配置项key。
+ * @param {String} name 配置项key,这里的命令行参数优先级高于命令行,重名则命令行参数将被此覆盖
+ * @param {String} value 配置项值
+ *
  * @return {String} 配置值。
  * @example
  *      EasyNode.addArg('easynode-home',process.cwd());
@@ -196,6 +197,7 @@ EasyNode.addArg = function (name, value) {
         EasyNode._parsed_args = {};
         EasyNode._parsed_args[name] = value;
     }
+    EasyNode._parsed_args[name] = value;
     return EasyNode._parsed_args[name || ''];
 };
 
@@ -227,6 +229,8 @@ EasyNode.arg = function (name) {
                 var p = argReg.exec(val);
                 if (p) {
                     EasyNode._parsed_args[p[1]] = p[2];
+                }else {
+
                 }
             }
         });
@@ -334,6 +338,8 @@ EasyNode.config = function (name, defaultVal) {
  * @param {String} name 国际化字符串配置项key。
  * @param {String} prefix 如果传递此值，请始终传递__filename，__filename会被转成namespace(file) + '.' + name;
  * @return {String} 配置值。如果不传递任何参数，EasyNode则会加载国际化配置文件，但不会返回任何值。
+ *                  如果此值存在,则返回该值
+ *                  如果不存在,则返回null
  */
 EasyNode.i18n = function (name) {
     var prefix = arguments.length <= 1 || arguments[1] === undefined ? '' : arguments[1];
@@ -368,9 +374,20 @@ EasyNode.i18n = function (name) {
     }
     if (typeof name == 'string') {
         var v = EasyNode._i18n_cache[name];
-        return v || name;
+        return v || null;
     }
 };
+
+/**
+ * 添加国际化配置目录,首先会把默认配置文件etc/i18n/$local.conf，格式与EasyNode.conf相同。
+ *
+ * @method addi18nDirectory
+ * @since 0.1.0
+ * @static
+ * @author hujiabao
+ * @param {...String} name 国际化配置目录
+ * @apiDescription 1.清除i18n缓存 2.添加默认国际化配置etc/i18n 3.添加参数中的配置到国际化配置目录
+ */
 
 EasyNode.addi18nDirectory = function () {
     //清除i18n缓存
@@ -402,7 +419,7 @@ EasyNode.addi18nDirectory = function () {
  * @since 0.1.0
  * @static
  * @author hujiabao
- * @param {String} locale 地区字符串。
+ * @param {String} locale 地区字符串。比命令行中设转眼的优先级高
  */
 EasyNode.setLocale = function () {
     var locale = arguments.length <= 0 || arguments[0] === undefined ? 'zh_CN' : arguments[0];
@@ -442,7 +459,7 @@ EasyNode.getLocale = function () {
 EasyNode.namespace = function (name) {
     assert(typeof name == 'string', 'Invalid name, need a String');
     if (process.env.EASYNODE_ENV == 'DEVELOP') {
-        // assert(name.match(/.*\/src\/.*/), 'Source code is not in src folder');
+         //assert(name.match(/.*\/src\/.*/), 'Source code is not in src folder');
         name = name.replace(/\.js/, '').replace(/^.*\/src\//gm, '');
     } else {
         // assert(name.match(/.*\/lib\/.*/), 'Source code is not in lib folder');
@@ -713,8 +730,10 @@ EasyNode.addSourceDirectory = function () {
             if (!fs.existsSync(folder)) {
                 throw new Error('Can not found source folder [' + folder + ']');
             }
-            EasyNode._src_folders.push(v);
-            //}
+
+            if( EasyNode._src_folders.indexOf(v) < 0  ){
+                EasyNode._src_folders.push(v);
+            }
         } else if (_.isArray(v)) {
             EasyNode.addSourceDirectory.apply(null, v);
         } else {
@@ -779,18 +798,15 @@ EasyNode.getLocalIP = function () {
 /**
  * 指定EasyNode运行环境
  *
- * @method ENV
+ * @method setEnv
  * @return {void} 无
  * @since 0.1.0
  * @author hujiabao
  * @param {String} env 环境名称 'TEST'|'DEVELOPMENT'|'PRODUCTION'。
+ * @return 开发阶段返回src, 测试等其它阶段用lib
  * @static
- * @example
- *      require('../src/EasyNode.js');<br>
- *      var plugin = EasyNode.create('easynode.framework.plugin.EasyNodePlugin');
- *      console.log(plugin.toJSON());
  */
-EasyNode.ENV = function (env) {
+EasyNode.setEnv = function (env) {
     "use strict";
 
     EasyNode.src = env == 'DEVELOP' ? 'src' : env == 'TEST' ? 'lib' : 'lib';
