@@ -49,7 +49,7 @@ var events = require("events");
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                static trigger() {
+                trigger() {
                         this.emit.apply(this, arguments);
                 }
 
@@ -62,7 +62,7 @@ var events = require("events");
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                static off(event, listener) {
+                off(event, listener) {
                     this.removeListener(event, listener);
                 }
 
@@ -75,7 +75,7 @@ var events = require("events");
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                static toString () {
+                toString () {
                     return '[object ' + this.getClassName() + ']';
                 }
 
@@ -86,7 +86,7 @@ var events = require("events");
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                static getClassName() {
+                getClassName() {
                     return EasyNode.namespace(__filename);
                 }
 
@@ -97,7 +97,7 @@ var events = require("events");
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                static toJSONString() {
+                toJSONString() {
                     //return util.inspect(this, {depth: EasyNode.config('easynode.inspect.depth')});
                     return JSON.stringify(this.toJSON());
                 }
@@ -109,7 +109,7 @@ var events = require("events");
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                static toJSON() {
+                toJSON() {
                     var o = {};
                     for(var attr in this) {
                             var val = this[attr];
@@ -142,7 +142,7 @@ var events = require("events");
                  * var ExpressServer = using('easynode.framework.server.http.ExpressServer');
                  * new ExpressServer(3010).is('easynode.framework.server.http.ExpressServer');  //true
                  * */
-                static is(namespace) {
+                is(namespace) {
                     return this.getClassName() == namespace;
                 }
 
@@ -158,7 +158,7 @@ var events = require("events");
                  * var ExpressServer = using('easynode.framework.server.http.ExpressServer');
                  * new ExpressServer(3010).is('easynode.framework.server.http.ExpressServer');  //true
                  * */
-                static noop() {}
+                 noop() {}
         }
 
 

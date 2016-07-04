@@ -47,7 +47,6 @@ describe('BeanFactoryTest', function () {
         co(function*  (){
             var BeanFactory = EasyNode.using('easynode.framework.BeanFactory');
             console.log("1")
-            //yield BeanFactory.initialize('etc/demo-beans.json', 'etc/easynode-beans.json');
             yield BeanFactory.initialize('etc/demo-beans.json');
         });
         done();

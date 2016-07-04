@@ -185,7 +185,7 @@ var fs = require('fs');
                                 }
                                 else {
                                         o[methodName] = function() {
-                                                fnAfter.call(this, srcFn.apply(this, arguments));
+                                               return fnAfter.call(this, srcFn.apply(this, arguments));
                                         };
                                 }
                         }

@@ -4,7 +4,7 @@
  * */
 'use strict';
 
-require('../../src/EasyNode.js');
+require('../../../src/EasyNode.js');
 require("babel-polyfill");
 import co from 'co';
 import request from 'superagent';

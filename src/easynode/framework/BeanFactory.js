@@ -3,6 +3,7 @@ var logger = using('easynode.framework.Logger').forFile(__filename);
 var GenericObject = using('easynode.GenericObject');
 var _ = require('underscore');
 var fs = require('co-fs');
+var f = require('fs');
 
 (function () {
         var configuration = {};
@@ -49,24 +50,17 @@ var fs = require('co-fs');
                 static initialize() {
                         var arr = _.toArray(arguments);
                         return function * () {
-                                console.log('11')
                                 for(var i = 0;i<arr.length;i++) {
                                         var file = EasyNode.real(arr[i]);
-                                        console.log(file)
                                         var exists = yield fs.exists(file);
                                         if(!exists) {
-                                                console.log("22")
                                                 throw new Error(`beans configuration file [${file}] is not found`);
-                                                console.log('222')
                                         }
-                                        console.log('222')
-                                        var content = yield fs.readFile(file);
-                                        console.log('2222')
+                                        //var content = yield fs.readFile(file);
+                                        var content = f.readFileSync(file);
                                         content = content.toString();
                                         var o = JSON.parse(content);
                                         _.extend(configuration, o);
-                                        console.log('222222')
-                                        console.log(configuration)
                                 }
                         };
                 }
