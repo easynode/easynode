@@ -2,7 +2,7 @@ var assert = require('assert');
 var logger = using('easynode.framework.Logger').forFile(__filename);
 var GenericObject = using('easynode.GenericObject');
 
-(function () {
+(function() {
         /**
          * Class IActionContextListener。流程顺序：onCreate->onActionReady->onDestroy，出错时调用onError->onDestroy
          *
@@ -11,7 +11,7 @@ var GenericObject = using('easynode.GenericObject');
          * @since 0.1.0
          * @author hujiabao
          * */
-        class IActionContextListener extends GenericObject {
+  class IActionContextListener extends GenericObject {
                 /**
                  *  ActionContext创建时被调用。此时ctx.getAction()可能为null。
                  *
@@ -22,9 +22,9 @@ var GenericObject = using('easynode.GenericObject');
                  * @since 0.1.0
                  * @author hujiabao
                  **/
-                onCreate (ctx) {
-                        throw new Error('Abstract Error');
-                }
+    onCreate(ctx) {
+      throw new Error('Abstract Error');
+    }
 
                 /**
                  *  ActionContext的action被执行前调用。
@@ -36,9 +36,9 @@ var GenericObject = using('easynode.GenericObject');
                  * @since 0.1.0
                  * @author hujiabao
                  **/
-                onActionReady(ctx) {
-                        throw new Error('Abstract Error');
-                }
+    onActionReady(ctx) {
+      throw new Error('Abstract Error');
+    }
 
                 /**
                  *  ActionContext销毁时被调用。
@@ -50,9 +50,9 @@ var GenericObject = using('easynode.GenericObject');
                  * @since 0.1.0
                  * @author hujiabao
                  **/
-                onDestroy(ctx) {
-                        throw new Error('Abstract Error');
-                }
+    onDestroy(ctx) {
+      throw new Error('Abstract Error');
+    }
 
                 /**
                  *  Action调用发生异常时被调用。
@@ -65,14 +65,14 @@ var GenericObject = using('easynode.GenericObject');
                  * @since 0.1.0
                  * @author hujiabao
                  **/
-                onError(ctx, err) {
-                        throw new Error('Abstract Error');
-                }
+    onError(ctx, err) {
+      throw new Error('Abstract Error');
+    }
 
-                getClassName() {
-                        return EasyNode.namespace(__filename);
-                }
+    getClassName() {
+      return EasyNode.namespace(__filename);
+    }
         }
 
-        module.exports = IActionContextListener;
+  module.exports = IActionContextListener;
 })();

@@ -4,7 +4,7 @@ var ITemplateViewRenderer = using('easynode.framework.mvc.ITemplateViewRenderer'
 var ejs = require('ejs');
 var _ = require('underscore');
 
-(function () {
+(function() {
         /**
          * Class EJSTemplateViewRenderer，用于渲染EJS模板引擎的View
          *
@@ -13,7 +13,7 @@ var _ = require('underscore');
          * @since 0.1.0
          * @author hujiabao
          * */
-        class EJSTemplateViewRenderer extends ITemplateViewRenderer {
+  class EJSTemplateViewRenderer extends ITemplateViewRenderer {
                 /**
                  * 构造函数。
                  *
@@ -21,25 +21,25 @@ var _ = require('underscore');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                constructor() {
-                        super();
-                        //调用super()后再定义子类成员。
-                }
+    constructor() {
+      super();
+                        // 调用super()后再定义子类成员。
+    }
 
-                render (actionResult, template) {
-                        var data = actionResult.toJSON();
-                        this._injectHelperFunctions(data);
-                        return ejs.render(template, data);
-                }
+    render(actionResult, template) {
+      var data = actionResult.toJSON();
+      this._injectHelperFunctions(data);
+      return ejs.render(template, data);
+    }
 
-                _injectHelperFunctions (o) {
-                        //TODO 支持格式转换函数
-                }
+    _injectHelperFunctions(o) {
+                        // TODO 支持格式转换函数
+    }
 
-                getClassName() {
-                        return EasyNode.namespace(__filename);
-                }
+    getClassName() {
+      return EasyNode.namespace(__filename);
+    }
         }
 
-        module.exports = EJSTemplateViewRenderer;
+  module.exports = EJSTemplateViewRenderer;
 })();

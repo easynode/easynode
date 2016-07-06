@@ -3,7 +3,7 @@ var logger = using('easynode.framework.Logger').forFile(__filename);
 var GenericObject = using('easynode.GenericObject');
 var S = require('string');
 
-(function () {
+(function() {
         /**
          * Class ActionContext
          *
@@ -13,7 +13,7 @@ var S = require('string');
          * @since 0.1.0
          * @author hujiabao
          * */
-        class ActionContext extends GenericObject {
+  class ActionContext extends GenericObject {
                 /**
                  * 构造函数。
                  *
@@ -21,9 +21,9 @@ var S = require('string');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                constructor(m, a) {
-                        super();
-                        //调用super()后再定义子类成员。
+    constructor(m, a) {
+      super();
+                        // 调用super()后再定义子类成员。
                         /**
                          * Action实例。通过setAction和getAction存取。
                          *
@@ -33,7 +33,7 @@ var S = require('string');
                          * @since 0.1.0
                          * @author hujiabao
                          * */
-                        this.action = null;
+      this.action = null;
 
                         /**
                          *  easynode.framework.cache.ICache实例。
@@ -43,7 +43,7 @@ var S = require('string');
                          * @since 0.1.0
                          * @author hujiabao
                          * */
-                        this.cache = null;
+      this.cache = null;
 
                         /**
                          *  easynode.framework.db.IConnection实例。
@@ -53,7 +53,7 @@ var S = require('string');
                          * @since 0.1.0
                          * @author hujiabao
                          * */
-                        this.connection = null;
+      this.connection = null;
 
                         /**
                          *  easynode.framework.mq.IQueue实例。
@@ -63,7 +63,7 @@ var S = require('string');
                          * @since 0.1.0
                          * @author hujiabao
                          * */
-                        this.queue = null;
+      this.queue = null;
 
                         /**
                          *  远程地址(客户端地址)。
@@ -73,7 +73,7 @@ var S = require('string');
                          * @since 0.1.0
                          * @author hujiabao
                          * */
-                        this.remoteAddress = null;
+      this.remoteAddress = null;
 
                         /**
                          *  模块名。
@@ -83,7 +83,7 @@ var S = require('string');
                          * @since 0.1.0
                          * @author hujiabao
                          * */
-                        this.moduleName = m;
+      this.moduleName = m;
                         /**
                          *  Action名。
                          *
@@ -92,8 +92,8 @@ var S = require('string');
                          * @since 0.1.0
                          * @author hujiabao
                          * */
-                        this.actionName = a;
-                }
+      this.actionName = a;
+    }
 
                 /**
                  * set action成员。
@@ -103,9 +103,9 @@ var S = require('string');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                setAction (action) {
-                        this.action = action;
-                }
+    setAction(action) {
+      this.action = action;
+    }
 
                 /**
                  * get action成员。
@@ -115,9 +115,9 @@ var S = require('string');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                getAction() {
-                        return this.action;
-                }
+    getAction() {
+      return this.action;
+    }
 
                 /**
                  * 获取此上下文环境中指定名称的参数值。
@@ -129,9 +129,9 @@ var S = require('string');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                param (name, defaultValue=null) {
-                        throw new Error('Abstract Method');
-                }
+    param(name, defaultValue = null) {
+      throw new Error('Abstract Method');
+    }
 
                 /**
                  * 设置参数值。
@@ -143,9 +143,9 @@ var S = require('string');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                setParam(name, val) {
-                        throw new Error('Abstract Method');
-                }
+    setParam(name, val) {
+      throw new Error('Abstract Method');
+    }
 
                 /**
                  * 获取此上下文环境中指所有的参数。
@@ -155,9 +155,9 @@ var S = require('string');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                params () {
-                        throw new Error('Abstract Method');
-                }
+    params() {
+      throw new Error('Abstract Method');
+    }
 
                 /**
                  * 为ActionContext增加cache支持。
@@ -167,9 +167,9 @@ var S = require('string');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                setCache (cache) {
-                        this.cache = cache;
-                }
+    setCache(cache) {
+      this.cache = cache;
+    }
 
 
                 /**
@@ -180,9 +180,9 @@ var S = require('string');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                setRemoteAddress (remoteAddress) {
-                        this.remoteAddress = remoteAddress;
-                }
+    setRemoteAddress(remoteAddress) {
+      this.remoteAddress = remoteAddress;
+    }
 
                 /**
                  * 获取远程地址。
@@ -192,9 +192,9 @@ var S = require('string');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                getRemoteAddress () {
-                        return this.remoteAddress;
-                }
+    getRemoteAddress() {
+      return this.remoteAddress;
+    }
 
 
                 /**
@@ -205,9 +205,9 @@ var S = require('string');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                getCache() {
-                        return this.cache;
-                }
+    getCache() {
+      return this.cache;
+    }
 
                 /**
                  * 为ActionContext增加数据库支持。
@@ -217,9 +217,9 @@ var S = require('string');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                setConnection (connection) {
-                        this.connection = connection;
-                }
+    setConnection(connection) {
+      this.connection = connection;
+    }
 
                 /**
                  * 获取数据库连接实例。
@@ -229,9 +229,9 @@ var S = require('string');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                getConnection() {
-                        return this.connection;
-                }
+    getConnection() {
+      return this.connection;
+    }
 
                 /**
                  * 为ActionContext增加队列支持。
@@ -241,9 +241,9 @@ var S = require('string');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                setQueue (queue) {
-                        this.queue = queue;
-                }
+    setQueue(queue) {
+      this.queue = queue;
+    }
 
                 /**
                  * 获取队列连接实例。
@@ -253,14 +253,14 @@ var S = require('string');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                getQueue () {
-                        return this.queue;
-                }
+    getQueue() {
+      return this.queue;
+    }
 
-                getClassName() {
-                        return EasyNode.namespace(__filename);
-                }
+    getClassName() {
+      return EasyNode.namespace(__filename);
+    }
         }
 
-        module.exports = ActionContext;
+  module.exports = ActionContext;
 })();

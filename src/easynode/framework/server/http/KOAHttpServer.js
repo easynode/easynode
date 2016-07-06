@@ -1,9 +1,9 @@
 var assert = require('assert');
 var thunkify = require('thunkify');
 var Logger = using('easynode.framework.Logger');
-var _  = require('underscore');
+var _ = require('underscore');
 var fs = require('co-fs');
-var f =  require('fs');
+var f = require('fs');
 var logger = Logger.forFile(__filename);
 var AbstractServer = using('easynode.framework.server.AbstractServer');
 var S = require('string');
@@ -22,43 +22,42 @@ var AdmZip = require('adm-zip');
 var KOAHttpRequestParameter = using('easynode.framework.server.http.KOAHttpRequestParameter');
 
 
+(function() {
+  var PROXY_IP_HEADER = EasyNode.config('easynode.servers.koa-HttpServer.proxyIPHeader', 'x-forwarded-for');
+  const HTTP_METHODS = [
+    'all',          // virtual method
+    'del',          // virtual method, equal to delete
+    'get',
+    'post',
+    'put',
+    'head',
+    'delete',
+    'options',
+    'trace',
+    'copy',
+    'lock',
+    'mkcol',
+    'move',
+    'purge',
+    'propfind',
+    'proppatch',
+    'unlock',
+    'report',
+    'mkactivity',
+    'checkout',
+    'merge',
+    'm-search',
+    'notify',
+    'subscribe',
+    'unsubscribe',
+    'patch',
+    'search',
+    'connect'
+  ];
 
-(function () {
-        var PROXY_IP_HEADER = EasyNode.config('easynode.servers.koa-HttpServer.proxyIPHeader', 'x-forwarded-for');
-        const HTTP_METHODS = [
-                'all',          //virtual method
-                'del',          //virtual method, equal to delete
-                'get',
-                'post',
-                'put',
-                'head',
-                'delete',
-                'options',
-                'trace',
-                'copy',
-                'lock',
-                'mkcol',
-                'move',
-                'purge',
-                'propfind',
-                'proppatch',
-                'unlock',
-                'report',
-                'mkactivity',
-                'checkout',
-                'merge',
-                'm-search',
-                'notify',
-                'subscribe',
-                'unsubscribe',
-                'patch',
-                'search',
-                'connect'
-        ];
+  var filters = {
 
-        var filters = {
-
-        };
+  };
         /**
          * KOAHttpServer封装了一个koa Application，预定义了access logger，csrf，session, routes等中间件，并支持通过API方式向koa Application
          * 增加新的中间件、路由。<br>
@@ -137,7 +136,7 @@ var KOAHttpRequestParameter = using('easynode.framework.server.http.KOAHttpReque
          * @since 0.1.0
          * @author hujiabao
          * */
-        class KOAHttpServer extends AbstractServer {
+  class KOAHttpServer extends AbstractServer {
                 /**
                  * 构造函数。
                  *
@@ -146,9 +145,9 @@ var KOAHttpRequestParameter = using('easynode.framework.server.http.KOAHttpReque
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                constructor(port=S(EasyNode.config('easynode.servers.koa-HttpServer.port', '5000')).toInt()) {
-                        super(port, EasyNode.config('easynode.servers.koa-HttpServer.name', 'koa-HttpServer'));
-                        //调用super()后再定义子类成员。
+    constructor(port = S(EasyNode.config('easynode.servers.koa-HttpServer.port', '5000')).toInt()) {
+      super(port, EasyNode.config('easynode.servers.koa-HttpServer.name', 'koa-HttpServer'));
+                        // 调用super()后再定义子类成员。
 
                         /**
                          *  HTTP服务的根目录，默认配置项：easynode.servers.koa-HttpServer.rootDirectory或www
@@ -157,7 +156,7 @@ var KOAHttpRequestParameter = using('easynode.framework.server.http.KOAHttpReque
                          * @private
                          *
                          * */
-                        var _webRoot = EasyNode.real(EasyNode.config('easynode.servers.koa-HttpServer.webRoot', 'www/'));
+      var _webRoot = EasyNode.real(EasyNode.config('easynode.servers.koa-HttpServer.webRoot', 'www/'));
 
                         /**
                          *  设置HTTP服务根目录。
@@ -166,9 +165,9 @@ var KOAHttpRequestParameter = using('easynode.framework.server.http.KOAHttpReque
                          * @since 0.1.0
                          * @author hujiabao
                          * */
-                        this.setWebRoot = function(webRoot) {
-                                _webRoot = EasyNode.real(webRoot);
-                        };
+      this.setWebRoot = function(webRoot) {
+        _webRoot = EasyNode.real(webRoot);
+      };
 
                         /**
                          *  获取HTTP服务根目录。
@@ -177,9 +176,9 @@ var KOAHttpRequestParameter = using('easynode.framework.server.http.KOAHttpReque
                          * @since 0.1.0
                          * @author hujiabao
                          * */
-                        this.getWebRoot = function() {
-                                return _webRoot;
-                        };
+      this.getWebRoot = function() {
+        return _webRoot;
+      };
 
                         /**
                          *  上传文件目录，默认www/uploads
@@ -187,7 +186,7 @@ var KOAHttpRequestParameter = using('easynode.framework.server.http.KOAHttpReque
                          * @type String
                          * @private
                          * */
-                        var _uploadDir = EasyNode.real(EasyNode.config('easynode.servers.koa-HttpServer.uploadDir', 'www/uploads/'));
+      var _uploadDir = EasyNode.real(EasyNode.config('easynode.servers.koa-HttpServer.uploadDir', 'www/uploads/'));
 
                         /**
                          * 上传文件目录前缀，默认/uploads
@@ -195,7 +194,7 @@ var KOAHttpRequestParameter = using('easynode.framework.server.http.KOAHttpReque
                          * @type String
                          * @private
                          * */
-                        var _uploadURIPrefix = EasyNode.config('easynode.servers.koa-HttpServer.uploadURIPrefix','/uploads/');
+      var _uploadURIPrefix = EasyNode.config('easynode.servers.koa-HttpServer.uploadURIPrefix', '/uploads/');
 
                         /**
                          *  设置文件上传目录。
@@ -204,9 +203,9 @@ var KOAHttpRequestParameter = using('easynode.framework.server.http.KOAHttpReque
                          * @since 0.1.0
                          * @author hujiabao
                          * */
-                        this.setUploadDir = function(uploadDir) {
-                                _uploadDir = EasyNode.real(uploadDir);
-                        };
+      this.setUploadDir = function(uploadDir) {
+        _uploadDir = EasyNode.real(uploadDir);
+      };
                         /**
                          *  获取HTTP服务上传目录。
                          * @method getUploadDir
@@ -214,9 +213,9 @@ var KOAHttpRequestParameter = using('easynode.framework.server.http.KOAHttpReque
                          * @since 0.1.0
                          * @author hujiabao
                          * */
-                        this.getUploadDir = function() {
-                                return _uploadDir;
-                        };
+      this.getUploadDir = function() {
+        return _uploadDir;
+      };
 
                         /**
                          * 获取HTTP服务上伟目录相对路径
@@ -225,11 +224,11 @@ var KOAHttpRequestParameter = using('easynode.framework.server.http.KOAHttpReque
                          * @since 0.1.0
                          * @author allen.hu
                          */
-                         this.getUploadURIPrefix = function() {
-                            return _uploadURIPrefix;
-                         };
+      this.getUploadURIPrefix = function() {
+        return _uploadURIPrefix;
+      };
 
-                        var _writeAccessLog = S(EasyNode.config('easynode.servers.koa-HttpServer.writeAccessLog',  'true')).toBoolean();
+      var _writeAccessLog = S(EasyNode.config('easynode.servers.koa-HttpServer.writeAccessLog', 'true')).toBoolean();
                         /**
                          *  设置服务是否记录访问日志
                          * @method writeAccessLog
@@ -237,13 +236,13 @@ var KOAHttpRequestParameter = using('easynode.framework.server.http.KOAHttpReque
                          * @since 0.1.0
                          * @author hujiabao
                          * */
-                        this.writeAccessLog = function(flag) {
-                                if(arguments.length == 0) {
-                                        return _writeAccessLog;
-                                }
-                                assert(typeof flag == 'boolean', 'Invalid argument');
-                                _writeAccessLog = flag;
-                        };
+      this.writeAccessLog = function(flag) {
+        if (arguments.length == 0) {
+          return _writeAccessLog;
+        }
+        assert(typeof flag == 'boolean', 'Invalid argument');
+        _writeAccessLog = flag;
+      };
 
                         /**
                          *  Session 存储类型，默认KOAHttpServer.SessionSupport.STORAGE_MEMORY
@@ -251,14 +250,14 @@ var KOAHttpRequestParameter = using('easynode.framework.server.http.KOAHttpReque
                          * @type String
                          * @private
                          * */
-                        this._sessionStorage = 'storage-memory';
+      this._sessionStorage = 'storage-memory';
                         /**
                          *  Session 存储选项，默认null
                          * @property _sessionStorageOptions
                          * @type object
                          * @private
                          * */
-                        this._sessionStorageOptions = null;
+      this._sessionStorageOptions = null;
 
                         /**
                          *  koa app的key
@@ -266,9 +265,9 @@ var KOAHttpRequestParameter = using('easynode.framework.server.http.KOAHttpReque
                          * @type array
                          * @private
                          * */
-                        this._keys = EasyNode.config('easynode.servers.koa-HttpServer.keys', 'EasyNode').split(',');
+      this._keys = EasyNode.config('easynode.servers.koa-HttpServer.keys', 'EasyNode').split(',');
 
-                }
+    }
 
                 /**
                  *  增加静态文件查找目录
@@ -277,13 +276,13 @@ var KOAHttpRequestParameter = using('easynode.framework.server.http.KOAHttpReque
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                addWebDirs (...arr) {
-                        this._webDirs = this._webDirs || [];
-                        arr.forEach(dir => {
-                                assert(typeof dir == 'string', 'Invalid arguments');
-                                this._webDirs.push(dir);
-                        });
-                }
+    addWebDirs(...arr) {
+      this._webDirs = this._webDirs || [];
+      arr.forEach((dir) => {
+        assert(typeof dir == 'string', 'Invalid arguments');
+        this._webDirs.push(dir);
+      });
+    }
 
                 /**
                  *  增加动态模板查找目录，仅允许一个目录
@@ -292,14 +291,14 @@ var KOAHttpRequestParameter = using('easynode.framework.server.http.KOAHttpReque
                  *  @since 0.1.0
                  *  @autho allen.hu
                  * */
-                addTemplateDirs(...arr) {
-                        this._templateDirs = this._templateDirs || [];
-                        assert( arr.length == 1, 'template dire number, only one');
-                        arr.forEach( dir => {
-                            assert(typeof dir == 'string', 'Invalid arguments');
-                            this._templateDirs.push(dir);
-                        });
-                }
+    addTemplateDirs(...arr) {
+      this._templateDirs = this._templateDirs || [];
+      assert(arr.length == 1, 'template dire number, only one');
+      arr.forEach((dir) => {
+        assert(typeof dir == 'string', 'Invalid arguments');
+        this._templateDirs.push(dir);
+      });
+    }
 
                  /**
                  *  设置koa的KEY
@@ -308,10 +307,10 @@ var KOAHttpRequestParameter = using('easynode.framework.server.http.KOAHttpReque
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                setKeys (...keys) {
-                        assert(keys.length > 0, 'Invalid arguments');
-                        this._keys = keys;
-                }
+    setKeys(...keys) {
+      assert(keys.length > 0, 'Invalid arguments');
+      this._keys = keys;
+    }
 
                 /**
                  *  增加中间件，中间件是一个generator函数，请注意：中间件会按先后顺序添加到koa，具体流程请参考start函数。
@@ -332,10 +331,10 @@ var KOAHttpRequestParameter = using('easynode.framework.server.http.KOAHttpReque
                  *               yield next;
                  *       });
                  * */
-                addMiddleware (gen) {
-                        this._middlewares = this._middlewares || [];
-                        this._middlewares.push(gen);
-                }
+    addMiddleware(gen) {
+      this._middlewares = this._middlewares || [];
+      this._middlewares.push(gen);
+    }
 
                 /**
                  *  增加中间件(在Routes之后)，中间件是一个generator函数，请注意：中间件会按先后顺序添加到koa，具体流程请参考start函数。
@@ -356,10 +355,10 @@ var KOAHttpRequestParameter = using('easynode.framework.server.http.KOAHttpReque
                  *               yield next;
                  *       });
                  * */
-                addMiddlewareAfterRoutes (gen) {
-                        this._middlewaresAfterRoutes = this._middlewaresAfterRoutes || [];
-                        this._middlewaresAfterRoutes.push(gen);
-                }
+    addMiddlewareAfterRoutes(gen) {
+      this._middlewaresAfterRoutes = this._middlewaresAfterRoutes || [];
+      this._middlewaresAfterRoutes.push(gen);
+    }
 
                 /**
                  *  增加一个路由。
@@ -378,17 +377,17 @@ var KOAHttpRequestParameter = using('easynode.framework.server.http.KOAHttpReque
                  *      });
                  *
                  * */
-                addRoute (method, uri, gen) {
-                        assert(typeof method == 'string' && typeof uri == 'string', 'Invalid http method');
-                        method = method.toLowerCase();
-                        assert(_.contains(HTTP_METHODS, method), `Invalid http method [${method}] of route, supported methods are: [${HTTP_METHODS.join(',')}]`);
-                        this._routes = this._routes || [];
-                        this._routes.push({
-                                method : method,
-                                uri : uri,
-                                gen : gen
-                        });
-                }
+    addRoute(method, uri, gen) {
+      assert(typeof method == 'string' && typeof uri == 'string', 'Invalid http method');
+      method = method.toLowerCase();
+      assert(_.contains(HTTP_METHODS, method), `Invalid http method [${method}] of route, supported methods are: [${HTTP_METHODS.join(',')}]`);
+      this._routes = this._routes || [];
+      this._routes.push({
+        method : method,
+        uri : uri,
+        gen : gen
+      });
+    }
 
                 /**
                  *  设置Session的存储类型，默认Session支持为内存存储，这容易引起内存泄漏，请不要用于生产环境。
@@ -419,16 +418,16 @@ var KOAHttpRequestParameter = using('easynode.framework.server.http.KOAHttpReque
                  *              port : 11211
                  *      });
                  * */
-                setSessionStorage(storage, opt) {
-                        assert(typeof storage == 'string', 'Invalid argument');
-                        assert(_.contains([
-                                                KOAHttpServer.SessionSupport.STORAGE_MEMORY,
-                                                KOAHttpServer.SessionSupport.STORAGE_REDIS,
-                                                KOAHttpServer.SessionSupport.STORAGE_MEMCACHED
-                                        ], storage), `Invalid session storage [${storage}]`);
-                        this._sessionStorage = storage;
-                        this._sessionStorageOptions = opt;
-                }
+    setSessionStorage(storage, opt) {
+      assert(typeof storage == 'string', 'Invalid argument');
+      assert(_.contains([
+        KOAHttpServer.SessionSupport.STORAGE_MEMORY,
+        KOAHttpServer.SessionSupport.STORAGE_REDIS,
+        KOAHttpServer.SessionSupport.STORAGE_MEMCACHED
+      ], storage), `Invalid session storage [${storage}]`);
+      this._sessionStorage = storage;
+      this._sessionStorageOptions = opt;
+    }
 
                 /**
                  *  设置HTTP Server是否启用CSRF防御。默认禁用。启用时需要koa-csrf模块支持。
@@ -438,10 +437,10 @@ var KOAHttpRequestParameter = using('easynode.framework.server.http.KOAHttpReque
                  * @since 0.1.0
                  * @author hujiabao
                  **/
-                enableCSRF (flag) {
-                        assert(typeof flag == 'boolean', 'Invalid argument');
-                        this._enableCSRF = flag;
-                }
+    enableCSRF(flag) {
+      assert(typeof flag == 'boolean', 'Invalid argument');
+      this._enableCSRF = flag;
+    }
 
                 /**
                  *  设置HTTP Server是否启用404中间件。默认启用。可以通过addMiddlewareAfterRoutes函数自行增加一个404处理中间件，在这个
@@ -452,10 +451,10 @@ var KOAHttpRequestParameter = using('easynode.framework.server.http.KOAHttpReque
                  * @since 0.1.0
                  * @author hujiabao
                  **/
-                enable404Middleware (flag) {
-                        assert(typeof flag == 'boolean', 'Invalid argument');
-                        this._enable404Middleware = flag;
-                }
+    enable404Middleware(flag) {
+      assert(typeof flag == 'boolean', 'Invalid argument');
+      this._enable404Middleware = flag;
+    }
 
                 /**
                  *  设置KOAActionContext的事件处理器。可在此注入数据库支持、缓存支持、队列支持等等。<br/>
@@ -468,9 +467,9 @@ var KOAHttpRequestParameter = using('easynode.framework.server.http.KOAHttpReque
                  * @since 0.1.0
                  * @author hujiabao
                  **/
-                setActionContextListener (l) {
-                        this._actionContextListener = l;
-                }
+    setActionContextListener(l) {
+      this._actionContextListener = l;
+    }
 
                 /**
                  *  返回session的storage对象，符合koa-generic-session接口定义。get、set、destroy。
@@ -481,27 +480,27 @@ var KOAHttpRequestParameter = using('easynode.framework.server.http.KOAHttpReque
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                _getSessionStore () {
-                        this._sessionStorage = this._sessionStorage || KOAHttpServer.SessionSupport.STORAGE_MEMORY;
-                        switch (this._sessionStorage) {
-                                case KOAHttpServer.SessionSupport.STORAGE_MEMORY :
-                                {
-                                        return this._createMemoryStorage();
-                                }
-                                case KOAHttpServer.SessionSupport.STORAGE_REDIS :
-                                {
-                                        return this._createRedisStorage();
-                                }
-                                case KOAHttpServer.SessionSupport.STORAGE_MEMCACHED :
-                                {
-                                        return this._createMemcachedStorage();
-                                }
-                                default :
-                                {
-                                        throw new Error(`Unsupported session storage [${this._sessionStorage}]`);
-                                }
-                        }
-                }
+    _getSessionStore() {
+      this._sessionStorage = this._sessionStorage || KOAHttpServer.SessionSupport.STORAGE_MEMORY;
+      switch (this._sessionStorage) {
+      case KOAHttpServer.SessionSupport.STORAGE_MEMORY :
+        {
+          return this._createMemoryStorage();
+        }
+      case KOAHttpServer.SessionSupport.STORAGE_REDIS :
+        {
+          return this._createRedisStorage();
+        }
+      case KOAHttpServer.SessionSupport.STORAGE_MEMCACHED :
+        {
+          return this._createMemcachedStorage();
+        }
+      default :
+        {
+          throw new Error(`Unsupported session storage [${this._sessionStorage}]`);
+        }
+      }
+    }
 
                 /**
                  *  session内存存储
@@ -512,10 +511,10 @@ var KOAHttpRequestParameter = using('easynode.framework.server.http.KOAHttpReque
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                _createMemoryStorage () {
-                        var MSS = using('easynode.framework.server.http.KOAMemorySessionStorage');
-                        return new MSS();
-                }
+    _createMemoryStorage() {
+      var MSS = using('easynode.framework.server.http.KOAMemorySessionStorage');
+      return new MSS();
+    }
 
                 /**
                  *  session redis存储
@@ -526,10 +525,10 @@ var KOAHttpRequestParameter = using('easynode.framework.server.http.KOAHttpReque
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                _createRedisStorage () {
-                        var redisStore = require('koa-redis');
-                        return redisStore(this._sessionStorageOptions);
-                }
+    _createRedisStorage() {
+      var redisStore = require('koa-redis');
+      return redisStore(this._sessionStorageOptions);
+    }
 
                 /**
                  *  session memcached存储
@@ -540,10 +539,10 @@ var KOAHttpRequestParameter = using('easynode.framework.server.http.KOAHttpReque
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                _createMemcachedStorage () {
-                        var memcachedStore = require('koa-memcached');
-                        return memcachedStore(this._sessionStorageOptions);
-                }
+    _createMemcachedStorage() {
+      var memcachedStore = require('koa-memcached');
+      return memcachedStore(this._sessionStorageOptions);
+    }
 
                 /**
                  *  写AccessLog的中间件。
@@ -555,34 +554,34 @@ var KOAHttpRequestParameter = using('easynode.framework.server.http.KOAHttpReque
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                _createAccessLogger () {
-                        var me = this;
-                        return function * (next) {
-                                var d = new Date();
-                                yield next;
-                                if(this.status == 404) {return;}
-                                var t = new Date() - d;
-                                var o = {
-                                        'app-id' : me.appId,
-                                        'app-key' : me.appKey,
-                                        pid : process.pid,
-                                        uptime : parseInt(process.uptime()),
-                                        server : (me.name + '@' + EasyNode.getLocalIP() + ':' + me.port) || ('koa-http-server@' + EasyNode.getLocalIP() + ':' + me.port),
-                                        time : d.toFormat('YYYY-MM-DD HH:MI:SS'),
-                                        method : this.method,
-                                        url : this.url.replace(/\?.*$/, ''),
-                                        status : this.status,
-                                        cost : t,
-                                        'render-cost' : this.renderCost || 0,                   // to write the performance of view engine such as ejs or mustache
+    _createAccessLogger() {
+      var me = this;
+      return function *(next) {
+        var d = new Date();
+        yield next;
+        if (this.status == 404) { return; }
+        var t = new Date() - d;
+        var o = {
+          'app-id' : me.appId,
+          'app-key' : me.appKey,
+          pid : process.pid,
+          uptime : parseInt(process.uptime()),
+          server : (me.name + '@' + EasyNode.getLocalIP() + ':' + me.port) || ('koa-http-server@' + EasyNode.getLocalIP() + ':' + me.port),
+          time : d.toFormat('YYYY-MM-DD HH:MI:SS'),
+          method : this.method,
+          url : this.url.replace(/\?.*$/, ''),
+          status : this.status,
+          cost : t,
+          'render-cost' : this.renderCost || 0,                   // to write the performance of view engine such as ejs or mustache
                                                                                                                           // set renderCost attribute to koa context.
-                                        action : this.action,                                               // see KOADefaultRoutes._execAction();
-                                        remote : this.remoteAddress,                            //remote address
-                                        user : this.session && this.session.user && this.session.user.id || '[UNKNOWN]'         //user id in the session
-                                };
-                                accessLogger.info(JSON.stringify(o));
-                                me.trigger(KOAHttpServer.Events.EVENT_ACCESS, o);
-                        };
-                }
+          action : this.action,                                               // see KOADefaultRoutes._execAction();
+          remote : this.remoteAddress,                            // remote address
+          user : this.session && this.session.user && this.session.user.id || '[UNKNOWN]'         // user id in the session
+        };
+        accessLogger.info(JSON.stringify(o));
+        me.trigger(KOAHttpServer.Events.EVENT_ACCESS, o);
+      };
+    }
 
                 /**
                  *  默认Routes。
@@ -593,10 +592,10 @@ var KOAHttpRequestParameter = using('easynode.framework.server.http.KOAHttpReque
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                _createDefaultRoutes (app) {
-                        var DefaultRoutes = using('easynode.framework.server.http.KOADefaultRoutes');
-                        new DefaultRoutes(app, route, this._actionContextListener).addRoutes();
-                }
+    _createDefaultRoutes(app) {
+      var DefaultRoutes = using('easynode.framework.server.http.KOADefaultRoutes');
+      new DefaultRoutes(app, route, this._actionContextListener).addRoutes();
+    }
 
                 /**
                  *  增加用户定义的Routes(通过addRoute函数)。
@@ -607,17 +606,17 @@ var KOAHttpRequestParameter = using('easynode.framework.server.http.KOAHttpReque
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                _createExtraRoutes (app) {
-                        this._routes = this._routes || [];
-                        this._routes.forEach(o => {
-                                if(typeof route[o.method] == 'function') {
-                                        app.use(route[o.method].call(null, o.uri, o.gen));
-                                }
-                                else {
-                                        throw new Error(`Unsupported http method [${o.method}]`);
-                                }
-                        });
-                }
+    _createExtraRoutes(app) {
+      this._routes = this._routes || [];
+      this._routes.forEach((o) => {
+        if (typeof route[o.method] == 'function') {
+          app.use(route[o.method].call(null, o.uri, o.gen));
+        }
+        else {
+          throw new Error(`Unsupported http method [${o.method}]`);
+        }
+      });
+    }
 
                 /**
                  *  增加用户定义的Middleware(通过addMiddleware函数)。
@@ -628,12 +627,12 @@ var KOAHttpRequestParameter = using('easynode.framework.server.http.KOAHttpReque
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                _createExtraMiddlewares (app) {
-                        this._middlewares = this._middlewares || [];
-                        this._middlewares.forEach(middleware => {
-                                app.use(middleware);
-                        });
-                }
+    _createExtraMiddlewares(app) {
+      this._middlewares = this._middlewares || [];
+      this._middlewares.forEach((middleware) => {
+        app.use(middleware);
+      });
+    }
 
                 /**
                  *  加载默认中间件。
@@ -644,17 +643,17 @@ var KOAHttpRequestParameter = using('easynode.framework.server.http.KOAHttpReque
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                _createDefaultMiddlewares (app) {
+    _createDefaultMiddlewares(app) {
                         // anytime goes here, this.query will be the parse result of query string, this.parts will be the parsed body of request if
                         // it is a POST method now
-                        app.use(function * (next) {
-                                var me = this;
+      app.use(function *(next) {
+        var me = this;
                                 // add parameter attribute to ctx, so the downstream middlewares could access this attribute to fetch parameters from
                                 // query string or body
-                                this.parameter = new KOAHttpRequestParameter(this.query, this.parts);
-                                yield next;
-                        });
-                }
+        this.parameter = new KOAHttpRequestParameter(this.query, this.parts);
+        yield next;
+      });
+    }
 
                 /**
                  *  增加multipart-form-data支持。
@@ -665,14 +664,14 @@ var KOAHttpRequestParameter = using('easynode.framework.server.http.KOAHttpReque
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                _createMultipartMiddleware (app) {
-                        var supportFileTypes = '^.*\.(?:png|jpg|bmp|gif|jpeg|txt|doc|xls|xlsx|ppt|pptx|pdf|zip|tar|gz|rar|swf|mp3|mp4|log)$';
-                        supportFileTypes = EasyNode.config('easynode.servers.koa-HttpServer.upload.types', supportFileTypes);
-                        var regEx = new RegExp(supportFileTypes);
-                        var me = this;
-                        app.use(function* (next) {
-                                        //this.state.upload=0;
-                                        //if (this.method.toLocaleLowerCase() == 'post') {
+    _createMultipartMiddleware(app) {
+      var supportFileTypes = '^.*\.(?:png|jpg|bmp|gif|jpeg|txt|doc|xls|xlsx|ppt|pptx|pdf|zip|tar|gz|rar|swf|mp3|mp4|log)$';
+      supportFileTypes = EasyNode.config('easynode.servers.koa-HttpServer.upload.types', supportFileTypes);
+      var regEx = new RegExp(supportFileTypes);
+      var me = this;
+      app.use(function *(next) {
+                                        // this.state.upload=0;
+                                        // if (this.method.toLocaleLowerCase() == 'post') {
                                         //        var hasError = false;
                                         //        var parts = yield* multipart(this);
                                         //        parts.files.forEach(file => {
@@ -705,18 +704,18 @@ var KOAHttpRequestParameter = using('easynode.framework.server.http.KOAHttpReque
                                         //            yield next;
                                         //
                                         //        }
-                                        //}
-                                        //else {
+                                        // }
+                                        // else {
                                                 // for compatibility
-                                                this.parts = {
-                                                        files : [],
-                                                        fields : []
-                                                };
-                                                yield next;
+        this.parts = {
+          files : [],
+          fields : []
+        };
+        yield next;
                                        // }
-                                }
+      }
                         );
-                }
+    }
 
                 /**
                  *  增加在Route之后的middleware, 通过addMiddlewareAfterRoutes
@@ -727,12 +726,12 @@ var KOAHttpRequestParameter = using('easynode.framework.server.http.KOAHttpReque
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                _createMiddlewaresAfterRoutes (app) {
-                        this._middlewaresAfterRoutes = this._middlewaresAfterRoutes || [];
-                        this._middlewaresAfterRoutes.forEach(middleware => {
-                                app.use(middleware);
-                        });
-                }
+    _createMiddlewaresAfterRoutes(app) {
+      this._middlewaresAfterRoutes = this._middlewaresAfterRoutes || [];
+      this._middlewaresAfterRoutes.forEach((middleware) => {
+        app.use(middleware);
+      });
+    }
                 /**
                  *  增加用户定义的静态文件目录(通过addWebDirs函数)。
                  *
@@ -742,12 +741,12 @@ var KOAHttpRequestParameter = using('easynode.framework.server.http.KOAHttpReque
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                _addExtraWebDirs (app) {
-                        this._webDirs = this._webDirs || [];
-                        this._webDirs.forEach(dir => {
-                                app.use(staticFileServe(EasyNode.real(dir)));
-                        });
-                }
+    _addExtraWebDirs(app) {
+      this._webDirs = this._webDirs || [];
+      this._webDirs.forEach((dir) => {
+        app.use(staticFileServe(EasyNode.real(dir)));
+      });
+    }
 
                 /**
                  *  增加用户定义的模板文件目录(通过addTemplateDirs函数)。
@@ -757,19 +756,19 @@ var KOAHttpRequestParameter = using('easynode.framework.server.http.KOAHttpReque
                  * @since 0.1.0
                  * @author allen.hu
                  * */
-                _addTemplate(app){
-                    this._templateDirs = this._templateDirs || [];
-                    this._templateDirs.forEach(dir => {
-                        render(app, {
-                            root: EasyNode.real(dir),
-                            layout: '',
-                            viewExt: 'html',
-                            cache: false,
-                            debug: true,
-                            filters: filters
-                        });
-                    });
-                }
+    _addTemplate(app) {
+      this._templateDirs = this._templateDirs || [];
+      this._templateDirs.forEach((dir) => {
+        render(app, {
+          root: EasyNode.real(dir),
+          layout: '',
+          viewExt: 'html',
+          cache: false,
+          debug: true,
+          filters: filters
+        });
+      });
+    }
 
                 /**
                  * 启动KOAHttpServer并加载中间件，中间件会按先后顺序添加到koa，具体流程如下：<br>
@@ -781,9 +780,9 @@ var KOAHttpRequestParameter = using('easynode.framework.server.http.KOAHttpReque
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                start () {
-                        var me = this;
-                        return function * () {
+    start() {
+      var me = this;
+      return function *() {
                                 /**
                                  * koa Application实例
                                  * @property _app
@@ -792,143 +791,143 @@ var KOAHttpRequestParameter = using('easynode.framework.server.http.KOAHttpReque
                                  * @since 0.1.0
                                  * @author hujiabao
                                  * */
-                                var app = me._app = koa();
-                                //trigger before-start event
-                                me.trigger(AbstractServer.EVENT_BEFORE_START);
+        var app = me._app = koa();
+                                // trigger before-start event
+        me.trigger(AbstractServer.EVENT_BEFORE_START);
 
                                 // set key of app
-                                app.keys = me._keys;
-                                app.name = me.name;
+        app.keys = me._keys;
+        app.name = me.name;
 
                                 // add favicon support
-                                app.use(favicon(path.join(me.getWebRoot(), 'favicon.ico')));
+        app.use(favicon(path.join(me.getWebRoot(), 'favicon.ico')));
 
                                 // serve static files
-                                //HTTP ROOT
-                                app.use(staticFileServe(me.getWebRoot()));
-                                //Additional web dirs
-                                me._addExtraWebDirs(app);
+                                // HTTP ROOT
+        app.use(staticFileServe(me.getWebRoot()));
+                                // Additional web dirs
+        me._addExtraWebDirs(app);
 
 
-                                me._addTemplate(app);
+        me._addTemplate(app);
 
-        //=========================dynamic request below=========================//
+        // =========================dynamic request below=========================//
 
-                                //set remote address
-                                app.use(function * (next){
-                                        var req = this.req;
-                                        var address = req.headers[PROXY_IP_HEADER] ||
+                                // set remote address
+        app.use(function *(next) {
+          var req = this.req;
+          var address = req.headers[PROXY_IP_HEADER] ||
                                                 (req.connection && req.connection.remoteAddress) ||
                                                 (req.socket && req.socket.remoteAddress) ||
                                                 (req.connection.socket && req.connection.socket.remoteAddress) || '0.0.0.0';
-                                        address = address.replace(/:.*:/, '');                  //convert to pure IPv4
-                                        this.remoteAddress = address;
-                                        yield next;
-                                });
+          address = address.replace(/:.*:/, '');                  // convert to pure IPv4
+          this.remoteAddress = address;
+          yield next;
+        });
 
 
                                 // access log
-                                if (me.writeAccessLog()) {
-                                        app.use(me._createAccessLogger());
-                                }
+        if (me.writeAccessLog()) {
+          app.use(me._createAccessLogger());
+        }
 
                                 // session support
-                                app.use(session({
-                                        store: me._getSessionStore()
-                                }));
+        app.use(session({
+          store: me._getSessionStore()
+        }));
 
-                                //csrf support
-                                if (me._enableCSRF === true) {
-                                        var csrf = require('koa-csrf');
-                                        csrf(app);
-                                        app.use(csrf.middleware);
-                                }
+                                // csrf support
+        if (me._enableCSRF === true) {
+          var csrf = require('koa-csrf');
+          csrf(app);
+          app.use(csrf.middleware);
+        }
 
                                 // parse url query string and body before any middleware defined by user is running
-                                qs(app, 'first');                       // /foo?a=b&a=c         this.query.a = 'b' , not a = ['b', 'c']
+        qs(app, 'first');                       // /foo?a=b&a=c         this.query.a = 'b' , not a = ['b', 'c']
 
                                 // support multipart-form-data
-                                me._createMultipartMiddleware(app);
+        me._createMultipartMiddleware(app);
 
                                 // default middlewares
-                                me._createDefaultMiddlewares(app);
+        me._createDefaultMiddlewares(app);
 
                                 // user defined middlewares
-                                me._createExtraMiddlewares(app);
+        me._createExtraMiddlewares(app);
 
                                 // inner routes
-                                me._createDefaultRoutes(app);
+        me._createDefaultRoutes(app);
 
                                 // user defined routes
-                                me._createExtraRoutes(app);
+        me._createExtraRoutes(app);
 
                                 // middleware after routes
-                                me._createMiddlewaresAfterRoutes(app);
+        me._createMiddlewaresAfterRoutes(app);
 
                                 // handle error 404
-                                if (me._enable404Middleware !== false) {
-                                        app.use(function * () {
-                                                if (this.status == 404) {
-                                                        var uri = this.url.replace(/\?.*$/gm, '');
-                                                        var content404 = me._404Content;
-                                                        if (!content404) {
-                                                                EasyNode.DEBUG && logger.debug('load 404 content from 404.html');
-                                                                var config404 = EasyNode.config('easynode.servers.koa-HttpServer.404', '404.html');
-                                                                var page404 = path.join(me.getWebRoot(), config404);
-                                                                var content404 = '<h1>404 Resource Not Found : ${URI}</h1>';
-                                                                if (yield fs.exists(page404)) {
-                                                                        content404 = yield fs.readFile(page404);
-                                                                }
-                                                                me._404Content = content404;
-                                                        }
-                                                        content404 = content404.toString().replace(/\$\{URI\}/gm, uri);
-                                                        this.type = 'html';
-                                                        this.body = content404;
-                                                        this.status = 404;
-                                                }
-                                        });
-                                }
-
-                                //auto-generate nginx configuration
-                                if(EasyNode.config('easynode.servers.koa-HttpServer.generateNginxConfig', '0') == '1') {
-                                        var nginxConfTemplate = EasyNode.real('etc/nginx-conf.mst');
-                                        var nginxVPTemplate = EasyNode.real('etc/nginx-vp-conf.mst');
-                                        var sCfg = '';
-                                        var sVP = '';
-                                        var extraDirs = me.getWebDirs();
-                                        var vpRegexp = /.*\/(.+)\/www\/?$/;
-                                        //virtual path
-                                        for(var i = 0;i<extraDirs.length;i++) {
-                                                var p = extraDirs[i];
-                                                var vp = '';
-                                                if(p.match(vpRegexp)) {
-                                                        vp = vpRegexp.exec(p)[1];
-                                                        sVP += yield MustacheHelper.renderFile(nginxVPTemplate, {
-                                                                virtualPathName : vp,
-                                                                virtualPathRoot : EasyNode.real(p)
-                                                        });
-                                                        sVP += '\n\n\n';
-                                                }
-                                        }
-                                        //nginx conf
-                                        sCfg = yield MustacheHelper.renderFile(nginxConfTemplate, {
-                                                rootDir : me.getWebRoot(),
-                                                serviceIP : EasyNode.getLocalIP(),
-                                                servicePort : me.port,
-                                                virtualPath : sVP
-                                        });
-
-                                        var nginxConfigFile = EasyNode.real('etc/nginx.conf');
-                                        yield fs.writeFile(nginxConfigFile, sCfg);
-                                        logger.info(`nginx config file is auto-generated at [${nginxConfigFile}]`);
-                                }
-
-                                var fnListen = thunkify(app.listen);
-                                            yield fnListen.call(app, me.port);
-                                            logger.info(`[${me.name}] is listening on port [${me.port}]...`);
-                                            me.trigger(AbstractServer.EVENT_STARTED);
-                                    };
+        if (me._enable404Middleware !== false) {
+          app.use(function *() {
+            if (this.status == 404) {
+              var uri = this.url.replace(/\?.*$/gm, '');
+              var content404 = me._404Content;
+              if (!content404) {
+                EasyNode.DEBUG && logger.debug('load 404 content from 404.html');
+                var config404 = EasyNode.config('easynode.servers.koa-HttpServer.404', '404.html');
+                var page404 = path.join(me.getWebRoot(), config404);
+                var content404 = '<h1>404 Resource Not Found : ${URI}</h1>';
+                if (yield fs.exists(page404)) {
+                  content404 = yield fs.readFile(page404);
                 }
+                me._404Content = content404;
+              }
+              content404 = content404.toString().replace(/\$\{URI\}/gm, uri);
+              this.type = 'html';
+              this.body = content404;
+              this.status = 404;
+            }
+          });
+        }
+
+                                // auto-generate nginx configuration
+        if (EasyNode.config('easynode.servers.koa-HttpServer.generateNginxConfig', '0') == '1') {
+          var nginxConfTemplate = EasyNode.real('etc/nginx-conf.mst');
+          var nginxVPTemplate = EasyNode.real('etc/nginx-vp-conf.mst');
+          var sCfg = '';
+          var sVP = '';
+          var extraDirs = me.getWebDirs();
+          var vpRegexp = /.*\/(.+)\/www\/?$/;
+                                        // virtual path
+          for (var i = 0; i < extraDirs.length; i++) {
+            var p = extraDirs[i];
+            var vp = '';
+            if (p.match(vpRegexp)) {
+              vp = vpRegexp.exec(p)[1];
+              sVP += yield MustacheHelper.renderFile(nginxVPTemplate, {
+                virtualPathName : vp,
+                virtualPathRoot : EasyNode.real(p)
+              });
+              sVP += '\n\n\n';
+            }
+          }
+                                        // nginx conf
+          sCfg = yield MustacheHelper.renderFile(nginxConfTemplate, {
+            rootDir : me.getWebRoot(),
+            serviceIP : EasyNode.getLocalIP(),
+            servicePort : me.port,
+            virtualPath : sVP
+          });
+
+          var nginxConfigFile = EasyNode.real('etc/nginx.conf');
+          yield fs.writeFile(nginxConfigFile, sCfg);
+          logger.info(`nginx config file is auto-generated at [${nginxConfigFile}]`);
+        }
+
+        var fnListen = thunkify(app.listen);
+        yield fnListen.call(app, me.port);
+        logger.info(`[${me.name}] is listening on port [${me.port}]...`);
+        me.trigger(AbstractServer.EVENT_STARTED);
+      };
+    }
 
                 /**
                  * 获取客户端连接列表。KOAHttpServer只返回一个空的数组。
@@ -940,9 +939,9 @@ var KOAHttpRequestParameter = using('easynode.framework.server.http.KOAHttpReque
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                connections () {
-                        return [];
-                }
+    connections() {
+      return [];
+    }
 
                 /**
                  * 向客户端发送消息。HTTP服务不支持主动向客户端发送消息，仅抛出错误。
@@ -957,9 +956,9 @@ var KOAHttpRequestParameter = using('easynode.framework.server.http.KOAHttpReque
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                send(clientTokens, msg) {
-                        throw new Error('This is http server, do you think it is able to work?');
-                }
+    send(clientTokens, msg) {
+      throw new Error('This is http server, do you think it is able to work?');
+    }
 
                 /**
                  * 向所有客户端广播消息。HTTP服务不支持主动向客户端发送消息，仅抛出错误。
@@ -972,13 +971,13 @@ var KOAHttpRequestParameter = using('easynode.framework.server.http.KOAHttpReque
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                broadcast (msg) {
-                        throw new Error('This is http server, do you think it is able to work?');
-                }
+    broadcast(msg) {
+      throw new Error('This is http server, do you think it is able to work?');
+    }
 
-                getClassName() {
-                        return EasyNode.namespace(__filename);
-                }
+    getClassName() {
+      return EasyNode.namespace(__filename);
+    }
         }
 
         /**
@@ -1010,15 +1009,15 @@ var KOAHttpRequestParameter = using('easynode.framework.server.http.KOAHttpReque
          * @since 0.1.0
          * @author hujiabao
          * */
-        KOAHttpServer.SessionSupport = {};
+  KOAHttpServer.SessionSupport = {};
 
-        KOAHttpServer.SessionSupport.STORAGE_MEMORY = 'storage-memory';
+  KOAHttpServer.SessionSupport.STORAGE_MEMORY = 'storage-memory';
 
-        KOAHttpServer.SessionSupport.STORAGE_REDIS = 'storage-redis';
+  KOAHttpServer.SessionSupport.STORAGE_REDIS = 'storage-redis';
 
-        KOAHttpServer.SessionSupport.STORAGE_MEMCACHED = 'storage-memcached';
+  KOAHttpServer.SessionSupport.STORAGE_MEMCACHED = 'storage-memcached';
 
-        KOAHttpServer.Events = {};
+  KOAHttpServer.Events = {};
 
         /**
          * 用户访问动态内容时触发。
@@ -1027,7 +1026,7 @@ var KOAHttpRequestParameter = using('easynode.framework.server.http.KOAHttpReque
          * @since 0.1.0
          * @author hujiabao
          * */
-        KOAHttpServer.Events.EVENT_ACCESS = 'access';
+  KOAHttpServer.Events.EVENT_ACCESS = 'access';
 
-        module.exports = KOAHttpServer;
+  module.exports = KOAHttpServer;
 })();

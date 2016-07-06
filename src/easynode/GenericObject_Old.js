@@ -1,7 +1,7 @@
 var util = require('util');
-var events = require("events");
+var events = require('events');
 
-(function () {
+(function() {
         /**
          * GenericObject类。所有的EasyNode类均继承自此类。<br>
          * GenericObject类继承自Node.js->events.EventEmitter，所有的GenericObject类实例，或其子例实例均可以使用
@@ -34,11 +34,11 @@ var events = require("events");
          * @since 0.1.0
          * @author hujiabao
          * */
-         function GenericObject () {
-                this.setMaxListeners(EasyNode.arg('easynode.events.maxListeners') || 11);
-        }
+  function GenericObject() {
+    this.setMaxListeners(EasyNode.arg('easynode.events.maxListeners') || 11);
+  }
 
-        util.inherits(GenericObject, events.EventEmitter);
+  util.inherits(GenericObject, events.EventEmitter);
 
         /**
          * emit函数的别名。参考：Node.js events.EventEmitter.emit()函数。
@@ -49,9 +49,9 @@ var events = require("events");
          * @since 0.1.0
          * @author hujiabao
          * */
-        GenericObject.prototype.trigger = function() {
-                this.emit.apply(this, arguments);
-        };
+  GenericObject.prototype.trigger = function() {
+    this.emit.apply(this, arguments);
+  };
 
         /**
          * removeListener函数的别名。参考：Node.js events.EventEmitter.removeListener()函数。
@@ -62,9 +62,9 @@ var events = require("events");
          * @since 0.1.0
          * @author hujiabao
          * */
-        GenericObject.prototype.off = function (event, listener) {
-                this.removeListener(event, listener);
-        };
+  GenericObject.prototype.off = function(event, listener) {
+    this.removeListener(event, listener);
+  };
 
 
         /**
@@ -75,9 +75,9 @@ var events = require("events");
          * @since 0.1.0
          * @author hujiabao
          * */
-        GenericObject.prototype.toString = function () {
-                return '[object ' + this.getClassName() + ']';
-        };
+  GenericObject.prototype.toString = function() {
+    return '[object ' + this.getClassName() + ']';
+  };
 
         /**
          * 获取对象的全类名
@@ -86,9 +86,9 @@ var events = require("events");
          * @since 0.1.0
          * @author hujiabao
          * */
-        GenericObject.prototype.getClassName = function () {
-                return EasyNode.namespace(__filename);
-        };
+  GenericObject.prototype.getClassName = function() {
+    return EasyNode.namespace(__filename);
+  };
 
         /**
          * 返回对象的JSON String表达式
@@ -97,10 +97,10 @@ var events = require("events");
          * @since 0.1.0
          * @author hujiabao
          * */
-        GenericObject.prototype.toJSONString = function () {
-                //return util.inspect(this, {depth: EasyNode.config('easynode.inspect.depth')});
-                return JSON.stringify(this.toJSON());
-        };
+  GenericObject.prototype.toJSONString = function() {
+                // return util.inspect(this, {depth: EasyNode.config('easynode.inspect.depth')});
+    return JSON.stringify(this.toJSON());
+  };
 
         /**
          * 返回对象的JSON对象，即：Notation
@@ -109,26 +109,26 @@ var events = require("events");
          * @since 0.1.0
          * @author hujiabao
          * */
-        GenericObject.prototype.toJSON = function () {
-                var o = {};
-                for(var attr in this) {
-                        var val = this[attr];
-                        if(attr[0] != '_' && typeof val != 'function') {
-                                if(val!==null&&typeof val == 'object') {
-                                        if(typeof val.toJSON == 'function') {
-                                                o[attr] = val.toJSON();
-                                        }
-                                        else {
-                                                o[attr] = val;
-                                        }
-                                }
-                                else {
-                                        o[attr] = val;
-                                }
-                        }
-                }
-                return o;
-        };
+  GenericObject.prototype.toJSON = function() {
+    var o = {};
+    for (var attr in this) {
+      var val = this[attr];
+      if (attr[0] != '_' && typeof val != 'function') {
+        if (val !== null && typeof val == 'object') {
+          if (typeof val.toJSON == 'function') {
+            o[attr] = val.toJSON();
+          }
+          else {
+            o[attr] = val;
+          }
+        }
+        else {
+          o[attr] = val;
+        }
+      }
+    }
+    return o;
+  };
 
         /**
          * 判定对象是否属于某个类型
@@ -142,9 +142,9 @@ var events = require("events");
          * var ExpressServer = using('easynode.framework.server.http.ExpressServer');
          * new ExpressServer(3010).is('easynode.framework.server.http.ExpressServer');  //true
          * */
-        GenericObject.prototype.is = function (namespace) {
-                return this.getClassName() == namespace;
-        };
+  GenericObject.prototype.is = function(namespace) {
+    return this.getClassName() == namespace;
+  };
 
         /**
          * 无操作函数。可链式调用。
@@ -158,7 +158,7 @@ var events = require("events");
          * var ExpressServer = using('easynode.framework.server.http.ExpressServer');
          * new ExpressServer(3010).is('easynode.framework.server.http.ExpressServer');  //true
          * */
-        GenericObject.prototype.noop = function() {};
+  GenericObject.prototype.noop = function() {};
 
-        module.exports = GenericObject;
+  module.exports = GenericObject;
 })();

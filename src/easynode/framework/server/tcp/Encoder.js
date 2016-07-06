@@ -2,7 +2,7 @@ var assert = require('assert');
 var logger = using('easynode.framework.Logger').forFile(__filename);
 var GenericObject = using('easynode.GenericObject');
 
-(function () {
+(function() {
         /**
          * Class Encoder
          *
@@ -11,7 +11,7 @@ var GenericObject = using('easynode.GenericObject');
          * @since 0.1.0
          * @author hujiabao
          * */
-        class Encoder extends GenericObject {
+  class Encoder extends GenericObject {
                 /**
                  * 构造函数。
                  *
@@ -19,11 +19,11 @@ var GenericObject = using('easynode.GenericObject');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                constructor(server) {
-                        super();
-                        //调用super()后再定义子类成员。
-                        this.server = server;
-                }
+    constructor(server) {
+      super();
+                        // 调用super()后再定义子类成员。
+      this.server = server;
+    }
 
                 /**
                  * 对消息进行编码
@@ -36,14 +36,14 @@ var GenericObject = using('easynode.GenericObject');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                encode(msg, client) {
-                        throw new Error('Abstract Method');
-                }
+    encode(msg, client) {
+      throw new Error('Abstract Method');
+    }
 
-                getClassName() {
-                        return EasyNode.namespace(__filename);
-                }
+    getClassName() {
+      return EasyNode.namespace(__filename);
+    }
         }
 
-        module.exports = Encoder;
+  module.exports = Encoder;
 })();

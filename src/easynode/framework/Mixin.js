@@ -4,7 +4,7 @@ var fs = require('fs');
 var S = require('string');
 var GenericObject = using('easynode.GenericObject');
 
-(function () {
+(function() {
         /**
          * EasyNode 多继承实现类。这是一个单例类，请使用它的静态函数，不要实例化它。<br>
          * <h5>示例</h5>
@@ -29,9 +29,9 @@ var GenericObject = using('easynode.GenericObject');
          *  @author hujiabao
          *  @since 0.1.0
          * */
-        var _instance = null;
+  var _instance = null;
 
-        class Mixin extends GenericObject {
+  class Mixin extends GenericObject {
                 /**
                  * 构造函数，私有的，使用静态函数getLogger()获取Logger实例。
                  *
@@ -40,15 +40,15 @@ var GenericObject = using('easynode.GenericObject');
                  * @author hujiabao
                  * @private
                  * */
-                constructor() {
-                        super();
-                        //调用super()后再定义子类成员。
-                        assert(_instance == null, 'easynode.Mixin is a singleton class, please use class static function Mixin.mix instead of instantiation');
-                }
+    constructor() {
+      super();
+                        // 调用super()后再定义子类成员。
+      assert(_instance == null, 'easynode.Mixin is a singleton class, please use class static function Mixin.mix instead of instantiation');
+    }
 
-                getClassName () {
-                        return EasyNode.namespace(__filename);
-                }
+    getClassName() {
+      return EasyNode.namespace(__filename);
+    }
 
                 /**
                  *  类的静态函数,将多个接口的混合
@@ -79,33 +79,33 @@ var GenericObject = using('easynode.GenericObject');
                             }
                  *     }
                  * */
-                static mix(...mixins) {
-                        class Mix {}
+    static mix(...mixins) {
+      class Mix {}
 
-                        for (let mixin of mixins) {
-                                Mixin.copyProperties(Mix, mixin);
-                                Mixin.copyProperties(Mix.prototype, mixin.prototype);
-                        }
+      for (const mixin of mixins) {
+        Mixin.copyProperties(Mix, mixin);
+        Mixin.copyProperties(Mix.prototype, mixin.prototype);
+      }
 
-                        return Mix;
-                }
+      return Mix;
+    }
 
 
-                static copyProperties(target, source) {
-                        for (let key of Reflect.ownKeys(source)) {
-                                if ( key !== "constructor"
-                                    && key !== "prototype"
-                                    && key !== "name"
+    static copyProperties(target, source) {
+      for (const key of Reflect.ownKeys(source)) {
+        if (key !== 'constructor'
+                                    && key !== 'prototype'
+                                    && key !== 'name'
                                 ) {
-                                        let desc = Object.getOwnPropertyDescriptor(source, key);
-                                        Object.defineProperty(target, key, desc);
-                                }
-                        }
-                }}
+          const desc = Object.getOwnPropertyDescriptor(source, key);
+          Object.defineProperty(target, key, desc);
+        }
+      }
+    }}
 
 
-        //实例化单例对象。
-        _instance = new Mixin();
+        // 实例化单例对象。
+  _instance = new Mixin();
 
-        module.exports = Mixin;
+  module.exports = Mixin;
 })();

@@ -4,7 +4,7 @@ var fs = require('fs');
 var S = require('string');
 var GenericObject = using('easynode.GenericObject');
 
-(function () {
+(function() {
         /**
          * EasyNode日志类。这是一个单例类，请使用它的静态函数，不要实例化它。<br>
          * Logger是结合配置文件定义的appender和log level使用的，参考：etc/EasyNode.conf。<br>
@@ -32,9 +32,9 @@ var GenericObject = using('easynode.GenericObject');
          *  @author hujiabao
          *  @since 0.1.0
          * */
-        var _instance = null;
+  var _instance = null;
 
-        class Logger extends GenericObject {
+  class Logger extends GenericObject {
                 /**
                  * 构造函数，私有的，使用静态函数getLogger()获取Logger实例。
                  *
@@ -43,48 +43,48 @@ var GenericObject = using('easynode.GenericObject');
                  * @author hujiabao
                  * @private
                  * */
-                constructor() {
-                        super();
-                        //调用super()后再定义子类成员。
-                        assert(_instance == null, 'easynode.Logger is a singleton class,  use getLogger() instead of instantiation');
+    constructor() {
+      super();
+                        // 调用super()后再定义子类成员。
+      assert(_instance == null, 'easynode.Logger is a singleton class,  use getLogger() instead of instantiation');
 
-                        //initialize appenders
-                        var appenders = [
-                                {
-                                        type: 'console'
-                                }
-                        ];
-                        var logDirectory = EasyNode.config('easynode.logger.folder');
-                        if (!fs.existsSync(EasyNode.real(logDirectory))) {
-                                fs.mkdirSync(EasyNode.real(logDirectory));
-                        }
+                        // initialize appenders
+      var appenders = [
+        {
+          type: 'console'
+        }
+      ];
+      var logDirectory = EasyNode.config('easynode.logger.folder');
+      if (!fs.existsSync(EasyNode.real(logDirectory))) {
+        fs.mkdirSync(EasyNode.real(logDirectory));
+      }
 
-                        var s = EasyNode.config('easynode.logger.appenders') || '';
-                        s = s.split(',');
-                        s.forEach(function (v) {
-                                v = S(v).trim();
-                                var appId = EasyNode.config('easynode.app.id', 'UNTITLED');
-                                appId = appId == 'UNTITLED' ? '' : ('.' + appId);
-                                var appender = {
-                                        type: 'dateFile',
-                                        filename: EasyNode.real(logDirectory + '/' + EasyNode.config('easynode.logger.appender.' + v + '.file', v + '.log') + appId),
-                                        pattern: EasyNode.config('easynode.logger.appender.' + v + '.pattern'),
-                                        maxLogSize: parseInt(EasyNode.config('easynode.logger.appender.' + v + '.maxSize')),
-                                        alwaysIncludePattern: false,
-                                        backups: parseInt(EasyNode.config('easynode.logger.appender.' + v + '.backup')),
-                                        category: EasyNode.config('easynode.logger.appender.' + v + '.namespace') || v
-                                };
-                                appenders.push(appender);
-                        });
-                        log4js.configure({
-                                appenders: appenders,
-                                replaceConsole: true
-                        });
-                }
+      var s = EasyNode.config('easynode.logger.appenders') || '';
+      s = s.split(',');
+      s.forEach(function(v) {
+        v = S(v).trim();
+        var appId = EasyNode.config('easynode.app.id', 'UNTITLED');
+        appId = appId == 'UNTITLED' ? '' : ('.' + appId);
+        var appender = {
+          type: 'dateFile',
+          filename: EasyNode.real(logDirectory + '/' + EasyNode.config('easynode.logger.appender.' + v + '.file', v + '.log') + appId),
+          pattern: EasyNode.config('easynode.logger.appender.' + v + '.pattern'),
+          maxLogSize: parseInt(EasyNode.config('easynode.logger.appender.' + v + '.maxSize')),
+          alwaysIncludePattern: false,
+          backups: parseInt(EasyNode.config('easynode.logger.appender.' + v + '.backup')),
+          category: EasyNode.config('easynode.logger.appender.' + v + '.namespace') || v
+        };
+        appenders.push(appender);
+      });
+      log4js.configure({
+        appenders: appenders,
+        replaceConsole: true
+      });
+    }
 
-                getClassName () {
-                        return EasyNode.namespace(__filename);
-                }
+    getClassName() {
+      return EasyNode.namespace(__filename);
+    }
 
                 /**
                  * 获取一个Logger实例。Logger实例具有debug、info、warn、error、fatal五个函数，对应DEBUG、INFO、WARN、ERROR、FATAL五个日志级别。<br>
@@ -128,13 +128,13 @@ var GenericObject = using('easynode.GenericObject');
                  *      logger.error('Hello, EasyNode');
                  *      logger.fatal('Hello, EasyNode');
                  * */
-                static getLogger(name='root') {
-                        var logger = log4js.getLogger(name);
-                        var l = EasyNode.config('easynode.logger.appender.' + name + '.' + 'level') || EasyNode.config('easynode.logger.level');
-                        l && logger.setLevel(l);
-                        //TODO AOP debug
-                        return logger;
-                }
+    static getLogger(name = 'root') {
+      var logger = log4js.getLogger(name);
+      var l = EasyNode.config('easynode.logger.appender.' + name + '.' + 'level') || EasyNode.config('easynode.logger.level');
+      l && logger.setLevel(l);
+                        // TODO AOP debug
+      return logger;
+    }
 
                 /**
                  * 获取指定文件名的Logger，它是Logger.getLogger()函数的语法糖，参考getLogger。
@@ -153,20 +153,20 @@ var GenericObject = using('easynode.GenericObject');
                  *      logger.error('Hello, EasyNode');
                  *      logger.fatal('Hello, EasyNode');
                  * */
-                static forFile(file) {
-                        assert(typeof file == 'string', 'Not a String');
-                        if(file.match(/.*\/src\/.*/)) {
-                                var ns = EasyNode.namespace(file);
-                                return Logger.getLogger(ns);
-                        }
-                        else {
-                                return Logger.getLogger(file.replace(/.*\//gm, ''));
-                        }
-                }
+    static forFile(file) {
+      assert(typeof file == 'string', 'Not a String');
+      if (file.match(/.*\/src\/.*/)) {
+        var ns = EasyNode.namespace(file);
+        return Logger.getLogger(ns);
+      }
+      else {
+        return Logger.getLogger(file.replace(/.*\//gm, ''));
+      }
+    }
         }
 
-        //实例化单例对象。
-        _instance = new Logger();
+        // 实例化单例对象。
+  _instance = new Logger();
 
-        module.exports = Logger;
+  module.exports = Logger;
 })();

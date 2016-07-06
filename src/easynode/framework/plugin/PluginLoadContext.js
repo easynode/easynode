@@ -3,7 +3,7 @@ var logger = using('easynode.framework.Logger').forFile(__filename);
 var GenericObject = using('easynode.GenericObject');
 var _ = require('underscore');
 
-(function () {
+(function() {
         /**
          * 插件加载环境类PluginLoadContext
          *
@@ -12,7 +12,7 @@ var _ = require('underscore');
          * @since 0.1.0
          * @author hujiabao
          * */
-        class PluginLoadContext extends GenericObject {
+  class PluginLoadContext extends GenericObject {
                 /**
                  * 构造函数。
                  *
@@ -21,9 +21,9 @@ var _ = require('underscore');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                constructor(opts) {
-                        super();
-                        //调用super()后再定义子类成员。
+    constructor(opts) {
+      super();
+                        // 调用super()后再定义子类成员。
 
                         /**
                          * 数据源
@@ -34,7 +34,7 @@ var _ = require('underscore');
                          * @since 0.1.0
                          * @author hujiabao
                          * */
-                        this.datasource = null;
+      this.datasource = null;
 
                         /**
                          * 数据库名
@@ -45,7 +45,7 @@ var _ = require('underscore');
                          * @since 0.1.0
                          * @author hujiabao
                          * */
-                        this.database = null;
+      this.database = null;
 
                         /**
                          * 缓存
@@ -56,7 +56,7 @@ var _ = require('underscore');
                          * @since 0.1.0
                          * @author hujiabao
                          * */
-                        this.cache = null;
+      this.cache = null;
 
                         /**
                          * 队列实例
@@ -67,7 +67,7 @@ var _ = require('underscore');
                          * @since 0.1.0
                          * @author hujiabao
                          * */
-                        this.mq = null;
+      this.mq = null;
 
                         /**
                          * KOAHttpServer
@@ -78,21 +78,21 @@ var _ = require('underscore');
                          * @since 0.1.0
                          * @author hujiabao
                          * */
-                        this.koaHttpServer = null;
+      this.koaHttpServer = null;
 
-                        this.tcpServer = null;
+      this.tcpServer = null;
 
-                        this.udpServer = null;
+      this.udpServer = null;
 
-                        this.wsServer = null;
+      this.wsServer = null;
 
-                        _.extend(this, opts || {});
-                }
+      _.extend(this, opts || {});
+    }
 
-                getClassName() {
-                        return EasyNode.namespace(__filename);
-                }
+    getClassName() {
+      return EasyNode.namespace(__filename);
+    }
         }
 
-        module.exports = PluginLoadContext;
+  module.exports = PluginLoadContext;
 })();

@@ -2,7 +2,7 @@ var assert = require('assert');
 var logger = using('easynode.framework.Logger').forFile(__filename);
 var GenericObject = using('easynode.GenericObject');
 
-(function () {
+(function() {
     /**
      * Class APIReturn
      *
@@ -11,7 +11,7 @@ var GenericObject = using('easynode.GenericObject');
      * @since 0.1.0
      * @author allen.hu
      * */
-    class APIReturn extends GenericObject {
+  class APIReturn extends GenericObject {
         /**
          * 构造函数。
          *
@@ -19,19 +19,19 @@ var GenericObject = using('easynode.GenericObject');
          * @since 0.1.0
          * @author allen.hu
          * */
-        constructor() {
-            super();
-            //调用super()后再定义子类成员。
-        }
-
-        APIReturn(resCode = -1, resMsg = '', data = {} ){
-            return {resCode:resCode, resMsg:resMsg, data:data};
-        }
-
-        getClassName() {
-            return EasyNode.namespace(__filename);
-        }
+    constructor() {
+      super();
+            // 调用super()后再定义子类成员。
     }
 
-    module.exports = APIReturn;
+    APIReturn(resCode = -1, resMsg = '', data = {}) {
+      return {resCode:resCode, resMsg:resMsg, data:data};
+    }
+
+    getClassName() {
+      return EasyNode.namespace(__filename);
+    }
+    }
+
+  module.exports = APIReturn;
 })();

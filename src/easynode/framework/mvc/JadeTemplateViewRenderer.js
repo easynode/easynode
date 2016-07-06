@@ -4,7 +4,7 @@ var ITemplateViewRenderer = using('easynode.framework.mvc.ITemplateViewRenderer'
 var _ = require('underscore');
 var jade = require('jade');
 
-(function () {
+(function() {
         /**
          * Class JadeTemplateViewRenderer，用于渲染Jade模板引擎的View
          *
@@ -13,7 +13,7 @@ var jade = require('jade');
          * @since 0.1.0
          * @author hujiabao
          * */
-        class JadeTemplateViewRenderer extends ITemplateViewRenderer {
+  class JadeTemplateViewRenderer extends ITemplateViewRenderer {
                 /**
                  * 构造函数。
                  *
@@ -21,25 +21,25 @@ var jade = require('jade');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                constructor() {
-                        super();
-                        //调用super()后再定义子类成员。
-                }
+    constructor() {
+      super();
+                        // 调用super()后再定义子类成员。
+    }
 
-                render (actionResult, template) {
-                        var data = actionResult.toJSON();
-                        injectHelpers(data);
-                        return jade.render(template, data);
-                }
+    render(actionResult, template) {
+      var data = actionResult.toJSON();
+      injectHelpers(data);
+      return jade.render(template, data);
+    }
 
-                injectHelpers (data) {
-                        _.extend(data, {});
-                }
+    injectHelpers(data) {
+      _.extend(data, {});
+    }
 
-                getClassName() {
-                        return EasyNode.namespace(__filename);
-                }
+    getClassName() {
+      return EasyNode.namespace(__filename);
+    }
         }
 
-        module.exports = JadeTemplateViewRenderer;
+  module.exports = JadeTemplateViewRenderer;
 })();

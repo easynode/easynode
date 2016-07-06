@@ -2,7 +2,7 @@ var assert = require('assert');
 var logger = using('easynode.framework.Logger').forFile(__filename);
 var GenericObject = using('easynode.GenericObject');
 
-(function () {
+(function() {
         /**
          * Class IQueue
          *
@@ -11,7 +11,7 @@ var GenericObject = using('easynode.GenericObject');
          * @since 0.1.0
          * @author hujiabao
          * */
-        class IQueue extends GenericObject {
+  class IQueue extends GenericObject {
                 /**
                  * 构造函数。
                  *
@@ -19,10 +19,10 @@ var GenericObject = using('easynode.GenericObject');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                constructor() {
-                        super();
-                        //调用super()后再定义子类成员。
-                }
+    constructor() {
+      super();
+                        // 调用super()后再定义子类成员。
+    }
 
                 /**
                  * 向队列发送消息。
@@ -36,9 +36,9 @@ var GenericObject = using('easynode.GenericObject');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                publish (queueName, opts, ...msgs) {
-                        throw new Error('Abstract Method');
-                }
+    publish(queueName, opts, ...msgs) {
+      throw new Error('Abstract Method');
+    }
 
                 /**
                  * 订阅队列消息。
@@ -53,9 +53,9 @@ var GenericObject = using('easynode.GenericObject');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                subscribe (queueName, opts, l) {
-                        throw new Error('Abstract Method');
-                }
+    subscribe(queueName, opts, l) {
+      throw new Error('Abstract Method');
+    }
 
                 /**
                  * 取消订阅队列消息。
@@ -67,14 +67,14 @@ var GenericObject = using('easynode.GenericObject');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                unsubscribe (subscribeInst) {
-                        throw new Error('Abstract Method');
-                }
+    unsubscribe(subscribeInst) {
+      throw new Error('Abstract Method');
+    }
 
-                getClassName() {
-                        return EasyNode.namespace(__filename);
-                }
+    getClassName() {
+      return EasyNode.namespace(__filename);
+    }
         }
 
-        module.exports = IQueue;
+  module.exports = IQueue;
 })();

@@ -9,12 +9,12 @@ var thunkify = require('thunkify');
 var _ = require('underscore');
 var fs = require('co-fs');
 
-(function () {
-        //插件名列表，有序
-        var _pluginList = [];
+(function() {
+        // 插件名列表，有序
+  var _pluginList = [];
 
-        //插件实例
-        var _plugins = {};
+        // 插件实例
+  var _plugins = {};
 
         /**
          * Class EasyNodePlugin
@@ -24,7 +24,7 @@ var fs = require('co-fs');
          * @since 0.1.0
          * @author hujiabao
          * */
-        class EasyNodePlugin extends GenericObject {
+  class EasyNodePlugin extends GenericObject {
                 /**
                  * 构造函数。
                  *
@@ -34,17 +34,17 @@ var fs = require('co-fs');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                constructor(name, version='0.0.1') {
-                        super();
-                        //调用super()后再定义子类成员。
-                        assert(!S(name).isEmpty(), 'Plugin must be named');
+    constructor(name, version = '0.0.1') {
+      super();
+                        // 调用super()后再定义子类成员。
+      assert(!S(name).isEmpty(), 'Plugin must be named');
 
                         /**
                          * 插件名称
                          * @property name
                          * @type String
                          * */
-                        this.name = name;
+      this.name = name;
 
                         /**
                          * 插件版本，格式：major.minor.patch
@@ -53,7 +53,7 @@ var fs = require('co-fs');
                          * @since 0.1.0
                          * @author hujiabao
                          * */
-                        this.version = version;
+      this.version = version;
 
                         /**
                          * 插件简述，默认与插件名称一致。
@@ -62,7 +62,7 @@ var fs = require('co-fs');
                          * @since 0.1.0
                          * @author hujiabao
                          * */
-                        this.brief = this.name;
+      this.brief = this.name;
 
                         /**
                          * 插件详细描述
@@ -72,7 +72,7 @@ var fs = require('co-fs');
                          * @since 0.1.0
                          * @author hujiabao
                          * */
-                        this.description = null;
+      this.description = null;
 
 
                         /**
@@ -83,7 +83,7 @@ var fs = require('co-fs');
                          * @since 0.1.0
                          * @author hujiabao
                          * */
-                        this.configurations = {};
+      this.configurations = {};
 
 
                         /**
@@ -94,7 +94,7 @@ var fs = require('co-fs');
                          * @since 0.1.0
                          * @author hujiabao
                          * */
-                        this.i18nConfig = {};
+      this.i18nConfig = {};
 
 
                         /**
@@ -106,8 +106,8 @@ var fs = require('co-fs');
                          * @since 0.1.0
                          * @author hujiabao
                          * */
-                        this._load = false;
-                }
+      this._load = false;
+    }
 
                 /**
                  * 获取插件根目录，插件根目录: $EasyNode/plugins/$plugin。
@@ -117,9 +117,9 @@ var fs = require('co-fs');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                home () {
-                        return EasyNode.real(`plugins/${this.name}/`);
-                }
+    home() {
+      return EasyNode.real(`plugins/${this.name}/`);
+    }
 
                 /**
                  * 获取指定插件资源的相对路径（相对于EasyNode Home目录）。plugins/$pluginName/$relative
@@ -130,9 +130,9 @@ var fs = require('co-fs');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                relative(p) {
-                        return path.join(`plugins/${this.name}/`, p);
-                }
+    relative(p) {
+      return path.join(`plugins/${this.name}/`, p);
+    }
 
                 /**
                  * 获取指定插件资源的绝对路径。
@@ -143,9 +143,9 @@ var fs = require('co-fs');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                real (p) {
-                        return path.join(this.home(), p);
-                }
+    real(p) {
+      return path.join(this.home(), p);
+    }
 
                 /**
                  * 插件是否已经加载。
@@ -155,9 +155,9 @@ var fs = require('co-fs');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                isLoad() {
-                        return this._load;
-                }
+    isLoad() {
+      return this._load;
+    }
 
                 /**
                  * 读取插件描述文件，插件描述文件应该位于插件根目录下，命名为：$plugin.md，$plugin为插件名称。
@@ -168,20 +168,20 @@ var fs = require('co-fs');
                  * @author hujiabao
                  * */
 
-                 getDescription () {
-                        var me = this;
-                        return function * () {
-                                if(me.description != null) {
-                                        return me.description;
-                                }
-                                var descFile = me.real(`${this.name}.md`);
-                                var fnReadFile = thunkify(fs.readFile);
-                                var s = yield fnReadFile(descFile);
-                                s = s.toString();
-                                me.description = s;
-                                return s;
-                        };
-                 }
+    getDescription() {
+      var me = this;
+      return function *() {
+        if (me.description != null) {
+          return me.description;
+        }
+        var descFile = me.real(`${this.name}.md`);
+        var fnReadFile = thunkify(fs.readFile);
+        var s = yield fnReadFile(descFile);
+        s = s.toString();
+        me.description = s;
+        return s;
+      };
+    }
 
                 /**
                  * 初始化插件。
@@ -192,11 +192,11 @@ var fs = require('co-fs');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                initialize (loadCtx)  {
-                        return function * () {
+    initialize(loadCtx) {
+      return function *() {
 
-                        };
-                }
+      };
+    }
 
                 /**
                  * 设置或获取插件配置。
@@ -207,14 +207,14 @@ var fs = require('co-fs');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                config(item, defaultValue=null) {
-                        if(typeof item == 'string') {
-                                return this.configurations[item] || defaultValue;
-                        }
-                        else if(typeof item == 'object' && arguments.length == 1) {
-                                _.extend(this.configurations, item);
-                        }
-                }
+    config(item, defaultValue = null) {
+      if (typeof item == 'string') {
+        return this.configurations[item] || defaultValue;
+      }
+      else if (typeof item == 'object' && arguments.length == 1) {
+        _.extend(this.configurations, item);
+      }
+    }
 
                 /**
                  * 获取插件Web目录，插件Web目录为：$plugin/www/，要求插件目录下有且仅有一个以插件名命名的目录，否则视为无效Web目录。
@@ -225,22 +225,22 @@ var fs = require('co-fs');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                getWebDir () {
-                        var webDir = this.real('www/');
-                        var me = this;
-                        return function * () {
-                                var exists = yield fs.exists(path.join(webDir, me.name));
-                                if(exists) {
-                                        var files = yield fs.readdir(webDir);
-                                        if (files.length == 1) {
-                                                return `plugins/` + me.name + '/www/';
-                                        }
-                                        else {
-                                                logger.error(`Unrecognized web directory of plugin [${me.name}]`);
-                                        }
-                                }
-                        };
-                }
+    getWebDir() {
+      var webDir = this.real('www/');
+      var me = this;
+      return function *() {
+        var exists = yield fs.exists(path.join(webDir, me.name));
+        if (exists) {
+          var files = yield fs.readdir(webDir);
+          if (files.length == 1) {
+            return 'plugins/' + me.name + '/www/';
+          }
+          else {
+            logger.error(`Unrecognized web directory of plugin [${me.name}]`);
+          }
+        }
+      };
+    }
 
                 /**
                  * 设置或获取插件国际化配置。
@@ -251,17 +251,17 @@ var fs = require('co-fs');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                i18n(item, prefix, ...replaces) {
-                        if(typeof item == 'string') {
-                                if(prefix) {
-                                        item = EasyNode.namespace(prefix) + '.' + item;
-                                }
-                                return this.i18nConfig[item] || item;
-                        }
-                        else if(typeof item == 'object' && arguments.length == 1) {
-                                _.extend(this.i18nConfig, item);
-                        }
-                }
+    i18n(item, prefix, ...replaces) {
+      if (typeof item == 'string') {
+        if (prefix) {
+          item = EasyNode.namespace(prefix) + '.' + item;
+        }
+        return this.i18nConfig[item] || item;
+      }
+      else if (typeof item == 'object' && arguments.length == 1) {
+        _.extend(this.i18nConfig, item);
+      }
+    }
 
                 /**
                  * 获取插件i18n字符串。消息来自于i18n配置文件，i18n配置项为：plugin.$pluginName[.$subKey].$code
@@ -273,10 +273,10 @@ var fs = require('co-fs');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                formatString(key, subKey=null) {
-                        var item = 'plugin.' + this.name + '.' + (subKey ? (subKey + '.') : '') + key;
-                        return this.i18n(item, '');
-                }
+    formatString(key, subKey = null) {
+      var item = 'plugin.' + this.name + '.' + (subKey ? (subKey + '.') : '') + key;
+      return this.i18n(item, '');
+    }
 
                 /**
                  * 获取插件i18n字符串 - 响应ActionResult专用。消息来自于i18n配置文件，i18n配置项为：plugin.$pluginName.results.$code
@@ -287,9 +287,9 @@ var fs = require('co-fs');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                formatResult(key) {
-                        return this.formatString(key, 'results');
-                }
+    formatResult(key) {
+      return this.formatString(key, 'results');
+    }
 
                 /**
                  * 设置插件依赖。如果没有找到依赖的插件则抛出错误。
@@ -300,11 +300,11 @@ var fs = require('co-fs');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                depends(...plugins) {
-                        this.dependencies = this.dependencies || [];
-                        this.dependencies = this.dependencies.concat(plugins);
-                        return this;
-                }
+    depends(...plugins) {
+      this.dependencies = this.dependencies || [];
+      this.dependencies = this.dependencies.concat(plugins);
+      return this;
+    }
 
                 /**
                  * 检查插件依赖
@@ -313,16 +313,16 @@ var fs = require('co-fs');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                checkDependency() {
-                        this.dependencies = this.dependencies || [];
-                        this.dependencies.forEach(p => {
-                                var [name,version] = p.split('@');
-                                var inst = EasyNodePlugin.getPlugin(name, version);
-                                if(!inst) {
-                                        throw new Error(`Dependency error, plugin [${this.name}] depends [${name}${version ? '@' + version : ''}], but depended plugin is not found or version is too low`);
-                                }
-                        });
-                }
+    checkDependency() {
+      this.dependencies = this.dependencies || [];
+      this.dependencies.forEach((p) => {
+        var [name, version] = p.split('@');
+        var inst = EasyNodePlugin.getPlugin(name, version);
+        if (!inst) {
+          throw new Error(`Dependency error, plugin [${this.name}] depends [${name}${version ? '@' + version : ''}], but depended plugin is not found or version is too low`);
+        }
+      });
+    }
 
 
                 /**
@@ -332,16 +332,16 @@ var fs = require('co-fs');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                toJSON () {
-                        var o = {
-                                name : this.name,
-                                version : this.version,
-                                brief : this.brief,
-                                description : this.description,
-                                home : this.home()
-                        };
-                        return JSON.stringify(o);
-                }
+    toJSON() {
+      var o = {
+        name : this.name,
+        version : this.version,
+        brief : this.brief,
+        description : this.description,
+        home : this.home()
+      };
+      return JSON.stringify(o);
+    }
 
 
                 /**
@@ -371,98 +371,98 @@ var fs = require('co-fs');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                static load(loadCtx) {
-                        function * readConfig(pluginName, dir, pattern=/^.*\.conf$/) {
-                                var exists = yield fs.exists(dir);
-                                if(!exists) {
-                                        return {};
-                                }
-                                var files = yield fs.readdir(dir);
-                                var ret = {};
-                                for(var i = 0;i<files.length;i++) {
-                                        var f = path.join(dir, files[i]);
-                                        if(f.match(pattern)) {
-                                                var cfg = yield fs.readFile(f);
-                                                cfg = cfg.toString().split('\n');
-                                                cfg.forEach(function (c) {
-                                                        if (c && c[0] != '#') {          //#is a comment flag
-                                                                c = c.split('=');
-                                                                c[0] = c[0] && S(c[0]).trim().toString();
-                                                                c[1] = c[1] && S(c[1]).trim().toString();
-                                                                if(ret[c[0]] !== undefined) {
-                                                                        logger.warn(`Duplicated config item in plugin [${pluginName}]: [${c[0]}]`);
-                                                                }
-                                                                ret[c[0]] = c[1];
-                                                        }
-                                                });
-                                        }
-                                }
-                                return ret;
-                        }
-
-                        var pluginFolder = EasyNode.real('plugins/');
-                        var locale = EasyNode.getLocale();
-                        return function * () {
-                                var files = yield fs.readdir(pluginFolder);
-                                for(var i = 0;i<files.length;i++) {
-                                        var pluginFolderName = files[i];
-                                        var f = path.join(pluginFolder, pluginFolderName);
-                                        var stat = yield fs.stat(f);
-                                        if(stat.isDirectory()) {
-                                                try {
-                                                        var isIgnore = yield fs.exists(path.join(f, '.ignore'));
-                                                        if(isIgnore) {
-                                                                logger.info(`ignore plugin [${pluginFolderName}]`);
-                                                                continue;
-                                                        }
-                                                        EasyNode.DEBUG && logger.debug(`found plugin directory [${pluginFolderName}]...`);
-                                                        EasyNode.addSourceDirectory('plugins/' + pluginFolderName + '/src');
-                                                        EasyNode.addConfigFile('plugins/' + pluginFolderName + '/etc/' + pluginFolderName + '.conf');
-                                                        var locale = EasyNode.getLocale();
-                                                        var pluginConf = yield readConfig(pluginFolderName, path.join(f, 'etc/'), new RegExp(pluginFolderName + '.conf'));
-                                                        var i18nConf = yield readConfig(pluginFolderName, path.join(f, 'etc/i18n/'), new RegExp(locale + '.conf'));
-                                                        var PluginEntryClass = require(path.join(f, 'src/'+pluginFolderName+'_PluginEntry.js'));
-                                                        var pluginInstance = new PluginEntryClass();
-                                                        if (!(pluginInstance instanceof EasyNodePlugin)) {
-                                                                throw new Error(`Invalid plugin entry [${pluginFolderName}]`);
-                                                        }
-                                                        logger.info(`loading plugin [${pluginInstance.name}@${pluginInstance.version}]`);
-                                                        if(pluginInstance.name != pluginFolderName) {
-                                                                throw new Error(`Unmatched plugin name and folder [${pluginInstance.name}]->[${pluginFolderName}]`);
-                                                        }
-                                                        pluginInstance.config(pluginConf);
-                                                        pluginInstance.i18n(i18nConf);
-                                                        _plugins[pluginInstance.name] = pluginInstance;
-                                                        _pluginList.push(pluginInstance.name);
-                                                        EasyNode.DEBUG && logger.debug(`plugin [${pluginInstance.name}@${pluginInstance.version}] is load, preparing to initialize...`);
-                                                }catch(e) {
-                                                        logger.error(`Bad plugin package [${pluginFolderName}]`);
-                                                        logger.error(e);
-                                                }
-                                        }
-                                }
-
-                                for(var i = 0;i<_pluginList.length;i++) {
-                                        try {
-                                                var pluginInstance = EasyNodePlugin.getPlugin(_pluginList[i]);
-                                                EasyNode.DEBUG && logger.debug(`initializing plugin [${pluginInstance.name}@${pluginInstance.version}]...`);
-                                                EasyNode.DEBUG && logger.debug('checking dependency...');
-                                                pluginInstance.checkDependency();
-                                                yield pluginInstance.initialize(loadCtx);
-                                                var webDir = yield pluginInstance.getWebDir();
-                                                if(loadCtx.koaHttpServer && webDir) {
-                                                        EasyNode.DEBUG && logger.debug(`registering plugin web directory [/${pluginInstance.name}]...`);
-                                                        loadCtx.koaHttpServer.addWebDirs(webDir);
-                                                }
-                                                pluginInstance._load = true;
-                                                logger.info(`plugin [${pluginInstance.name}@${pluginInstance.version}] is initialized`);
-                                        }catch(e) {
-                                                logger.error(`initialize plugin [${pluginInstance.name}] failed`);
-                                                logger.error(e.stack);
-                                        }
-                                }
-                        };
+    static load(loadCtx) {
+      function *readConfig(pluginName, dir, pattern = /^.*\.conf$/) {
+        var exists = yield fs.exists(dir);
+        if (!exists) {
+          return {};
+        }
+        var files = yield fs.readdir(dir);
+        var ret = {};
+        for (var i = 0; i < files.length; i++) {
+          var f = path.join(dir, files[i]);
+          if (f.match(pattern)) {
+            var cfg = yield fs.readFile(f);
+            cfg = cfg.toString().split('\n');
+            cfg.forEach(function(c) {
+              if (c && c[0] != '#') {          // #is a comment flag
+                c = c.split('=');
+                c[0] = c[0] && S(c[0]).trim().toString();
+                c[1] = c[1] && S(c[1]).trim().toString();
+                if (ret[c[0]] !== undefined) {
+                  logger.warn(`Duplicated config item in plugin [${pluginName}]: [${c[0]}]`);
                 }
+                ret[c[0]] = c[1];
+              }
+            });
+          }
+        }
+        return ret;
+      }
+
+      var pluginFolder = EasyNode.real('plugins/');
+      var locale = EasyNode.getLocale();
+      return function *() {
+        var files = yield fs.readdir(pluginFolder);
+        for (var i = 0; i < files.length; i++) {
+          var pluginFolderName = files[i];
+          var f = path.join(pluginFolder, pluginFolderName);
+          var stat = yield fs.stat(f);
+          if (stat.isDirectory()) {
+            try {
+              var isIgnore = yield fs.exists(path.join(f, '.ignore'));
+              if (isIgnore) {
+                logger.info(`ignore plugin [${pluginFolderName}]`);
+                continue;
+              }
+              EasyNode.DEBUG && logger.debug(`found plugin directory [${pluginFolderName}]...`);
+              EasyNode.addSourceDirectory('plugins/' + pluginFolderName + '/src');
+              EasyNode.addConfigFile('plugins/' + pluginFolderName + '/etc/' + pluginFolderName + '.conf');
+              var locale = EasyNode.getLocale();
+              var pluginConf = yield readConfig(pluginFolderName, path.join(f, 'etc/'), new RegExp(pluginFolderName + '.conf'));
+              var i18nConf = yield readConfig(pluginFolderName, path.join(f, 'etc/i18n/'), new RegExp(locale + '.conf'));
+              var PluginEntryClass = require(path.join(f, 'src/' + pluginFolderName + '_PluginEntry.js'));
+              var pluginInstance = new PluginEntryClass();
+              if (!(pluginInstance instanceof EasyNodePlugin)) {
+                throw new Error(`Invalid plugin entry [${pluginFolderName}]`);
+              }
+              logger.info(`loading plugin [${pluginInstance.name}@${pluginInstance.version}]`);
+              if (pluginInstance.name != pluginFolderName) {
+                throw new Error(`Unmatched plugin name and folder [${pluginInstance.name}]->[${pluginFolderName}]`);
+              }
+              pluginInstance.config(pluginConf);
+              pluginInstance.i18n(i18nConf);
+              _plugins[pluginInstance.name] = pluginInstance;
+              _pluginList.push(pluginInstance.name);
+              EasyNode.DEBUG && logger.debug(`plugin [${pluginInstance.name}@${pluginInstance.version}] is load, preparing to initialize...`);
+            } catch (e) {
+              logger.error(`Bad plugin package [${pluginFolderName}]`);
+              logger.error(e);
+            }
+          }
+        }
+
+        for (var i = 0; i < _pluginList.length; i++) {
+          try {
+            var pluginInstance = EasyNodePlugin.getPlugin(_pluginList[i]);
+            EasyNode.DEBUG && logger.debug(`initializing plugin [${pluginInstance.name}@${pluginInstance.version}]...`);
+            EasyNode.DEBUG && logger.debug('checking dependency...');
+            pluginInstance.checkDependency();
+            yield pluginInstance.initialize(loadCtx);
+            var webDir = yield pluginInstance.getWebDir();
+            if (loadCtx.koaHttpServer && webDir) {
+              EasyNode.DEBUG && logger.debug(`registering plugin web directory [/${pluginInstance.name}]...`);
+              loadCtx.koaHttpServer.addWebDirs(webDir);
+            }
+            pluginInstance._load = true;
+            logger.info(`plugin [${pluginInstance.name}@${pluginInstance.version}] is initialized`);
+          } catch (e) {
+            logger.error(`initialize plugin [${pluginInstance.name}] failed`);
+            logger.error(e.stack);
+          }
+        }
+      };
+    }
 
                 /**
                  * 获取插件实例。
@@ -474,21 +474,21 @@ var fs = require('co-fs');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                static getPlugin(name, version) {
-                        if(arguments.length == 1) {
-                                [name, version] = name.split('@');
-                        }
-                        var plugin = _plugins[name];
-                        if(plugin && version) {
-                                if(VersionComparator.compare(plugin.version, version) >= 0) {
-                                        return plugin;
-                                }
-                                else {
-                                        return null;
-                                }
-                        }
-                        return plugin;
-                }
+    static getPlugin(name, version) {
+      if (arguments.length == 1) {
+        [name, version] = name.split('@');
+      }
+      var plugin = _plugins[name];
+      if (plugin && version) {
+        if (VersionComparator.compare(plugin.version, version) >= 0) {
+          return plugin;
+        }
+        else {
+          return null;
+        }
+      }
+      return plugin;
+    }
 
                 /**
                  * 返回系统插件情况。
@@ -499,31 +499,31 @@ var fs = require('co-fs');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                static plugins(detail=false) {
-                        if(!detail) {
-                                return _.clone(_pluginList);
-                        }
-                        else {
-                                var list = [];
-                                for(var name  in _plugins) {
-                                        var inst = _plugins[name];
-                                        var o = {
-                                                name : name,
-                                                version : inst.version,
-                                                brief : inst.brief,
-                                                description : inst.description,
-                                                load : inst.isLoad()
-                                        };
-                                        list.push(o);
-                                }
-                                return list;
-                        }
-                }
+    static plugins(detail = false) {
+      if (!detail) {
+        return _.clone(_pluginList);
+      }
+      else {
+        var list = [];
+        for (var name in _plugins) {
+          var inst = _plugins[name];
+          var o = {
+            name : name,
+            version : inst.version,
+            brief : inst.brief,
+            description : inst.description,
+            load : inst.isLoad()
+          };
+          list.push(o);
+        }
+        return list;
+      }
+    }
 
-                getClassName() {
-                        return EasyNode.namespace(__filename);
-                }
+    getClassName() {
+      return EasyNode.namespace(__filename);
+    }
         }
 
-        module.exports = EasyNodePlugin;
+  module.exports = EasyNodePlugin;
 })();

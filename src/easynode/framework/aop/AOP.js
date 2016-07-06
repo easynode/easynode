@@ -4,7 +4,7 @@ var GenericObject = using('easynode.GenericObject');
 var _ = require('underscore');
 var fs = require('fs');
 
-(function () {
+(function() {
         /**
          * Class AOP
          *
@@ -13,7 +13,7 @@ var fs = require('fs');
          * @since 0.1.0
          * @author hujiabao
          * */
-        class AOP extends GenericObject {
+  class AOP extends GenericObject {
                 /**
                  * 构造函数。
                  *
@@ -21,10 +21,10 @@ var fs = require('fs');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                constructor() {
-                        super();
-                        //调用super()后再定义子类成员。
-                }
+    constructor() {
+      super();
+                        // 调用super()后再定义子类成员。
+    }
 
                 /**
                  * AOP before。功能：在A函数执行前先行执行B函数，使用B函数的返回值（必须是一个数组）作为A函数的参数。A函数：被拦截函数，
@@ -57,55 +57,55 @@ var fs = require('fs');
                  *                      return ['PPP'];                                                        //实际传递到obj.sayHello的函数的参数hello变成了"PPP"
                  *              });
                  * */
-                static before(namespace, methodName, fnBefore, syncMode=AOP.SYNC) {
-                        var o = null;
-                        assert(namespace, 'Invalid arguments');
-                        if(typeof namespace == 'string') {
-                                o = using(namespace);
-                        }
-                        else if(typeof namespace == 'object' || typeof namespace == 'function') {
-                                o = namespace;
-                        }
+    static before(namespace, methodName, fnBefore, syncMode = AOP.SYNC) {
+      var o = null;
+      assert(namespace, 'Invalid arguments');
+      if (typeof namespace == 'string') {
+        o = using(namespace);
+      }
+      else if (typeof namespace == 'object' || typeof namespace == 'function') {
+        o = namespace;
+      }
                         else {
-                                throw new Error('Invalid argument [namesapce]');
-                        }
-                        if(typeof o == 'function') {
-                                var srcFn = o.prototype[methodName];
-                                assert(typeof srcFn == 'function', 'Invalid argument [methodName], not a function');
-                                if(syncMode == AOP.ASYNC) {
-                                        o.prototype[methodName] = function() {
-                                                var ctx = this;
-                                                var args = arguments;
-                                                return function * () {
-                                                        return yield srcFn.apply(ctx, yield fnBefore.apply(ctx, args));
-                                                };
-                                        };
-                                }
-                                else {
-                                        o.prototype[methodName] = function() {
-                                                return srcFn.apply(this, fnBefore.apply(this, arguments));
-                                        };
-                                }
-                        }
-                        else if(typeof o == 'object') {
-                                var srcFn = o[methodName];
-                                assert(typeof srcFn == 'function', 'Invalid argument [methodName], not a function');
-                                if(syncMode == AOP.ASYNC) {
-                                        o[methodName] = function() {
-                                                var ctx = this;
-                                                var args = arguments;
-                                                return function * () {
-                                                        return yield srcFn.apply(ctx, yield fnBefore.apply(ctx, args));
-                                                };
-                                        };
-                                }
-                                else {
-                                        o[methodName] = function() {
-                                                return srcFn.apply(this, fnBefore.apply(this, arguments));
-                                        };
-                                }
-                        }
-                }
+        throw new Error('Invalid argument [namesapce]');
+      }
+      if (typeof o == 'function') {
+        var srcFn = o.prototype[methodName];
+        assert(typeof srcFn == 'function', 'Invalid argument [methodName], not a function');
+        if (syncMode == AOP.ASYNC) {
+          o.prototype[methodName] = function() {
+            var ctx = this;
+            var args = arguments;
+            return function *() {
+              return yield srcFn.apply(ctx, yield fnBefore.apply(ctx, args));
+            };
+          };
+        }
+        else {
+          o.prototype[methodName] = function() {
+            return srcFn.apply(this, fnBefore.apply(this, arguments));
+          };
+        }
+      }
+      else if (typeof o == 'object') {
+        var srcFn = o[methodName];
+        assert(typeof srcFn == 'function', 'Invalid argument [methodName], not a function');
+        if (syncMode == AOP.ASYNC) {
+          o[methodName] = function() {
+            var ctx = this;
+            var args = arguments;
+            return function *() {
+              return yield srcFn.apply(ctx, yield fnBefore.apply(ctx, args));
+            };
+          };
+        }
+        else {
+          o[methodName] = function() {
+            return srcFn.apply(this, fnBefore.apply(this, arguments));
+          };
+        }
+      }
+    }
 
                 /**
                  * AOP after。功能：在A函数执行后执行B函数，A函数的返回值作为B函数的传入参数，B函数的返回值作为A函数的最终返回值。A函数：被拦截函数，
@@ -137,59 +137,59 @@ var fs = require('fs');
                  *                      console.log('After->' + this.name);
                  *              });
                  * */
-                static after(namespace, methodName, fnAfter, syncMode=AOP.SYNC) {
-                        var o = null;
-                        assert(namespace, 'Invalid arguments');
-                        if(typeof namespace == 'string') {
-                                o = using(namespace);
-                        }
-                        else if(typeof namespace == 'object') {
-                                o = namespace;
-                        }
+    static after(namespace, methodName, fnAfter, syncMode = AOP.SYNC) {
+      var o = null;
+      assert(namespace, 'Invalid arguments');
+      if (typeof namespace == 'string') {
+        o = using(namespace);
+      }
+      else if (typeof namespace == 'object') {
+        o = namespace;
+      }
                         else {
-                                throw new Error('Invalid argument [namesapce]');
-                        }
-                        if(typeof o == 'function') {
-                                var srcFn = o.prototype[methodName];
-                                assert(typeof srcFn == 'function', 'Invalid argument [methodName], not a function');
-                                if(syncMode == AOP.ASYNC) {
-                                        o.prototype[methodName] = function() {
-                                                var ctx = this;
-                                                var args = arguments;
-                                                return function * () {
-                                                        var ret = yield srcFn.apply(ctx, args);
-                                                        ret = yield fnAfter.call(ctx, ret);
-                                                        return ret;
-                                                };
-                                        };
-                                }
-                                else {
-                                        o.prototype[methodName] = function() {
-                                                return fnAfter.call(this, srcFn.apply(this, arguments));
-                                        };
-                                }
-                        }
-                        else if(typeof o == 'object') {
-                                var srcFn = o[methodName];
-                                assert(typeof srcFn == 'function', 'Invalid argument [methodName], not a function');
-                                if(syncMode == AOP.ASYNC) {
-                                        o[methodName] = function() {
-                                                var ctx = this;
-                                                var args = arguments;
-                                                return function * () {
-                                                        var ret = yield srcFn.apply(ctx, args);
-                                                        ret = yield fnAfter.call(ctx, ret);
-                                                        return ret;
-                                                };
-                                        };
-                                }
-                                else {
-                                        o[methodName] = function() {
-                                               return fnAfter.call(this, srcFn.apply(this, arguments));
-                                        };
-                                }
-                        }
-                }
+        throw new Error('Invalid argument [namesapce]');
+      }
+      if (typeof o == 'function') {
+        var srcFn = o.prototype[methodName];
+        assert(typeof srcFn == 'function', 'Invalid argument [methodName], not a function');
+        if (syncMode == AOP.ASYNC) {
+          o.prototype[methodName] = function() {
+            var ctx = this;
+            var args = arguments;
+            return function *() {
+              var ret = yield srcFn.apply(ctx, args);
+              ret = yield fnAfter.call(ctx, ret);
+              return ret;
+            };
+          };
+        }
+        else {
+          o.prototype[methodName] = function() {
+            return fnAfter.call(this, srcFn.apply(this, arguments));
+          };
+        }
+      }
+      else if (typeof o == 'object') {
+        var srcFn = o[methodName];
+        assert(typeof srcFn == 'function', 'Invalid argument [methodName], not a function');
+        if (syncMode == AOP.ASYNC) {
+          o[methodName] = function() {
+            var ctx = this;
+            var args = arguments;
+            return function *() {
+              var ret = yield srcFn.apply(ctx, args);
+              ret = yield fnAfter.call(ctx, ret);
+              return ret;
+            };
+          };
+        }
+        else {
+          o[methodName] = function() {
+            return fnAfter.call(this, srcFn.apply(this, arguments));
+          };
+        }
+      }
+    }
 
                 /**
                  * 从JSON文件描述中初始化AOP模块。
@@ -207,33 +207,33 @@ var fs = require('fs');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                static initialize() {
-                        for(var i = 0;i<arguments.length;i++) {
-                                var file = EasyNode.real(arguments[i]);
-                                var intercepts = JSON.parse(fs.readFileSync(file).toString());
-                                assert(_.isArray(intercepts), 'Invalid interceptor description, not an array');
-                                intercepts.forEach(o => {
-                                        o['mode'] = (o['mode'] || AOP.SYNC).toLowerCase();
-                                        o['when'] = o['when'].toLowerCase();
-                                        assert(o['mode'] == AOP.SYNC || o['mode'] == AOP.ASYNC, 'Invalid method mode, set to "sync" or "async"');
-                                        assert(o['when'] == AOP.BEFORE || o['when'] == AOP.AFTER, 'Invalid interceptor, set "when" to "before" or "after"');
-                                        var namespace = using(o['target']);
-                                        var interceptor = using(o['interceptor']);
-                                        var implMethodName = o['when'] + '_' + o['method'];
-                                        AOP[o['when']].call(null, namespace, o['method'], interceptor[implMethodName], o['mode']);
-                                });
-                        }
-                }
+    static initialize() {
+      for (var i = 0; i < arguments.length; i++) {
+        var file = EasyNode.real(arguments[i]);
+        var intercepts = JSON.parse(fs.readFileSync(file).toString());
+        assert(_.isArray(intercepts), 'Invalid interceptor description, not an array');
+        intercepts.forEach((o) => {
+          o['mode'] = (o['mode'] || AOP.SYNC).toLowerCase();
+          o['when'] = o['when'].toLowerCase();
+          assert(o['mode'] == AOP.SYNC || o['mode'] == AOP.ASYNC, 'Invalid method mode, set to "sync" or "async"');
+          assert(o['when'] == AOP.BEFORE || o['when'] == AOP.AFTER, 'Invalid interceptor, set "when" to "before" or "after"');
+          var namespace = using(o['target']);
+          var interceptor = using(o['interceptor']);
+          var implMethodName = o['when'] + '_' + o['method'];
+          AOP[o['when']].call(null, namespace, o['method'], interceptor[implMethodName], o['mode']);
+        });
+      }
+    }
 
-                getClassName() {
-                        return EasyNode.namespace(__filename);
-                }
+    getClassName() {
+      return EasyNode.namespace(__filename);
+    }
         }
 
-        AOP.BEFORE = 'before';
-        AOP.AFTER = 'after';
-        AOP.SYNC = 'sync';
-        AOP.ASYNC = 'async';
+  AOP.BEFORE = 'before';
+  AOP.AFTER = 'after';
+  AOP.SYNC = 'sync';
+  AOP.ASYNC = 'async';
 
-        module.exports = AOP;
+  module.exports = AOP;
 })();

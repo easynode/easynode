@@ -6,7 +6,7 @@ var util = require('util');
 var S = require('string');
 var _ = require('underscore');
 
-(function () {
+(function() {
         /**
          * Class Model
          *
@@ -15,7 +15,7 @@ var _ = require('underscore');
          * @since 0.1.0
          * @author hujiabao
          * */
-        class Model extends GenericObject {
+  class Model extends GenericObject {
                 /**
                  * 构造函数。
                  *
@@ -23,18 +23,18 @@ var _ = require('underscore');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                constructor(schema, view) {
-                        super();
-                        //调用super()后再定义子类成员。
-                        assert(schema && typeof schema == 'string', 'Invalid schema name');
-                        this._fields = {};
-                        this._fieldNames = [];
-                        this._schema = schema;
-                        this._view = view || schema;
-                        this._idField = null;
-                        this._values = {};
-                        this.defineFields();
-                }
+    constructor(schema, view) {
+      super();
+                        // 调用super()后再定义子类成员。
+      assert(schema && typeof schema == 'string', 'Invalid schema name');
+      this._fields = {};
+      this._fieldNames = [];
+      this._schema = schema;
+      this._view = view || schema;
+      this._idField = null;
+      this._values = {};
+      this.defineFields();
+    }
 
                 /**
                  * 定义模型字段，子类可以覆盖该函数以在创建子类模型实例时即定义好字段。
@@ -45,8 +45,8 @@ var _ = require('underscore');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                defineFields () {
-                }
+    defineFields() {
+    }
 
                 /**
                  * 获取模型对应的Schema名称。
@@ -56,9 +56,9 @@ var _ = require('underscore');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                getSchema() {
-                        return this._schema;
-                }
+    getSchema() {
+      return this._schema;
+    }
 
                 /**
                  * 获取模型对应的view的名称，这里的View指的是关系数据库的视图。
@@ -68,9 +68,9 @@ var _ = require('underscore');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                getView() {
-                        return this._view;
-                }
+    getView() {
+      return this._view;
+    }
 
                 /**
                  * 判定模型的视图是否为原生SQL视图。
@@ -80,9 +80,9 @@ var _ = require('underscore');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                isRawView() {
-                        return this._view.match(/^\s*SELECT\s+.*/i);
-                }
+    isRawView() {
+      return this._view.match(/^\s*SELECT\s+.*/i);
+    }
 
                 /**
                  * 定义一个模型字段，可链式调用。
@@ -100,22 +100,22 @@ var _ = require('underscore');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                defineField(name, type, maxLength = 0, defaultValue = null, nullable = false, comment = '', readonly = false) {
-                        var field = null;
-                        if (arguments.length == 1) {
-                                field = name;
-                        }
-                        else {
-                                field = new ModelField(name, type, maxLength, defaultValue, nullable, comment, readonly);
-                        }
-                        if (this._fields[field.name]) {
-                                logger.warn(`Duplicated model field [${field.name}]`);
-                        }
-                        this._fields[field.name] = field;
-                        this._fieldNames.push(field.name);
-                        //this.setFieldValue(field.name);
-                        return this;
-                }
+    defineField(name, type, maxLength = 0, defaultValue = null, nullable = false, comment = '', readonly = false) {
+      var field = null;
+      if (arguments.length == 1) {
+        field = name;
+      }
+      else {
+        field = new ModelField(name, type, maxLength, defaultValue, nullable, comment, readonly);
+      }
+      if (this._fields[field.name]) {
+        logger.warn(`Duplicated model field [${field.name}]`);
+      }
+      this._fields[field.name] = field;
+      this._fieldNames.push(field.name);
+                        // this.setFieldValue(field.name);
+      return this;
+    }
 
                 /**
                  * 设置主键字段名
@@ -125,11 +125,11 @@ var _ = require('underscore');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                setIdentifyField(name) {
-                        var field = this._fields[name];
-                        assert(field, `Field [${name}] is not found`);
-                        this._idField = field;
-                }
+    setIdentifyField(name) {
+      var field = this._fields[name];
+      assert(field, `Field [${name}] is not found`);
+      this._idField = field;
+    }
 
                 /**
                  * 获取主键字段名
@@ -139,24 +139,24 @@ var _ = require('underscore');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                getIdentifyField() {
-                        if (this._idField) {
-                                return this._idField.name;
-                        }
+    getIdentifyField() {
+      if (this._idField) {
+        return this._idField.name;
+      }
 
-                        var defaultIdField = EasyNode.config('easynode.framework.mvc.model.defaultIdFieldName', 'recordId');
-                        var f = null;
-                        for (var field in this._fields) {
-                                field = this._fields[field];
-                                if (field.name == defaultIdField) {
-                                        this._idField = field;
-                                        f = field.name;
-                                }
-                        }
-                        assert(f, `Identify of model [${this._table}] is not found`);
-                        EasyNode.DEBUG && logger.debug(`identify field auto-matched [${this.getClassName()}] [${f}]`);
-                        return f;
-                }
+      var defaultIdField = EasyNode.config('easynode.framework.mvc.model.defaultIdFieldName', 'recordId');
+      var f = null;
+      for (var field in this._fields) {
+        field = this._fields[field];
+        if (field.name == defaultIdField) {
+          this._idField = field;
+          f = field.name;
+        }
+      }
+      assert(f, `Identify of model [${this._table}] is not found`);
+      EasyNode.DEBUG && logger.debug(`identify field auto-matched [${this.getClassName()}] [${f}]`);
+      return f;
+    }
 
                 /**
                  * 获取主键字段值
@@ -166,9 +166,9 @@ var _ = require('underscore');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                getId() {
-                        return this.getFieldValue(this.getIdentifyField());
-                }
+    getId() {
+      return this.getFieldValue(this.getIdentifyField());
+    }
 
                 /**
                  * 设置主键字段值
@@ -178,10 +178,10 @@ var _ = require('underscore');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                setId(id) {
-                        assert(typeof id != null, 'Invalid identify field value');
-                        this.setFieldValue(this.getIdentifyField(), id);
-                }
+    setId(id) {
+      assert(typeof id != null, 'Invalid identify field value');
+      this.setFieldValue(this.getIdentifyField(), id);
+    }
 
                 /**
                  * 获取字段列表，字段列表的顺序取决于定义的顺序。
@@ -192,28 +192,28 @@ var _ = require('underscore');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                getFieldNames (all=true) {
-                        if(all) {
-                                return this._fieldNames.slice(0);
-                        }
-                        else {
-                                var arr = this._fieldNames.slice(0);
-                                var nonRO = [];
-                                for(var field in this._fields) {
-                                        field = this._fields[field];
-                                        if(field.readonly == false) {
-                                                nonRO.push(field.name);
-                                        }
-                                }
-                                var ret = [];
-                                arr.forEach(f => {
-                                        if(_.contains(nonRO, f)) {
-                                                ret.push(f);
-                                        }
-                                });
-                                return ret;
-                        }
-                }
+    getFieldNames(all = true) {
+      if (all) {
+        return this._fieldNames.slice(0);
+      }
+      else {
+        var arr = this._fieldNames.slice(0);
+        var nonRO = [];
+        for (var field in this._fields) {
+          field = this._fields[field];
+          if (field.readonly == false) {
+            nonRO.push(field.name);
+          }
+        }
+        var ret = [];
+        arr.forEach((f) => {
+          if (_.contains(nonRO, f)) {
+            ret.push(f);
+          }
+        });
+        return ret;
+      }
+    }
 
                 /**
                  * 获取字段定义
@@ -223,11 +223,11 @@ var _ = require('underscore');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                getFieldDefinition(name) {
-                        var field = this._fields[name];
-                        assert(field, `Field [${name}] is not defined`);
-                        return field;
-                }
+    getFieldDefinition(name) {
+      var field = this._fields[name];
+      assert(field, `Field [${name}] is not defined`);
+      return field;
+    }
 
                 /**
                  * 获取字段值
@@ -237,12 +237,12 @@ var _ = require('underscore');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                getFieldValue (name) {
-                        assert(typeof name == 'string', 'Invalid argument');
-                        var val = this._values[name];
-                        //assert(val !== undefined, `field [${name}] is not defined`);
-                        return val;
-                }
+    getFieldValue(name) {
+      assert(typeof name == 'string', 'Invalid argument');
+      var val = this._values[name];
+                        // assert(val !== undefined, `field [${name}] is not defined`);
+      return val;
+    }
 
                 /**
                  * 设置字段值
@@ -253,57 +253,57 @@ var _ = require('underscore');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                setFieldValue (name, value=null) {
-                        assert(typeof name == 'string', 'Invalid argument');
-                        var field = this._fields[name];
-                        assert(field, `Field [${name}] is not found`);
-                        var val = value || field.defaultValue;
-                        switch (field.type) {
-                                case ModelField.TYPE_STRING :
-                                {
-                                        assert(val == null || typeof val == 'string', `Invalid field type, need [String]`);
-                                        val = val || (field.nullable ? null : '');
-                                        break;
-                                }
-                                case ModelField.TYPE_INT :
-                                {
-                                        val = parseInt(val) || (field.nullable ? null : 0);
-                                        break;
-                                }
-                                case ModelField.TYPE_FLOAT :
-                                {
-                                        val = parseFloat(val) || (field.nullable ? null : 0);
-                                        break;
-                                }
-                                case ModelField.TYPE_DATE :
-                                case ModelField.TYPE_DATETIME :
-                                {
-                                        if(typeof val == 'string') {
-                                                val = new Date(Date.parse(val));
-                                        }
-                                        val = val || (field.nullable ? null : new Date(0));
-                                        break;
-                                }
-                                case ModelField.TYPE_JSON :
-                                {
-                                        if(typeof val == 'string') {
-                                                try {
-                                                        val = JSON.parse(val);
-                                                }catch(e){
-                                                        logger.error(`not a valid json string\n${val}`);
-                                                        val = {};
-                                                }
-                                        }
-                                        assert(val == null || typeof val == 'object', `Invalid field type, need [JSON Object]`);
-                                        val = val || (field.nullable ? null : {});
-                                        break;
-                                }
-                                default : {
-                                        throw new Error(`Invalid field type [${field.type} => ${val}]`);
-                                }
-                        }
-                        this._values[name] = val;
-                }
+    setFieldValue(name, value = null) {
+      assert(typeof name == 'string', 'Invalid argument');
+      var field = this._fields[name];
+      assert(field, `Field [${name}] is not found`);
+      var val = value || field.defaultValue;
+      switch (field.type) {
+      case ModelField.TYPE_STRING :
+        {
+          assert(val == null || typeof val == 'string', 'Invalid field type, need [String]');
+          val = val || (field.nullable ? null : '');
+          break;
+        }
+      case ModelField.TYPE_INT :
+        {
+          val = parseInt(val) || (field.nullable ? null : 0);
+          break;
+        }
+      case ModelField.TYPE_FLOAT :
+        {
+          val = parseFloat(val) || (field.nullable ? null : 0);
+          break;
+        }
+      case ModelField.TYPE_DATE :
+      case ModelField.TYPE_DATETIME :
+        {
+          if (typeof val == 'string') {
+            val = new Date(Date.parse(val));
+          }
+          val = val || (field.nullable ? null : new Date(0));
+          break;
+        }
+      case ModelField.TYPE_JSON :
+        {
+          if (typeof val == 'string') {
+            try {
+              val = JSON.parse(val);
+            } catch (e) {
+              logger.error(`not a valid json string\n${val}`);
+              val = {};
+            }
+          }
+          assert(val == null || typeof val == 'object', 'Invalid field type, need [JSON Object]');
+          val = val || (field.nullable ? null : {});
+          break;
+        }
+      default : {
+        throw new Error(`Invalid field type [${field.type} => ${val}]`);
+      }
+      }
+      this._values[name] = val;
+    }
 
                 /**
                  * 使用JSON快速设置所有的字段值，可链式调用
@@ -313,18 +313,18 @@ var _ = require('underscore');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                merge (obj) {
-                        for(var name in obj) {
-                                var field = this.getFieldDefinition(name);
-                                if(field) {
-                                        this.setFieldValue(name, obj[name]);
-                                }
-                                else {
-                                        logger.warn(`Can not merge attribute [${name}] to model, field is not defined`);
-                                }
-                        }
-                        return this;
-                }
+    merge(obj) {
+      for (var name in obj) {
+        var field = this.getFieldDefinition(name);
+        if (field) {
+          this.setFieldValue(name, obj[name]);
+        }
+        else {
+          logger.warn(`Can not merge attribute [${name}] to model, field is not defined`);
+        }
+      }
+      return this;
+    }
 
                 /**
                  * 使用JSON快速设置所有的字段值，可链式调用，merge函数的别名函数。
@@ -334,9 +334,9 @@ var _ = require('underscore');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                parse (obj) {
-                        return this.merge(obj);
-                }
+    parse(obj) {
+      return this.merge(obj);
+    }
 
                 /**
                  * 获取字段所有值。
@@ -346,9 +346,9 @@ var _ = require('underscore');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                getFieldValues () {
-                        return _.clone(this._values);
-                }
+    getFieldValues() {
+      return _.clone(this._values);
+    }
 
                 /**
                  * 根据模型定义，格式化值，主要是JSON对象的格式化，其他字段只要和数据库定义匹配即能够获得正确的类型
@@ -361,25 +361,25 @@ var _ = require('underscore');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                static normalizeJSON(model, values={}) {
-                        for(var fieldName in values) {
-                                var field = model._fields[fieldName];
-                                if(field && field.type == ModelField.TYPE_JSON) {
-                                        var val = values[fieldName];
-                                        try {
-                                                values[fieldName] = JSON.parse(val);
-                                        } catch (e) {
-                                                logger.error('Invalid json string :\n' + val);
-                                        }
-                                }
-                        }
-                        return values;
-                }
+    static normalizeJSON(model, values = {}) {
+      for (var fieldName in values) {
+        var field = model._fields[fieldName];
+        if (field && field.type == ModelField.TYPE_JSON) {
+          var val = values[fieldName];
+          try {
+            values[fieldName] = JSON.parse(val);
+          } catch (e) {
+            logger.error('Invalid json string :\n' + val);
+          }
+        }
+      }
+      return values;
+    }
 
-                getClassName() {
-                        return EasyNode.namespace(__filename);
-                }
+    getClassName() {
+      return EasyNode.namespace(__filename);
+    }
         }
 
-        module.exports = Model;
+  module.exports = Model;
 })();

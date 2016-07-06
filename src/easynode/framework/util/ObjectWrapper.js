@@ -5,7 +5,7 @@ var thunkify = require('thunkify');
 var http = require('http');
 var URL = require('url');
 
-(function () {
+(function() {
         /**
          * Class ObjectWrapper
          *
@@ -14,7 +14,7 @@ var URL = require('url');
          * @since 0.1.0
          * @author hujiabao
          * */
-        class ObjectWrapper extends GenericObject {
+  class ObjectWrapper extends GenericObject {
                 /**
                  * 构造函数。
                  *
@@ -22,15 +22,15 @@ var URL = require('url');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                constructor() {
-                        super();
-                        //调用super()后再定义子类成员。
-                }
+    constructor() {
+      super();
+                        // 调用super()后再定义子类成员。
+    }
 
-                getClassName() {
-                        return EasyNode.namespace(__filename);
-                }
+    getClassName() {
+      return EasyNode.namespace(__filename);
+    }
         }
 
-        module.exports = ObjectWrapper;
+  module.exports = ObjectWrapper;
 })();

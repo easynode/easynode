@@ -1,10 +1,10 @@
 /*
- Function:Mixin Interface Test
+ Function:Logger Test
  Created by hujiabao on 6/22/16.
  * */
 'use strict';
 
-require('../../../src/EasyNode.js');
+require('../../../../src/EasyNode.js');
 require('babel-polyfill');
 import co from 'co';
 import request from 'superagent';
@@ -16,7 +16,7 @@ import req from 'request';
 var _ = require('underscore');
 
 
-describe('MixinTest', function() {
+describe('RedisTest', function() {
 
   var root = '';
   var mochaTest = true;
@@ -43,30 +43,28 @@ describe('MixinTest', function() {
     done();
   });
 
-  it('Mix', function(done) {
-    class A {
-      getA() {
-        return 'A';
-      }
-        }
+  it('redis.set/get/del', function(done) {
 
-    class B {
-      getB() {
-        return 'B';
-      }
-        }
+    var Redis = EasyNode.using('easynode.framework.cache.Redis');
 
-    var Mixin = EasyNode.using('easynode.framework.Mixin');
-    class C extends Mixin.mix(A, B) {
-      getC() {
-        return this.getA() + this.getB();
-      }
-        }
+    var redis = new Redis();
+    redis.initialize('218.205.113.98',6379, {password:''});
 
-    var c = new C();
-    assert(c.getC() == 'AB', 'Mixin test failed');
+    co(function* (){
 
-    done();
+      yield  redis.set('key','value');
+
+      var value =  yield redis.get('key');
+      assert( value === 'value','not eqaul');
+
+      yield redis.del('key');
+      value = yield redis.get('key');
+      assert( value === null, 'not equal');
+
+      done();
+    });
+
+    //done();
   });
 
   after(function(done) {

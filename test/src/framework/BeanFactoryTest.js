@@ -5,7 +5,7 @@
 'use strict';
 
 require('../../../src/EasyNode.js');
-require("babel-polyfill");
+require('babel-polyfill');
 import co from 'co';
 import request from 'superagent';
 import chai from 'chai';
@@ -15,46 +15,46 @@ var http = require('http');
 import req from 'request';
 var _ = require('underscore');
 
+var memcached = using();
+describe('BeanFactoryTest', function() {
 
-describe('BeanFactoryTest', function () {
+  var root = '';
+  var mochaTest = true;
+  before(function(done) {
+    try {
+      root = EasyNode.addArg('easynode-home', process.cwd());
+      mochaTest = EasyNode.addArg('mocha-test', true);
+      done();
+    } catch (e) {
+      done(e);
+    }
+  });
 
-    var root = '';
-    var mochaTest = true;
-    before(function (done) {
-        try {
-            root = EasyNode.addArg('easynode-home', process.cwd());
-            mochaTest = EasyNode.addArg('mocha-test', true);
-            done();
-        } catch (e) {
-            done(e);
-        }
+  it('EasyNode.arg', function(done) {
+    assert(EasyNode.arg('mocha-test') == mochaTest, 'mocha is not the test program');
+    done();
+  });
+
+  it('EasyNode.setEnv', function(done) {
+    EasyNode.setEnv('TEST');
+    assert(EasyNode.src == 'lib', 'test etc stage, not use lib');
+    EasyNode.setEnv('DEVELOP');
+    assert(EasyNode.src == 'src', 'develop stage, not use src');
+    done();
+  });
+
+  it('initialize', function(done) {
+    co(function *() {
+      var BeanFactory = EasyNode.using('easynode.framework.BeanFactory');
+      console.log('1');
+      yield BeanFactory.initialize('etc/demo-beans.json');
     });
+    done();
+  });
 
-    it('EasyNode.arg', function (done) {
-        assert(EasyNode.arg('mocha-test') == mochaTest, 'mocha is not the test program');
-        done();
-    });
-
-    it('EasyNode.setEnv', function (done) {
-        EasyNode.setEnv('TEST')
-        assert(EasyNode.src == 'lib', 'test etc stage, not use lib');
-        EasyNode.setEnv('DEVELOP')
-        assert(EasyNode.src == 'src', 'develop stage, not use src');
-        done();
-    });
-
-    it('initialize', function (done) {
-        co(function*  (){
-            var BeanFactory = EasyNode.using('easynode.framework.BeanFactory');
-            console.log("1")
-            yield BeanFactory.initialize('etc/demo-beans.json');
-        });
-        done();
-    });
-
-    after(function (done) {
-        done();
-    });
+  after(function(done) {
+    done();
+  });
 
 });
 

@@ -7,9 +7,9 @@ var S = require('string');
 var fs = require('co-fs');
 var _ = require('underscore');
 
-(function () {
-        var entry = {};
-        var descriptionMap = new Map();
+(function() {
+  var entry = {};
+  var descriptionMap = new Map();
 
         /**
          * Class ActionFactory
@@ -19,7 +19,7 @@ var _ = require('underscore');
          * @since 0.1.0
          * @author hujiabao
          * */
-        class ActionFactory extends GenericObject {
+  class ActionFactory extends GenericObject {
                 /**
                  * 构造函数。
                  *
@@ -27,10 +27,10 @@ var _ = require('underscore');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                constructor() {
-                        super();
-                        //调用super()后再定义子类成员。
-                }
+    constructor() {
+      super();
+                        // 调用super()后再定义子类成员。
+    }
 
                 /**
                  * 注册一个Action。使得可以通过json api或restful api来调用。注册的Action可以是一个类、一个全类名
@@ -64,53 +64,53 @@ var _ = require('underscore');
                  *
                  *      ActionFactory.register(MyAction);
                  * */
-                static register(actionClass, moduleName, actionName, description) {
-                        if (typeof actionClass == 'string') {
+    static register(actionClass, moduleName, actionName, description) {
+      if (typeof actionClass == 'string') {
                                 //    assert(actionClass.match(/^[0-9a-zA-z\.\*]+$/), 'Invalid action class');
-                                var m = "";
-                                var a = "";
-                                var ActionClass = null;
-                                if (actionClass.match(/^[0-9a-zA-z\.\*]+$/)) {
-                                        ActionClass = using(actionClass); //ActionClass is class
-                                        m = moduleName || ActionClass.module;
-                                        a = actionName || ActionClass.action;
-                                }
-                                else {
-                                        ActionClass = actionClass;    //ActionClass is string
-                                        m = moduleName;
-                                        a = actionName;
-                                }
-                                assert(typeof m == 'string' && typeof a == 'string', 'Invalid arguments');
-                                //assert(!_.isEmpty(ActionClass)&&!S(m).isEmpty() && !S(a).isEmpty(), 'Invalid arguments');
-                                EasyNode.DEBUG && logger.debug(`register action [${m}.${a}]`);
-                                entry[m] = entry[m] || {};
-                                entry[m][a] = ActionClass;                             //stored class or string
-                                ActionFactory.addActionDescription(m, a, description);
-                        }
-                        else if (typeof actionClass == 'function') {
-                                var m = actionClass.module;
-                                var a = actionClass.action;
-                                assert(typeof m == 'string' && typeof a == 'string', 'Invalid arguments');
-                                assert(!S(m).isEmpty() && !S(a).isEmpty(), 'Invalid arguments');
-                                EasyNode.DEBUG && logger.debug(`register action [${m}.${a}]`);
-                                entry[m] = entry[m] || {};
-                                entry[m][a] = actionClass;                             //stored class, not string
-                                ActionFactory.addActionDescription(m, a, description);
-                        }
+        var m = '';
+        var a = '';
+        var ActionClass = null;
+        if (actionClass.match(/^[0-9a-zA-z\.\*]+$/)) {
+          ActionClass = using(actionClass); // ActionClass is class
+          m = moduleName || ActionClass.module;
+          a = actionName || ActionClass.action;
+        }
+        else {
+          ActionClass = actionClass;    // ActionClass is string
+          m = moduleName;
+          a = actionName;
+        }
+        assert(typeof m == 'string' && typeof a == 'string', 'Invalid arguments');
+                                // assert(!_.isEmpty(ActionClass)&&!S(m).isEmpty() && !S(a).isEmpty(), 'Invalid arguments');
+        EasyNode.DEBUG && logger.debug(`register action [${m}.${a}]`);
+        entry[m] = entry[m] || {};
+        entry[m][a] = ActionClass;                             // stored class or string
+        ActionFactory.addActionDescription(m, a, description);
+      }
+      else if (typeof actionClass == 'function') {
+        var m = actionClass.module;
+        var a = actionClass.action;
+        assert(typeof m == 'string' && typeof a == 'string', 'Invalid arguments');
+        assert(!S(m).isEmpty() && !S(a).isEmpty(), 'Invalid arguments');
+        EasyNode.DEBUG && logger.debug(`register action [${m}.${a}]`);
+        entry[m] = entry[m] || {};
+        entry[m][a] = actionClass;                             // stored class, not string
+        ActionFactory.addActionDescription(m, a, description);
+      }
                         else if (typeof actionClass == 'object') {
-                                var m = actionClass.module;
-                                var a = actionClass.action;
-                                assert(actionClass instanceof Action, 'Invalid action instance');
-                                assert(m && a, 'Invalid action instance');
-                                EasyNode.DEBUG && logger.debug(`register action [${m}.${a}]`);
-                                entry[m] = entry[m] || {};
-                                entry[m][a] = actionClass;                             //stored class instance, not string
-                                ActionFactory.addActionDescription(m, a, description);
+                          var m = actionClass.module;
+                          var a = actionClass.action;
+                          assert(actionClass instanceof Action, 'Invalid action instance');
+                          assert(m && a, 'Invalid action instance');
+                          EasyNode.DEBUG && logger.debug(`register action [${m}.${a}]`);
+                          entry[m] = entry[m] || {};
+                          entry[m][a] = actionClass;                             // stored class instance, not string
+                          ActionFactory.addActionDescription(m, a, description);
                         }
                         else {
-                                throw new Error('Invalid argument');
+                          throw new Error('Invalid argument');
                         }
-                }
+    }
 
                 /**
                  * 删除一个Action。
@@ -121,16 +121,16 @@ var _ = require('underscore');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                remove(m, a) {
-                        assert(typeof m == 'string', 'Invalid arguments');
-                        if (arguments.length == 1) {
-                                delete entry[m];
-                        }
-                        if (arguments.length == 2) {
-                                assert(typeof a == 'string', 'Invalid arguments');
-                                delete entry[m][a];
-                        }
-                }
+    remove(m, a) {
+      assert(typeof m == 'string', 'Invalid arguments');
+      if (arguments.length == 1) {
+        delete entry[m];
+      }
+      if (arguments.length == 2) {
+        assert(typeof a == 'string', 'Invalid arguments');
+        delete entry[m][a];
+      }
+    }
 
                 /**
                  * 加载目录中所有文件名匹配pattern的Action。pattern默认为：/^.*Action\.js$/。如果将MethodDispatchedAction与一般Action
@@ -143,21 +143,21 @@ var _ = require('underscore');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                static registerNamespace(namespace, pattern = /^.*Action\.js$/) {
-                        return function * () {
-                                var path = yield EasyNode.namespace2Path(namespace);
-                                var stat = yield fs.stat(path);
-                                if (stat.isFile()) {
-                                        throw new Error('Invalid namespace, not a directory');
-                                }
-                                var files = yield fs.readdir(path);
-                                files.forEach(file => {
-                                        if (file.match(pattern)) {
-                                                ActionFactory.register(namespace + '.' + file.replace(/\.js$/, ''));
-                                        }
-                                });
-                        };
-                }
+    static registerNamespace(namespace, pattern = /^.*Action\.js$/) {
+      return function *() {
+        var path = yield EasyNode.namespace2Path(namespace);
+        var stat = yield fs.stat(path);
+        if (stat.isFile()) {
+          throw new Error('Invalid namespace, not a directory');
+        }
+        var files = yield fs.readdir(path);
+        files.forEach((file) => {
+          if (file.match(pattern)) {
+            ActionFactory.register(namespace + '.' + file.replace(/\.js$/, ''));
+          }
+        });
+      };
+    }
 
                 /**
                  * 加载一个根据函数名路由的Action。
@@ -169,18 +169,18 @@ var _ = require('underscore');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                static registerMethodDispatchedAction(namespace, moduleName = null) {
-                        assert(typeof namespace == 'string' || typeof namespace == 'function', 'Invalid arguments');
-                        var MethodDispatchedActionClass = namespace;
-                        if (typeof namespace == 'string') {
-                                MethodDispatchedActionClass = using(namespace);
-                        }
-                        var instance = new MethodDispatchedActionClass();
-                        if (moduleName) {
-                                instance.moduleName(moduleName);
-                        }
-                        instance.register();
-                }
+    static registerMethodDispatchedAction(namespace, moduleName = null) {
+      assert(typeof namespace == 'string' || typeof namespace == 'function', 'Invalid arguments');
+      var MethodDispatchedActionClass = namespace;
+      if (typeof namespace == 'string') {
+        MethodDispatchedActionClass = using(namespace);
+      }
+      var instance = new MethodDispatchedActionClass();
+      if (moduleName) {
+        instance.moduleName(moduleName);
+      }
+      instance.register();
+    }
 
                 /**
                  * 从.json文件中加载Action。
@@ -192,41 +192,41 @@ var _ = require('underscore');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                static initialize() {
-                        var arr = _.toArray(arguments);
-                        return function * () {
-                                for (var i = 0; i < arr.length; i++) {
-                                        var file = EasyNode.real(arr[i]);
-                                        var content = yield fs.readFile(file);
-                                        var o = JSON.parse(content.toString());
-                                        for (var m in o) {
-                                                var actionModule = m;
-                                                var actions = o[m];
-                                                actions.forEach(action => {
-                                                        var actionName = action['action-name'] || '';
-                                                        if(action['enabled'] !== false && action['enabled'] !== 'false') {
-                                                                var description = action['description'] || '';
-                                                                var actionType = action['type'];
-                                                                if (action.hasOwnProperty('action-class')) {
-                                                                        ActionFactory.register(action['action-class'], actionModule, actionName, description);
-                                                                }
-                                                                else if (action.hasOwnProperty('action-bean')) {
-                                                                        ActionFactory.register(action['action-bean'], actionModule, actionName, description);
-                                                                }
-                                                                else {
-                                                                        throw new Error('Invalid argument');
-                                                                }
-                                                        }
-                                                        else {
-                                                                logger.info(`disabled action [${actionModule}.${actionName}]`);
-                                                        }
-                                                });
-
-                                        }
-
-                                }
-                        };
+    static initialize() {
+      var arr = _.toArray(arguments);
+      return function *() {
+        for (var i = 0; i < arr.length; i++) {
+          var file = EasyNode.real(arr[i]);
+          var content = yield fs.readFile(file);
+          var o = JSON.parse(content.toString());
+          for (var m in o) {
+            var actionModule = m;
+            var actions = o[m];
+            actions.forEach((action) => {
+              var actionName = action['action-name'] || '';
+              if (action['enabled'] !== false && action['enabled'] !== 'false') {
+                var description = action['description'] || '';
+                var actionType = action['type'];
+                if (action.hasOwnProperty('action-class')) {
+                  ActionFactory.register(action['action-class'], actionModule, actionName, description);
                 }
+                else if (action.hasOwnProperty('action-bean')) {
+                  ActionFactory.register(action['action-bean'], actionModule, actionName, description);
+                }
+                                                                else {
+                  throw new Error('Invalid argument');
+                }
+              }
+              else {
+                logger.info(`disabled action [${actionModule}.${actionName}]`);
+              }
+            });
+
+          }
+
+        }
+      };
+    }
 
                 /**
                  * 查找一个Action。
@@ -240,11 +240,11 @@ var _ = require('underscore');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                static find(m, a) {
-                        assert(typeof m == 'string' && typeof a == 'string', 'Invalid arguments');
-                        assert(!S(m).isEmpty() && !S(a).isEmpty(), 'Invalid arguments');
-                        return (entry[m] && entry[m][a]) ? entry[m][a] : null;
-                }
+    static find(m, a) {
+      assert(typeof m == 'string' && typeof a == 'string', 'Invalid arguments');
+      assert(!S(m).isEmpty() && !S(a).isEmpty(), 'Invalid arguments');
+      return (entry[m] && entry[m][a]) ? entry[m][a] : null;
+    }
 
                 /**
                  * 枚举出所有的Action。
@@ -256,19 +256,19 @@ var _ = require('underscore');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                static list(m) {
-                        var l = [];
-                        if (m) {
-                                l = descriptionMap.get(m);
-                        }
-                        else {
-                                var keys = descriptionMap.keys();
-                                for (var key of keys) {
-                                        l.push.apply(l, descriptionMap.get(key));
-                                }
-                        }
-                        return l;
-                }
+    static list(m) {
+      var l = [];
+      if (m) {
+        l = descriptionMap.get(m);
+      }
+      else {
+        var keys = descriptionMap.keys();
+        for (var key of keys) {
+          l.push.apply(l, descriptionMap.get(key));
+        }
+      }
+      return l;
+    }
 
                 /**
                  * 创建一个Action实例。
@@ -282,41 +282,41 @@ var _ = require('underscore');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                static createActionInstance(m, a, ctx) {
-                        assert(typeof m == 'string' && typeof a == 'string', 'Invalid arguments');
-                        assert(!S(m).isEmpty() && !S(a).isEmpty(), 'Invalid arguments');
+    static createActionInstance(m, a, ctx) {
+      assert(typeof m == 'string' && typeof a == 'string', 'Invalid arguments');
+      assert(!S(m).isEmpty() && !S(a).isEmpty(), 'Invalid arguments');
 
-                        var Clazz = ActionFactory.find(m, a);
-                        if (Clazz) {
-                                var ret = null;
-                                if (typeof Clazz == 'function') {
-                                        var action = new Clazz();
-                                        action.setModule(m);
-                                        action.setActionName(a);
-                                        action.setContext(ctx);
-                                        ctx && ctx.setAction(action);
-                                        ret = action;
-                                }
-                                else if (typeof Clazz == 'object') {
-                                        Clazz.setModule(m);
-                                        Clazz.setActionName(a);
-                                        Clazz.setContext(ctx);
-                                        ctx && ctx.setAction(Clazz);
-                                        ret = Clazz;
-                                }
+      var Clazz = ActionFactory.find(m, a);
+      if (Clazz) {
+        var ret = null;
+        if (typeof Clazz == 'function') {
+          var action = new Clazz();
+          action.setModule(m);
+          action.setActionName(a);
+          action.setContext(ctx);
+          ctx && ctx.setAction(action);
+          ret = action;
+        }
+        else if (typeof Clazz == 'object') {
+          Clazz.setModule(m);
+          Clazz.setActionName(a);
+          Clazz.setContext(ctx);
+          ctx && ctx.setAction(Clazz);
+          ret = Clazz;
+        }
                                 else if (typeof Clazz == 'string') {
-                                        Clazz = Clazz.replace('$', '');
-                                        Clazz = BeanFactory.get(Clazz);
-                                        assert(Clazz instanceof Action, 'Invalid action type');
-                                        Clazz.setModule(m);
-                                        Clazz.setActionName(a);
-                                        Clazz.setContext(ctx);
-                                        ctx && ctx.setAction(Clazz);
-                                        ret = Clazz;
+                                  Clazz = Clazz.replace('$', '');
+                                  Clazz = BeanFactory.get(Clazz);
+                                  assert(Clazz instanceof Action, 'Invalid action type');
+                                  Clazz.setModule(m);
+                                  Clazz.setActionName(a);
+                                  Clazz.setContext(ctx);
+                                  ctx && ctx.setAction(Clazz);
+                                  ret = Clazz;
                                 }
-                                return ret;
-                        }
-                }
+        return ret;
+      }
+    }
 
                 /**
                  * 注册action信息
@@ -328,24 +328,24 @@ var _ = require('underscore');
                  * @author hujiabao
                  * */
 
-                static addActionDescription(m, a, description) {
-                        assert(typeof m == 'string' && typeof a == 'string', 'Invalid arguments');
-                        assert(!S(m).isEmpty() && !S(a).isEmpty(), 'Invalid arguments');
-                        var obj = {
-                                "moduleName": m,
-                                "actionName": a,
-                                "state":1,
-                                "description": description
-                        }
-                        var actions = descriptionMap.has(m) ? descriptionMap.get(m) : [];
-                        actions.push(obj);
-                        descriptionMap.set(m, actions)
-                }
+    static addActionDescription(m, a, description) {
+      assert(typeof m == 'string' && typeof a == 'string', 'Invalid arguments');
+      assert(!S(m).isEmpty() && !S(a).isEmpty(), 'Invalid arguments');
+      var obj = {
+        'moduleName': m,
+        'actionName': a,
+        'state':1,
+        'description': description
+      };
+      var actions = descriptionMap.has(m) ? descriptionMap.get(m) : [];
+      actions.push(obj);
+      descriptionMap.set(m, actions);
+    }
 
-                getClassName() {
-                        return EasyNode.namespace(__filename);
-                }
+    getClassName() {
+      return EasyNode.namespace(__filename);
+    }
         }
 
-        module.exports = ActionFactory;
+  module.exports = ActionFactory;
 })();

@@ -5,7 +5,7 @@ var S = require('string');
 var JSONView = using('easynode.framework.mvc.JSONView');
 var ActionResult = using('easynode.framework.mvc.ActionResult');
 
-(function () {
+(function() {
         /**
          * Action抽象类。定义了Action的一些抽象函数，子类需要实现这些抽象函数。Action的子类的构造器只能传递一个类型为ActionContext的参数。
          * 同时，Action的子类应具有module和name两个静态属性对应于添加到ActionFactory时的module和name.
@@ -33,7 +33,7 @@ var ActionResult = using('easynode.framework.mvc.ActionResult');
          * @since 0.1.0
          * @author hujiabao
          * */
-        class Action extends GenericObject {
+  class Action extends GenericObject {
                 /**
                  * 构造函数。
                  *
@@ -41,9 +41,9 @@ var ActionResult = using('easynode.framework.mvc.ActionResult');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                constructor() {
-                        super();
-                        //调用super()后再定义子类成员。
+    constructor() {
+      super();
+                        // 调用super()后再定义子类成员。
                         /**
                          * easynode.framework.mvc.ActionContext实例
                          *
@@ -53,7 +53,7 @@ var ActionResult = using('easynode.framework.mvc.ActionResult');
                          * @since 0.1.0
                          * @author hujiabao
                          * */
-                        this.ctx = null;
+      this.ctx = null;
 
                         /**
                          * Action参数
@@ -69,7 +69,7 @@ var ActionResult = using('easynode.framework.mvc.ActionResult');
                          * @since 0.1.0
                          * @author hujiabao
                          * */
-                        this.args = [];
+      this.args = [];
 
                         /**
                          * 视图
@@ -81,7 +81,7 @@ var ActionResult = using('easynode.framework.mvc.ActionResult');
                          * @since 0.1.0
                          * @author hujiabao
                          * */
-                        this.view = new JSONView();
+      this.view = new JSONView();
                         /**
                          * 视图渲染参数
                          *
@@ -92,8 +92,8 @@ var ActionResult = using('easynode.framework.mvc.ActionResult');
                          * @since 0.1.0
                          * @author hujiabao
                          * */
-                        this.viewOptions = {};
-                }
+      this.viewOptions = {};
+    }
 
                 /**
                  * 设置视图。
@@ -104,11 +104,11 @@ var ActionResult = using('easynode.framework.mvc.ActionResult');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                setView (view, opts={}) {
-                        assert(view, 'Invalid argument');
-                        this.view = view;
-                        this.viewOptions = opts;
-                }
+    setView(view, opts = {}) {
+      assert(view, 'Invalid argument');
+      this.view = view;
+      this.viewOptions = opts;
+    }
 
                 /**
                  * 获得视图。
@@ -118,9 +118,9 @@ var ActionResult = using('easynode.framework.mvc.ActionResult');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                getView () {
-                        return this.view;
-                }
+    getView() {
+      return this.view;
+    }
 
                 /**
                  * 获得视图渲染参数。
@@ -130,9 +130,9 @@ var ActionResult = using('easynode.framework.mvc.ActionResult');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                getViewOptions () {
-                        return this.viewOptions;
-                }
+    getViewOptions() {
+      return this.viewOptions;
+    }
 
                 /**
                  * 获取Action全名。
@@ -142,9 +142,9 @@ var ActionResult = using('easynode.framework.mvc.ActionResult');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                getFullName () {
-                        return this.module + '.' + this.action;
-                }
+    getFullName() {
+      return this.module + '.' + this.action;
+    }
 
                 /**
                  * 设置Action的执行上下文环境。
@@ -154,9 +154,9 @@ var ActionResult = using('easynode.framework.mvc.ActionResult');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                setContext (ctx) {
-                        this.ctx = ctx;
-                }
+    setContext(ctx) {
+      this.ctx = ctx;
+    }
 
                 /**
                  * 获取Action的执行上下文环境。
@@ -166,9 +166,9 @@ var ActionResult = using('easynode.framework.mvc.ActionResult');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                getContext () {
-                        return this.ctx;
-                }
+    getContext() {
+      return this.ctx;
+    }
 
                 /**
                  * 设置模块名，框架内使用，请不要在任何地方调用此函数。
@@ -179,10 +179,10 @@ var ActionResult = using('easynode.framework.mvc.ActionResult');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                setModule (m) {
-                        assert(typeof m == 'string' && S(m).trim().length > 0, 'Invalid module name');
-                        this.module = m;
-                }
+    setModule(m) {
+      assert(typeof m == 'string' && S(m).trim().length > 0, 'Invalid module name');
+      this.module = m;
+    }
 
                 /**
                  * 获取Action的模块名。
@@ -192,9 +192,9 @@ var ActionResult = using('easynode.framework.mvc.ActionResult');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                getModule() {
-                        return this.getModule();
-                }
+    getModule() {
+      return this.getModule();
+    }
 
                 /**
                  * 设置Action名，框架内使用，请不要在任何地方调用此函数。
@@ -205,10 +205,10 @@ var ActionResult = using('easynode.framework.mvc.ActionResult');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                setActionName (a) {
-                        assert(typeof a == 'string' && S(a).trim().length > 0, 'Invalid action name');
-                        this.action = a;
-                }
+    setActionName(a) {
+      assert(typeof a == 'string' && S(a).trim().length > 0, 'Invalid action name');
+      this.action = a;
+    }
 
                 /**
                  * 获取Action名。
@@ -218,9 +218,9 @@ var ActionResult = using('easynode.framework.mvc.ActionResult');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                getActionName () {
-                        return this.action;
-                }
+    getActionName() {
+      return this.action;
+    }
 
                 /**
                  * 获取Action参数列表。
@@ -230,9 +230,9 @@ var ActionResult = using('easynode.framework.mvc.ActionResult');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                getArgs () {
-                        return this.args || [];
-                }
+    getArgs() {
+      return this.args || [];
+    }
 
                 /**
                  * 增加一个或多个参数。可链式调用。
@@ -262,34 +262,34 @@ var ActionResult = using('easynode.framework.mvc.ActionResult');
                  *      datetimeS,     日期时间型，精确到秒
                  *      json,       JSON对象
                  * */
-                addArg (...o) {
-                        o.forEach(a => {
-                                if(typeof a == 'string') {
-                                        var regExp = /^(\w+)\s([\w|\(|\)]+)\s?(.*)$/;
-                                        if(a.match(regExp)) {
-                                                var parsed = regExp.exec(a);
-                                                a = {
-                                                        name: parsed[1],
-                                                        type : parsed[2],
-                                                        comment : parsed[3] || ''
-                                                };
-                                        }
-                                        else {
-                                                a = {
-                                                        name: a
-                                                };
-                                        }
-                                }
-                                assert(a.name, 'Invalid argument');
-                                a.type = a.type || 'string';
-                                a.comment = a.comment || '';
-                                if(this.hasArg(a.name)) {
-                                        logger.warn(`Duplicate definition of arg [${a.name}]`);
-                                }
-                                this.args.push(a);
-                        });
-                        return this;
-                }
+    addArg(...o) {
+      o.forEach((a) => {
+        if (typeof a == 'string') {
+          var regExp = /^(\w+)\s([\w|\(|\)]+)\s?(.*)$/;
+          if (a.match(regExp)) {
+            var parsed = regExp.exec(a);
+            a = {
+              name: parsed[1],
+              type : parsed[2],
+              comment : parsed[3] || ''
+            };
+          }
+          else {
+            a = {
+              name: a
+            };
+          }
+        }
+        assert(a.name, 'Invalid argument');
+        a.type = a.type || 'string';
+        a.comment = a.comment || '';
+        if (this.hasArg(a.name)) {
+          logger.warn(`Duplicate definition of arg [${a.name}]`);
+        }
+        this.args.push(a);
+      });
+      return this;
+    }
 
                 /**
                  *  是否定义了名为name的参数。
@@ -300,14 +300,14 @@ var ActionResult = using('easynode.framework.mvc.ActionResult');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                hasArg(name) {
-                        this.args.forEach(arg => {
-                                if(arg.name == name) {
-                                        return true;
-                                }
-                        });
-                        return false;
-                }
+    hasArg(name) {
+      this.args.forEach((arg) => {
+        if (arg.name == name) {
+          return true;
+        }
+      });
+      return false;
+    }
 
                 /**
                  * 验证Action的调用上下文环境，通常用于验证上下文环境中的输入参数。
@@ -322,11 +322,11 @@ var ActionResult = using('easynode.framework.mvc.ActionResult');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                validate (ctx, ...args) {
-                        return function * () {
-                                return ctx != null;
-                        }
-                }
+    validate(ctx, ...args) {
+      return function *() {
+        return ctx != null;
+      };
+    }
 
                 /**
                  * 验证Action的调用权限。建议通过RBAC插件统一设置权限校验函数。
@@ -341,11 +341,11 @@ var ActionResult = using('easynode.framework.mvc.ActionResult');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                authorize(ctx, ...args) {
-                        return function * () {
-                                return true;
-                        }
-                }
+    authorize(ctx, ...args) {
+      return function *() {
+        return true;
+      };
+    }
 
                 /**
                  * 执行Action处理过程。
@@ -358,11 +358,11 @@ var ActionResult = using('easynode.framework.mvc.ActionResult');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                process (ctx, ...args) {
-                        return function * () {
-                                return ActionResult.createNoImplementationError();
-                        };
-                }
+    process(ctx, ...args) {
+      return function *() {
+        return ActionResult.createNoImplementationError();
+      };
+    }
 
 
                 /**
@@ -375,15 +375,15 @@ var ActionResult = using('easynode.framework.mvc.ActionResult');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                throwErrorResult(actionResult=ActionResult.createErrorResult()) {
-                        var err = new Error(actionResult);
-                        var me = this;
-                        err.executeResult = {
-                                action : me,
-                                actionResult : actionResult
-                        };
-                        throw err;
-                }
+    throwErrorResult(actionResult = ActionResult.createErrorResult()) {
+      var err = new Error(actionResult);
+      var me = this;
+      err.executeResult = {
+        action : me,
+        actionResult : actionResult
+      };
+      throw err;
+    }
 
                 /**
                  * Action是否需要数据源支持。默认返回true。
@@ -393,9 +393,9 @@ var ActionResult = using('easynode.framework.mvc.ActionResult');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                datasourceSupport() {
-                        return true;
-                }
+    datasourceSupport() {
+      return true;
+    }
 
 
                 /**
@@ -419,15 +419,15 @@ var ActionResult = using('easynode.framework.mvc.ActionResult');
                  *      // 访问：http://localhost:5000/rest/demoM/demoA
                  *      Action.define('demoM', 'demoA', MyAction);
                  * */
-                static define(m, a, actionClass) {
-                        actionClass.module = m;
-                        actionClass.action = a;
-                }
+    static define(m, a, actionClass) {
+      actionClass.module = m;
+      actionClass.action = a;
+    }
 
-                getClassName() {
-                        return EasyNode.namespace(__filename);
-                }
+    getClassName() {
+      return EasyNode.namespace(__filename);
+    }
         }
 
-        module.exports = Action;
+  module.exports = Action;
 })();

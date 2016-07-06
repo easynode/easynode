@@ -5,7 +5,7 @@ var ActionFactory = using('easynode.framework.mvc.ActionFactory');
 var Action = using('easynode.framework.mvc.Action');
 var _ = require('underscore');
 
-(function () {
+(function() {
         /**
          * Class MethodDispatchedAction
          *
@@ -14,7 +14,7 @@ var _ = require('underscore');
          * @since 0.1.0
          * @author hujiabao
          * */
-        class MethodDispatchedAction extends GenericObject {
+  class MethodDispatchedAction extends GenericObject {
                 /**
                  * 构造函数。
                  *
@@ -25,14 +25,14 @@ var _ = require('underscore');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                constructor(moduleName, entryMethodPrefix = 'action_', argDefineMethodPrefix = 'arg_') {
-                        super();
-                        //调用super()后再定义子类成员。
-                        this._moduleName = moduleName;
-                        this._entryMethodPrefix = entryMethodPrefix;
-                        this._argDefineMethodPrefix = argDefineMethodPrefix;
-                        this._actionEntries = [];
-                }
+    constructor(moduleName, entryMethodPrefix = 'action_', argDefineMethodPrefix = 'arg_') {
+      super();
+                        // 调用super()后再定义子类成员。
+      this._moduleName = moduleName;
+      this._entryMethodPrefix = entryMethodPrefix;
+      this._argDefineMethodPrefix = argDefineMethodPrefix;
+      this._actionEntries = [];
+    }
 
                 /**
                  * 添加一个Action入口。
@@ -54,13 +54,13 @@ var _ = require('underscore');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                dispatch(entry) {
-                        assert(typeof entry == 'function', 'Invalid argument');
-                        var actionRegExp = new RegExp(this._entryMethodPrefix + '*');
-                        assert(entry.name.match(actionRegExp), `Action processor is not matched to the declared pattern [${this._entryMethodPrefix}]`);
-                        this._actionEntries.push(entry);
-                        return this;
-                }
+    dispatch(entry) {
+      assert(typeof entry == 'function', 'Invalid argument');
+      var actionRegExp = new RegExp(this._entryMethodPrefix + '*');
+      assert(entry.name.match(actionRegExp), `Action processor is not matched to the declared pattern [${this._entryMethodPrefix}]`);
+      this._actionEntries.push(entry);
+      return this;
+    }
 
                 /**
                  * 获取或设置Action模块名。
@@ -70,13 +70,13 @@ var _ = require('underscore');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                moduleName(name) {
-                        if (arguments.length == 0) {
-                                return this._moduleName;
-                        }
-                        assert(name, 'Invalid argument');
-                        this._moduleName = name;
-                }
+    moduleName(name) {
+      if (arguments.length == 0) {
+        return this._moduleName;
+      }
+      assert(name, 'Invalid argument');
+      this._moduleName = name;
+    }
 
                 /**
                  * 注册所有符合命名规范的Action。Action的模块名为设置的moduleName，Action的名称为处理函数去"processMethodPrefix"(默认：action_)。
@@ -86,53 +86,53 @@ var _ = require('underscore');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                register() {
-                        this._actionEntries.forEach(entryMethod => {
-                                var actionName = this._getActionName(entryMethod.name);
-                                var argDefineMethod = this._argDefineMethodPrefix + actionName;
-                                var ActionClass = this._createActionClass(entryMethod.call(this));
-                                Action.define(this._moduleName, actionName, ActionClass);
-                                ActionFactory.register(ActionClass);
-                        });
-                }
+    register() {
+      this._actionEntries.forEach((entryMethod) => {
+        var actionName = this._getActionName(entryMethod.name);
+        var argDefineMethod = this._argDefineMethodPrefix + actionName;
+        var ActionClass = this._createActionClass(entryMethod.call(this));
+        Action.define(this._moduleName, actionName, ActionClass);
+        ActionFactory.register(ActionClass);
+      });
+    }
 
-                _createActionClass(actionEntry) {
-                        var argDefineMethod = actionEntry.defineArgs;
-                        var processMethod = actionEntry.process || function (ctx) {
-                                        return function * () {
-                                                var ActionResult = using('easynode.framework.mvc.ActionResult');
-                                                return ActionResult.createNoImplementationError();
-                                        };
-                                };
-                        class ActionClass extends Action {
-                                constructor() {
-                                        super();
-                                        if (argDefineMethod) {
-                                                argDefineMethod.call(this);
-                                        }
-                                        this.brief = actionEntry.brief;
-                                }
-
-                                process(ctx) {
-                                        var me = this;
-                                        var args = arguments;
-                                        return function * () {
-                                                return yield processMethod.apply(me, args);
-                                        };
-                                }
-                        }
-
-                        return ActionClass;
-                }
-
-                _getActionName(methodName) {
-                        return methodName.replace(new RegExp(this._entryMethodPrefix), '');
-                }
-
-                getClassName() {
-                        return EasyNode.namespace(__filename);
-                }
+    _createActionClass(actionEntry) {
+      var argDefineMethod = actionEntry.defineArgs;
+      var processMethod = actionEntry.process || function(ctx) {
+        return function *() {
+          var ActionResult = using('easynode.framework.mvc.ActionResult');
+          return ActionResult.createNoImplementationError();
+        };
+      };
+      class ActionClass extends Action {
+        constructor() {
+          super();
+          if (argDefineMethod) {
+            argDefineMethod.call(this);
+          }
+          this.brief = actionEntry.brief;
         }
 
-        module.exports = MethodDispatchedAction;
+        process(ctx) {
+          var me = this;
+          var args = arguments;
+          return function *() {
+            return yield processMethod.apply(me, args);
+          };
+        }
+                        }
+
+      return ActionClass;
+    }
+
+    _getActionName(methodName) {
+      return methodName.replace(new RegExp(this._entryMethodPrefix), '');
+    }
+
+    getClassName() {
+      return EasyNode.namespace(__filename);
+    }
+        }
+
+  module.exports = MethodDispatchedAction;
 })();

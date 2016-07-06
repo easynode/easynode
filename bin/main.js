@@ -10,6 +10,7 @@ const logger = using('easynode.framework.Logger').getLogger();
                 process.on('uncaughtException', function(err){
                         logger.error('unhandled error : ');
                         logger.error(err);
+                        logger.error(err.stack);
                         if(err.code == 'EADDRINUSE') {
                                 process.exit(-1);
                         }

@@ -10,7 +10,7 @@ var co = require('co');
 var UUID = require('node-uuid');
 var util = require('util');
 
-(function () {
+(function() {
         /**
          * Class TCPServer
          *
@@ -19,7 +19,7 @@ var util = require('util');
          * @since 0.1.0
          * @author hujiabao
          * */
-        class TCPServer extends AbstractServer {
+  class TCPServer extends AbstractServer {
                 /**
                  * 构造函数。
                  *
@@ -31,13 +31,13 @@ var util = require('util');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                constructor(decoder = null, encoder = null, messageHandler = null, port = S(EasyNode.config('easynode.servers.tcpServer.port', '6000')).toInt()) {
-                        if (arguments.length == 1) {
-                                port = arguments[0];
-                                decoder = encoder = messageHandler = null;
-                        }
-                        super(port, EasyNode.config('easynode.servers.tcpServer.name', 'tcpServer'));
-                        //调用super()后再定义子类成员。
+    constructor(decoder = null, encoder = null, messageHandler = null, port = S(EasyNode.config('easynode.servers.tcpServer.port', '6000')).toInt()) {
+      if (arguments.length == 1) {
+        port = arguments[0];
+        decoder = encoder = messageHandler = null;
+      }
+      super(port, EasyNode.config('easynode.servers.tcpServer.name', 'tcpServer'));
+                        // 调用super()后再定义子类成员。
 
                         /**
                          *  客户端连接map，session id -> easynode.framework.server.tcp.TCPClient
@@ -47,7 +47,7 @@ var util = require('util');
                          * @private
                          *
                          * */
-                        this._clients = {};
+      this._clients = {};
 
 
                         /**
@@ -58,7 +58,7 @@ var util = require('util');
                          * @private
                          *
                          * */
-                        this._clientAlias = {};
+      this._clientAlias = {};
 
                         /**
                          *  客户端连接数
@@ -68,7 +68,7 @@ var util = require('util');
                          * @private
                          *
                          * */
-                        this._clientsCount = 0;
+      this._clientsCount = 0;
 
                         /**
                          *  Decoder
@@ -78,7 +78,7 @@ var util = require('util');
                          * @private
                          *
                          * */
-                        this._decoder = decoder;
+      this._decoder = decoder;
 
                         /**
                          *  Encoder
@@ -88,7 +88,7 @@ var util = require('util');
                          * @private
                          *
                          * */
-                        this._encoder = encoder;
+      this._encoder = encoder;
 
                         /**
                          *  MessageHandler, 处理Decoder解码过的消息
@@ -98,7 +98,7 @@ var util = require('util');
                          * @private
                          *
                          * */
-                        this._messageHandler = messageHandler;
+      this._messageHandler = messageHandler;
 
                         /**
                          *  指示TCP服务是否已经启动。
@@ -108,7 +108,7 @@ var util = require('util');
                          * @private
                          *
                          * */
-                        this._isRunning = false;
+      this._isRunning = false;
 
                         /**
                          *  客户端工厂类。
@@ -119,7 +119,7 @@ var util = require('util');
                          * @private
                          *
                          * */
-                        this._clientFactory = using('easynode.framework.server.tcp.TCPClient');
+      this._clientFactory = using('easynode.framework.server.tcp.TCPClient');
 
                         /**
                          *  net.Server实例。
@@ -129,8 +129,8 @@ var util = require('util');
                          * @default null
                          * @private*
                          * */
-                        this._server = null;
-                }
+      this._server = null;
+    }
 
                 /**
                  * 设置decoder。
@@ -141,11 +141,11 @@ var util = require('util');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                setDecoder(decoder) {
-                        assert(!this._isRunning, 'Can not change decoder while tcp server is running');
-                        this._decoder = decoder;
-                        return this;
-                }
+    setDecoder(decoder) {
+      assert(!this._isRunning, 'Can not change decoder while tcp server is running');
+      this._decoder = decoder;
+      return this;
+    }
 
                 /**
                  * 设置encoder。
@@ -156,11 +156,11 @@ var util = require('util');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                setEncoder(encoder) {
-                        assert(!this._isRunning, 'Can not change encoder while tcp server is running');
-                        this._encoder = encoder;
-                        return this;
-                }
+    setEncoder(encoder) {
+      assert(!this._isRunning, 'Can not change encoder while tcp server is running');
+      this._encoder = encoder;
+      return this;
+    }
 
                 /**
                  * 设置消息处理器。
@@ -171,11 +171,11 @@ var util = require('util');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                setMessageHandler(messageHandler) {
-                        assert(!this._isRunning, 'Can not change message handler while tcp server is running');
-                        this._messageHandler = messageHandler;
-                        return this;
-                }
+    setMessageHandler(messageHandler) {
+      assert(!this._isRunning, 'Can not change message handler while tcp server is running');
+      this._messageHandler = messageHandler;
+      return this;
+    }
 
                 /**
                  * 设置client实例工厂。
@@ -185,17 +185,17 @@ var util = require('util');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                setClientFactory(namespace) {
-                        if (typeof namespace == 'string') {
-                                this._clientFactory = using(namespace);
-                        }
-                        else if (typeof namespace == 'function') {
-                                this._clientFactory = namespace;
-                        }
+    setClientFactory(namespace) {
+      if (typeof namespace == 'string') {
+        this._clientFactory = using(namespace);
+      }
+      else if (typeof namespace == 'function') {
+        this._clientFactory = namespace;
+      }
                         else {
-                                throw new Error('Invalid argument');
-                        }
-                }
+        throw new Error('Invalid argument');
+      }
+    }
 
                 /**
                  * 包装Socket。
@@ -206,23 +206,23 @@ var util = require('util');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                _encapsulateSocket(socket) {
-                        var me = this;
-                        socket.setTimeout(S(EasyNode.config('easynode.servers.tcpServer.socketTimeout', '3000')).toInt());
-                        socket.setNoDelay(true);
-                        socket.on('timeout', function () {
-                                me.disconnect(socket.SOCKET_ID, 'timeout');
-                        });
+    _encapsulateSocket(socket) {
+      var me = this;
+      socket.setTimeout(S(EasyNode.config('easynode.servers.tcpServer.socketTimeout', '3000')).toInt());
+      socket.setNoDelay(true);
+      socket.on('timeout', function() {
+        me.disconnect(socket.SOCKET_ID, 'timeout');
+      });
 
-                        socket.on('error', function (err) {
-                                logger.error(err);
-                                me.disconnect(socket.SOCKET_ID, 'error');
-                        });
+      socket.on('error', function(err) {
+        logger.error(err);
+        me.disconnect(socket.SOCKET_ID, 'error');
+      });
 
-                        socket.on('close', function () {
-                                me.disconnect(socket.SOCKET_ID, 'close');
-                        });
-                }
+      socket.on('close', function() {
+        me.disconnect(socket.SOCKET_ID, 'close');
+      });
+    }
 
                 /**
                  * 网络连接事件处理函数。
@@ -233,52 +233,52 @@ var util = require('util');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                _onClientConnect(socket) {
-                        var me = this;
-                        var id = UUID.v4();
-                        socket.SOCKET_ID = id;
-                        this._encapsulateSocket(socket);
-                        var client = new this._clientFactory(socket, this);
-                        this._clients[id] = client;
-                        this._clientsCount++;
-                        socket.encodeAndSend = function(msg, c) {
-                                var _client = c || client;
-                                if(me._encoder == null) {
-                                        EasyNode.DEBUG && logger.debug('send default utf-8 string because of no encoder had been specified');
-                                        if(typeof msg == 'object') {
-                                                msg = JSON.stringify(msg);
-                                        }
-                                        socket.write(msg, 'utf-8');
-                                        return msg;
-                                }
-                                else {
-                                        var encoded = me._encoder.encode(msg, _client);
-                                        if(encoded != null) {
-                                                //assert(Buffer.isBuffer(encoded), `Invalid encoded type, not a Buffer`);
-                                                if(Buffer.isBuffer(encoded)) {
-                                                        var hex = encoded.toString('hex');
-                                                        EasyNode.DEBUG && logger.debug(`send message to client [${client.getAlias() | client.getSocketId()}] : ${hex}`);
-                                                        socket.write(hex, 'hex');
-                                                        return hex;
-                                                }
-                                                else if(typeof encoded == 'string') {
-                                                        EasyNode.DEBUG && logger.debug(`send message to client [${client.getAlias() || client.getSocketId()}] : ${encoded}`);
-                                                        socket.write(encoded, 'hex');
-                                                        return encoded;
-                                                }
+    _onClientConnect(socket) {
+      var me = this;
+      var id = UUID.v4();
+      socket.SOCKET_ID = id;
+      this._encapsulateSocket(socket);
+      var client = new this._clientFactory(socket, this);
+      this._clients[id] = client;
+      this._clientsCount++;
+      socket.encodeAndSend = function(msg, c) {
+        var _client = c || client;
+        if (me._encoder == null) {
+          EasyNode.DEBUG && logger.debug('send default utf-8 string because of no encoder had been specified');
+          if (typeof msg == 'object') {
+            msg = JSON.stringify(msg);
+          }
+          socket.write(msg, 'utf-8');
+          return msg;
+        }
+        else {
+          var encoded = me._encoder.encode(msg, _client);
+          if (encoded != null) {
+                                                // assert(Buffer.isBuffer(encoded), `Invalid encoded type, not a Buffer`);
+            if (Buffer.isBuffer(encoded)) {
+              var hex = encoded.toString('hex');
+              EasyNode.DEBUG && logger.debug(`send message to client [${client.getAlias() | client.getSocketId()}] : ${hex}`);
+              socket.write(hex, 'hex');
+              return hex;
+            }
+            else if (typeof encoded == 'string') {
+              EasyNode.DEBUG && logger.debug(`send message to client [${client.getAlias() || client.getSocketId()}] : ${encoded}`);
+              socket.write(encoded, 'hex');
+              return encoded;
+            }
                                                 else {
-                                                        throw new Error(`Invalid encoded result, not a Buffer or a HEX string`);
-                                                }
-                                        }
-                                }
-                        };
-                        this._handleMessages(client);
-                        this._beginDecode(client);
-                        if(!this._encoder) {
-                                logger.error('no encoder specified, call setEncoder() to set one');
-                        }
-                        EasyNode.DEBUG && logger.debug(`client [${id}] connected`);
-                }
+              throw new Error('Invalid encoded result, not a Buffer or a HEX string');
+            }
+          }
+        }
+      };
+      this._handleMessages(client);
+      this._beginDecode(client);
+      if (!this._encoder) {
+        logger.error('no encoder specified, call setEncoder() to set one');
+      }
+      EasyNode.DEBUG && logger.debug(`client [${id}] connected`);
+    }
 
                 /**
                  * 设置客户端别名。
@@ -289,14 +289,14 @@ var util = require('util');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                setClientAlias (alias, client) {
-                        var oldClient = this._clientAlias[alias];
-                        if(oldClient) {
-                                this.disconnect(oldClient.getSocketId(), 'duplicated alias');
-                        }
-                        client.setAlias(alias);
-                        this._clientAlias[alias] = client;
-                }
+    setClientAlias(alias, client) {
+      var oldClient = this._clientAlias[alias];
+      if (oldClient) {
+        this.disconnect(oldClient.getSocketId(), 'duplicated alias');
+      }
+      client.setAlias(alias);
+      this._clientAlias[alias] = client;
+    }
 
                 /**
                  * 根据客户端别名查找客户端实例
@@ -307,9 +307,9 @@ var util = require('util');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                getClientByAlias(alias) {
-                        return this._clientAlias[alias];
-                }
+    getClientByAlias(alias) {
+      return this._clientAlias[alias];
+    }
 
                 /**
                  * 获取当前的客户端连接总数。
@@ -319,9 +319,9 @@ var util = require('util');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                getClientsCount() {
-                        return this._clientsCount;
-                }
+    getClientsCount() {
+      return this._clientsCount;
+    }
 
                 /**
                  * 断开连接。
@@ -332,103 +332,103 @@ var util = require('util');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                disconnect(socketId, reason) {
-                        if (this._clients[socketId]) {
-                                var client = this._clients[socketId];
-                                var alias = client.getAlias();
-                                EasyNode.DEBUG && logger.debug(`client [${socketId}] disconnected by reason [${reason}]`);
-                                delete this._clients[socketId];
-                                this._clientsCount --;
-                                if(alias) {
-                                        delete this._clientAlias[alias];
-                                }
-                                client.getSocket().destroy();
-                        }
-                }
+    disconnect(socketId, reason) {
+      if (this._clients[socketId]) {
+        var client = this._clients[socketId];
+        var alias = client.getAlias();
+        EasyNode.DEBUG && logger.debug(`client [${socketId}] disconnected by reason [${reason}]`);
+        delete this._clients[socketId];
+        this._clientsCount --;
+        if (alias) {
+          delete this._clientAlias[alias];
+        }
+        client.getSocket().destroy();
+      }
+    }
 
-                _beginDecode(client) {
-                        if(!this._decoder) {
-                                logger.error('no decoder specified, call setDecoder() to set one');
-                                return;
-                        }
-                        this._decoder.decode(client);
-                }
+    _beginDecode(client) {
+      if (!this._decoder) {
+        logger.error('no decoder specified, call setDecoder() to set one');
+        return;
+      }
+      this._decoder.decode(client);
+    }
 
-                _handleMessages(client) {
-                        var me = this;
-                        if(!this._messageHandler) {
-                                logger.error('no message handler specified, call setMessageHandler() to set one');
-                                return;
-                        }
-                        client.on(TCPClient.EVENT_MESSAGE_DECODED, function(msg) {
-                                co(function * () {
-                                        var responses = yield me._messageHandler.handleMessage(msg, client);
-                                        var msgSent = [];
+    _handleMessages(client) {
+      var me = this;
+      if (!this._messageHandler) {
+        logger.error('no message handler specified, call setMessageHandler() to set one');
+        return;
+      }
+      client.on(TCPClient.EVENT_MESSAGE_DECODED, function(msg) {
+        co(function *() {
+          var responses = yield me._messageHandler.handleMessage(msg, client);
+          var msgSent = [];
 
-                                        if (responses) {
-                                                if (util.isArray(responses)) {
-                                                        responses.forEach(msg => {
-                                                                msgSent.push(client.getSocket().encodeAndSend(msg, client));
-                                                        });
-                                                }
-                                                else {
-                                                        msgSent.push(client.getSocket().encodeAndSend(responses, client));
-                                                }
-                                        }
-                                        process.nextTick(function () {
-                                                client.trigger(TCPClient.EVENT_MESSAGE_HANDLED, msg, responses, msgSent);
-                                        });
-                                }).catch(function(err){
-                                        logger.error(err);
-                                });
-                        });
-                }
+          if (responses) {
+            if (util.isArray(responses)) {
+              responses.forEach((msg) => {
+                msgSent.push(client.getSocket().encodeAndSend(msg, client));
+              });
+            }
+            else {
+              msgSent.push(client.getSocket().encodeAndSend(responses, client));
+            }
+          }
+          process.nextTick(function() {
+            client.trigger(TCPClient.EVENT_MESSAGE_HANDLED, msg, responses, msgSent);
+          });
+        }).catch(function(err) {
+          logger.error(err);
+        });
+      });
+    }
 
-                stop() {
-                        var me = this;
-                        me.trigger(AbstractServer.EVENT_BEFORE_STOP);
-                        return function * () {
-                                me._server.close();
-                                me._isRunning = false;
-                                me.trigger(AbstractServer.EVENT_STOP);
-                        };
-                }
+    stop() {
+      var me = this;
+      me.trigger(AbstractServer.EVENT_BEFORE_STOP);
+      return function *() {
+        me._server.close();
+        me._isRunning = false;
+        me.trigger(AbstractServer.EVENT_STOP);
+      };
+    }
 
-                start() {
-                        var me = this;
-                        me.trigger(AbstractServer.EVENT_BEFORE_START);
-                        return function * () {
-                                var server = me._server = net.createServer(function (socket) {
-                                        me._onClientConnect(socket);
-                                });
+    start() {
+      var me = this;
+      me.trigger(AbstractServer.EVENT_BEFORE_START);
+      return function *() {
+        var server = me._server = net.createServer(function(socket) {
+          me._onClientConnect(socket);
+        });
 
-                                server.on('error', function (e) {
-                                        logger.error(e);
-                                        if(e.code == 'EADDRINUSE') {
-                                                process.exit(-1);
-                                        }
-                                        co(function * () {
-                                                yield me.stop();
-                                        }).catch(function (err) {
-                                                logger.error(err);
-                                        });
-                                });
+        server.on('error', function(e) {
+          logger.error(e);
+          if (e.code == 'EADDRINUSE') {
+            process.exit(-1);
+          }
+          co(function *() {
+            yield me.stop();
+          }).catch(function(err) {
+            logger.error(err);
+          });
+        });
 
-                                server.on('listening', function () {
-                                        me._isRunning = true;
-                                });
+        server.on('listening', function() {
+          me._isRunning = true;
+        });
 
-                                var fnListen = thunkify(server.listen);
-                                yield fnListen.call(server, me.port);
-                                logger.info(`[${me.name}] is listening on port [${me.port}]...`);
-                                me.trigger(AbstractServer.EVENT_STARTED);
-                        };
-                }
+        var fnListen = thunkify(server.listen);
+        yield fnListen.call(server, me.port);
+        logger.info(`[${me.name}] is listening on port [${me.port}]...`);
+        me.trigger(AbstractServer.EVENT_STARTED);
+      };
+    }
 
-                getClassName() {
-                        return EasyNode.namespace(__filename);
-                }
+    getClassName() {
+      return EasyNode.namespace(__filename);
+    }
         }
 
-        module.exports = TCPServer;
+  module.exports = TCPServer;
 })();

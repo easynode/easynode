@@ -1,10 +1,10 @@
 /*
- Function:Mixin Interface Test
+ Function:Logger Test
  Created by hujiabao on 6/22/16.
  * */
 'use strict';
 
-require('../../../src/EasyNode.js');
+require('../../../../src/EasyNode.js');
 require('babel-polyfill');
 import co from 'co';
 import request from 'superagent';
@@ -16,7 +16,7 @@ import req from 'request';
 var _ = require('underscore');
 
 
-describe('MixinTest', function() {
+describe('MemcachedTest', function() {
 
   var root = '';
   var mochaTest = true;
@@ -43,30 +43,24 @@ describe('MixinTest', function() {
     done();
   });
 
-  it('Mix', function(done) {
-    class A {
-      getA() {
-        return 'A';
-      }
-        }
+  it('memached.set/get/del', function(done) {
 
-    class B {
-      getB() {
-        return 'B';
-      }
-        }
+    var Memcached = EasyNode.using('easynode.framework.cache.Memcached');
+    var memcached = new Memcached('218.205.113.98:11211');
 
-    var Mixin = EasyNode.using('easynode.framework.Mixin');
-    class C extends Mixin.mix(A, B) {
-      getC() {
-        return this.getA() + this.getB();
-      }
-        }
+    co(function* (){
 
-    var c = new C();
-    assert(c.getC() == 'AB', 'Mixin test failed');
+      yield  memcached.set('key','value');
+      var value =  yield memcached.get('key');
+      assert( value === 'value','not eqaul');
+      yield memcached.del('key');
+      value = yield memcached.get('key');
+      assert( value === null, 'not equal');
 
-    done();
+      done();
+    });
+
+    //done();
   });
 
   after(function(done) {

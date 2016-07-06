@@ -2,7 +2,7 @@ var assert = require('assert');
 var logger = using('easynode.framework.Logger').forFile(__filename);
 var GenericObject = using('easynode.GenericObject');
 
-(function () {
+(function() {
         /**
          * Class TCPClient
          *
@@ -11,7 +11,7 @@ var GenericObject = using('easynode.GenericObject');
          * @since 0.1.0
          * @author hujiabao
          * */
-        class TCPClient extends GenericObject {
+  class TCPClient extends GenericObject {
                 /**
                  * 构造函数。
                  *
@@ -21,10 +21,10 @@ var GenericObject = using('easynode.GenericObject');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                constructor(socket, server) {
-                        super();
-                        //调用super()后再定义子类成员。
-                        assert(socket, 'Invalid argument [socket]');
+    constructor(socket, server) {
+      super();
+                        // 调用super()后再定义子类成员。
+      assert(socket, 'Invalid argument [socket]');
                         /**
                          *  网络套接字
                          *
@@ -33,7 +33,7 @@ var GenericObject = using('easynode.GenericObject');
                          * @since 0.1.0
                          * @author hujiabao
                          * */
-                        this.socket = socket;
+      this.socket = socket;
 
                         /**
                          *  TCPServer实例
@@ -43,7 +43,7 @@ var GenericObject = using('easynode.GenericObject');
                          * @since 0.1.0
                          * @author hujiabao
                          * */
-                        this.server = server;
+      this.server = server;
 
                         /**
                          *  创建时间
@@ -53,7 +53,7 @@ var GenericObject = using('easynode.GenericObject');
                          * @private
                          *
                          * */
-                        this._uptime = new Date();
+      this._uptime = new Date();
 
                         /**
                          *  是否处于连接状态
@@ -63,7 +63,7 @@ var GenericObject = using('easynode.GenericObject');
                          * @private
                          *
                          * */
-                        this._connected = true;
+      this._connected = true;
 
                         /**
                          *  客户端别名
@@ -73,8 +73,8 @@ var GenericObject = using('easynode.GenericObject');
                          * @private
                          *
                          * */
-                        this._alias = null;
-                }
+      this._alias = null;
+    }
 
                 /**
                  * 获取客户端连接时长(单位：ms)。
@@ -84,9 +84,9 @@ var GenericObject = using('easynode.GenericObject');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                uptime () {
-                        return new Date() - this._uptime;
-                }
+    uptime() {
+      return new Date() - this._uptime;
+    }
 
                 /**
                  * 获取原生Socket连接。
@@ -96,9 +96,9 @@ var GenericObject = using('easynode.GenericObject');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                getSocket() {
-                        return this.socket;
-                }
+    getSocket() {
+      return this.socket;
+    }
 
                 /**
                  * 获取客户端ID，返回：this.socket.SOCKET_ID
@@ -108,9 +108,9 @@ var GenericObject = using('easynode.GenericObject');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                getId () {
-                        return this.getSocketId();
-                }
+    getId() {
+      return this.getSocketId();
+    }
 
                 /**
                  * 设置客户端别名
@@ -120,9 +120,9 @@ var GenericObject = using('easynode.GenericObject');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                setAlias(alias) {
-                        this._alias = alias;
-                }
+    setAlias(alias) {
+      this._alias = alias;
+    }
 
                 /**
                  * 设置客户端别名
@@ -132,9 +132,9 @@ var GenericObject = using('easynode.GenericObject');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                getAlias() {
-                        return this._alias;
-                }
+    getAlias() {
+      return this._alias;
+    }
 
                 /**
                  * 获取客户端Socket ID，返回：this.socket.SOCKET_ID
@@ -144,9 +144,9 @@ var GenericObject = using('easynode.GenericObject');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                getSocketId() {
-                        return this.socket.SOCKET_ID;
-                }
+    getSocketId() {
+      return this.socket.SOCKET_ID;
+    }
 
                 /**
                  * 客户端是否已经连接成功
@@ -156,9 +156,9 @@ var GenericObject = using('easynode.GenericObject');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                connected () {
-                        return this._connected;
-                }
+    connected() {
+      return this._connected;
+    }
 
                 /**
                  * 发送一条消息
@@ -169,16 +169,16 @@ var GenericObject = using('easynode.GenericObject');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                send(msg) {
-                        var me = this;
-                        return function * () {
-                                me.socket.encodeAndSend(msg);
-                        };
-                }
+    send(msg) {
+      var me = this;
+      return function *() {
+        me.socket.encodeAndSend(msg);
+      };
+    }
 
-                getClassName() {
-                        return EasyNode.namespace(__filename);
-                }
+    getClassName() {
+      return EasyNode.namespace(__filename);
+    }
         }
 
         /**
@@ -188,8 +188,8 @@ var GenericObject = using('easynode.GenericObject');
          * @since 0.1.0
          * @author hujiabao
          * */
-        TCPClient.EVENT_MESSAGE_DECODED = 'message-decoded';
-        TCPClient.EVENT_MESSAGE_HANDLED='message-handled';
+  TCPClient.EVENT_MESSAGE_DECODED = 'message-decoded';
+  TCPClient.EVENT_MESSAGE_HANDLED = 'message-handled';
 
-        module.exports = TCPClient;
+  module.exports = TCPClient;
 })();

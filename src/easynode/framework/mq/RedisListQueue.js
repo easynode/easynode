@@ -5,18 +5,18 @@ var redisWrapper = require('co-redis');
 var redis = require('redis');
 var thunkify = require('thunkify');
 
-(function () {
+(function() {
 
-        function _sleep(t, callback) {
-                setTimeout(function () {
-                        callback(null, null);
-                }, t);
-        }
+  function _sleep(t, callback) {
+    setTimeout(function() {
+      callback(null, null);
+    }, t);
+  }
 
-        function * sleep(t) {
-                var fnSleep = thunkify(_sleep);
-                yield fnSleep.call(null, t);
-        }
+  function *sleep(t) {
+    var fnSleep = thunkify(_sleep);
+    yield fnSleep.call(null, t);
+  }
 
 /**
  * Class RedisListQueue
@@ -26,7 +26,7 @@ var thunkify = require('thunkify');
  * @since 0.1.0
  * @author hujiabao
  * */
-class RedisListQueue extends IQueue {
+  class RedisListQueue extends IQueue {
         /**
          * 构造函数。
          *
@@ -34,30 +34,30 @@ class RedisListQueue extends IQueue {
          * @since 0.1.0
          * @author hujiabao
          * */
-        constructor() {
-                super();
-                //调用super()后再定义子类成员。
-        }
+    constructor() {
+      super();
+                // 调用super()后再定义子类成员。
+    }
 
-        initialize(server = '127.0.0.1', port = 6379, opts = {}) {
-                this.opts = opts;
-                this._client_original = redis.createClient(port, server, opts);
-                this._client = redisWrapper(this._client_original);
-        }
+    initialize(server = '127.0.0.1', port = 6379, opts = {}) {
+      this.opts = opts;
+      this._client_original = redis.createClient(port, server, opts);
+      this._client = redisWrapper(this._client_original);
+    }
 
-        _doAuth() {
-                var me = this;
-                return function * () {
-                        if (me.opts.password) {
-                                if (me._didAuth !== true) {
-                                        me._disAuth = true;
-                                        me._authResult = yield me._client.auth(me.opts.password);
-                                }
-                                return me._authResult;
-                        }
-                        return true;
-                };
+    _doAuth() {
+      var me = this;
+      return function *() {
+        if (me.opts.password) {
+          if (me._didAuth !== true) {
+            me._disAuth = true;
+            me._authResult = yield me._client.auth(me.opts.password);
+          }
+          return me._authResult;
         }
+        return true;
+      };
+    }
 
         /**
          * 向队列发送消息。
@@ -72,22 +72,22 @@ class RedisListQueue extends IQueue {
          * @since 0.1.0
          * @author hujiabao
          * */
-        publish(queueName = 'defaultQueue', opts = {}, ...msgs) {
-                assert(msgs.length > 0, 'Invalid argument');
-                var me = this;
-                return function * () {
-                        if (yield me._doAuth()) {
-                                for (var i = 0; i < msgs.length; i++) {
-                                        var s = JSON.stringify(msgs[i]);
-                                        EasyNode.DEBUG && logger.debug(`publish message to redis queue [${queueName}] -> [${s}]`);
-                                        yield me._client.lpush(queueName, s);
-                                }
-                        }
-                        else {
-                                logger.error(`redis authorize fail`);
-                        }
-                };
+    publish(queueName = 'defaultQueue', opts = {}, ...msgs) {
+      assert(msgs.length > 0, 'Invalid argument');
+      var me = this;
+      return function *() {
+        if (yield me._doAuth()) {
+          for (var i = 0; i < msgs.length; i++) {
+            var s = JSON.stringify(msgs[i]);
+            EasyNode.DEBUG && logger.debug(`publish message to redis queue [${queueName}] -> [${s}]`);
+            yield me._client.lpush(queueName, s);
+          }
         }
+        else {
+          logger.error('redis authorize fail');
+        }
+      };
+    }
 
         /**
          * 订阅队列消息。注意，listener的onMessage是一个generator函数。
@@ -104,53 +104,53 @@ class RedisListQueue extends IQueue {
          * @since 0.1.0
          * @author hujiabao
          * */
-        subscribe(queueName = 'defaultQueue', opts = {FIFO : true}, l = null) {
-                logger.warn('***Subscribe a redis list will block any code below !!!');
-                assert(l && typeof l.onMessage == 'function', 'Invalid message listener');
-                var me = this;
-                return function * () {
-                        if (yield me._doAuth()) {
-                                var working = true;
-                                while (true) {
-                                        try {
-                                                if(l.pause === true) {
-                                                        yield sleep(1000);
-                                                        yield l.onMessage(queueName, null);
-                                                        continue;
-                                                }
-                                                var m = null;
-                                                if (opts && !opts.FILO) {
-                                                        m = yield me._client.rpop(queueName);
-                                                }
-                                                else {
-                                                        m = yield me._client.lpop(queueName);
-                                                }
-                                                if (m) {
-                                                        yield l.onMessage(queueName, JSON.parse(m));
-                                                }
-                                                else {
-                                                        yield sleep(20);
-                                                }
-                                                if(!working) {
-                                                        working = true;
-                                                        logger.info('subscribe restore');
-                                                }
-                                        }catch(e){
-                                                if(typeof l.onError == 'function') {
-                                                        l.onError.call(null, e);
-                                                }
-                                                if(working) {
-                                                        logger.error('subscribe broken');
-                                                }
-                                                working = false;
-                                        }
-                                }
-                        }
-                        else {
-                                logger.error(`redis authorize fail`);
-                        }
-                };
+    subscribe(queueName = 'defaultQueue', opts = {FIFO : true}, l = null) {
+      logger.warn('***Subscribe a redis list will block any code below !!!');
+      assert(l && typeof l.onMessage == 'function', 'Invalid message listener');
+      var me = this;
+      return function *() {
+        if (yield me._doAuth()) {
+          var working = true;
+          while (true) {
+            try {
+              if (l.pause === true) {
+                yield sleep(1000);
+                yield l.onMessage(queueName, null);
+                continue;
+              }
+              var m = null;
+              if (opts && !opts.FILO) {
+                m = yield me._client.rpop(queueName);
+              }
+              else {
+                m = yield me._client.lpop(queueName);
+              }
+              if (m) {
+                yield l.onMessage(queueName, JSON.parse(m));
+              }
+              else {
+                yield sleep(20);
+              }
+              if (!working) {
+                working = true;
+                logger.info('subscribe restore');
+              }
+            } catch (e) {
+              if (typeof l.onError == 'function') {
+                l.onError.call(null, e);
+              }
+              if (working) {
+                logger.error('subscribe broken');
+              }
+              working = false;
+            }
+          }
         }
+        else {
+          logger.error('redis authorize fail');
+        }
+      };
+    }
 
         /**
          * 取消订阅队列消息。
@@ -162,15 +162,14 @@ class RedisListQueue extends IQueue {
          * @since 0.1.0
          * @author hujiabao
          * */
-        unsubscribe(subscribeInst) {
-                throw new Error('Unsubscribe is not supported on list model');
-        }
+    unsubscribe(subscribeInst) {
+      throw new Error('Unsubscribe is not supported on list model');
+    }
 
-        getClassName() {
-                return EasyNode.namespace(__filename);
-        }
+    getClassName() {
+      return EasyNode.namespace(__filename);
+    }
 }
 
-module.exports = RedisListQueue;
-})
-();
+  module.exports = RedisListQueue;
+})();

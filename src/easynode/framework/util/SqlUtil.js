@@ -6,7 +6,7 @@ var util = require('util');
 var S = require('string');
 const crypto = require('crypto');
 
-(function () {
+(function() {
         /**
          * Class SqlUtil
          *
@@ -15,7 +15,7 @@ const crypto = require('crypto');
          * @since 0.1.0
          * @author hujiabao
          * */
-        class SqlUtil extends GenericObject {
+  class SqlUtil extends GenericObject {
                 /**
                  * 构造函数。
                  *
@@ -23,10 +23,10 @@ const crypto = require('crypto');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                constructor() {
-                        super();
-                        //调用super()后再定义子类成员。
-                }
+    constructor() {
+      super();
+                        // 调用super()后再定义子类成员。
+    }
 
                 /**
                  * 替换mysql的SQL参数。参数格式：<br/>
@@ -44,67 +44,67 @@ const crypto = require('crypto');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                static replaceMysqlArgs(sql, arg) {
-                        if (typeof sql == 'string') {
-                                if (arg == null) {
-                                        return sql;
-                                }
-                                //替换#xxx#和$xxx$
-                                var regEx = /([\$|#]\w*[\$|#])($|\s+|,|'|%|;|\))/;
-                                var s = sql;
-                                var counter = 0;
-                                while (true) {
-                                        var arr = regEx.exec(s);
-                                        if (!arr || arr.length < 2) {
-                                                break;
-                                        }
-                                        else if (arr.length > 1) {
-                                                var part = S(arr[1]);
-                                                var argType = '';
-                                                if (part.startsWith('#') && part.endsWith('#')) {
-                                                        argType = '#';
-                                                }
-                                                else if (part.startsWith('$') && part.endsWith('$')) {
-                                                        argType = '$';
-                                                }
-                                                if (argType.length > 0) {
-                                                        part = part.substring(1, part.length - 1);
-                                                        var v = "";
-                                                        if (util.isArray(arg)) {
-                                                                v = arg[counter++];
-                                                                if (typeof v == 'number' && isNaN(v)) {
-                                                                        v = null;
-                                                                }
-                                                        }
-                                                        else if (arg) {
-                                                                v = arg[part];
-                                                                if (typeof v == 'number' && isNaN(v)) {
-                                                                        v = null;
-                                                                }
-                                                        }
-                                                        else {
-                                                                v = '';
-                                                        }
-                                                        if(typeof v == 'object' && !util.isDate(v)) {
-                                                                v = JSON.stringify(v);
-                                                        }
-                                                        var isNumber = (typeof v == 'number');
-                                                        if (argType == '#' && !isNumber) {
-                                                                s = s.replace(regEx, mysql.escape(v) + arr[2]);
-                                                        }
-                                                        else if (argType == '$' || isNumber) {
-                                                                s = s.replace(regEx, v + arr[2]);
-                                                        }
-                                                }
-                                                else {
-                                                        throw new Error('SQL template error :' + sql);
-                                                }
-                                        }
-                                }
-                                return s;
-                        }
-                        return '';
+    static replaceMysqlArgs(sql, arg) {
+      if (typeof sql == 'string') {
+        if (arg == null) {
+          return sql;
+        }
+                                // 替换#xxx#和$xxx$
+        var regEx = /([\$|#]\w*[\$|#])($|\s+|,|'|%|;|\))/;
+        var s = sql;
+        var counter = 0;
+        while (true) {
+          var arr = regEx.exec(s);
+          if (!arr || arr.length < 2) {
+            break;
+          }
+          else if (arr.length > 1) {
+            var part = S(arr[1]);
+            var argType = '';
+            if (part.startsWith('#') && part.endsWith('#')) {
+              argType = '#';
+            }
+            else if (part.startsWith('$') && part.endsWith('$')) {
+              argType = '$';
+            }
+            if (argType.length > 0) {
+              part = part.substring(1, part.length - 1);
+              var v = '';
+              if (util.isArray(arg)) {
+                v = arg[counter++];
+                if (typeof v == 'number' && isNaN(v)) {
+                  v = null;
                 }
+              }
+              else if (arg) {
+                v = arg[part];
+                if (typeof v == 'number' && isNaN(v)) {
+                  v = null;
+                }
+              }
+                                                        else {
+                v = '';
+              }
+              if (typeof v == 'object' && !util.isDate(v)) {
+                v = JSON.stringify(v);
+              }
+              var isNumber = (typeof v == 'number');
+              if (argType == '#' && !isNumber) {
+                s = s.replace(regEx, mysql.escape(v) + arr[2]);
+              }
+              else if (argType == '$' || isNumber) {
+                s = s.replace(regEx, v + arr[2]);
+              }
+            }
+            else {
+              throw new Error('SQL template error :' + sql);
+            }
+          }
+        }
+        return s;
+      }
+      return '';
+    }
 
                 /**
                  * 映射对象，将数据库列为照射为驼峰名，例：
@@ -129,28 +129,28 @@ const crypto = require('crypto');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                static mapEntity(o, mapper) {
-                        var ret = {};
-                        if (mapper) {
-                                for (var key in mapper) {
-                                        if (typeof mapper[key] == 'string') {
-                                                ret[key] = o[mapper[key]];
-                                        }
-                                }
-                                mapper.callback && mapper.callback(ret);
-                        }
-                        else {
-                                //do autoMap
-                                for (var key in o) {
-                                        if (typeof o[key] != 'function') {
-                                                var val = o[key];
-                                                var alias = SqlUtil.alias(key);
-                                                ret[alias] = val;
-                                        }
-                                }
-                        }
-                        return ret;
-                }
+    static mapEntity(o, mapper) {
+      var ret = {};
+      if (mapper) {
+        for (var key in mapper) {
+          if (typeof mapper[key] == 'string') {
+            ret[key] = o[mapper[key]];
+          }
+        }
+        mapper.callback && mapper.callback(ret);
+      }
+      else {
+                                // do autoMap
+        for (var key in o) {
+          if (typeof o[key] != 'function') {
+            var val = o[key];
+            var alias = SqlUtil.alias(key);
+            ret[alias] = val;
+          }
+        }
+      }
+      return ret;
+    }
 
                 /**
                  *  获取数据库列的驼峰别名。COLUMN_NAME_A => columnNameA
@@ -161,16 +161,16 @@ const crypto = require('crypto');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                static alias(columnName) {
-                        var alias = '';
-                        var arr = columnName.split('_');
-                        alias += arr[0].toLowerCase();
-                        for (var j = 1; j < arr.length; j++) {
-                                var temp = arr[j].toUpperCase().substring(0, 1) + arr[j].toLowerCase().substring(1);
-                                alias += temp;
-                        }
-                        return alias;
-                }
+    static alias(columnName) {
+      var alias = '';
+      var arr = columnName.split('_');
+      alias += arr[0].toLowerCase();
+      for (var j = 1; j < arr.length; j++) {
+        var temp = arr[j].toUpperCase().substring(0, 1) + arr[j].toLowerCase().substring(1);
+        alias += temp;
+      }
+      return alias;
+    }
 
                 /**
                  *  获取数据库驼峰别的数据库列名。columnNameA => COLUMN_NAME_A。alias函数的反向转换函数。应用中如果
@@ -182,19 +182,19 @@ const crypto = require('crypto');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                static aliasReverse(fieldName) {
-                        var ret = fieldName[0];
-                        for(var i = 1;i<fieldName.length;i++) {
-                                var c = fieldName[i];
-                                if(c.match(/^[A-Z]$/)) {
-                                        ret += '_' + c;
-                                }
-                                else {
-                                        ret += c;
-                                }
-                        }
-                        return ret.toUpperCase();
-                }
+    static aliasReverse(fieldName) {
+      var ret = fieldName[0];
+      for (var i = 1; i < fieldName.length; i++) {
+        var c = fieldName[i];
+        if (c.match(/^[A-Z]$/)) {
+          ret += '_' + c;
+        }
+        else {
+          ret += c;
+        }
+      }
+      return ret.toUpperCase();
+    }
 
                 /**
                  *  计算结果集页数。
@@ -206,18 +206,18 @@ const crypto = require('crypto');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                static calculatePages(rows, rpp) {
-                        var pages = 0;
-                        if (rows > 0) {
-                                if (rows % rpp == 0) {
-                                        pages = parseInt(rows / rpp);
-                                }
-                                else {
-                                        pages = parseInt(rows / rpp) + 1;
-                                }
-                        }
-                        return pages;
-                }
+    static calculatePages(rows, rpp) {
+      var pages = 0;
+      if (rows > 0) {
+        if (rows % rpp == 0) {
+          pages = parseInt(rows / rpp);
+        }
+        else {
+          pages = parseInt(rows / rpp) + 1;
+        }
+      }
+      return pages;
+    }
 
 
                 /**
@@ -229,20 +229,20 @@ const crypto = require('crypto');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                static encryptAdv(data) {
-                        var key = 'ABCDE';
-                        var iv = 'ABCDE' ;
-                        var clearEncoding = 'utf8';
-                        var cipherEncoding = 'base64';
-                        var cipherChunks = [];
-                        var cipher = crypto.createCipherivAdv('aes-128-cbc', key, iv);
-                        cipher.setAutoPadding(true);
+    static encryptAdv(data) {
+      var key = 'ABCDE';
+      var iv = 'ABCDE';
+      var clearEncoding = 'utf8';
+      var cipherEncoding = 'base64';
+      var cipherChunks = [];
+      var cipher = crypto.createCipherivAdv('aes-128-cbc', key, iv);
+      cipher.setAutoPadding(true);
 
-                        var enc = cipher.update(data, clearEncoding, cipherEncoding);
-                        enc += cipher.final(cipherEncoding);
+      var enc = cipher.update(data, clearEncoding, cipherEncoding);
+      enc += cipher.final(cipherEncoding);
 
-                        return enc;
-                }
+      return enc;
+    }
 
                 /**
                  *  解密函数
@@ -253,19 +253,19 @@ const crypto = require('crypto');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                static decryptAdv(data) {
-                        var key = 'ABCDE';
-                        var iv = 'ABCDE' ;
-                        var clearEncoding = 'binary';
-                        var cipherEncoding = 'base64';
-                        var decipher = crypto.createDecipherivAdv('aes-128-cbc', key, iv);
-                        decipher.setAutoPadding(true);
+    static decryptAdv(data) {
+      var key = 'ABCDE';
+      var iv = 'ABCDE';
+      var clearEncoding = 'binary';
+      var cipherEncoding = 'base64';
+      var decipher = crypto.createDecipherivAdv('aes-128-cbc', key, iv);
+      decipher.setAutoPadding(true);
 
-                        var enc = decipher.update(data, cipherEncoding, clearEncoding);
-                        enc += decipher.final(clearEncoding);
+      var enc = decipher.update(data, cipherEncoding, clearEncoding);
+      enc += decipher.final(clearEncoding);
 
-                        return enc;
-                }
+      return enc;
+    }
 
                 /**
                  *  将分页对象转成Mysql LIMIT子句。
@@ -276,25 +276,25 @@ const crypto = require('crypto');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                static pagingToLimit (paging={page: 0, rpp : 0}) {
-                        if (paging) {
-                                if(paging.page == 0) {
-                                        paging.page = 1;
-                                }
-                                if(paging.rpp == 0) {
-                                        paging.rpp = parseInt(EasyNode.config('easynode.framework.mvc.model.defaultRPP', '20'));
-                                }
-                                return 'LIMIT ' + ((paging.page - 1) * paging.rpp) + ',' + paging.rpp;
-                        }
-                        else {
-                                return '';
-                        }
-                }
+    static pagingToLimit(paging = {page: 0, rpp : 0}) {
+      if (paging) {
+        if (paging.page == 0) {
+          paging.page = 1;
+        }
+        if (paging.rpp == 0) {
+          paging.rpp = parseInt(EasyNode.config('easynode.framework.mvc.model.defaultRPP', '20'));
+        }
+        return 'LIMIT ' + ((paging.page - 1) * paging.rpp) + ',' + paging.rpp;
+      }
+      else {
+        return '';
+      }
+    }
 
-                getClassName() {
-                        return EasyNode.namespace(__filename);
-                }
+    getClassName() {
+      return EasyNode.namespace(__filename);
+    }
         }
 
-        module.exports = SqlUtil;
+  module.exports = SqlUtil;
 })();

@@ -2,7 +2,7 @@ var assert = require('assert');
 var logger = using('easynode.framework.Logger').forFile(__filename);
 var GenericObject = using('easynode.GenericObject');
 
-(function () {
+(function() {
         /**
          * 抽象服务类，请不要直接实例化该类，因为它的主要函数都是抽象函数。
          *
@@ -11,7 +11,7 @@ var GenericObject = using('easynode.GenericObject');
          * @since 0.1.0
          * @author hujiabao
          * */
-        class AbstractServer extends GenericObject {
+  class AbstractServer extends GenericObject {
                 /**
                  * 构造函数。
                  *
@@ -22,14 +22,14 @@ var GenericObject = using('easynode.GenericObject');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                  constructor (port, name = 'no-name') {
-                        super();
-                        //place code below
-                        if (typeof port != 'number' || isNaN(port)) {
-                                throw new TypeError('Invalid port number');
-                        }
+    constructor(port, name = 'no-name') {
+      super();
+                        // place code below
+      if (typeof port != 'number' || isNaN(port)) {
+        throw new TypeError('Invalid port number');
+      }
 
-                        var me = this;
+      var me = this;
 
                         /**
                          * 服务类型
@@ -39,7 +39,7 @@ var GenericObject = using('easynode.GenericObject');
                          * @since 0.1.0
                          * @author hujiabao
                          * */
-                        this.type = 'unknown';
+      this.type = 'unknown';
 
                         /**
                          * 服务端口
@@ -49,7 +49,7 @@ var GenericObject = using('easynode.GenericObject');
                          * @since 0.1.0
                          * @author hujiabao
                          * */
-                        this.port = port;
+      this.port = port;
 
                         /**
                          * 服务名称
@@ -59,7 +59,7 @@ var GenericObject = using('easynode.GenericObject');
                          * @since 0.1.0
                          * @author hujiabao
                          * */
-                        this.name = name;
+      this.name = name;
 
                         /**
                          * 服务ID，从EasyNode官方网站获取，配置项：easynode.app.id
@@ -70,7 +70,7 @@ var GenericObject = using('easynode.GenericObject');
                          * @since 0.1.0
                          * @author hujiabao
                          * */
-                        this.appId = EasyNode.config('easynode.app.id', 'UNTITLED');
+      this.appId = EasyNode.config('easynode.app.id', 'UNTITLED');
 
                         /**
                          * 应用密钥。配置项：easynode.app.key
@@ -81,7 +81,7 @@ var GenericObject = using('easynode.GenericObject');
                          * @since 0.1.0
                          * @author hujiabao
                          * */
-                        this.appKey =  EasyNode.config('easynode.app.key', 'EMPTY');
+      this.appKey = EasyNode.config('easynode.app.key', 'EMPTY');
 
 
                         /**
@@ -93,13 +93,13 @@ var GenericObject = using('easynode.GenericObject');
                          * @since 0.1.0
                          * @author hujiabao
                          * */
-                        var _started = false;
-                        this.on('started', function(){
-                                _started = true;
-                        });
-                        this.on('stop', function(){
-                                _started = false;
-                        });
+      var _started = false;
+      this.on('started', function() {
+        _started = true;
+      });
+      this.on('stop', function() {
+        _started = false;
+      });
                         /**
                          * 获取服务是否已经启动。
                          *
@@ -108,9 +108,9 @@ var GenericObject = using('easynode.GenericObject');
                          * @since 0.1.0
                          * @author hujiabao
                          * */
-                        this.isStarted = function() {
-                                return _started;
-                        };
+      this.isStarted = function() {
+        return _started;
+      };
 
                         /**
                          * 服务是否处于暂停状态
@@ -121,13 +121,13 @@ var GenericObject = using('easynode.GenericObject');
                          * @since 0.1.0
                          * @author hujiabao
                          * */
-                        var _paused = false;
-                        this.on('pause', function(){
-                                _paused = true;
-                        });
-                        this.on('resume', function(){
-                                _paused = false;
-                        });
+      var _paused = false;
+      this.on('pause', function() {
+        _paused = true;
+      });
+      this.on('resume', function() {
+        _paused = false;
+      });
                         /**
                          * 获取服务是否处于暂停状态
                          *
@@ -136,10 +136,10 @@ var GenericObject = using('easynode.GenericObject');
                          * @since 0.1.0
                          * @author hujiabao
                          * */
-                        this.isPausing = function() {
-                                return _paused;
-                        };
-                }
+      this.isPausing = function() {
+        return _paused;
+      };
+    }
 
                 /**
                  *  设置应用ID和密钥。
@@ -150,14 +150,14 @@ var GenericObject = using('easynode.GenericObject');
                  * @since 0.1.0
                  * @author hujiabao
                  **/
-                setAppInfo (appId, appKey) {
-                        this.appId = appId;
-                        this.appKey = appKey;
-                }
+    setAppInfo(appId, appKey) {
+      this.appId = appId;
+      this.appKey = appKey;
+    }
 
-                getClassName () {
-                        return EasyNode.namespace(__filename);
-                }
+    getClassName() {
+      return EasyNode.namespace(__filename);
+    }
 
                 /**
                  *  设置服务的ActionContext监听器，用于向服务的ActionContext注入Action执行时必要成员。
@@ -168,9 +168,9 @@ var GenericObject = using('easynode.GenericObject');
                  * @since 0.1.0
                  * @author hujiabao
                  **/
-                setActionContextListener (l) {
-                        throw new Error('Abstract Method');
-                }
+    setActionContextListener(l) {
+      throw new Error('Abstract Method');
+    }
 
                 /**
                  * 设置服务端口。
@@ -182,11 +182,11 @@ var GenericObject = using('easynode.GenericObject');
                  * @abstract
                  * @async
                  * */
-                setPort (port) {
-                        assert(typeof port == 'number' && port > 0, 'Invalid port number');
-                        assert(!this.isRunning(), 'Can not change port while server running');
-                        this.port = port;
-                }
+    setPort(port) {
+      assert(typeof port == 'number' && port > 0, 'Invalid port number');
+      assert(!this.isRunning(), 'Can not change port while server running');
+      this.port = port;
+    }
 
                 /**
                  * 启动服务。子类实现时，请触发其started事件。
@@ -197,9 +197,9 @@ var GenericObject = using('easynode.GenericObject');
                  * @abstract
                  * @async
                  * */
-                start () {
-                        throw new Error('Abstract method');
-                }
+    start() {
+      throw new Error('Abstract method');
+    }
 
                 /**
                  * 停止服务。停止服务时，服务占用的网络端口将一并释放。子类实现时，请触发stop事件
@@ -210,9 +210,9 @@ var GenericObject = using('easynode.GenericObject');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                stop () {
-                        throw new Error('Abstract method');
-                }
+    stop() {
+      throw new Error('Abstract method');
+    }
 
                 /**
                  * 立即暂停服务。与停止服务不同，暂停服务并不释放网络端口资源，也不丢弃网络数据包，仅无响应或响应服务暂停。
@@ -223,9 +223,9 @@ var GenericObject = using('easynode.GenericObject');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                pause () {
-                        throw new Error('Abstract method');
-                }
+    pause() {
+      throw new Error('Abstract method');
+    }
 
                 /**
                  * 立即恢复服务，如果服务处于暂停状态。子类实现时，请触发resume事件。
@@ -235,9 +235,9 @@ var GenericObject = using('easynode.GenericObject');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                resume () {
-                        throw new Error('Abstract method');
-                }
+    resume() {
+      throw new Error('Abstract method');
+    }
 
                 /**
                  * 统计服务状态。
@@ -249,9 +249,9 @@ var GenericObject = using('easynode.GenericObject');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                stat () {
-                        throw new Error('Abstract method');
-                }
+    stat() {
+      throw new Error('Abstract method');
+    }
 
                 /**
                  * 获取客户端连接列表。
@@ -263,9 +263,9 @@ var GenericObject = using('easynode.GenericObject');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                connections () {
-                        throw new Error('Abstract method');
-                }
+    connections() {
+      throw new Error('Abstract method');
+    }
 
                 /**
                  * 向客户端发送消息。
@@ -280,9 +280,9 @@ var GenericObject = using('easynode.GenericObject');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                send(clientTokens, msg) {
-                        throw new Error('Abstract method');
-                }
+    send(clientTokens, msg) {
+      throw new Error('Abstract method');
+    }
 
                 /**
                  * 向所有客户端广播消息。
@@ -295,9 +295,9 @@ var GenericObject = using('easynode.GenericObject');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                broadcast (msg) {
-                        throw new Error('Abstract method');
-                }
+    broadcast(msg) {
+      throw new Error('Abstract method');
+    }
 
                 /**
                  * 判定服务器是否处于运行状态
@@ -307,9 +307,9 @@ var GenericObject = using('easynode.GenericObject');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                isRunning () {
-                        return this.isStarted() && !this.isPausing();
-                }
+    isRunning() {
+      return this.isStarted() && !this.isPausing();
+    }
         }
 
         /**
@@ -317,7 +317,7 @@ var GenericObject = using('easynode.GenericObject');
          *
          * @event before-start
          */
-        AbstractServer.EVENT_BEFORE_START = 'before-start';
+  AbstractServer.EVENT_BEFORE_START = 'before-start';
 
         /**
          * 服务启动后触发。
@@ -326,14 +326,14 @@ var GenericObject = using('easynode.GenericObject');
          * @param {Error} err 启动时发生的错误，没有错误为null。
          * @param {boolean} result 启动结果，发生错误时为null，否则为true.
          */
-        AbstractServer.EVENT_STARTED = 'started';
+  AbstractServer.EVENT_STARTED = 'started';
 
         /**
          * 服务开始停止前触发。
          *
          * @event before-stop
          */
-        AbstractServer.EVENT_BEFORE_STOP = 'before-stop';
+  AbstractServer.EVENT_BEFORE_STOP = 'before-stop';
 
         /**
          * 停止后触发。
@@ -342,21 +342,21 @@ var GenericObject = using('easynode.GenericObject');
          * @param {Error} err 停止时发生的错误，没有错误为null。
          * @param {boolean} result 停止结果，发生错误时为null，否则为true.
          */
-        AbstractServer.EVENT_STOP = 'stop';
+  AbstractServer.EVENT_STOP = 'stop';
 
         /**
          * 服务暂停时触发。
          *
          * @event before-start
          */
-        AbstractServer.EVENT_PAUSE = 'pause';
+  AbstractServer.EVENT_PAUSE = 'pause';
 
         /**
          * 服务从暂停状态恢复时触发。
          *
          * @event resume
          */
-        AbstractServer.EVENT_RESUME = 'resume';
+  AbstractServer.EVENT_RESUME = 'resume';
 
-        module.exports = AbstractServer;
+  module.exports = AbstractServer;
 })();

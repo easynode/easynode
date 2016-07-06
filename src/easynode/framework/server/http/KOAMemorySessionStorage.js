@@ -2,7 +2,7 @@ var assert = require('assert');
 var logger = using('easynode.framework.Logger').forFile(__filename);
 var GenericObject = using('easynode.GenericObject');
 
-(function () {
+(function() {
         /**
          * KOAHttpServer session的内存存储，注意，内存存储仅供开发使用，并且不支持TTL，线上产品请使用redis或后续将支持的memcached等 。
          *
@@ -12,9 +12,9 @@ var GenericObject = using('easynode.GenericObject');
          * @author hujiabao
          * */
 
-        var _sessions = {};
+  var _sessions = {};
 
-        class KOAMemorySessionStorage extends GenericObject {
+  class KOAMemorySessionStorage extends GenericObject {
                 /**
                  * 构造函数。
                  *
@@ -22,11 +22,11 @@ var GenericObject = using('easynode.GenericObject');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                constructor(options) {
-                        super();
-                        //调用super()后再定义子类成员。
-                        this._options = options || {};
-                }
+    constructor(options) {
+      super();
+                        // 调用super()后再定义子类成员。
+      this._options = options || {};
+    }
 
                 /**
                  *  get函数，获取一个session。
@@ -37,11 +37,11 @@ var GenericObject = using('easynode.GenericObject');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                get (sid) {
-                        return function * () {
-                                return _sessions[sid];
-                        };
-                }
+    get(sid) {
+      return function *() {
+        return _sessions[sid];
+      };
+    }
 
                 /**
                  *  set函数，获取一个session。
@@ -54,11 +54,11 @@ var GenericObject = using('easynode.GenericObject');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                set (sid, sess, ttl) {
-                        return function * () {
-                                _sessions[sid] = sess;
-                        };
-                }
+    set(sid, sess, ttl) {
+      return function *() {
+        _sessions[sid] = sess;
+      };
+    }
 
                 /**
                  *  destroy函数，销毁一个session。
@@ -69,16 +69,16 @@ var GenericObject = using('easynode.GenericObject');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                destroy (sid) {
-                        return function * () {
-                                delete _sessions[sid];
-                        };
-                }
+    destroy(sid) {
+      return function *() {
+        delete _sessions[sid];
+      };
+    }
 
-                getClassName() {
-                        return EasyNode.namespace(__filename);
-                }
+    getClassName() {
+      return EasyNode.namespace(__filename);
+    }
         }
 
-        module.exports = KOAMemorySessionStorage;
+  module.exports = KOAMemorySessionStorage;
 })();

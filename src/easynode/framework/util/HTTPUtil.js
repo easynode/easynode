@@ -7,67 +7,67 @@ var URL = require('url');
 var _ = require('underscore');
 var querystring = require('querystring');
 
-(function () {
-        /**
-         * Class HTTPUtil
-         *
-         * @class easynode.framework.util.HTTPUtil
-         * @extends easynode.GenericObject
-         * @since 0.1.0
-         * @author hujiabao
-         * */
-        class HTTPUtil extends GenericObject {
-                /**
-                 * 构造函数。
-                 *
-                 * @method 构造函数
-                 * @since 0.1.0
-                 * @author hujiabao
-                 * */
-                constructor() {
-                        super();
-                        //调用super()后再定义子类成员。
-                }
+(function() {
+  /**
+   * Class HTTPUtil
+   *
+   * @class easynode.framework.util.HTTPUtil
+   * @extends easynode.GenericObject
+   * @since 0.1.0
+   * @author hujiabao
+   * */
+  class HTTPUtil extends GenericObject {
+    /**
+     * 构造函数。
+     *
+     * @method 构造函数
+     * @since 0.1.0
+     * @author hujiabao
+     * */
+    constructor() {
+      super();
+                        // 调用super()后再定义子类成员。
+    }
 
-                static rawPost(url, timeout = 3000, data = {}, encoding = 'utf8', headers = {}, agent = false) {
-                        return function * () {
-                                if(typeof data != 'string') {
-                                        data = querystring.stringify(data);
-                                }
-                                headers = headers || {};
-                                //headers['User-Agent'] = 'Node.js EasyNode easynode.framework.util.HTTPUtil';
-                                var options = URL.parse(url);
-                                options.method = 'POST';
-                                options.headers = headers;
-                                options.agent = agent;
-                                EasyNode.DEBUG && logger.debug('request http service [RAW MODE] -> ' + url);
-                                EasyNode.DEBUG && logger.debug('post body -> ' + data);
-                                function _doRequest(cb) {
-                                        var req = http.request(options, function (res) {
-                                        });
-                                        req.on('socket', function(socket) {
-                                                socket.setTimeout(timeout);
-                                                socket.on('data', function(data) {
-                                                        //logger.error(data.toString('hex'));
-                                                        cb && cb(null, data.toString('hex'));
-                                                });
-                                                EasyNode.DEBUG && logger.debug(`write http body string -> ${data}`);
-                                                socket.write(data + '\n');
-                                        });
-                                        req.setTimeout(timeout, function () {
-                                                req.abort();
-                                                cb && cb(new Error('Timeout - ' + url));
-                                        });
-                                        req.on('error', function (err) {
-                                                //logger.error('111111');
-                                                //cb && cb(err);
-                                        });
-                                }
+    static rawPost(url, timeout = 3000, data = {}, encoding = 'utf8', headers = {}, agent = false) {
+      return function *() {
+        if (typeof data != 'string') {
+          data = querystring.stringify(data);
+        }
+        headers = headers || {};
+                                // headers['User-Agent'] = 'Node.js EasyNode easynode.framework.util.HTTPUtil';
+        var options = URL.parse(url);
+        options.method = 'POST';
+        options.headers = headers;
+        options.agent = agent;
+        EasyNode.DEBUG && logger.debug('request http service [RAW MODE] -> ' + url);
+        EasyNode.DEBUG && logger.debug('post body -> ' + data);
+        function _doRequest(cb) {
+          var req = http.request(options, function(res) {
+          });
+          req.on('socket', function(socket) {
+            socket.setTimeout(timeout);
+            socket.on('data', function(data) {
+              // logger.error(data.toString('hex'));
+              cb && cb(null, data.toString('hex'));
+            });
+            EasyNode.DEBUG && logger.debug(`write http body string -> ${data}`);
+            socket.write(data + '\n');
+          });
+          req.setTimeout(timeout, function() {
+            req.abort();
+            cb && cb(new Error('Timeout - ' + url));
+          });
+          req.on('error', function(err) {
+                                                // logger.error('111111');
+                                                // cb && cb(err);
+          });
+        }
 
-                                var fnRequest = thunkify(_doRequest);
-                                return yield fnRequest.call(null);
-                        };
-                }
+        var fnRequest = thunkify(_doRequest);
+        return yield fnRequest.call(null);
+      };
+    }
 
                 /**
                  * 请求BINARY文件接口。
@@ -80,27 +80,27 @@ var querystring = require('querystring');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                static  getBinary(url) {
-                        var imgData = '';
-                        return new Promise(function(resq, rej) {
-                                http.get(url, function(res) {
-                                        res.setEncoding('binary'); // 一定要设置response的编码为binary否则会下载下来的图片打不开
-                                        res.on('data', function(chunk) {
-                                                imgData += chunk;
-                                        });
+    static getBinary(url) {
+      var imgData = '';
+      return new Promise(function(resq, rej) {
+        http.get(url, function(res) {
+          res.setEncoding('binary'); // 一定要设置response的编码为binary否则会下载下来的图片打不开
+          res.on('data', function(chunk) {
+            imgData += chunk;
+          });
 
-                                        res.on('end', function(err) {
-                                                if (err) {
-                                                        rej();
-                                                }
-                                                resq(imgData);
-                                        });
+          res.on('end', function(err) {
+            if (err) {
+              rej();
+            }
+            resq(imgData);
+          });
 
-                                        res.socket.on('error', function() {
-                                        });1
-                                });
-                        });
-                }
+          res.socket.on('error', function() {
+          }); 1;
+        });
+      });
+    }
 
 
                 /**
@@ -120,87 +120,89 @@ var querystring = require('querystring');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                static  getJSON(url, timeout = 3000, method = 'GET', data = {}, encoding = 'utf8', headers = {}, agent = false) {
+    static getJSON(url, timeout = 3000, method = 'GET', data = {}, encoding = 'utf8', headers = {}, agent = false) {
 
-                        return function *() {
-                                var qs = querystring.stringify(data);
-                                if (method.toLowerCase() == 'get') {
-                                        if (qs) {
-                                                if (url.match(/^.*\?.*$/)) {
-                                                        url += '&' + qs;
-                                                }
-                                                else {
-                                                        url += '?' + qs;
-                                                }
-                                        }
-                                }
-                                else {
-                                        url = url.replace(/\?.*$/, '');
-                                }
-                                headers = headers || {};
-                                headers['User-Agent'] = 'Node.js EasyNode easynode.framework.util.HTTPUtil';
-                                var options = URL.parse(url);
-                                options.method = method;
-                                options.headers = headers;
-                                if (method.toLowerCase() == 'post') {
-                                        _.extend(options.headers, {
-                                                "Content-Type": 'application/x-www-form-urlencoded',
-                                                "Content-Length": qs.length
-                                        });
-                                }
-                                options.agent = agent;
-                                EasyNode.DEBUG && logger.debug('request http service -> ' + url);
-                                EasyNode.DEBUG && method.toLowerCase() == 'post' && logger.debug('post body -> ' + JSON.stringify(data));
-                                function _doRequest(cb) {
-                                        var req = http.request(options, function (res) {
-                                                var err = null;
-                                                res.setEncoding(encoding);
-                                                var _data = "";
-                                                res.on('data', function (chunk) {
-                                                        _data += chunk;
-                                                });
-                                                res.on('end', function () {
-                                                        EasyNode.DEBUG && logger.debug(`http request [${url}] response -> ${_data}`);
-                                                        if (res.statusCode != 200) {
-                                                                cb && cb(new Error('http request [' + url + '] error : ' + res.statusCode));
-                                                                return;
-                                                        }
-                                                        var o = null;
-                                                        try {
-                                                                o = JSON.parse(_data);
-                                                        } catch (e) {
-                                                                logger.error(`Invalid JSON response from url [${url}] ->\n` + _data);
-                                                                err = e;
-                                                        }
-                                                        cb && cb(err, o);
-                                                });
-                                                req.on('error', function (e) {
-                                                        cb && cb(e);
-                                                });
-                                        });
-                                        req.setTimeout(timeout, function () {
-                                                req.abort();
-                                                cb(new Error('Timeout - ' + url));
-                                        });
-                                        req.on('error', function (err) {
-                                                cb && cb(err);
-                                        });
-                                        if (method.toLowerCase() == 'post') {
-                                                EasyNode.DEBUG && logger.debug(`write http body string -> ${qs}`);
-                                                req.write(qs + '\n');
-                                        }
-                                        req.end();
-                                }
-
-                                var fnRequest = thunkify(_doRequest);
-                                return yield fnRequest.call(null);
-                        }
-                }
-
-                getClassName() {
-                        return EasyNode.namespace(__filename);
-                }
+      return function *() {
+        var qs = querystring.stringify(data);
+        if (method.toLowerCase() == 'get') {
+          if (qs) {
+            if (url.match(/^.*\?.*$/)) {
+              url += '&' + qs;
+            }
+            else {
+              url += '?' + qs;
+            }
+          }
+        }
+        else {
+          url = url.replace(/\?.*$/, '');
+        }
+        headers = headers || {};
+        headers['User-Agent'] = 'Node.js EasyNode easynode.framework.util.HTTPUtil';
+        var options = URL.parse(url);
+        options.method = method;
+        options.headers = headers;
+        if (method.toLowerCase() == 'post') {
+          _.extend(options.headers, {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Content-Length': qs.length
+          });
+        }
+        options.agent = agent;
+        EasyNode.DEBUG && logger.debug('request http service -> ' + url);
+        EasyNode.DEBUG && method.toLowerCase() == 'post' && logger.debug('post body -> ' + JSON.stringify(data));
+        function _doRequest(cb) {
+          var req = http.request(options, function(res) {
+            var err = null;
+            res.setEncoding(encoding);
+            var _data = '';
+            res.on('data', function(chunk) {
+              _data += chunk;
+            });
+            res.on('end', function() {
+              EasyNode.DEBUG && logger.debug(`http request [${url}] response -> ${_data}`);
+              if (res.statusCode != 200) {
+                cb && cb(new Error('http request [' + url + '] error : ' + res.statusCode));
+                return;
+              }
+              var o = null;
+              try {
+                o = JSON.parse(_data);
+              } catch (e) {
+                logger.error(`Invalid JSON response from url [${url}] ->\n` + _data);
+                err = e;
+              }
+              cb && cb(err, o);
+            });
+            req.on('error', function(e) {
+              cb && cb(e);
+            });
+          });
+          req.setTimeout(timeout, function() {
+            req.abort();
+            cb(new Error('Timeout - ' + url));
+          });
+          req.on('error', function(err) {
+            cb && cb(err);
+          });
+          if (method.toLowerCase() == 'post') {
+            EasyNode.DEBUG && logger.debug(`write http body string -> ${qs}`);
+            req.write(qs + '\n');
+          }
+          req.end();
         }
 
-        module.exports = HTTPUtil;
+        var fnRequest = thunkify(_doRequest);
+        return yield fnRequest.call(null);
+      };
+    }
+
+    getClassName() {
+      return EasyNode.namespace(__filename);
+    }
+
+  }
+
+  module.exports = HTTPUtil;
 })();
+

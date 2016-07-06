@@ -2,7 +2,7 @@ var assert = require('assert');
 var logger = using('easynode.framework.Logger').forFile(__filename);
 var GenericObject = using('easynode.GenericObject');
 
-(function () {
+(function() {
         /**
          * 缓存接口，定义了缓存的抽象函数。
          * 各缓存支持情况：
@@ -14,7 +14,7 @@ var GenericObject = using('easynode.GenericObject');
          * @since 0.1.0
          * @author hujiabao
          * */
-        class ICache extends GenericObject {
+  class ICache extends GenericObject {
                 /**
                  * 取值。
                  *
@@ -26,9 +26,9 @@ var GenericObject = using('easynode.GenericObject');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                get (key, defaultValue=null) {
-                        throw new Error('Abstract Method');
-                }
+    get(key, defaultValue = null) {
+      throw new Error('Abstract Method');
+    }
 
                 /**
                  * 缓存值。
@@ -41,9 +41,9 @@ var GenericObject = using('easynode.GenericObject');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                set (key, value, ttl) {
-                        throw new Error('Abstract Method');
-                }
+    set(key, value, ttl) {
+      throw new Error('Abstract Method');
+    }
 
                 /**
                  * 重新设置缓存时间。
@@ -55,9 +55,9 @@ var GenericObject = using('easynode.GenericObject');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                touch(key, ttl) {
-                        throw new Error('Abstract Method');
-                }
+    touch(key, ttl) {
+      throw new Error('Abstract Method');
+    }
 
                 /**
                  * 从缓存中删除值。
@@ -68,9 +68,9 @@ var GenericObject = using('easynode.GenericObject');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                del (key) {
-                        throw new Error('Abstract Method');
-                }
+    del(key) {
+      throw new Error('Abstract Method');
+    }
 
                 /**
                  * 缓存情况统计。
@@ -81,14 +81,14 @@ var GenericObject = using('easynode.GenericObject');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                stat () {
-                        throw new Error('Abstract Method');
-                }
+    stat() {
+      throw new Error('Abstract Method');
+    }
 
-                getClassName() {
-                        return EasyNode.namespace(__filename);
-                }
+    getClassName() {
+      return EasyNode.namespace(__filename);
+    }
         }
 
-        module.exports = ICache;
+  module.exports = ICache;
 })();

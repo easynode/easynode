@@ -2,7 +2,7 @@ var assert = require('assert');
 var logger = using('easynode.framework.Logger').forFile(__filename);
 var GenericObject = using('easynode.GenericObject');
 
-(function () {
+(function() {
         /**
          * Class ActionArgConverter
          *
@@ -11,7 +11,7 @@ var GenericObject = using('easynode.GenericObject');
          * @since 0.1.0
          * @author hujiabao
          * */
-        class ActionArgConverter extends GenericObject {
+  class ActionArgConverter extends GenericObject {
                 /**
                  * 构造函数。
                  *
@@ -19,10 +19,10 @@ var GenericObject = using('easynode.GenericObject');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                constructor() {
-                        super();
-                        //调用super()后再定义子类成员。
-                }
+    constructor() {
+      super();
+                        // 调用super()后再定义子类成员。
+    }
 
                 /**
                  * 根据Action的参数定义，转换参数。
@@ -45,81 +45,81 @@ var GenericObject = using('easynode.GenericObject');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                static convert(actionRequestParameter, action) {
-                        var ret = {};
-                        action.getArgs().forEach(arg => {
-                                var name = arg.name;
-                                if(actionRequestParameter.hasParam(name)) {
-                                        var type = arg.type || 'string';
-                                        switch (type) {
-                                                case 'string' :
-                                                {
-                                                        ret[name] = actionRequestParameter.param(name);
-                                                        break;
-                                                }
-                                                case 'int' :
-                                                {
-                                                        ret[name] = actionRequestParameter.intParam(name);
-                                                        break;
-                                                }
-                                                case 'boolean':
-                                                {
-                                                        ret[name] = actionRequestParameter.booleanParam(name);
-                                                        break;
-                                                }
-                                                case 'float' :
-                                                {
-                                                        ret[name] = actionRequestParameter.floatParam(name);
-                                                        break;
-                                                }
-                                                case 'array' :
-                                                {
-                                                        ret[name] = actionRequestParameter.arrayParam(name, 'string');
-                                                        break;
-                                                }
-                                                case 'date' :
-                                                {
-                                                        ret[name] = actionRequestParameter.dateParam(name);
-                                                        break;
-                                                }
-                                                case 'datetime' :
-                                                {
-                                                        ret[name] = actionRequestParameter.datetimeParam(name);
-                                                        break;
-                                                }
-                                                case 'datetimeM':
-                                                {
-                                                        ret[name] = actionRequestParameter.datetimeMParam(name);
-                                                        break;
-                                                }
-                                                case 'json' :
-                                                {
-                                                        ret[name] = null;
-                                                        try {
-                                                                ret[name] = JSON.parse(actionRequestParameter.param(name));
-                                                        } catch (e) {
-                                                        }
-                                                        break;
-                                                }
-                                                default :
-                                                {
-                                                        var arrayRegExp = /^array\((\w+)\)$/i;
-                                                        if (type.match(arrayRegExp)) {
-                                                                var arrType = arrayRegExp.exec(type)[1];
-                                                                ret[name] = actionRequestParameter.arrayParam(name, arrType);
-                                                        }
-                                                        break;
-                                                }
-                                        }
-                                }
-                        });
-                        return ret;
-                }
+    static convert(actionRequestParameter, action) {
+      var ret = {};
+      action.getArgs().forEach((arg) => {
+        var name = arg.name;
+        if (actionRequestParameter.hasParam(name)) {
+          var type = arg.type || 'string';
+          switch (type) {
+          case 'string' :
+            {
+              ret[name] = actionRequestParameter.param(name);
+              break;
+            }
+          case 'int' :
+            {
+              ret[name] = actionRequestParameter.intParam(name);
+              break;
+            }
+          case 'boolean':
+            {
+              ret[name] = actionRequestParameter.booleanParam(name);
+              break;
+            }
+          case 'float' :
+            {
+              ret[name] = actionRequestParameter.floatParam(name);
+              break;
+            }
+          case 'array' :
+            {
+              ret[name] = actionRequestParameter.arrayParam(name, 'string');
+              break;
+            }
+          case 'date' :
+            {
+              ret[name] = actionRequestParameter.dateParam(name);
+              break;
+            }
+          case 'datetime' :
+            {
+              ret[name] = actionRequestParameter.datetimeParam(name);
+              break;
+            }
+          case 'datetimeM':
+            {
+              ret[name] = actionRequestParameter.datetimeMParam(name);
+              break;
+            }
+          case 'json' :
+            {
+              ret[name] = null;
+              try {
+                ret[name] = JSON.parse(actionRequestParameter.param(name));
+              } catch (e) {
+              }
+              break;
+            }
+          default :
+            {
+              var arrayRegExp = /^array\((\w+)\)$/i;
+              if (type.match(arrayRegExp)) {
+                var arrType = arrayRegExp.exec(type)[1];
+                ret[name] = actionRequestParameter.arrayParam(name, arrType);
+              }
+              break;
+            }
+          }
+        }
+      });
+      return ret;
+    }
 
-                getClassName() {
-                        return EasyNode.namespace(__filename);
-                }
+    getClassName() {
+      return EasyNode.namespace(__filename);
+    }
         }
 
-        module.exports = ActionArgConverter;
+  module.exports = ActionArgConverter;
 })();

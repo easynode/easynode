@@ -4,8 +4,8 @@ var GenericObject = using('easynode.GenericObject');
 var _ = require('underscore');
 var fs = require('fs');
 
-(function () {
-        var _actionAOPs = {};
+(function() {
+  var _actionAOPs = {};
 
         /**
          * Class ActionAOP
@@ -15,7 +15,7 @@ var fs = require('fs');
          * @since 0.1.0
          * @author hujiabao
          * */
-        class ActionAOP extends GenericObject {
+  class ActionAOP extends GenericObject {
                 /**
                  * 构造函数。
                  *
@@ -23,10 +23,10 @@ var fs = require('fs');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                constructor() {
-                        super();
-                        //调用super()后再定义子类成员。
-                }
+    constructor() {
+      super();
+                        // 调用super()后再定义子类成员。
+    }
 
                 /**
                  * 清除Action AOP。
@@ -38,10 +38,10 @@ var fs = require('fs');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                static actionAOPClear(m, a) {
-                        var fullName = m + '.' + a;
-                        delete _actionAOPs[fullName];
-                }
+    static actionAOPClear(m, a) {
+      var fullName = m + '.' + a;
+      delete _actionAOPs[fullName];
+    }
 
                 /**
                  * 设置Action AOP。
@@ -55,30 +55,30 @@ var fs = require('fs');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                static actionAOPSet(m, a, before, after) {
-                        var fullName = m + '.' + a;
-                        assert(before == null || typeof before == 'function', 'Invalid argument');
-                        assert(after == null || typeof after == 'function', 'Invalid argument');
-                        assert(_actionAOPs[fullName] == null, `Action aop of [${fullName}] is already set`);
-                        _actionAOPs[fullName] = {
-                                before : function() {
-                                        var args = arguments;
-                                        return function * () {
-                                                if (before) {
-                                                        return yield before.apply(null, args);
-                                                }
-                                        };
-                                },
-                                after : function() {
-                                        var args = arguments;
-                                        return function * () {
-                                                if (after) {
-                                                        return yield after.apply(null, args);
-                                                }
-                                        };
-                                }
-                        };
-                }
+    static actionAOPSet(m, a, before, after) {
+      var fullName = m + '.' + a;
+      assert(before == null || typeof before == 'function', 'Invalid argument');
+      assert(after == null || typeof after == 'function', 'Invalid argument');
+      assert(_actionAOPs[fullName] == null, `Action aop of [${fullName}] is already set`);
+      _actionAOPs[fullName] = {
+        before : function() {
+          var args = arguments;
+          return function *() {
+            if (before) {
+              return yield before.apply(null, args);
+            }
+          };
+        },
+        after : function() {
+          var args = arguments;
+          return function *() {
+            if (after) {
+              return yield after.apply(null, args);
+            }
+          };
+        }
+      };
+    }
 
                 /**
                  * 执行Action，支持AOP。
@@ -93,36 +93,36 @@ var fs = require('fs');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                static actionAOPExec(m, a, action, stack) {
-                        var fullName = m + '.' + a;
-                        var o = _actionAOPs[fullName];
-                        return function * () {
-                                if(o && o.before) {
-                                        var newStack = yield o.before.apply(action, stack);
-                                        if(newStack) {
-                                                stack = newStack;
-                                        }
-                                }
-                                var actionResult = yield action.process.apply(action, stack);
-                                if(o && o.after) {
-                                        var newActionResult = yield o.after.call(action, stack[0], actionResult);
-                                        if(newActionResult) {
-                                                actionResult = newActionResult;
-                                        }
-                                }
-                                return actionResult;
-                        };
-                }
+    static actionAOPExec(m, a, action, stack) {
+      var fullName = m + '.' + a;
+      var o = _actionAOPs[fullName];
+      return function *() {
+        if (o && o.before) {
+          var newStack = yield o.before.apply(action, stack);
+          if (newStack) {
+            stack = newStack;
+          }
+        }
+        var actionResult = yield action.process.apply(action, stack);
+        if (o && o.after) {
+          var newActionResult = yield o.after.call(action, stack[0], actionResult);
+          if (newActionResult) {
+            actionResult = newActionResult;
+          }
+        }
+        return actionResult;
+      };
+    }
 
-                getClassName() {
-                        return EasyNode.namespace(__filename);
-                }
+    getClassName() {
+      return EasyNode.namespace(__filename);
+    }
         }
 
-        ActionAOP.BEFORE = 'before';
-        ActionAOP.AFTER = 'after';
-        ActionAOP.SYNC = 'sync';
-        ActionAOP.ASYNC = 'async';
+  ActionAOP.BEFORE = 'before';
+  ActionAOP.AFTER = 'after';
+  ActionAOP.SYNC = 'sync';
+  ActionAOP.ASYNC = 'async';
 
-        module.exports = ActionAOP;
+  module.exports = ActionAOP;
 })();

@@ -2,8 +2,8 @@ var assert = require('assert');
 var logger = using('easynode.framework.Logger').forFile(__filename);
 var GenericObject = using('easynode.GenericObject');
 
-(function () {
-        var filters = [];
+(function() {
+  var filters = [];
 
         /**
          * Class ActionFilter
@@ -13,7 +13,7 @@ var GenericObject = using('easynode.GenericObject');
          * @since 0.1.0
          * @author hujiabao
          * */
-        class ActionFilter extends GenericObject {
+  class ActionFilter extends GenericObject {
                 /**
                  * 构造函数。
                  *
@@ -21,10 +21,10 @@ var GenericObject = using('easynode.GenericObject');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                constructor(name='untitled') {
-                        super();
-                        //调用super()后再定义子类成员。
-                }
+    constructor(name = 'untitled') {
+      super();
+                        // 调用super()后再定义子类成员。
+    }
 
                 /**
                  * 过滤Action执行。
@@ -40,11 +40,11 @@ var GenericObject = using('easynode.GenericObject');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                filter(m, a, action, stack, next) {
-                        return function * () {
-                                return yield next;
-                        };
-                }
+    filter(m, a, action, stack, next) {
+      return function *() {
+        return yield next;
+      };
+    }
 
                 /**
                  * 向系统的Action过滤器链中增加一个或多个过滤器。
@@ -56,13 +56,13 @@ var GenericObject = using('easynode.GenericObject');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                static addFilter(...f) {
-                        f.forEach(filter => {
-                                assert(filter instanceof ActionFilter || typeof filter.filter == 'function', 'Invalid argument');
-                                filters.push(filter);
-                        });
-                        return ActionFilter;
-                }
+    static addFilter(...f) {
+      f.forEach((filter) => {
+        assert(filter instanceof ActionFilter || typeof filter.filter == 'function', 'Invalid argument');
+        filters.push(filter);
+      });
+      return ActionFilter;
+    }
 
                 /**
                  * 向系统的Action过滤器链中增加一个或多个过滤器。
@@ -74,14 +74,14 @@ var GenericObject = using('easynode.GenericObject');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                static filters() {
-                        return filters;
-                }
+    static filters() {
+      return filters;
+    }
 
-                getClassName() {
-                        return EasyNode.namespace(__filename);
-                }
+    getClassName() {
+      return EasyNode.namespace(__filename);
+    }
         }
 
-        module.exports = ActionFilter;
+  module.exports = ActionFilter;
 })();

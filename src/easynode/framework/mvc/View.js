@@ -2,7 +2,7 @@ var assert = require('assert');
 var logger = using('easynode.framework.Logger').forFile(__filename);
 var GenericObject = using('easynode.GenericObject');
 
-(function () {
+(function() {
         /**
          * Class View
          *
@@ -11,7 +11,7 @@ var GenericObject = using('easynode.GenericObject');
          * @since 0.1.0
          * @author hujiabao
          * */
-        class View extends GenericObject {
+  class View extends GenericObject {
                 /**
                  * 构造函数。
                  *
@@ -19,10 +19,10 @@ var GenericObject = using('easynode.GenericObject');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                constructor() {
-                        super();
-                        //调用super()后再定义子类成员。
-                }
+    constructor() {
+      super();
+                        // 调用super()后再定义子类成员。
+    }
 
                 /**
                  * 获取渲染类型，json/html，影响response content-type。
@@ -33,9 +33,9 @@ var GenericObject = using('easynode.GenericObject');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                getContentType () {
-                        throw new Error('Abstract Method');
-                }
+    getContentType() {
+      throw new Error('Abstract Method');
+    }
 
                 /**
                  * 渲染ActionResult。
@@ -48,14 +48,14 @@ var GenericObject = using('easynode.GenericObject');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                render (actionResult, opts) {
-                        throw new Error('Abstract Method');
-                }
+    render(actionResult, opts) {
+      throw new Error('Abstract Method');
+    }
 
-                getClassName() {
-                        return EasyNode.namespace(__filename);
-                }
+    getClassName() {
+      return EasyNode.namespace(__filename);
+    }
         }
 
-        module.exports = View;
+  module.exports = View;
 })();

@@ -3,15 +3,15 @@ var logger = using('easynode.framework.Logger').forFile(__filename);
 var GenericObject = using('easynode.GenericObject');
 var _ = require('underscore');
 
-(function () {
-        const TYPES = [
-                'string',
-                'int',
-                'float',
-                'date',
-                'datetime',
-                'json'
-        ];
+(function() {
+  const TYPES = [
+    'string',
+    'int',
+    'float',
+    'date',
+    'datetime',
+    'json'
+  ];
 
         /**
          * Class ModelField
@@ -21,7 +21,7 @@ var _ = require('underscore');
          * @since 0.1.0
          * @author hujiabao
          * */
-        class ModelField extends GenericObject {
+  class ModelField extends GenericObject {
                 /**
                  * 构造函数。
                  *
@@ -29,17 +29,17 @@ var _ = require('underscore');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                constructor(name, type, maxLength = 0, defaultValue = null, nullable = true, comment = '', readonly = false) {
-                        super();
-                        //调用super()后再定义子类成员。
-                        assert(name, `Invalid attribute name [${name}]`);
-                        assert(typeof type == 'string', `Invalid attribute name [${name}]`);
-                        assert(typeof maxLength == 'number', 'Invalid argument maxLength');
-                        assert(typeof nullable == 'boolean', 'Invalid argument nullable');
-                        assert(typeof comment == 'string', 'Invalid argument comment');
-                        assert(typeof readonly == 'boolean', 'Invalid argument readonly');
-                        type = type.toLowerCase();
-                        assert(_.contains(TYPES, type), `Invalid attribute type [${type}]`);
+    constructor(name, type, maxLength = 0, defaultValue = null, nullable = true, comment = '', readonly = false) {
+      super();
+                        // 调用super()后再定义子类成员。
+      assert(name, `Invalid attribute name [${name}]`);
+      assert(typeof type == 'string', `Invalid attribute name [${name}]`);
+      assert(typeof maxLength == 'number', 'Invalid argument maxLength');
+      assert(typeof nullable == 'boolean', 'Invalid argument nullable');
+      assert(typeof comment == 'string', 'Invalid argument comment');
+      assert(typeof readonly == 'boolean', 'Invalid argument readonly');
+      type = type.toLowerCase();
+      assert(_.contains(TYPES, type), `Invalid attribute type [${type}]`);
                         /**
                          * 字段名称
                          *
@@ -48,7 +48,7 @@ var _ = require('underscore');
                          * @since 0.1.0
                          * @author hujiabao
                          * */
-                        this.name = name;
+      this.name = name;
                         /**
                          * 字段类型，ModelField.TYPE_*枚举
                          *
@@ -57,7 +57,7 @@ var _ = require('underscore');
                          * @since 0.1.0
                          * @author hujiabao
                          * */
-                        this.type = type;
+      this.type = type;
                         /**
                          * 字段最大长度，默认为0（不限制长度）
                          *
@@ -67,7 +67,7 @@ var _ = require('underscore');
                          * @since 0.1.0
                          * @author hujiabao
                          * */
-                        this.maxLength = maxLength;
+      this.maxLength = maxLength;
                         /**
                          * 字段默认值。
                          *
@@ -77,7 +77,7 @@ var _ = require('underscore');
                          * @since 0.1.0
                          * @author hujiabao
                          * */
-                        this.defaultValue = defaultValue;
+      this.defaultValue = defaultValue;
                         /**
                          * 字段可否为空。
                          *
@@ -87,7 +87,7 @@ var _ = require('underscore');
                          * @since 0.1.0
                          * @author hujiabao
                          * */
-                        this.nullable = nullable;
+      this.nullable = nullable;
                         /**
                          * 字段备注。
                          *
@@ -97,7 +97,7 @@ var _ = require('underscore');
                          * @since 0.1.0
                          * @author hujiabao
                          * */
-                        this.comment = comment;
+      this.comment = comment;
                         /**
                          * 是否为只读字段。
                          *
@@ -107,12 +107,12 @@ var _ = require('underscore');
                          * @since 0.1.0
                          * @author hujiabao
                          * */
-                        this.readonly = readonly;
-                }
+      this.readonly = readonly;
+    }
 
-                getClassName() {
-                        return EasyNode.namespace(__filename);
-                }
+    getClassName() {
+      return EasyNode.namespace(__filename);
+    }
         }
 
         /**
@@ -123,7 +123,7 @@ var _ = require('underscore');
          * @since 0.1.0
          * @author hujiabao
          * */
-        ModelField.TYPE_STRING = 'string';
+  ModelField.TYPE_STRING = 'string';
         /**
          * int型
          * @property ModelField.TYPE_INT
@@ -132,7 +132,7 @@ var _ = require('underscore');
          * @since 0.1.0
          * @author hujiabao
          * */
-        ModelField.TYPE_INT = 'int';
+  ModelField.TYPE_INT = 'int';
         /**
          * float型
          * @property ModelField.TYPE_FLOAT
@@ -141,7 +141,7 @@ var _ = require('underscore');
          * @since 0.1.0
          * @author hujiabao
          * */
-        ModelField.TYPE_FLOAT = 'float';
+  ModelField.TYPE_FLOAT = 'float';
         /**
          * 日期型
          * @property ModelField.TYPE_DATE
@@ -150,7 +150,7 @@ var _ = require('underscore');
          * @since 0.1.0
          * @author hujiabao
          * */
-        ModelField.TYPE_DATE = 'date';
+  ModelField.TYPE_DATE = 'date';
         /**
          * 日期时间型
          * @property ModelField.TYPE_DATETIME
@@ -159,7 +159,7 @@ var _ = require('underscore');
          * @since 0.1.0
          * @author hujiabao
          * */
-        ModelField.TYPE_DATETIME = 'datetime';
+  ModelField.TYPE_DATETIME = 'datetime';
         /**
          * JSON类型，数据库实际存储为VARCHAR或TEXT
          * @property ModelField.TYPE_JSON
@@ -168,7 +168,7 @@ var _ = require('underscore');
          * @since 0.1.0
          * @author hujiabao
          * */
-        ModelField.TYPE_JSON = 'json';
+  ModelField.TYPE_JSON = 'json';
 
-        module.exports = ModelField;
+  module.exports = ModelField;
 })();

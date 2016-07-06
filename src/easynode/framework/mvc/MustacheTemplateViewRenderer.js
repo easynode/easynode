@@ -4,7 +4,7 @@ var ITemplateViewRenderer = using('easynode.framework.mvc.ITemplateViewRenderer'
 var mustache = require('mustache');
 var MustacheHelper = using('easynode.framework.util.MustacheHelper');
 
-(function () {
+(function() {
         /**
          * Class MustacheTemplateViewRenderer，用于渲染Mustache模板引擎的View。在mustache模板中，内置支持以下格式转换函数：
          * <h5>通过{{#fmt.*}}{{/fmt.*}}使用格式转换函数</h5>
@@ -29,7 +29,7 @@ var MustacheHelper = using('easynode.framework.util.MustacheHelper');
          * @since 0.1.0
          * @author hujiabao
          * */
-        class MustacheTemplateViewRenderer extends ITemplateViewRenderer {
+  class MustacheTemplateViewRenderer extends ITemplateViewRenderer {
                 /**
                  * 构造函数。
                  *
@@ -37,26 +37,26 @@ var MustacheHelper = using('easynode.framework.util.MustacheHelper');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                constructor() {
-                        super();
-                        //调用super()后再定义子类成员。
-                }
+    constructor() {
+      super();
+                        // 调用super()后再定义子类成员。
+    }
 
-                render (actionResult, template) {
-                        mustache.parse(template);
-                        var o = actionResult.toJSON();
-                        this._injectHelperFunctions(o);
-                        return mustache.render(template, o);
-                }
+    render(actionResult, template) {
+      mustache.parse(template);
+      var o = actionResult.toJSON();
+      this._injectHelperFunctions(o);
+      return mustache.render(template, o);
+    }
 
-                _injectHelperFunctions (o) {
-                        MustacheHelper.normalize(o);
-                }
+    _injectHelperFunctions(o) {
+      MustacheHelper.normalize(o);
+    }
 
-                getClassName() {
-                        return EasyNode.namespace(__filename);
-                }
+    getClassName() {
+      return EasyNode.namespace(__filename);
+    }
         }
 
-        module.exports = MustacheTemplateViewRenderer;
+  module.exports = MustacheTemplateViewRenderer;
 })();

@@ -4,7 +4,7 @@ var IQueue = using('easynode.framework.mq.IQueue');
 var redisWrapper = require('co-redis');
 var redis = require('redis');
 
-(function () {
+(function() {
         /**
          * Class RedisQueue
          *
@@ -13,7 +13,7 @@ var redis = require('redis');
          * @since 0.1.0
          * @author hujiabao
          * */
-        class RedisQueue extends IQueue {
+  class RedisQueue extends IQueue {
                 /**
                  * 构造函数。
                  *
@@ -21,29 +21,29 @@ var redis = require('redis');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                constructor() {
-                        super();
-                        //调用super()后再定义子类成员。
-                }
+    constructor() {
+      super();
+                        // 调用super()后再定义子类成员。
+    }
 
-                initialize(server = '127.0.0.1', port = 6379, opts = {}) {
-                        this.opts = opts;
-                        this._client = redisWrapper(redis.createClient(port, server, opts));
-                }
+    initialize(server = '127.0.0.1', port = 6379, opts = {}) {
+      this.opts = opts;
+      this._client = redisWrapper(redis.createClient(port, server, opts));
+    }
 
-                _doAuth() {
-                        var me = this;
-                        return function * () {
-                                if (me.opts.password) {
-                                        if(me._didAuth !== true) {
-                                                me._didAuth = true;
-                                                me._authResult = yield me._client.auth(me.opts.password);
-                                        }
-                                        return me._authResult;
-                                }
-                                return true;
-                        };
-                }
+    _doAuth() {
+      var me = this;
+      return function *() {
+        if (me.opts.password) {
+          if (me._didAuth !== true) {
+            me._didAuth = true;
+            me._authResult = yield me._client.auth(me.opts.password);
+          }
+          return me._authResult;
+        }
+        return true;
+      };
+    }
 
                 /**
                  * 向队列发送消息。
@@ -58,22 +58,22 @@ var redis = require('redis');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                publish(queueName = 'defaultQueue', opts = {}, ...msgs) {
-                        assert(msgs.length > 0, 'Invalid argument');
-                        var me = this;
-                        return function * () {
-                                if(yield me._doAuth()) {
-                                        for (var i = 0; i < msgs.length; i++) {
-                                                var s = JSON.stringify(msgs[i]);
-                                                EasyNode.DEBUG && logger.debug(`publish message to redis queue [${queueName}] -> [${s}]`);
-                                                yield me._client.publish(queueName, s);
-                                        }
-                                }
-                                else {
-                                        logger.error(`redis authorize fail`);
-                                }
-                        };
-                }
+    publish(queueName = 'defaultQueue', opts = {}, ...msgs) {
+      assert(msgs.length > 0, 'Invalid argument');
+      var me = this;
+      return function *() {
+        if (yield me._doAuth()) {
+          for (var i = 0; i < msgs.length; i++) {
+            var s = JSON.stringify(msgs[i]);
+            EasyNode.DEBUG && logger.debug(`publish message to redis queue [${queueName}] -> [${s}]`);
+            yield me._client.publish(queueName, s);
+          }
+        }
+        else {
+          logger.error('redis authorize fail');
+        }
+      };
+    }
 
                 /**
                  * 订阅队列消息。
@@ -90,26 +90,26 @@ var redis = require('redis');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                subscribe(queueName = 'defaultQueue', opts = {}, l = null) {
-                        assert(l && typeof l.onMessage == 'function', 'Invalid argument');
-                        var me = this;
-                        return function * () {
-                                if(yield me._doAuth()) {
-                                        yield me._client.subscribe(queueName);
-                                        me._client.on('message', function (queueName, message) {
-                                                EasyNode.DEBUG && logger.debug(`received a message from redis queue [${queueName}] -> [${message}}]`);
-                                                l.onMessage(queueName, JSON.parse(message));
-                                        });
-                                        return {
-                                                client: me._client
-                                        };
-                                }
-                                else {
-                                        logger.error(`redis authorize fail`);
-                                        return null;
-                                }
-                        };
-                }
+    subscribe(queueName = 'defaultQueue', opts = {}, l = null) {
+      assert(l && typeof l.onMessage == 'function', 'Invalid argument');
+      var me = this;
+      return function *() {
+        if (yield me._doAuth()) {
+          yield me._client.subscribe(queueName);
+          me._client.on('message', function(queueName, message) {
+            EasyNode.DEBUG && logger.debug(`received a message from redis queue [${queueName}] -> [${message}}]`);
+            l.onMessage(queueName, JSON.parse(message));
+          });
+          return {
+            client: me._client
+          };
+        }
+        else {
+          logger.error('redis authorize fail');
+          return null;
+        }
+      };
+    }
 
                 /**
                  * 取消订阅队列消息。
@@ -121,18 +121,18 @@ var redis = require('redis');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                unsubscribe(subscribeInst) {
-                        assert(subscribeInst && subscribeInst.client, 'Invalid argument');
-                        var me = this;
-                        return function * () {
-                                yield me._client.unsubscribe();
-                        };
-                }
+    unsubscribe(subscribeInst) {
+      assert(subscribeInst && subscribeInst.client, 'Invalid argument');
+      var me = this;
+      return function *() {
+        yield me._client.unsubscribe();
+      };
+    }
 
-                getClassName() {
-                        return EasyNode.namespace(__filename);
-                }
+    getClassName() {
+      return EasyNode.namespace(__filename);
+    }
         }
 
-        module.exports = RedisQueue;
+  module.exports = RedisQueue;
 })();
