@@ -81,10 +81,10 @@ var util = require('util');
      *                      "$"表示非转义参数，通常用于数值型或SQL子句，注意SQL注入风险。
      * @param {Object/Array} args 模板替换参数，如果是对象，则按同名替换，如果是数组则逐个按顺序替换
      * @return {Object} 返回更新语句影响行数和insertId，insertId表示自增列ID
-     *                              {
-     *                                      rowsAffected : 1,                       //更新影响行数
-     *                                      insertId : 0                                 //自增列ID
-     *                              }
+     *    {
+     *      rowsAffected : 1,    //更新影响行数
+     *      insertId : 0         //自增列ID
+     *    }
      * @async
      * @since 0.1.0
      * @author hujiabao
@@ -167,6 +167,11 @@ var util = require('util');
      *
      * @method create
      * @param {easynode.framework.mvc.Model} model 模型及值定义
+     * @return {Object} 返回更新语句影响行数和insertId，insertId表示自增列ID
+     *   {
+     *    rowsAffected : 1, //更新影响行数
+     *    insertId : 0      //自增列ID
+     *   }
      * @async
      * @since 0.1.0
      * @author hujiabao
@@ -201,6 +206,7 @@ var util = require('util');
      *
      * @method read
      * @param {easynode.framework.mvc.Model} model 模型定义
+     * @return {Object} 查询结果，该元素表示为一个JSON对象，具有与模型列名完全同名的属性。
      * @since 0.1.0
      * @author hujiabao
      * */
@@ -236,8 +242,13 @@ var util = require('util');
     /**
      * 更新数据库的一个模型。
      *
-     * @method update
+     * @method update,根据identityField字段来更新模型
      * @param {easynode.framework.mvc.Model} model 模型定义
+     * @return {Object} 返回更新语句影响行数和insertId，insertId表示自增列ID
+     *    {
+     *      rowsAffected : 1,    //更新影响行数
+     *      insertId : 0         //自增列ID
+     *    }
      * @async
      * @since 0.1.0
      * @author hujiabao
@@ -274,6 +285,11 @@ var util = require('util');
      * @method del
      * @param {easynode.framework.mvc.Model} model 模型定义
      * @param {Array/int} ids 主键值数组或单个数值。数组时删除多个，单个数值时仅删除一个
+     * @return {Object} 返回更新语句影响行数和insertId，insertId表示自增列ID
+     *    {
+     *      rowsAffected : 1,    //更新影响行数
+     *      insertId : 0         //自增列ID
+     *    }
      * @async
      * @since 0.1.0
      * @author hujiabao

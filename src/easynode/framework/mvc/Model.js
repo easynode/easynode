@@ -144,7 +144,7 @@ var _ = require('underscore');
         return this._idField.name;
       }
 
-      var defaultIdField = EasyNode.config('easynode.framework.mvc.model.defaultIdFieldName', 'recordId');
+      var defaultIdField = EasyNode.config('easynode.framework.mvc.model.defaultIdFieldName', 'id');
       var f = null;
       for (var field in this._fields) {
         field = this._fields[field];
