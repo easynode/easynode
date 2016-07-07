@@ -16,7 +16,7 @@ import req from 'request';
 var _ = require('underscore');
 
 
-describe('MQTTQueueTest', function() {
+describe('RedisListQueuePublishTest', function() {
 
     var root = '';
     var mochaTest = true;
@@ -43,15 +43,15 @@ describe('MQTTQueueTest', function() {
         done();
     });
 
-    it('MQTTQueue.Initialize', function(done) {
+    it('publish', function(done) {
 
-        var MQTTQueue = EasyNode.using('easynode.framework.mq.MQTTQueue');
-        var mqttQueue = new MQTTQueue();
-        mqttQueue.initialize('mqtt://218.205.113.98');
+        var RedisQueue = EasyNode.using('easynode.framework.mq.RedisListQueue');
+        var redisQueue = new RedisQueue();
+        redisQueue.initialize('218.205.113.98',6380,{password:'1122334455'});
 
         co(function* (){
 
-            yield mqttQueue.publish( 'defaultQueue', {qos: MQTTQueue.QoS_NORMAL, retain: false}, {a:'a'});
+            yield redisQueue.publish( 'defaultQueue', {}, {a:'a'});
 
 
             done();

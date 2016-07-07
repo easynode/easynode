@@ -16,7 +16,7 @@ import req from 'request';
 var _ = require('underscore');
 
 
-describe('MQTTQueueSubscribeTest', function() {
+describe('MQTTQueuePublishTest', function() {
 
     var root = '';
     var mochaTest = true;
@@ -43,7 +43,7 @@ describe('MQTTQueueSubscribeTest', function() {
         done();
     });
 
-    it('subscribe', function(done) {
+    it('publish', function(done) {
 
         var MQTTQueue = EasyNode.using('easynode.framework.mq.MQTTQueue');
         var mqttQueue = new MQTTQueue();
@@ -51,23 +51,12 @@ describe('MQTTQueueSubscribeTest', function() {
 
         co(function* (){
 
-            var sub = yield mqttQueue.subscribe( 'defaultQueue', {qos: MQTTQueue.QoS_NORMAL, retain: false},{
-                onMessage:function(queueName,msg){
-                    console.log(queueName);
-                    assert( queueName === 'defaultQueue', 'equal' );
-                    assert( _.isEqual(msg,{a:'a'}), 'equal');
+            yield mqttQueue.publish( 'defaultQueue', {qos: MQTTQueue.QoS_NORMAL, retain: false}, {a:'a'});
 
-                    //done();
-                },
-                onError: function(err){
-                    if( err ){
-                        console.log(err);
-                    }
-                    done();
-                }
-            });
 
+            done();
         });
+
     });
 
     after(function(done) {

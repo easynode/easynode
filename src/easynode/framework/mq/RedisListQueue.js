@@ -27,16 +27,17 @@ var thunkify = require('thunkify');
  * @author hujiabao
  * */
   class RedisListQueue extends IQueue {
-        /**
-         * 构造函数。
-         *
-         * @method 构造函数
-         * @since 0.1.0
-         * @author hujiabao
-         * */
-    constructor() {
+
+  /**
+   * 构造函数。
+   *
+   * @method 构造函数
+   * @since 0.1.0
+   * @author hujiabao
+   * */
+   constructor() {
       super();
-                // 调用super()后再定义子类成员。
+      // 调用super()后再定义子类成员。
     }
 
     initialize(server = '127.0.0.1', port = 6379, opts = {}) {
@@ -59,19 +60,19 @@ var thunkify = require('thunkify');
       };
     }
 
-        /**
-         * 向队列发送消息。
-         *
-         * @method publish
-         * @param {String} queueName 队列名称
-         * @param {Object} opts 发送选项，取决于队列的协议和驱动程序
-         * @param {Object} msgs JSON对象，可一次发送多条消息
-         * @return {boolean} 消息发送结果
-         * @async
-         * @abstract
-         * @since 0.1.0
-         * @author hujiabao
-         * */
+    /**
+     * 向队列发送消息。
+     *
+     * @method publish
+     * @param {String} queueName 队列名称
+     * @param {Object} opts 发送选项，取决于队列的协议和驱动程序
+     * @param {Object} msgs JSON对象，可一次发送多条消息
+     * @return {boolean} 消息发送结果
+     * @async
+     * @abstract
+     * @since 0.1.0
+     * @author hujiabao
+     * */
     publish(queueName = 'defaultQueue', opts = {}, ...msgs) {
       assert(msgs.length > 0, 'Invalid argument');
       var me = this;
@@ -89,21 +90,21 @@ var thunkify = require('thunkify');
       };
     }
 
-        /**
-         * 订阅队列消息。注意，listener的onMessage是一个generator函数。
-         *
-         * @method subscribe
-         * @param {String} queueName 队列名称
-         * @param {Object} opts 订阅选项，接受一个选项qos。FIFO : true, 先进先出队列, FILO : true，后进先出队列
-         * @param {Object} l 队列监听器，具有一个onMessage和onError函数，l.pause指定是否接受数据如pause === true，则暂停接收队列数据，监听器会每隔１秒收到一条null消息
-         *                                              函数原型：onMessage * (queueName, msg) {}，queueName类型：string，msg类型：object，
-         *                                                                 onError(err) {},  err : 错误实例
-         * @return {Object} 订阅实例，需要通过unsubscribe释放资源, 如果返回null则表示订阅失败
-         * @async
-         * @abstract
-         * @since 0.1.0
-         * @author hujiabao
-         * */
+    /**
+     * 订阅队列消息。注意，listener的onMessage是一个generator函数。
+     *
+     * @method subscribe
+     * @param {String} queueName 队列名称
+     * @param {Object} opts 订阅选项，接受一个选项qos。FIFO : true, 先进先出队列, FILO : true，后进先出队列
+     * @param {Object} l 队列监听器，具有一个onMessage和onError函数，l.pause指定是否接受数据如pause === true，则暂停接收队列数据，监听器会每隔１秒收到一条null消息
+     *                  函数原型：onMessage * (queueName, msg) {}，queueName类型：string，msg类型：object，
+     *                          onError(err) {},  err : 错误实例
+     * @return {Object} 订阅实例，需要通过unsubscribe释放资源, 如果返回null则表示订阅失败
+     * @async
+     * @abstract
+     * @since 0.1.0
+     * @author hujiabao
+     * */
     subscribe(queueName = 'defaultQueue', opts = {FIFO : true}, l = null) {
       logger.warn('***Subscribe a redis list will block any code below !!!');
       assert(l && typeof l.onMessage == 'function', 'Invalid message listener');
@@ -152,16 +153,16 @@ var thunkify = require('thunkify');
       };
     }
 
-        /**
-         * 取消订阅队列消息。
-         *
-         * @method unsubscribe
-         * @param {Object} subscribeInst subscribe函数的返回值
-         * @async
-         * @abstract
-         * @since 0.1.0
-         * @author hujiabao
-         * */
+    /**
+     * 取消订阅队列消息。
+     *
+     * @method unsubscribe
+     * @param {Object} subscribeInst subscribe函数的返回值
+     * @async
+     * @abstract
+     * @since 0.1.0
+     * @author hujiabao
+     * */
     unsubscribe(subscribeInst) {
       throw new Error('Unsubscribe is not supported on list model');
     }
@@ -169,7 +170,7 @@ var thunkify = require('thunkify');
     getClassName() {
       return EasyNode.namespace(__filename);
     }
-}
+  }
 
   module.exports = RedisListQueue;
 })();

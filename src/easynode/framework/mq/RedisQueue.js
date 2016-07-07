@@ -5,6 +5,7 @@ var redisWrapper = require('co-redis');
 var redis = require('redis');
 
 (function() {
+
   /**
    * Class RedisQueue
    *
@@ -14,16 +15,17 @@ var redis = require('redis');
    * @author hujiabao
    * */
   class RedisQueue extends IQueue {
-                /**
-                 * 构造函数。
-                 *
-                 * @method 构造函数
-                 * @since 0.1.0
-                 * @author hujiabao
-                 * */
+
+    /**
+     * 构造函数。
+     *
+     * @method 构造函数
+     * @since 0.1.0
+     * @author hujiabao
+     * */
     constructor() {
       super();
-                        // 调用super()后再定义子类成员。
+      // 调用super()后再定义子类成员。
     }
 
     initialize(server = '127.0.0.1', port = 6379, opts = {}) {
@@ -45,19 +47,19 @@ var redis = require('redis');
       };
     }
 
-                /**
-                 * 向队列发送消息。
-                 *
-                 * @method publish
-                 * @param {String} queueName 队列名称
-                 * @param {Object} opts 发送选项，取决于队列的协议和驱动程序
-                 * @param {Object} msgs JSON对象，可一次发送多条消息
-                 * @return {boolean} 消息发送结果
-                 * @async
-                 * @abstract
-                 * @since 0.1.0
-                 * @author hujiabao
-                 * */
+    /**
+     * 向队列发送消息。
+     *
+     * @method publish
+     * @param {String} queueName 队列名称
+     * @param {Object} opts 发送选项，取决于队列的协议和驱动程序
+     * @param {Object} msgs JSON对象，可一次发送多条消息
+     * @return {boolean} 消息发送结果
+     * @async
+     * @abstract
+     * @since 0.1.0
+     * @author hujiabao
+     * */
     publish(queueName = 'defaultQueue', opts = {}, ...msgs) {
       assert(msgs.length > 0, 'Invalid argument');
       var me = this;
@@ -75,21 +77,21 @@ var redis = require('redis');
       };
     }
 
-                /**
-                 * 订阅队列消息。
-                 *
-                 * @method subscribe
-                 * @param {String} queueName 队列名称
-                 * @param {Object} opts 订阅选项，接受一个选项qos
-                 * @param {Object} l 队列监听器，具有一个onMessage和onError函数，
-                 *                                              函数原型：onMessage (queueName, msg) {}，queueName类型：string，msg类型：object，
-                 *                                                                 onError(err) {},  err : 错误实例
-                 * @return {Object} 订阅实例，需要通过unsubscribe释放资源, 如果返回null则表示订阅失败
-                 * @async
-                 * @abstract
-                 * @since 0.1.0
-                 * @author hujiabao
-                 * */
+    /**
+     * 订阅队列消息。
+     *
+     * @method subscribe
+     * @param {String} queueName 队列名称
+     * @param {Object} opts 订阅选项，接受一个选项qos
+     * @param {Object} l 队列监听器，具有一个onMessage和onError函数，
+     *                 函数原型：onMessage (queueName, msg) {}，queueName类型：string，msg类型：object，
+     *                         onError(err) {},  err : 错误实例
+     * @return {Object} 订阅实例，需要通过unsubscribe释放资源, 如果返回null则表示订阅失败
+     * @async
+     * @abstract
+     * @since 0.1.0
+     * @author hujiabao
+     * */
     subscribe(queueName = 'defaultQueue', opts = {}, l = null) {
       assert(l && typeof l.onMessage == 'function', 'Invalid argument');
       var me = this;
@@ -111,16 +113,16 @@ var redis = require('redis');
       };
     }
 
-                /**
-                 * 取消订阅队列消息。
-                 *
-                 * @method unsubscribe
-                 * @param {Object} subscribeInst subscribe函数的返回值
-                 * @async
-                 * @abstract
-                 * @since 0.1.0
-                 * @author hujiabao
-                 * */
+    /**
+     * 取消订阅队列消息。
+     *
+     * @method unsubscribe
+     * @param {Object} subscribeInst subscribe函数的返回值
+     * @async
+     * @abstract
+     * @since 0.1.0
+     * @author hujiabao
+     * */
     unsubscribe(subscribeInst) {
       assert(subscribeInst && subscribeInst.client, 'Invalid argument');
       var me = this;
@@ -132,7 +134,8 @@ var redis = require('redis');
     getClassName() {
       return EasyNode.namespace(__filename);
     }
-        }
+
+  }
 
   module.exports = RedisQueue;
 })();
