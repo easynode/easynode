@@ -15,7 +15,6 @@ var http = require('http');
 import req from 'request';
 var _ = require('underscore');
 
-var memcached = using();
 describe('BeanFactoryTest', function() {
 
   var root = '';
