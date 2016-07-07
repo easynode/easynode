@@ -1,3 +1,6 @@
+/*
+Obseleted
+* */
 var assert = require('assert');
 var logger = using('easynode.framework.Logger').forFile(__filename);
 var GenericObject = using('easynode.GenericObject');

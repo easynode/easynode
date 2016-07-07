@@ -5,14 +5,14 @@ var redisWrapper = require('co-redis');
 var redis = require('redis');
 
 (function() {
-        /**
-         * Class RedisQueue
-         *
-         * @class easynode.framework.mq.RedisQueue
-         * @extends easynode.framework.mq.IQueue
-         * @since 0.1.0
-         * @author hujiabao
-         * */
+  /**
+   * Class RedisQueue
+   *
+   * @class easynode.framework.mq.RedisQueue
+   * @extends easynode.framework.mq.IQueue
+   * @since 0.1.0
+   * @author hujiabao
+   * */
   class RedisQueue extends IQueue {
                 /**
                  * 构造函数。
