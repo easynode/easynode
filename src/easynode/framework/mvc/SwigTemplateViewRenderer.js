@@ -6,9 +6,11 @@ var StringUtil = using('easynode.framework.util.StringUtil');
 var _ = require('underscore');
 
 (function () {
+
         const SWITCH_CACHE = StringUtil.switchState(EasyNode.config('easynode.framework.mvc.view.template.enableCache', 'false'));
+
         /**
-         * Class SwigTemplateViewRenderer，用于渲染EJS模板引擎的View
+         * Class SwigTemplateViewRenderer，用于渲染swig模板引擎的View
          *
          * @class easynode.framework.mvc.SwigTemplateViewRenderer
          * @extends easynode.framework.mvc.ITemplateViewRenderer
@@ -16,6 +18,7 @@ var _ = require('underscore');
          * @author hujiabao
          * */
         class SwigTemplateViewRenderer extends ITemplateViewRenderer {
+
                 /**
                  * 构造函数。
                  *
@@ -40,7 +43,7 @@ var _ = require('underscore');
                 render (actionResult, template) {
                         var data = actionResult.toJSON();
                         var templateRender = swig.compileFile(template, {cache : this.getCache()});
-                        return templateRender(data);
+                        return templateRender(data.result);
                 }
 
                 _injectHelperFunctions (o) {

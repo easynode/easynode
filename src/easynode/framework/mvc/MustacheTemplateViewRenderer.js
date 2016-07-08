@@ -30,23 +30,24 @@ var MustacheHelper = using('easynode.framework.util.MustacheHelper');
          * @author hujiabao
          * */
   class MustacheTemplateViewRenderer extends ITemplateViewRenderer {
-                /**
-                 * 构造函数。
-                 *
-                 * @method 构造函数
-                 * @since 0.1.0
-                 * @author hujiabao
-                 * */
+
+    /**
+     * 构造函数。
+     *
+     * @method 构造函数
+     * @since 0.1.0
+     * @author hujiabao
+     * */
     constructor() {
       super();
-                        // 调用super()后再定义子类成员。
+      // 调用super()后再定义子类成员。
     }
 
     render(actionResult, template) {
       mustache.parse(template);
       var o = actionResult.toJSON();
       this._injectHelperFunctions(o);
-      return mustache.render(template, o);
+      return mustache.render(template, o.result);
     }
 
     _injectHelperFunctions(o) {
@@ -56,7 +57,8 @@ var MustacheHelper = using('easynode.framework.util.MustacheHelper');
     getClassName() {
       return EasyNode.namespace(__filename);
     }
-        }
+
+  }
 
   module.exports = MustacheTemplateViewRenderer;
 })();

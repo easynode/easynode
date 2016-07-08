@@ -29,7 +29,7 @@ var _ = require('underscore');
     render(actionResult, template) {
       var data = actionResult.toJSON();
       this._injectHelperFunctions(data);
-      return ejs.render(template, data);
+      return ejs.render(template, data.result);
     }
 
     _injectHelperFunctions(o) {

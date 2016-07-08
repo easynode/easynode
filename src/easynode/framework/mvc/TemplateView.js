@@ -93,6 +93,7 @@ var _ = require('underscore');
             _cachedTpl[realTplFile] = tplContent;
           }
         }
+        return tplContent;
       }
       switch (engine) {
         case TemplateView.ENGINE_SWIG:

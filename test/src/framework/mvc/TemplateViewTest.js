@@ -82,17 +82,15 @@ describe('TemplateViewTest', function() {
 
     });
 
-    it('render', function(done) {
-
+    it('render.swig', function(done) {
 
         var TemplateView = EasyNode.using('easynode.framework.mvc.TemplateView');
         var view = new TemplateView();
 
         var ActionResult = EasyNode.using('easynode.framework.mvc.ActionResult');
-        var actionResult = ActionResult.createSuccessResult({pagename : 'my blog'});
+        var actionResult = ActionResult.createSuccessResult({pagename : 'my blog',authors:['hujb','zlbbq']});
 
         try{
-            //ToDO
             var render = view.render(actionResult,{tplFile:'demo.swig',engine:'swig'});
             console.log(render);
             done();
@@ -103,38 +101,65 @@ describe('TemplateViewTest', function() {
 
     });
 
-    /*it('TemplateView.getContentType', function(done) {
+    it('render.mustache', function(done) {
 
+        var TemplateView = EasyNode.using('easynode.framework.mvc.TemplateView');
+        var view = new TemplateView();
 
-        var JSONView = EasyNode.using('easynode.framework.mvc.JSONView');
-        var view = new JSONView();
-
-        try{
-            var contentType = view.getContentType();
-            assert( contentType === 'json', 'equal');
-        }catch(e){
-            assert( e.message === 'Abstract Method','equal');
-        }
-
-        done();
-    });
-
-    it('TemplateView.render', function(done) {
-
-
-        var JSONView = EasyNode.using('easynode.framework.mvc.JSONView');
-        var view = new JSONView();
+        var ActionResult = EasyNode.using('easynode.framework.mvc.ActionResult');
+        var actionResult = ActionResult.createSuccessResult({name : 'hujb'});
 
         try{
-            var ret = view.render({a:'a'});
-            assert( _.isEqual(ret, {a:'a'}), 'equal');
+            var render = view.render(actionResult,{tplFile:'demo.mst',engine:'mustache'});
+            console.log(render);
+            done();
         }catch(e){
-            assert( e.message === 'Abstract Method','equal');
+            console.log(e);
+            done(e);
         }
 
-        done();
     });
-*/
+
+    it('render.ejs', function(done) {
+
+        var TemplateView = EasyNode.using('easynode.framework.mvc.TemplateView');
+        var view = new TemplateView();
+
+        var ActionResult = EasyNode.using('easynode.framework.mvc.ActionResult');
+        var actionResult = ActionResult.createSuccessResult({user:{name:'hujb'}});
+
+        try{
+            var render = view.render(actionResult,{tplFile:'demo.ejs',engine:'ejs'});
+            console.log(render);
+            done();
+        }catch(e){
+            console.log(e);
+            done(e);
+        }
+
+    });
+
+    it('render.jade', function(done) {
+
+        var TemplateView = EasyNode.using('easynode.framework.mvc.TemplateView');
+        var view = new TemplateView();
+
+        var ActionResult = EasyNode.using('easynode.framework.mvc.ActionResult');
+        var actionResult = ActionResult.createSuccessResult({pageTitle:'my title'});
+
+        try{
+            //ToDO
+            var render = view.render(actionResult,{tplFile:'demo.jade',engine:'jade'});
+            console.log(render);
+            done();
+        }catch(e){
+            console.log(e);
+            done(e);
+        }
+
+    });
+
+
     after(function(done) {
         done();
     });
