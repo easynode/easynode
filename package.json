@@ -99,6 +99,7 @@
     "style-loader": "^0.13.1",
     "superagent": "^1.8.3",
     "supertest": "^1.2.0",
+    "swig": "^1.4.2",
     "thunkify": "^2.1.2",
     "underscore": "^1.8.3",
     "url-loader": "^0.5.7",
