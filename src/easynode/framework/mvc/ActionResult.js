@@ -50,7 +50,7 @@ var S = require('string');
      * @since 0.1.0
      * @author hujiabao
      * */
-    static create( result = {} ) {
+    static create(result = {}) {
       return new ActionResult(ActionResult.CODE_SUCC, result);
     }
 

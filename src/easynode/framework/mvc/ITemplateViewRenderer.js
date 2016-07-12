@@ -24,14 +24,14 @@ var GenericObject = using('easynode.GenericObject');
          * @since 0.1.0
          * @author hujiabao
          * */
-        render(actionResult, template) {
-          throw new Error('Abstract Method');
-        }
+    render(actionResult, template) {
+      throw new Error('Abstract Method');
+    }
 
-        getClassName() {
-          return EasyNode.namespace(__filename);
-        }
+    getClassName() {
+      return EasyNode.namespace(__filename);
+    }
 
     }
-    module.exports = ITemplateViewRenderer;
+  module.exports = ITemplateViewRenderer;
 })();

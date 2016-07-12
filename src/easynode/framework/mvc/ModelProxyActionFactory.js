@@ -13,60 +13,62 @@ var _ = require('underscore');
   var DEL_NAME = EasyNode.config('easynode.framework.mvc.model.action.delName', 'D');
   var LIST_NAME = EasyNode.config('easynode.framework.mvc.model.action.listName', 'L');
 
-        /**
-         * Class ModelProxyActionFactoryFactory。暴露模型的CRUDL函数为REST接口。
-         *
-         * @class easynode.framework.mvc.ModelProxyActionFactory
-         * @extends easynode.GenericObject
-         * @since 0.1.0
-         * @author hujiabao
-         * */
+  /**
+   * Class ModelProxyActionFactoryFactory。暴露模型的CRUDL函数为REST接口。
+   *
+   * @class easynode.framework.mvc.ModelProxyActionFactory
+   * @extends easynode.GenericObject
+   * @since 0.1.0
+   * @author hujiabao
+   * */
   class ModelProxyActionFactory extends GenericObject {
-                /**
-                 * 构造函数。
-                 *
-                 * @method 构造函数
-                 * @param {Object} modelFactory 模型工厂，需要接口函数：getModel()，返回一个easynode.framework.mvc.Model实例。
-                 * @param {String} m 模块名，如果不传则使用modelFactory中的模型的schema。
-                 * @since 0.1.0
-                 * @author hujiabao
-                 * */
+
+    /**
+     * 构造函数。
+     *
+     * @method 构造函数
+     * @param {Object} modelFactory 模型工厂，需要接口函数：getModel()，返回一个easynode.framework.mvc.Model实例。
+     * @param {String} m 模块名，如果不传则使用modelFactory中的模型的schema。
+     * @since 0.1.0
+     * @author hujiabao
+     * */
     constructor(modelFactory, m) {
       super();
-                        // 调用super()后再定义子类成员。
+      // 调用super()后再定义子类成员。
       assert(modelFactory && typeof modelFactory.getModel == 'function', 'Invalid argument modelFactory');
       this.modelFactory = modelFactory;
       this.module = m || modelFactory.getModel().getSchema;
     }
 
-                /**
-                 * 获取代理模型create函数的Action原型类，返回的是一个动态的类，而不是一个实例。
-                 *
-                 * @method getCreateAction
-                 * @param {Array/String} fieldNames 创建时支持写入的字段名数组，'*'表示可以写入任何字段
-                 * @param {easynode.framework.mvc.View} view 该Action使用的视图，默认为new JSONView()，如需要显示HTML页面，请传入
-                 *                                                      TemplateView实例。
-                 * @param {Object} l 事件监听器，分别在开始创建前调用beforeCreate，在创建完成后调用afterCreate，这两个函数均是async函数，
-                 *                                   并且会被bind到action实例上执行，因此可以在这两个函数中使用this引用到action。
-                 *
-                 *                                                                      // example
-                 *                                                                      Notation & Example : {
-                 *                                                                              beforeCreate : function(model, actionCtx) {
-                 *                                                                                      return function * () {
-                 *                                                                                      };
-                 *                                                                              },
-                 *
-                 *                                                                              afterCreate : function(model, actionCtx, insertId) {
-                 *                                                                                      return function * () {
-                 *                                                                                      };
-                 *                                                                              }
-                 *                                                                      }
-                 * @since 0.1.0
-                 * @author hujiabao
-                 * */
+    /**
+     * 获取代理模型create函数的Action原型类，返回的是一个动态的类，而不是一个实例。
+     *
+     * @method getCreateAction
+     * @param {Array/String} fieldNames 创建时支持写入的字段名数组，'*'表示可以写入任何字段
+     * @param {easynode.framework.mvc.View} view 该Action使用的视图，默认为new JSONView()，如需要显示HTML页面，请传入
+     *                                  TemplateView实例。
+     * @param {Object} l 事件监听器，分别在开始创建前调用beforeCreate，在创建完成后调用afterCreate，这两个函数均是async函数，
+     *                                   并且会被bind到action实例上执行，因此可以在这两个函数中使用this引用到action。
+     *
+     *        // example
+     *           Notation & Example : {
+     *                              beforeCreate : function(model, actionCtx) {
+     *                                              return function * () {
+     *                                              };
+     *                                            },
+     *
+     *                               afterCreate : function(model, actionCtx, insertId) {
+     *                                              return function * () {
+     *                                              };
+     *                                           }
+     *                              }
+     * @since 0.1.0
+     * @author hujiabao
+     * */
     getCreateAction(fieldNames = '*', view = null, l = null) {
       var model = this.modelFactory.getModel();
       var mf = this.modelFactory;
+
       class _CreateAction extends Action {
         constructor() {
           super();
@@ -101,36 +103,36 @@ var _ = require('underscore');
             return ActionResult.createSuccessResult(ret);
           };
         }
-                        }
+      }
 
       Action.define(this.module, CREATE_NAME, _CreateAction);
       return _CreateAction;
     }
 
-                /**
-                 * 获取代理模型read函数的Action原型类，返回的是一个动态的类，而不是一个实例。
-                 *
-                 * @method getReadAction
-                 * @param {easynode.framework.mvc.View} view 该Action使用的视图，默认为new JSONView()，如需要显示HTML页面，请传入
-                 *                                                      TemplateView实例。
-                 * @param {Object} l 事件监听器，分别在开始创建前调用beforeRead，在创建完成后调用afterRead，这两个函数均是async函数，
-                 *                                   并且会被bind到action实例上执行，因此可以在这两个函数中使用this引用到action。
-                 *
-                 *                                                                      // example
-                 *                                                                      Notation & Example : {
-                 *                                                                              beforeRead : function(model, actionCtx, id) {
-                 *                                                                                      return function * () {
-                 *                                                                                      };
-                 *                                                                              },
-                 *
-                 *                                                                              afterRead : function(model, actionCtx, id, data) {
-                 *                                                                                      return function * () {
-                 *                                                                                      };
-                 *                                                                              }
-                 *                                                                      }
-                 * @since 0.1.0
-                 * @author hujiabao
-                 * */
+    /**
+     * 获取代理模型read函数的Action原型类，返回的是一个动态的类，而不是一个实例。
+     *
+     * @method getReadAction
+     * @param {easynode.framework.mvc.View} view 该Action使用的视图，默认为new JSONView()，如需要显示HTML页面，请传入
+     *                                                      TemplateView实例。
+     * @param {Object} l 事件监听器，分别在开始创建前调用beforeRead，在创建完成后调用afterRead，这两个函数均是async函数，
+     *                                   并且会被bind到action实例上执行，因此可以在这两个函数中使用this引用到action。
+     *
+     *          // example
+     *                Notation & Example : {
+     *                        beforeRead : function(model, actionCtx, id) {
+     *                                return function * () {
+     *                                };
+     *                        },
+     *
+     *                        afterRead : function(model, actionCtx, id, data) {
+     *                                return function * () {
+     *                                };
+     *                        }
+     *                }
+     * @since 0.1.0
+     * @author hujiabao
+     * */
     getReadAction(view, l = null) {
       var model = this.modelFactory.getModel();
       var mf = this.modelFactory;
@@ -164,36 +166,36 @@ var _ = require('underscore');
             return ActionResult.createSuccessResult(ret);
           };
         }
-                        }
+      }
 
       Action.define(this.module, READ_NAME, _ReadAction);
       return _ReadAction;
     }
 
-                /**
-                 * 获取代理模型update函数的Action原型类，返回的是一个动态的类，而不是一个实例。
-                 * @method getUpdateAction
-                 * @param {Array/String} fieldNames 创建时支持更新的字段名数组，'*'表示可以更新任何字段
-                 * @param {easynode.framework.mvc.View} view 该Action使用的视图，默认为new JSONView()，如需要显示HTML页面，请传入
-                 *                                                      TemplateView实例。
-                 * @param {Object} l 事件监听器，分别在开始创建前调用beforeUpdate，在创建完成后调用afterUpdate，这两个函数均是async函数，
-                 *                                   并且会被bind到action实例上执行，因此可以在这两个函数中使用this引用到action。
-                 *
-                 *                                                                      // example
-                 *                                                                      Notation & Example : {
-                 *                                                                              beforeUpdate : function(model, actionCtx, id) {
-                 *                                                                                      return function * () {
-                 *                                                                                      };
-                 *                                                                              },
-                 *
-                 *                                                                              afterUpdate : function(model, actionCtx, id) {
-                 *                                                                                      return function * () {
-                 *                                                                                      };
-                 *                                                                              }
-                 *                                                                      }
-                 * @since 0.1.0
-                 * @author hujiabao
-                 * */
+    /**
+     * 获取代理模型update函数的Action原型类，返回的是一个动态的类，而不是一个实例。
+     * @method getUpdateAction
+     * @param {Array/String} fieldNames 创建时支持更新的字段名数组，'*'表示可以更新任何字段
+     * @param {easynode.framework.mvc.View} view 该Action使用的视图，默认为new JSONView()，如需要显示HTML页面，请传入
+     *                                                      TemplateView实例。
+     * @param {Object} l 事件监听器，分别在开始创建前调用beforeUpdate，在创建完成后调用afterUpdate，这两个函数均是async函数，
+     *                                   并且会被bind到action实例上执行，因此可以在这两个函数中使用this引用到action。
+     *
+     *      // example
+     *      Notation & Example : {
+     *              beforeUpdate : function(model, actionCtx, id) {
+     *                      return function * () {
+     *                      };
+     *              },
+     *
+     *              afterUpdate : function(model, actionCtx, id) {
+     *                      return function * () {
+     *                      };
+     *              }
+     *      }
+     * @since 0.1.0
+     * @author hujiabao
+     * */
     getUpdateAction(fieldNames = '*', view = null, l = null) {
       var model = this.modelFactory.getModel();
       var mf = this.modelFactory;
@@ -233,35 +235,35 @@ var _ = require('underscore');
             return ActionResult.createSuccessResult(ret);
           };
         }
-                        }
+      }
 
       Action.define(this.module, UPDATE_NAME, _UpdateAction);
       return _UpdateAction;
     }
 
-                /**
-                 * 获取代理模型del函数的Action原型类，返回的是一个动态的类，而不是一个实例。
-                 * @method getDelAction
-                 * @param {easynode.framework.mvc.View} view 该Action使用的视图，默认为new JSONView()，如需要显示HTML页面，请传入
-                 *                                                      TemplateView实例。
-                 * @param {Object} l 事件监听器，分别在开始创建前调用beforeDel，在创建完成后调用afterDel，这两个函数均是async函数，
-                 *                                   并且会被bind到action实例上执行，因此可以在这两个函数中使用this引用到action。
-                 *
-                 *                                                                      // example
-                 *                                                                      Notation & Example : {
-                 *                                                                              beforeDel : function(model, actionCtx, ids) {
-                 *                                                                                      return function * () {
-                 *                                                                                      };
-                 *                                                                              },
-                 *
-                 *                                                                              afterDel : function(model, actionCtx, ids) {
-                 *                                                                                      return function * () {
-                 *                                                                                      };
-                 *                                                                              }
-                 *                                                                      }
-                 * @since 0.1.0
-                 * @author hujiabao
-                 * */
+    /**
+     * 获取代理模型del函数的Action原型类，返回的是一个动态的类，而不是一个实例。
+     * @method getDelAction
+     * @param {easynode.framework.mvc.View} view 该Action使用的视图，默认为new JSONView()，如需要显示HTML页面，请传入
+     *                                                      TemplateView实例。
+     * @param {Object} l 事件监听器，分别在开始创建前调用beforeDel，在创建完成后调用afterDel，这两个函数均是async函数，
+     *                                   并且会被bind到action实例上执行，因此可以在这两个函数中使用this引用到action。
+     *
+     *          // example
+     *          Notation & Example : {
+     *                  beforeDel : function(model, actionCtx, ids) {
+     *                          return function * () {
+     *                          };
+     *                  },
+     *
+     *                  afterDel : function(model, actionCtx, ids) {
+     *                          return function * () {
+     *                          };
+     *                  }
+     *          }
+     * @since 0.1.0
+     * @author hujiabao
+     * */
     getDelAction(view, l = null) {
       var model = this.modelFactory.getModel();
       var mf = this.modelFactory;
@@ -295,44 +297,44 @@ var _ = require('underscore');
             return ActionResult.createSuccessResult(ret);
           };
         }
-                        }
+     }
 
       Action.define(this.module, DEL_NAME, _DelAction);
       return _DelAction;
     }
 
-                /**
-                 * 获取代理模型del函数的Action原型类，返回的是一个动态的类，而不是一个实例。
-                 * @method getListAction
-                 * @param {Object} conditions 查询条件字段、比较表达式. Notation : {
-                 *                                                                                                                      $fieldName1 : $expression
-                 *                                                                                                                      $fieldName2 : $expression
-                 *                                                                                                                      }
-                 * @param {Array} orderBy 排序字段，参考：IConnection.list的orderBy参数，支持参数中使用__orderBy__参数修改默认排序
-                 * @param {String} conditionPattern 条件组合模板，参考参考：IConnection.list的conditionPattern参数
-                 * @param {easynode.framework.mvc.View} view 该Action使用的视图，默认为new JSONView()，如需要显示HTML页面，请传入
-                 *                                                      TemplateView实例。
-                 * @param {Object} l 事件监听器，分别在开始创建前调用beforeList，在创建完成后调用afterList，这两个函数均是async函数，
-                 *                                   并且会被bind到action实例上执行，因此可以在这两个函数中使用this引用到action。
-                 *                                   在beforeList函数中，可以返回一个string表示一个新的conditionPattern，实际查询时将按新的conditionPattern
-                 *                                   组织SQL逻辑。
-                 *
-                 *                                                                      // example
-                 *                                                                      Notation & Example : {
-                 *                                                                              beforeList : function(model, actionCtx, conditions, pagination, orderBy, conditionPattern) {
-                 *                                                                                      return function * () {
-                 *                                                                                              return 'AND $pluginName$ OR $pluginVersion$';
-                 *                                                                                      };
-                 *                                                                              },
-                 *
-                 *                                                                              afterList : function(model, actionCtx, result) {
-                 *                                                                                      return function * () {
-                 *                                                                                      };
-                 *                                                                              }
-                 *                                                                      }
-                 * @since 0.1.0
-                 * @author hujiabao
-                 * */
+    /**
+     * 获取代理模型del函数的Action原型类，返回的是一个动态的类，而不是一个实例。
+     * @method getListAction
+     * @param {Object} conditions 查询条件字段、比较表达式. Notation : {
+     *                                                                                                                      $fieldName1 : $expression
+     *                                                                                                                      $fieldName2 : $expression
+     *                                                                                                                      }
+     * @param {Array} orderBy 排序字段，参考：IConnection.list的orderBy参数，支持参数中使用__orderBy__参数修改默认排序
+     * @param {String} conditionPattern 条件组合模板，参考参考：IConnection.list的conditionPattern参数
+     * @param {easynode.framework.mvc.View} view 该Action使用的视图，默认为new JSONView()，如需要显示HTML页面，请传入
+     *                                                      TemplateView实例。
+     * @param {Object} l 事件监听器，分别在开始创建前调用beforeList，在创建完成后调用afterList，这两个函数均是async函数，
+     *                                   并且会被bind到action实例上执行，因此可以在这两个函数中使用this引用到action。
+     *                                   在beforeList函数中，可以返回一个string表示一个新的conditionPattern，实际查询时将按新的conditionPattern
+     *                                   组织SQL逻辑。
+     *
+     *         // example
+     *         Notation & Example : {
+     *                 beforeList : function(model, actionCtx, conditions, pagination, orderBy, conditionPattern) {
+     *                         return function * () {
+     *                                 return 'AND $pluginName$ OR $pluginVersion$';
+     *                         };
+     *                 },
+     *
+     *                 afterList : function(model, actionCtx, result) {
+     *                         return function * () {
+     *                         };
+     *                 }
+     *         }
+     * @since 0.1.0
+     * @author hujiabao
+     * */
     getListAction(conditions = null, orderBy = [], conditionPattern = null, view = null, l = null) {
       var model = this.modelFactory.getModel();
       var mf = this.modelFactory;
@@ -365,10 +367,10 @@ var _ = require('underscore');
               logger.warn(`Undefined field [${c}], query condition is ignored`);
             }
           }
-                                        // if(conditionPattern) {
-                                        //        this.addArg(`__condition_pattern__ string ${EasyNode.i18n('commentConditionPattern', __filename)} : ${conditionPattern}`);
-                                        // }
-                                        // 分页参数_page和_rpp
+          // if(conditionPattern) {
+          //        this.addArg(`__condition_pattern__ string ${EasyNode.i18n('commentConditionPattern', __filename)} : ${conditionPattern}`);
+          // }
+          // 分页参数_page和_rpp
           this.addArg('_page int ' + EasyNode.i18n('pageComment', __filename));
           this.addArg('_rpp int ' + EasyNode.i18n('rppComment', __filename));
 
@@ -413,7 +415,7 @@ var _ = require('underscore');
             return ActionResult.createSuccessResult(ret);
           };
         }
-                        }
+      }
 
       Action.define(this.module, LIST_NAME, _ListAction);
       return _ListAction;
@@ -432,7 +434,7 @@ var _ = require('underscore');
     getClassName() {
       return EasyNode.namespace(__filename);
     }
-        }
+  }
 
   module.exports = ModelProxyActionFactory;
 })();

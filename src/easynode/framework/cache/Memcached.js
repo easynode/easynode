@@ -38,7 +38,7 @@ var fnDel = thunkify(MemcachedClient.prototype.del);
       // 调用super()后再定义子类成员。
       this._client = new MemcachedClient(connect, opts);
       this._client.on('issue', function() {
-        console.log("errr")
+        console.log('errr');
         var cs = typeof connect == 'string' ? connect : JSON.stringify(connect);
         logger.error(`Error while connecting to memcached [${connect}]`);
       });

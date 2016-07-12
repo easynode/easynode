@@ -42,7 +42,7 @@ var Model = using('easynode.framework.mvc.Model');
       var nullable = col.isNullable == 'YES';
       var lengthRegExp = /^\w+\(?(\d*),?(\d*)\)?$/;
       var parsed = lengthRegExp.exec(col.columnType);
-      if( parsed ){
+      if (parsed) {
         var len1 = parsed[1] ? parseInt(parsed[1]) : 0;
         var len2 = parsed[2] ? (parseInt(parsed[2]) + 1) : 0;
         maxLength = len1 + len2;
@@ -122,7 +122,7 @@ var Model = using('easynode.framework.mvc.Model');
             pkCol : pkCol
           };
         }
-        //console.log(_mysqlModelCache[name]);
+        // console.log(_mysqlModelCache[name]);
         yield mysqlDataSource.releaseConnection(connection);
         EasyNode.DEBUG && logger.debug(`Mysql mysql model [${modelNames.join(',')}] initialized`);
       };

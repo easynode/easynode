@@ -13,7 +13,7 @@ var GenericObject = using('easynode.GenericObject');
      * @since 0.1.0
      * @author hujiabao
      * */
-    class IConnection extends GenericObject {
+  class IConnection extends GenericObject {
 
     /**
      * 执行查询SQL，返回查询结果数组

@@ -12,7 +12,7 @@ var GenericObject = using('easynode.GenericObject');
      * @since 0.1.0
      * @author hujiabao
      * */
-    class IDataSource extends GenericObject {
+  class IDataSource extends GenericObject {
 
         /**
          * 获取数据源名称
@@ -23,9 +23,9 @@ var GenericObject = using('easynode.GenericObject');
          * @since 0.1.0
          * @author hujiabao
          * */
-        getName() {
-          throw new Error('Abstract Method');
-        }
+    getName() {
+      throw new Error('Abstract Method');
+    }
 
         /**
          * 初始化数据源
@@ -35,9 +35,9 @@ var GenericObject = using('easynode.GenericObject');
          * @since 0.1.0
          * @author hujiabao
          * */
-        initialize() {
-          throw new Error('Abstract Method');
-        }
+    initialize() {
+      throw new Error('Abstract Method');
+    }
 
         /**
          * 销毁数据源
@@ -48,9 +48,9 @@ var GenericObject = using('easynode.GenericObject');
          * @since 0.1.0
          * @author hujiabao
          * */
-        destroy() {
-          throw new Error('Abstract Method');
-        }
+    destroy() {
+      throw new Error('Abstract Method');
+    }
 
 
         /**
@@ -63,9 +63,9 @@ var GenericObject = using('easynode.GenericObject');
          * @since 0.1.0
          * @author hujiabao
          * */
-        getConnection() {
-          throw new Error('Abstract Method');
-        }
+    getConnection() {
+      throw new Error('Abstract Method');
+    }
 
         /**
          * 释放一个连接。
@@ -77,13 +77,13 @@ var GenericObject = using('easynode.GenericObject');
          * @since 0.1.0
          * @author hujiabao
          * */
-        releaseConnection(conn) {
-          throw new Error('Abstract Method');
-        }
+    releaseConnection(conn) {
+      throw new Error('Abstract Method');
+    }
 
-        getClassName() {
-          return EasyNode.namespace(__filename);
-        }
+    getClassName() {
+      return EasyNode.namespace(__filename);
+    }
 
    }
 

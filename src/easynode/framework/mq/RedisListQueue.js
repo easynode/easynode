@@ -35,7 +35,7 @@ var thunkify = require('thunkify');
    * @since 0.1.0
    * @author hujiabao
    * */
-   constructor() {
+    constructor() {
       super();
       // 调用super()后再定义子类成员。
     }

@@ -52,7 +52,7 @@ var _ = require('underscore');
       var engine = DEFAULT_ENGINE;
 
       this.tplFile = tplFile;
-      if(this.tplFile.match(/\.swig$/)) {
+      if (this.tplFile.match(/\.swig$/)) {
         engine = TemplateView.ENGINE_SWIG;
       }
       else if (this.tplFile.match(/\.ejs$/)) {
@@ -76,9 +76,9 @@ var _ = require('underscore');
       var engine = opts.engine || this.engine;
       var oEngine = engine;
       this.engine = engine = this.getEngine(tpl);
-      assert(tpl && typeof tpl == 'string', 'Invalid template file name ['+tpl+']');
+      assert(tpl && typeof tpl == 'string', 'Invalid template file name [' + tpl + ']');
       var realTplFile = tpl;
-      if(this.dir) {
+      if (this.dir) {
         realTplFile = path.join(EasyNode.real(this.dir), tpl);
       }
       var tplContent = '';
@@ -96,27 +96,27 @@ var _ = require('underscore');
         return tplContent;
       }
       switch (engine) {
-        case TemplateView.ENGINE_SWIG:
+      case TemplateView.ENGINE_SWIG:
         {
           return this._renderSwig(actionResult, realTplFile);
         }
-        case TemplateView.ENGINE_MUSTACHE :
-          {
-            return this._renderMustache(actionResult, getTemplateContent());
-          }
-        case TemplateView.ENGINE_EJS:
-          {
-            return this._renderEJS(actionResult, getTemplateContent());
-          }
-        case TemplateView.ENGINE_JADE:
-          {
-            return this._renderJade(actionResult, getTemplateContent());
-          }
-        default :
-          {
-            assert(opt && opt.renderer, `Engine [${oEngine}] is not supported by default, need a renderer to render ActionResult`);
-            return this._render(actionResult, tplContent, opt.renderer);
-          }
+      case TemplateView.ENGINE_MUSTACHE :
+        {
+          return this._renderMustache(actionResult, getTemplateContent());
+        }
+      case TemplateView.ENGINE_EJS:
+        {
+          return this._renderEJS(actionResult, getTemplateContent());
+        }
+      case TemplateView.ENGINE_JADE:
+        {
+          return this._renderJade(actionResult, getTemplateContent());
+        }
+      default :
+        {
+          assert(opt && opt.renderer, `Engine [${oEngine}] is not supported by default, need a renderer to render ActionResult`);
+          return this._render(actionResult, tplContent, opt.renderer);
+        }
       }
     }
 

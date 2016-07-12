@@ -341,21 +341,21 @@ EasyNode.config = function(name, defaultVal) {
  *                  如果此值存在,则返回该值
  *                  如果不存在,则返回null
  */
-EasyNode.i18n = function (name, prefix = '') {
+EasyNode.i18n = function(name, prefix = '') {
   if (prefix) {
     name = EasyNode.namespace(prefix) + '.' + name;
   }
   if (!EasyNode._i18n_cache) {
     EasyNode._i18n_cache = {};
     EasyNode._i18n_folders = EasyNode._i18n_folders || ['etc/i18n'];
-    EasyNode._i18n_folders.forEach(v => {
+    EasyNode._i18n_folders.forEach((v) => {
       var cfgDirectory = EasyNode.real(v);
       var i18nFile = (EasyNode._locale || 'zh_CN') + '.conf';
       var file = path.join(cfgDirectory, i18nFile);
       var cfg = fs.readFileSync(file);
       cfg = cfg.toString().split('\n');
-      cfg.forEach(function (c) {
-        if (c && c[0] != '#') {          //#is a comment flag
+      cfg.forEach(function(c) {
+        if (c && c[0] != '#') {          // #is a comment flag
           c = c.split('=');
           c[0] = c[0] && _trim(c[0]);
           c[1] = c[1] && _trim(c[1]);

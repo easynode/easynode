@@ -21,7 +21,7 @@ var GenericObject = using('easynode.GenericObject');
     * @author hujiabao
     * */
     constructor() {
-        super();
+      super();
         // 调用super()后再定义子类成员。
     }
 
@@ -38,7 +38,7 @@ var GenericObject = using('easynode.GenericObject');
      * @author hujiabao
      * */
     publish(queueName, opts, ...msgs) {
-        throw new Error('Abstract Method');
+      throw new Error('Abstract Method');
     }
 
     /**
@@ -55,7 +55,7 @@ var GenericObject = using('easynode.GenericObject');
      * @author hujiabao
      * */
     subscribe(queueName, opts, l) {
-        throw new Error('Abstract Method');
+      throw new Error('Abstract Method');
     }
 
     /**
@@ -69,11 +69,11 @@ var GenericObject = using('easynode.GenericObject');
      * @author hujiabao
      * */
     unsubscribe(subscribeInst) {
-        throw new Error('Abstract Method');
+      throw new Error('Abstract Method');
     }
 
     getClassName() {
-    return EasyNode.namespace(__filename);
+      return EasyNode.namespace(__filename);
     }
    }
 

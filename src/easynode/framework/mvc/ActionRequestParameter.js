@@ -35,9 +35,9 @@ var S = require('string');
      * @since 0.1.0
      * @author zlbbq
      * */
-    params () {
+    params() {
       var o = {};
-      this.paramNames().forEach(name => {
+      this.paramNames().forEach((name) => {
         o[name] = this.param(name);
       });
       return o;
@@ -71,7 +71,7 @@ var S = require('string');
      * @since 0.1.0
      * @author hujiabao
      * */
-    get (name, where='all', canNull=true) {
+    get(name, where = 'all', canNull = true) {
       throw new Error('Abstract Method');
     }
 
@@ -320,7 +320,7 @@ var S = require('string');
       if (!val) {
         return null;
       }
-      return new Date(Date.parse(val+ ' 00:00:00'));
+      return new Date(Date.parse(val + ' 00:00:00'));
     }
 
     /**

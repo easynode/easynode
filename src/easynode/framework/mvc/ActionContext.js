@@ -36,7 +36,7 @@ var S = require('string');
        * @since 0.1.0
        * @author hujiabao
        * */
-        this.action = null;
+      this.action = null;
 
       /**
        *  easynode.framework.cache.ICache实例。
@@ -46,7 +46,7 @@ var S = require('string');
        * @since 0.1.0
        * @author hujiabao
        * */
-        this.cache = null;
+      this.cache = null;
 
       /**
        *  easynode.framework.db.IConnection实例。
@@ -56,7 +56,7 @@ var S = require('string');
        * @since 0.1.0
        * @author hujiabao
        * */
-        this.connection = null;
+      this.connection = null;
 
       /**
        *  easynode.framework.mq.IQueue实例。
@@ -66,7 +66,7 @@ var S = require('string');
        * @since 0.1.0
        * @author hujiabao
        * */
-        this.queue = null;
+      this.queue = null;
 
       /**
        *  远程地址(客户端地址)。
@@ -76,7 +76,7 @@ var S = require('string');
        * @since 0.1.0
        * @author hujiabao
        * */
-        this.remoteAddress = null;
+      this.remoteAddress = null;
 
       /**
        *  模块名。
@@ -86,7 +86,7 @@ var S = require('string');
        * @since 0.1.0
        * @author hujiabao
        * */
-        this.moduleName = m;
+      this.moduleName = m;
 
       /**
        *  Action名。
@@ -96,7 +96,7 @@ var S = require('string');
        * @since 0.1.0
        * @author hujiabao
        * */
-        this.actionName = a;
+      this.actionName = a;
     }
 
     /**

@@ -5,9 +5,9 @@ var swig = require('swig');
 var StringUtil = using('easynode.framework.util.StringUtil');
 var _ = require('underscore');
 
-(function () {
+(function() {
 
-        const SWITCH_CACHE = StringUtil.switchState(EasyNode.config('easynode.framework.mvc.view.template.enableCache', 'false'));
+  const SWITCH_CACHE = StringUtil.switchState(EasyNode.config('easynode.framework.mvc.view.template.enableCache', 'false'));
 
         /**
          * Class SwigTemplateViewRenderer，用于渲染swig模板引擎的View
@@ -17,7 +17,7 @@ var _ = require('underscore');
          * @since 0.1.0
          * @author hujiabao
          * */
-        class SwigTemplateViewRenderer extends ITemplateViewRenderer {
+  class SwigTemplateViewRenderer extends ITemplateViewRenderer {
 
                 /**
                  * 构造函数。
@@ -26,34 +26,34 @@ var _ = require('underscore');
                  * @since 0.1.0
                  * @author hujiabao
                  * */
-                constructor() {
-                        super();
-                        //调用super()后再定义子类成员。
-                }
+    constructor() {
+      super();
+                        // 调用super()后再定义子类成员。
+    }
 
-                getCache() {
-                        if(!SWITCH_CACHE) {
-                                return false;
-                        }
-                        else {
-                                return 'memory';
-                        }
-                }
+    getCache() {
+      if (!SWITCH_CACHE) {
+        return false;
+      }
+      else {
+        return 'memory';
+      }
+    }
 
-                render (actionResult, template) {
-                        var data = actionResult.toJSON();
-                        var templateRender = swig.compileFile(template, {cache : this.getCache()});
-                        return templateRender(data.result);
-                }
+    render(actionResult, template) {
+      var data = actionResult.toJSON();
+      var templateRender = swig.compileFile(template, {cache : this.getCache()});
+      return templateRender(data.result);
+    }
 
-                _injectHelperFunctions (o) {
-                        //TODO 支持格式转换函数
-                }
+    _injectHelperFunctions(o) {
+                        // TODO 支持格式转换函数
+    }
 
-                getClassName() {
-                        return EasyNode.namespace(__filename);
-                }
+    getClassName() {
+      return EasyNode.namespace(__filename);
+    }
         }
 
-        module.exports = SwigTemplateViewRenderer;
+  module.exports = SwigTemplateViewRenderer;
 })();

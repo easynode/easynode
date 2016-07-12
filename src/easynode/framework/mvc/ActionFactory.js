@@ -29,10 +29,10 @@ var _ = require('underscore');
      * @since 0.1.0
      * @author hujiabao
      * */
-      constructor() {
-        super();
+    constructor() {
+      super();
         // 调用super()后再定义子类成员。
-      }
+    }
 
     /**
      * 注册一个Action。使得可以通过json api或restful api来调用。注册的Action可以是一个类、一个全类名

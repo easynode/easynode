@@ -13,7 +13,7 @@ var GenericObject = using('easynode.GenericObject');
      * @since 0.1.0
      * @author hujiabao
      * */
-    class JSONView extends View {
+  class JSONView extends View {
 
         /**
          * 构造函数。
@@ -22,10 +22,10 @@ var GenericObject = using('easynode.GenericObject');
          * @since 0.1.0
          * @author hujiabao
          * */
-        constructor() {
-          super();
+    constructor() {
+      super();
           // 调用super()后再定义子类成员。
-        }
+    }
 
         /**
          * 获取渲染类型，json/html，影响response content-type。
@@ -36,9 +36,9 @@ var GenericObject = using('easynode.GenericObject');
          * @since 0.1.0
          * @author hujiabao
          * */
-        getContentType() {
-          return 'json';
-        }
+    getContentType() {
+      return 'json';
+    }
 
         /**
          * 渲染ActionResult。
@@ -50,14 +50,14 @@ var GenericObject = using('easynode.GenericObject');
          * @since 0.1.0
          * @author hujiabao
          * */
-        render(actionResult) {
-           assert(actionResult, 'Invalid argument');
-           return actionResult instanceof GenericObject ? actionResult.toJSON() : actionResult;
-        }
+    render(actionResult) {
+      assert(actionResult, 'Invalid argument');
+      return actionResult instanceof GenericObject ? actionResult.toJSON() : actionResult;
+    }
 
-        getClassName() {
-          return EasyNode.namespace(__filename);
-        }
+    getClassName() {
+      return EasyNode.namespace(__filename);
+    }
 
     }
 

@@ -24,9 +24,9 @@ var GenericObject = using('easynode.GenericObject');
          * @since 0.1.0
          * @author hujiabao
          **/
-        onCreate(ctx) {
-          throw new Error('Abstract Method');
-        }
+    onCreate(ctx) {
+      throw new Error('Abstract Method');
+    }
 
         /**
          *  ActionContext的action被执行前调用。
@@ -38,9 +38,9 @@ var GenericObject = using('easynode.GenericObject');
          * @since 0.1.0
          * @author hujiabao
          **/
-        onActionReady(ctx) {
-          throw new Error('Abstract Method');
-        }
+    onActionReady(ctx) {
+      throw new Error('Abstract Method');
+    }
 
         /**
          *  ActionContext销毁时被调用。
@@ -52,9 +52,9 @@ var GenericObject = using('easynode.GenericObject');
          * @since 0.1.0
          * @author hujiabao
          **/
-        onDestroy(ctx) {
-          throw new Error('Abstract Method');
-        }
+    onDestroy(ctx) {
+      throw new Error('Abstract Method');
+    }
 
         /**
          *  Action调用发生异常时被调用。
@@ -67,13 +67,13 @@ var GenericObject = using('easynode.GenericObject');
          * @since 0.1.0
          * @author hujiabao
          **/
-        onError(ctx, err) {
-          throw new Error('Abstract Method');
-        }
+    onError(ctx, err) {
+      throw new Error('Abstract Method');
+    }
 
-        getClassName() {
-          return EasyNode.namespace(__filename);
-        }
+    getClassName() {
+      return EasyNode.namespace(__filename);
+    }
 
     }
 
