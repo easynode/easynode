@@ -1,6 +1,6 @@
 {
   "name": "easynode",
-  "version": "0.1.33",
+  "version": "0.1.35",
   "private": false,
   "description": "Easynode is a framework for microservice written with es6 and integrated a light web service based on koa and a light tcp servic based on native socket. You can utilize all feature characters of ES6 in the framework.",
   "scripts": {
@@ -103,6 +103,7 @@
     "thunkify": "^2.1.2",
     "underscore": "^1.8.3",
     "url-loader": "^0.5.7",
+    "urlsafe-base64": "^1.0.0",
     "utility": "^1.8.0",
     "validator": "^5.2.0",
     "watch-xdelta": "^1.9.0",
