@@ -14,8 +14,20 @@ var path = require('path');
 var session = require('koa-generic-session');
 var accessLogger = Logger.getLogger('access');
 var route = require('koa-route');
-var multipart = require('co-multipart');
+
+var pathToRegexp = require('path-to-regexp');
 var qs = require('koa-qs');
+var koaBody = require('koa-body');
+//var pjax = require('./misc/koa-pjax');
+var KOAHttpRequestParameter = using('easynode.framework.server.http.KOAHttpRequestParameter');
+var TemplateView = using('easynode.framework.mvc.TemplateView');
+var MustacheHelper = using('easynode.framework.util.MustacheHelper');
+var StringUtil = using('easynode.framework.util.StringUtil');
+var Validator = using('easynode.framework.mvc.Validator');
+var BeanFactory = using('easynode.framework.BeanFactory');
+//var APMTool = using('easynode.framework.util.APMTool');
+
+var multipart = require('co-multipart');
 var render = require('koa-ejs');
 var AdmZip = require('adm-zip');
 
@@ -300,7 +312,19 @@ var KOAHttpRequestParameter = using('easynode.framework.server.http.KOAHttpReque
       });
     }
 
-                 /**
+          /**
+           *  获取所有静态文件目录
+           * @method getWebDirs
+           * @return {Array} 静态文件列表，相对于EasyNode的目录。
+           * @since 0.1.0
+           * @author hujiabao
+           * */
+          getWebDirs() {
+            return _.clone(this._webDirs || []);
+          }
+
+
+          /**
                  *  设置koa的KEY
                  * @method setKeys
                  * @param {...} keys Key列表，每个KEY是string。
