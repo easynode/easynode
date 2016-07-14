@@ -57,14 +57,17 @@ var co = require('co');
     static loadSchedule(file) {
       return function *() {
         const BEAN_REGEXP = /^\$(\w+)$/;
-        var fileContent = yield fs.readFile(EasyNode.real(file));
+        var fileContent =  require('fs').readFileSync(EasyNode.real(file));
         var config = JSON.parse(fileContent.toString());
         for (var i = 0; i < config.length; i++) {
           var c = config[i];
           if (c.enabled === false) continue;
           var executor = null;
+
           if (BEAN_REGEXP.test(c.executor)) {
-            executor = BeanFactory.get(BEAN_REGEXP.exec(c.executor)[1]);
+            //executor = BeanFactory.get(BEAN_REGEXP.exec(c.executor)[1]);
+            var cls = using(c.executor);
+            executor = new cls();
           }
           else {
             var cls = using(c.executor);

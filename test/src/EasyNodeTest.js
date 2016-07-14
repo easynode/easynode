@@ -166,6 +166,16 @@ describe('EasyNodeTest', function() {
   });
 
 
+  it('EasyNode.sleep', function(done) {
+
+    co(function*(){
+      //yield EasyNode.sleep(5000);
+    });
+
+    done();
+  });
+
+
   after(function(done) {
     done();
   });

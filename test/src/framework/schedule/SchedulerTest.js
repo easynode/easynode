@@ -14,9 +14,9 @@ var fs = require('fs');
 var http = require('http');
 import req from 'request';
 var _ = require('underscore');
+var thunkify = require('thunkify');
 
-
-describe('AbstractScheduleExecutorTest', function() {
+describe('SchedulerTest', function() {
 
     var root = '';
     var mochaTest = true;
@@ -43,19 +43,37 @@ describe('AbstractScheduleExecutorTest', function() {
         done();
     });
 
-    it('execute', function(done) {
+    it('EasyNode.addSourceDirectory', function(done) {
 
-
-        var AbstractScheduleExecutor = EasyNode.using('easynode.framework.schedule.AbstractScheduleExecutor');
-        var abstractScheduleExecutor = new AbstractScheduleExecutor();
-
-        try{
-            abstractScheduleExecutor.execute();
-        }catch(e){
-            assert( e.message === 'Abstract Method','equal');
-        }
+        EasyNode.addSourceDirectory('test');
 
         done();
+    });
+
+
+
+    it('execute', function(done) {
+
+        var Scheduler = EasyNode.using('easynode.framework.schedule.Scheduler');
+
+
+
+
+        co(function*(){
+            try{
+                yield Scheduler.loadSchedule('/test/src/framework/schedule/demo-schedule.json');
+
+                console.log(new Date());
+                yield EasyNode.sleep(5000);
+                console.log(new Date());
+                done();
+            }catch(e){
+                console.log(e);
+                //assert( e.message === 'Abstract Method','equal');
+            }
+        });
+
+
     });
 
     after(function(done) {

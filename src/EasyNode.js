@@ -11,6 +11,7 @@ var _ = require('underscore');
 var S = require('string');
 var cofs = require('co-fs');
 var os = require('os');
+var thunkify = require('thunkify');
 
 /**
  * 为简化API调用定义必要的全局函数，使用全局函数需要引入EasyNode.js，请在应用程序第一行引入EasyNode.js。<br>
@@ -840,6 +841,25 @@ EasyNode.setEnv = function(env) {
  *      ns.Logger.getLogger().info('Hello, EasyNode');
  */
 global.using = global.EasyNode.using;
+
+
+/**
+ * 延时函数
+ *
+ * @method sleep
+ * @since 0.1.0
+ * @author hujiabao
+ * @param {Number} ms 延时毫秒数
+ * @example
+ *      co(function*(){
+ *        yield EasyNode.sleep(5000);
+ *      })
+ */
+EasyNode.sleep = function(ms){
+  return function(cb){
+    setTimeout(cb, ms);
+  };
+}
 
 EasyNode.DEBUG = true;
 
