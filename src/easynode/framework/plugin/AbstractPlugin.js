@@ -18,7 +18,7 @@ var Plugins = using('easynode.framework.plugin.Plugins');
    * @class easynode.framework.plugin.AbstractPlugin
    * @extends easynode.GenericObject
    * @since 0.1.0
-   * @author zlbbq
+   * @author hujiabao
    * */
   class AbstractPlugin extends GenericObject {
     /**
@@ -26,7 +26,7 @@ var Plugins = using('easynode.framework.plugin.Plugins');
      *
      * @method 构造函数
      * @since 0.1.0
-     * @author zlbbq
+     * @author hujiabao
      * */
     constructor() {
       super();
@@ -43,7 +43,7 @@ var Plugins = using('easynode.framework.plugin.Plugins');
        * @property version
        * @type String
        * @since 0.1.0
-       * @author zlbbq
+       * @author hujiabao
        * */
       this.version = null;
 
@@ -52,7 +52,7 @@ var Plugins = using('easynode.framework.plugin.Plugins');
        * @property brief
        * @type String
        * @since 0.1.0
-       * @author zlbbq
+       * @author hujiabao
        * */
       this.brief = this.name;
 
@@ -62,7 +62,7 @@ var Plugins = using('easynode.framework.plugin.Plugins');
        * @type String
        * @default null
        * @since 0.1.0
-       * @author zlbbq
+       * @author hujiabao
        * */
       this.description = null;
 
@@ -73,7 +73,7 @@ var Plugins = using('easynode.framework.plugin.Plugins');
        * @type Object
        * @default {}
        * @since 0.1.0
-       * @author zlbbq
+       * @author hujiabao
        * */
       this.configurations = {};
 
@@ -84,7 +84,7 @@ var Plugins = using('easynode.framework.plugin.Plugins');
        * @type Object
        * @default {}
        * @since 0.1.0
-       * @author zlbbq
+       * @author hujiabao
        * */
       this.i18nConfig = {};
 
@@ -96,7 +96,7 @@ var Plugins = using('easynode.framework.plugin.Plugins');
        * @public
        * @default []
        * @since 0.1.0
-       * @author zlbbq
+       * @author hujiabao
        * */
       this.dependencies = [];
     }
@@ -107,7 +107,7 @@ var Plugins = using('easynode.framework.plugin.Plugins');
      * @method home
      * @return {String} 插件home目录。绝对目录。
      * @since 0.1.0
-     * @author zlbbq
+     * @author hujiabao
      * */
     home() {
       return EasyNode.real(`plugins/${this.name}-${this.version}/`);
@@ -120,7 +120,7 @@ var Plugins = using('easynode.framework.plugin.Plugins');
      * @param {String} p 插件资源相对路径
      * @return {String} 插件资源目录，相对于EasyNode目录。
      * @since 0.1.0
-     * @author zlbbq
+     * @author hujiabao
      * */
     relative(p) {
       return path.join(`plugins/${this.name}-${this.version}/`, p);
@@ -133,7 +133,7 @@ var Plugins = using('easynode.framework.plugin.Plugins');
      * @param {String} p 插件资源相对路径
      * @return {String} 插件资源的绝对路径
      * @since 0.1.0
-     * @author zlbbq
+     * @author hujiabao
      * */
     real(p) {
       return path.join(this.home(), p);
@@ -147,7 +147,7 @@ var Plugins = using('easynode.framework.plugin.Plugins');
      * @param {String} namespace 类名或包名
      * @return {Object} namespace为类名时：Nodejs导出对象，namespace为包名时：此目录所有js文件的Nodejs导出对象
      * @since 0.1.0
-     * @author zlbbq
+     * @author hujiabao
      * */
     using(namespace) {
       return Plugins.using(namespace, this.getFullName());
@@ -159,7 +159,7 @@ var Plugins = using('easynode.framework.plugin.Plugins');
      * @method getFullName
      * @return {String} 插件全名
      * @since 0.1.0
-     * @author zlbbq
+     * @author hujiabao
      * */
     getFullName() {
       return this.name + '@' + this.version;
@@ -172,7 +172,7 @@ var Plugins = using('easynode.framework.plugin.Plugins');
      * @return {String} 插件描述
      * @async
      * @since 0.1.0
-     * @author zlbbq
+     * @author hujiabao
      * */
 
     getDescription() {
@@ -198,7 +198,7 @@ var Plugins = using('easynode.framework.plugin.Plugins');
      * @param {Object} options 初始化插件实例
      * @abstract
      * @since 0.1.0
-     * @author zlbbq
+     * @author hujiabao
      * */
     initialize(options) {
       throw new Error('Abstract Method');
@@ -210,7 +210,7 @@ var Plugins = using('easynode.framework.plugin.Plugins');
      * @method finalize
      * @abstract
      * @since 0.1.0
-     * @author zlbbq
+     * @author hujiabao
      * */
     finalize() {
       throw new Error('Abstract Method');
@@ -223,7 +223,7 @@ var Plugins = using('easynode.framework.plugin.Plugins');
      * @param {Object/String} item 配置项名称，当配置项为object并且只有一个参数时则合并配置项到插件配置
      * @param {String} defaultValue 默认值，默认为null
      * @since 0.1.0
-     * @author zlbbq
+     * @author hujiabao
      * */
     config(item, defaultValue = null) {
       if (typeof item == 'string') {
@@ -241,7 +241,7 @@ var Plugins = using('easynode.framework.plugin.Plugins');
      * @return {String} 插件Web目录，没有www目录时返回null
      * @async
      * @since 0.1.0
-     * @author zlbbq
+     * @author hujiabao
      * */
     getWebDir() {
       var webDir = this.real('www/');
@@ -267,7 +267,7 @@ var Plugins = using('easynode.framework.plugin.Plugins');
      * @param {Object/String} item 配置项名称，当配置项为object并且只有一个参数时则合并配置项到插件国际化配置
      * @param {String} prefix 配置项前缀，如果传递此值，请始终传递__filename，__filename会被转成namespace(file) + '.' + name;
      * @since 0.1.0
-     * @author zlbbq
+     * @author hujiabao
      * */
     i18n(item, prefix, ...replaces) {
       if (typeof item == 'string') {
@@ -289,7 +289,7 @@ var Plugins = using('easynode.framework.plugin.Plugins');
      * @param {String} subKey string子项，默认为null
      * @return {String} i18n字符串
      * @since 0.1.0
-     * @author zlbbq
+     * @author hujiabao
      * */
     formatString(key, subKey = null) {
       var item = 'plugin.' + this.name + '.' + (subKey ? (subKey + '.') : '') + key;
@@ -303,7 +303,7 @@ var Plugins = using('easynode.framework.plugin.Plugins');
      * @param {String} key string标识。
      * @return {String} ActionResult i18n字符串
      * @since 0.1.0
-     * @author zlbbq
+     * @author hujiabao
      * */
     formatResult(key) {
       return this.formatString(key, 'results');
@@ -316,7 +316,7 @@ var Plugins = using('easynode.framework.plugin.Plugins');
      * @param {...} plugins 插件，多参，每个参数为字符串类型。格式：$pluginName@$version
      * @return this 可链式调用
      * @since 0.1.0
-     * @author zlbbq
+     * @author hujiabao
      * */
     depends(...plugins) {
       this.dependencies = this.dependencies || [];
@@ -331,7 +331,7 @@ var Plugins = using('easynode.framework.plugin.Plugins');
      * @return {Array} 未找到的依赖插件
      * @public
      * @since 0.1.0
-     * @author zlbbq
+     * @author hujiabao
      * */
     checkDependency() {
       var ret = [];
@@ -350,7 +350,7 @@ var Plugins = using('easynode.framework.plugin.Plugins');
      *
      * @method toJSON
      * @since 0.1.0
-     * @author zlbbq
+     * @author hujiabao
      * */
     toJSON() {
       var o = {

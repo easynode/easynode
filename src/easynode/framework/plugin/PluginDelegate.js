@@ -18,7 +18,7 @@ var Plugins = using('easynode.framework.plugin.Plugins');
      * @class easynode.framework.plugin.PluginDelegate
      * @extends easynode.GenericObject
      * @since 0.1.0
-     * @author zlbbq
+     * @author hujiabao
      * */
   class PluginDelegate extends GenericObject {
         /**
@@ -26,7 +26,7 @@ var Plugins = using('easynode.framework.plugin.Plugins');
          *
          * @method 构造函数
          * @since 0.1.0
-         * @author zlbbq
+         * @author hujiabao
          * */
     constructor() {
       super();
@@ -94,7 +94,7 @@ var Plugins = using('easynode.framework.plugin.Plugins');
          * @method home
          * @return {String} 插件home目录。绝对目录。
          * @since 0.1.0
-         * @author zlbbq
+         * @author hujiabao
          * */
     home() {
       return EasyNode.real(`plugins/${this.name}-${this.version}/`);

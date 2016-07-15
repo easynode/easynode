@@ -9,6 +9,7 @@ var S = require('string');
 
 (function() {
     /**
+     * Obselected
      * Class FileService
      *
      * @class #NAMESPACE#.FileService

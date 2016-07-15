@@ -18,7 +18,7 @@ var TestCase = using('easynode.framework.test.TestCase');
                  *
                  * @method 构造函数
                  * @since 0.1.0
-                 * @author zlbbq
+                 * @author hujiabao
                  * */
                 constructor() {
                         super();
