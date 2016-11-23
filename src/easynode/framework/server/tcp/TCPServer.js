@@ -7,7 +7,7 @@ var _ = require('underscore');
 var net = require('net');
 var thunkify = require('thunkify');
 var co = require('co');
-var UUID = require('node-uuid');
+var UUID = require('uuid');
 var util = require('util');
 
 (function() {

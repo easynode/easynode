@@ -6,7 +6,7 @@ var S = require('string');
 var fs = require('fs');
 var cofs = require('co-fs');
 var path = require('path');
-var UUID = require('node-uuid');
+var UUID = require('uuid');
 
 (function() {
         /**
